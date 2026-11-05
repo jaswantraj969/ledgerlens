@@ -1,0 +1,38 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Data, models, caches (R10: never committed)
+data/
+models/
+*.parquet
+*.safetensors
+*.onnx
+*.gguf
+evals/cache/*
+!evals/cache/synthetic/
+evals/results/licensed/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Node
+node_modules/
+dist/
+*.tsbuildinfo
+playwright-report/
+test-results/
+
+# Local
+var/
+.DS_Store
+Thumbs.db

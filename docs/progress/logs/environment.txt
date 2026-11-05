@@ -1,0 +1,33 @@
+# captured: 2026-11-05T16:56:59Z
+## os
+MINGW64_NT-10.0-26300 3.6.9-b4195d69.x86_64 x86_64
+Microsoft Windows 11 Home 10.0.26300
+## hardware
+13th Gen Intel(R) Core(TM) i5-13420H cores=8 threads=12
+ram_gb=15.6
+C: free_gb=85.1
+D: free_gb=4
+NVIDIA GeForce RTX 3050 6GB Laptop GPU, 6144 MiB, 621.01
+## tools
+python: Python 3.13.5
+uv: uv 0.11.29 (901092ee1 2026-07-15 x86_64-pc-windows-msvc)
+node: v22.19.0
+npm: 10.9.3
+docker: Docker version 29.7.2, build a7dcaa6
+git: git version 2.55.0.windows.3
+make: MISSING
+tesseract: MISSING
+ollama: MISSING
+psql: MISSING
+redis-server: MISSING
+gitleaks: MISSING
+Docker Compose version v5.5.0
+docker_server=29.7.2 mem=8133423104 cpus=12
+## git
+jaswantraj969
+jaswantraj969@gmail.com
+## network
+200 3274B/s https://pypi.org/simple/pydantic/
+200 99904B/s https://registry.npmjs.org/typescript/-/typescript-5.6.2.tgz
+200 486B/s https://huggingface.co/api/datasets/naver-clova-ix/cord-v2
+200 0B/s https://ollama.com/download/OllamaSetup.exe
