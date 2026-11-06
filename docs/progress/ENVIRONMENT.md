@@ -23,6 +23,9 @@ Raw capture: [logs/environment.txt](logs/environment.txt) (regenerate with `bash
 - **Ollama is not usable as found.** Windows lists it as installed, but the install directory is
   gone. `~/.ollama/models` survives (2.2 GB: llama3.2, nomic-embed-text). Status: BLOCKED until a
   working binary exists, either by reinstalling or through the `ollama/ollama` image.
+- **Installs need care on this link.** `uv` cannot resume a partial wheel and hung on dead
+  connections, and archive errors appeared on two unrelated wheels. What worked: the default uv
+  cache, a timeout per attempt, and `curl -C -` with SHA-256 checks for wheels over about 10 MB.
 - **`make` is missing.** The Makefile stays as specified; Windows needs a documented equivalent.
 - **PostgreSQL 18 is partly present** (`C:\Program Files\PostgreSQL\18`, pgAgent entry, no `psql`
   or `pg_ctl` in `bin`) and is not used.
@@ -36,5 +39,5 @@ Node for development. SQLite is allowed for unit tests only.
 ## Datasets
 
 CORD v2 (`naver-clova-ix/cord-v2`): API reports public, ungated, `cc-by-4.0`; 2.3 GB of parquet
-(test 234 MB, validation 242 MB, train 1.8 GB). A `/resolve/` request for its README returned 401
-once, so data-file download is checked separately.
+(test 234 MB, validation 242 MB, train 1.8 GB). All six data files later downloaded and matched
+their published SHA-256 (a `/resolve/` request for the README returned 401 once; data files were unaffected).
