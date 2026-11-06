@@ -30,7 +30,7 @@ step npm-test npm test
 step npm-build npm run build
 
 cd "$root" || exit 2
-GITLEAKS=$(command -v gitleaks || find "$HOME/.cache/pre-commit" -iname 'gitleaks*' -type f 2>/dev/null | head -1)
+GITLEAKS=$(command -v gitleaks || find "$HOME/.cache/pre-commit" -path '*/bin/gitleaks*' -type f 2>/dev/null | head -1)
 if [ -n "$GITLEAKS" ]; then
   step gitleaks-full-history "$GITLEAKS" detect --source . --no-banner --redact --log-opts=--all
 else
