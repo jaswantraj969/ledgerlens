@@ -10,7 +10,7 @@ from datetime import date
 from decimal import Decimal, InvalidOperation
 from typing import Literal
 
-NORMALIZATION_VERSION = "1.0.0"
+NORMALIZATION_VERSION = "1.0"
 
 DateOrder = Literal["dmy", "mdy"]
 
@@ -96,11 +96,13 @@ def normalize_amount(value: str) -> Decimal | None:
 
     One separator followed by exactly three digits is read as grouping, so "45.000" is
     45000. This matches Indonesian receipts and is wrong for three-decimal currencies,
-    which the default schema does not target.
+    which the default schema does not target. A repeated separator ending in two digits is
+    a decimal, so "39,200,00" is 39200.00. A trailing ",-" is decoration, not a sign.
     """
     text = _AMOUNT_CHARS.sub("", unicodedata.normalize("NFKC", value))
+    text = text.lstrip(".,").removesuffix(",-").removesuffix(".-")
     negative = text.startswith("-") or text.endswith("-") or text.startswith("(")
-    digits = text.strip("-()")
+    digits = text.strip("-()").lstrip(".,")
     if not digits or not digits[0].isdigit() or not digits[-1].isdigit():
         return None
     if "-" in digits or "(" in digits or ")" in digits:
@@ -117,9 +119,10 @@ def normalize_amount(value: str) -> Decimal | None:
         canonical = digits.replace(group_mark, "").replace(decimal_mark, ".")
     elif len(separators) > 1:
         groups = digits.split(separators[0])
-        if any(len(group) != 3 for group in groups[1:]):
+        if any(len(group) != 3 for group in groups[1:-1]) or len(groups[-1]) not in (2, 3):
             return None
-        canonical = "".join(groups)
+        whole, fraction = "".join(groups[:-1]), groups[-1]
+        canonical = f"{whole}.{fraction}" if len(fraction) == 2 else whole + fraction
     else:
         whole, fraction = digits.split(separators[0])
         canonical = whole + fraction if len(fraction) == 3 else f"{whole}.{fraction}"

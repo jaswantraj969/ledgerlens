@@ -28,13 +28,20 @@ from ledgerlens.verification.normalize import (
         ("(15.00)", "-15.00"),
         ("-3.20", "-3.20"),
         ("3.20-", "-3.20"),
+        ("Rp. 57.000", "57000"),
+        ("Rp 99999.99", "99999.99"),
+        ("Rp. 10,000", "10000"),
+        ("39,200,00", "39200.00"),
+        ("Rp 45.545.45", "45545.45"),
+        ("20.000,-", "20000"),
+        ("( 1,236)", "-1236"),
     ],
 )
 def test_amount_parsing(raw: str, expected: str) -> None:
     assert normalize_amount(raw) == Decimal(expected)
 
 
-@pytest.mark.parametrize("raw", ["", "abc", "1.2.3", "1,23,45", "1.234,567,8", "12-34"])
+@pytest.mark.parametrize("raw", ["", "-", "abc", "1.2.3", "1,23,45", "1.234,567,8", "12-34"])
 def test_amount_rejects_non_amounts(raw: str) -> None:
     assert normalize_amount(raw) is None
 
