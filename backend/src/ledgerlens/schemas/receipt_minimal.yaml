@@ -1,0 +1,11 @@
+# Alternative schema: proves the extractor is driven by configuration.
+name: receipt_minimal
+version: "1.0.0"
+fields:
+  - name: merchant
+    type: text
+    position: first_line
+  - name: paid_total
+    type: amount
+    labels: ["grand total", "total due", "amount due", "total"]
+    take: last

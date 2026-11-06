@@ -1,0 +1,9 @@
+........................................................................ [100%]
+72 passed in 3.48s
+pytest_exit=0
+All checks passed!
+ruff_exit=0
+22 files already formatted
+format_exit=0
+Success: no issues found in 19 source files
+mypy_exit=0
