@@ -1,0 +1,6 @@
+CAUGHT label order ignored
+CAUGHT arithmetic rule always passes
+CAUGHT bbox not flipped to top-left
+CAUGHT failed rules add no risk
+CAUGHT invented native confidence
+CAUGHT formula text passes to CSV

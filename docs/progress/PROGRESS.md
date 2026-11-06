@@ -14,3 +14,10 @@
 - Postgres 16.15 and Redis healthy through Compose.
 - Open: frontend dev dependencies installing; Docling install; Ollama binary; pre-commit hooks not run.
 - Next: finish the frontend test, then the vertical slice (synthetic invoice, parse, extract, verify, export).
+- Frontend scaffold verified (build, 1 test, oxlint). Log: docs/progress/logs/phase3-frontend.txt.
+- pre-commit: all six hooks pass after fixing ruff config. Log: docs/progress/logs/phase3-precommit.txt.
+- Offline slice works in-process with no database: synthetic PDF, parse, extract, verify, risk, route, export.
+- Checks: 72 tests pass; ruff, format, mypy clean. Log: docs/progress/logs/phase5-slice-checks.txt.
+- Mutation check: 6 of 6 deliberate breaks caught. Log: docs/progress/logs/phase5-mutation-check.txt.
+- Started docs/limitations.md. Deterministic evidence matching is circular; see that file.
+- Next: Phase 4 backend (models, migrations, auth, org scoping, upload, jobs).

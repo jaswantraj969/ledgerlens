@@ -13,9 +13,11 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 | 4 | Backend | NOT STARTED | |
 | 5 | Normalisation module v1.0.0 | VERIFIED | docs/progress/logs/phase3-checks.txt (47 tests) |
 | 5 | Native PDF parser (pdfium) | VERIFIED | docs/progress/logs/phase5-parser-checks.txt |
-| 5 | Rest of AI pipeline | NOT STARTED | |
+| 5 | Offline slice: schemas, deterministic extractor, evidence, arithmetic, heuristic risk, routing, JSON/CSV export | VERIFIED | docs/progress/logs/phase5-slice-checks.txt, docs/progress/logs/phase5-mutation-check.txt |
+| 5 | OCR parser, LLM extractor, replay cache, calibrators | NOT STARTED | |
 | 6 | Frontend | NOT STARTED | |
 | 7 | CORD v2 downloaded, hashes verified, labels mapped | VERIFIED | evals/datasets/checksums/cord-v2.sha256, evals/datasets/LICENSES.md |
+| 7 | Synthetic generator, single template | IMPLEMENTED BUT UNVERIFIED | used by e2e tests; edge cases (rotation, low DPI, noise) missing |
 | 7 | Rest of evaluation framework and runs | NOT STARTED | |
 | 8 | Testing and hardening | NOT STARTED | |
 | 9 | Deployment | NOT STARTED | |
