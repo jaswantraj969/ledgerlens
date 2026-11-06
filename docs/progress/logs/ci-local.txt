@@ -6,7 +6,7 @@ STEP_EXIT[ruff-check]=0
 
 === ruff-format
 $ .venv/Scripts/python.exe -m ruff format --check .
-31 files already formatted
+32 files already formatted
 STEP_EXIT[ruff-format]=0
 
 === mypy
@@ -16,9 +16,9 @@ STEP_EXIT[mypy]=0
 
 === pytest-coverage
 $ .venv/Scripts/python.exe -m pytest -q --cov=ledgerlens --cov-report=term
-........................................................................ [ 45%]
-........................................................................ [ 90%]
-...............                                                          [100%]
+........................................................................ [ 42%]
+........................................................................ [ 85%]
+........................                                                 [100%]
 =============================== tests coverage ================================
 ______________ coverage: platform win32, python 3.12.13-final-0 _______________
 
@@ -46,7 +46,7 @@ src\ledgerlens\verification\normalize.py        76      2    97%
 src\ledgerlens\verification\rules.py            30      0   100%
 ----------------------------------------------------------------
 TOTAL                                          671     24    96%
-159 passed in 16.61s
+168 passed in 26.44s
 STEP_EXIT[pytest-coverage]=0
 
 === npm-lint
@@ -69,8 +69,8 @@ $ npm test
 
  Test Files  1 passed (1)
       Tests  1 passed (1)
-   Start at  13:34:38
-   Duration  2.79s (environment 73%, setup 18%, tests 6%, transform 1%, worker 1%, import 1%)
+   Start at  13:46:50
+   Duration  6.66s (environment 79%, setup 15%, tests 4%, transform 1%)
 
 STEP_EXIT[npm-test]=0
 
@@ -89,14 +89,15 @@ dist/index.html                   0.46 kB │ gzip:  0.29 kB
 dist/assets/index-Dm_kgmD5.css    6.70 kB │ gzip:  2.02 kB
 dist/assets/index-CxFXa7To.js   219.75 kB │ gzip: 68.71 kB
 
-[32m✓ built in 191ms[39m
+[32m✓ built in 289ms[39m
 STEP_EXIT[npm-build]=0
 
 === gitleaks-full-history
 $ /c/Users/jknm6/.cache/pre-commit/repomsx10mrf/golangenv-default/bin/gitleaks.exe detect --source . --no-banner --redact --log-opts=--all
-[90m1:34PM[0m [32mINF[0m 20 commits scanned.
-[90m1:34PM[0m [32mINF[0m scan completed in 290ms
-[90m1:34PM[0m [32mINF[0m no leaks found
+[90m1:47PM[0m [32mINF[0m 21 commits scanned.
+[90m1:47PM[0m [32mINF[0m scan completed in 342ms
+[90m1:47PM[0m [32mINF[0m no leaks found
 STEP_EXIT[gitleaks-full-history]=0
 
 CI_LOCAL_EXIT=0
+COMMIT=ba5a3f7322ed2ac009c8e435ab656df4c4b3686b
