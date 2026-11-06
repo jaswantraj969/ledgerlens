@@ -7,7 +7,7 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 | 1 | Environment inspection | VERIFIED | docs/progress/logs/environment.txt |
 | 2 | Tasks, criteria, ADRs, architecture | IN PROGRESS | ADR-0002 awaits the Docling result |
 | 3 | Backend scaffold, lockfile, Compose services | VERIFIED | docs/progress/logs/phase3-checks.txt |
-| 3 | Frontend scaffold and first test | IN PROGRESS | npm dev dependencies installing |
+| 3 | Frontend scaffold and first test | VERIFIED | docs/progress/logs/phase3-frontend.txt |
 | 3 | pre-commit hooks | IMPLEMENTED BUT UNVERIFIED | config written, hooks not yet run |
 | 3 | CI workflow | IMPLEMENTED BUT UNVERIFIED | cannot run: no remote by design (R8); same checks run locally |
 | 4 | Backend | NOT STARTED | |
