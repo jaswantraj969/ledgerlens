@@ -8,10 +8,11 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 | 2 | Tasks, criteria, ADRs, architecture | IN PROGRESS | ADR-0002 awaits the Docling result |
 | 3 | Backend scaffold, lockfile, Compose services | VERIFIED | docs/progress/logs/phase3-checks.txt |
 | 3 | Frontend scaffold and first test | VERIFIED | docs/progress/logs/phase3-frontend.txt |
-| 3 | pre-commit hooks | IMPLEMENTED BUT UNVERIFIED | config written, hooks not yet run |
+| 3 | pre-commit hooks | VERIFIED | docs/progress/logs/phase3-precommit.txt |
 | 3 | CI workflow | IMPLEMENTED BUT UNVERIFIED | cannot run: no remote by design (R8); same checks run locally |
 | 4 | Backend | NOT STARTED | |
 | 5 | Normalisation module v1.0.0 | VERIFIED | docs/progress/logs/phase3-checks.txt (47 tests) |
+| 5 | Native PDF parser (pdfium) | VERIFIED | docs/progress/logs/phase5-parser-checks.txt |
 | 5 | Rest of AI pipeline | NOT STARTED | |
 | 6 | Frontend | NOT STARTED | |
 | 7 | CORD v2 downloaded, hashes verified, labels mapped | VERIFIED | evals/datasets/checksums/cord-v2.sha256, evals/datasets/LICENSES.md |

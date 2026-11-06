@@ -77,3 +77,7 @@ python_version = "3.12"
 strict = true
 mypy_path = "src"
 packages = ["ledgerlens"]
+
+[[tool.mypy.overrides]]
+module = ["pypdfium2.*"]
+ignore_missing_imports = true

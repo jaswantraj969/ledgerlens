@@ -5,19 +5,25 @@ repos:
       - id: end-of-file-fixer
       - id: check-added-large-files
         args: ["--maxkb=1024"]
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.6.9
-    hooks:
-      - id: ruff
-        args: ["--config", "backend/pyproject.toml"]
-      - id: ruff-format
-        args: ["--config", "backend/pyproject.toml"]
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.18.4
     hooks:
       - id: gitleaks
+  # Local hooks use the locked versions, so pre-commit and CI cannot disagree.
   - repo: local
     hooks:
+      - id: ruff
+        name: ruff
+        entry: uv run --directory backend ruff check .
+        language: system
+        pass_filenames: false
+        files: ^backend/
+      - id: ruff-format
+        name: ruff format
+        entry: uv run --directory backend ruff format --check .
+        language: system
+        pass_filenames: false
+        files: ^backend/
       - id: mypy
         name: mypy
         entry: uv run --directory backend mypy
