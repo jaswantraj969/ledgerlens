@@ -25,7 +25,7 @@ typecheck:
 
 # Local mirror of .github/workflows/ci.yml; see the script header for what it does not prove.
 ci:
-	bash scripts/ci_local.sh 2>&1 | tee docs/progress/logs/ci-local.txt
+	bash -c 'set -o pipefail; bash scripts/ci_local.sh 2>&1 | tee docs/progress/logs/ci-local.txt'
 
 # The evaluation targets below are wired up in Phase 7.
 eval-smoke eval-full tables figures reproduce demo-data:

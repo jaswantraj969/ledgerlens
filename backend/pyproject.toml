@@ -83,5 +83,5 @@ mypy_path = "src"
 packages = ["ledgerlens"]
 
 [[tool.mypy.overrides]]
-module = ["pypdfium2.*"]
+module = ["pypdfium2.*", "rapidocr.*", "sklearn.*", "pyarrow.*"]
 ignore_missing_imports = true

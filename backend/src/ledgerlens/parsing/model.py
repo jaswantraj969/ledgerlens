@@ -1,6 +1,7 @@
 """Parsed document model with provenance.
 
-Bounding boxes are [x0, y0, x1, y1] in PDF points with a top-left origin, so y grows downward.
+Bounding boxes are [x0, y0, x1, y1] with a top-left origin, so y grows downward. Each page
+names its coordinate system: PDF points, or pixels for image uploads.
 `confidence` is whatever the engine reported, or None when it reports nothing. It is never
 estimated here.
 """
@@ -10,6 +11,7 @@ from typing import Literal, Protocol
 from pydantic import BaseModel, ConfigDict
 
 COORDINATE_SYSTEM = "pdf_points_top_left"
+IMAGE_COORDINATE_SYSTEM = "image_pixels_top_left"
 
 ParserSource = Literal["native_pdf", "ocr"]
 

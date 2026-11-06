@@ -19,7 +19,7 @@ step() {
 cd "$root/backend" || exit 2
 PY=.venv/Scripts/python.exe
 [ -x "$PY" ] || PY=.venv/bin/python
-step ruff-check "$PY" -m ruff check .
+step ruff-check "$PY" -m ruff check . ../evals --config pyproject.toml
 step ruff-format "$PY" -m ruff format --check .
 step mypy "$PY" -m mypy
 step pytest-coverage "$PY" -m pytest -q --cov=ledgerlens --cov-report=term

@@ -1,0 +1,19 @@
+# Fields CORD v2 labels. Labels may only be tuned on train or validation.
+name: cord_receipt
+version: "1.0.0"
+fields:
+  - name: subtotal
+    type: amount
+    labels: ["subtotal", "sub total", "net amount"]
+    take: last
+  - name: tax_amount
+    type: amount
+    labels: ["tax amount", "tax", "vat", "gst", "ppn", "pb1"]
+    take: last
+  - name: total_amount
+    type: amount
+    labels: ["grand total", "total due", "amount due", "total"]
+    take: last
+line_items:
+  header_labels: ["description", "item", "qty", "quantity", "amount", "amt", "price"]
+  end_labels: ["subtotal", "sub", "net", "tax", "vat", "gst", "total", "cash", "change"]

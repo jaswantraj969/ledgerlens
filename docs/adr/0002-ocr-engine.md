@@ -1,13 +1,16 @@
 # ADR-0002: Parsing and OCR engine
 
-Status: Proposed (pending the Docling install test)  
-Date: 2026-11-05
+Status: Accepted — deviation: Docling deferred to optional parser; reason: install unreliable on this network  
+Date: 2026-11-06
 
-## Proposal
-Docling for PDFs behind a `Parser` interface, RapidOCR (ONNX) for scans and images. Tesseract is absent here. PaddleOCR is not tried unless RapidOCR fails.
+## Decision
+`pypdfium2` reads native PDF text and renders pages. RapidOCR (ONNX, bundled PP-OCRv6 models) reads images and scanned pages. Both sit behind the `Parser` interface, and `AutoParser` chooses per page. The specification names Docling as the default, so this is a recorded deviation, approved in the supervisor review of 2026-11-06.
 
-## To settle before acceptance
-Docling pulls in torch and model downloads on a slow link. Record the install result, then the per-page CPU time. Words, bboxes and confidences must come from the engine; missing confidence stays null.
+## Why
+Two Docling installs failed or hung here, one on an archive error and one on a dead connection. It pulls in torch and further model downloads. RapidOCR installed and runs on CPU, returning word boxes and word scores.
 
-## Fallback if Docling is impractical here
-A `pypdfium2` native-text parser plus direct RapidOCR. That is a deviation from the specification and this ADR must say so with the evidence.
+## Consequences
+- Tokens carry engine text, box and score. A missing score stays null, and a line the engine does not split stays one token, because slicing it would invent coordinates.
+- Docling stays available as the optional `docling` extra but has no `Parser` implementation yet.
+- Layout analysis such as table structure is not available. Extraction relies on token geometry.
+- Future ablation: Docling vs fallback.
