@@ -82,4 +82,14 @@ Pure OCR misreads such as `590050` for `59,500` were left alone. Patching them w
 
 ## Changes after first results
 
-None.
+No rule, schema, normalisation or metric change has been made since `evals/results/cord_s1_v1.json`.
+
+## Results
+
+[S1 on CORD test](../evals/results/cord_s1_v1.md). The test split was read once, at commit `1b53a77`.
+
+`n` counts usable labels. Tax has n=41 on test: 43 documents hold the key, but two contain only `-`, which this protocol defines as absent.
+
+With one tuning round on 100 validation documents, the validation numbers are optimistic, and the test table is the reported result.
+
+The test run's log has no HEARTBEAT line, because of a wrapper bug fixed afterwards (see Operational lessons in `docs/progress/PROGRESS.md`). Its `EXIT=0` line was written after the process ended and is valid. The run was not repeated, because the test split is read once.

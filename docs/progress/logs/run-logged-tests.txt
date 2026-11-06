@@ -1,0 +1,14 @@
+ok   native child exit code
+ok   every child line kept
+ok   heartbeats survive
+ok   log ends in EXIT=0
+ok   no corrupted lines
+ok   steady output never stalls
+ok   real failure code
+ok   log records failure
+ok   silent child is stopped
+ok   log records stall
+ok   hard timeout
+ok   growing watch path counts as progress
+ok   no temp files left
+RUN_LOGGED_TEST_EXIT=0

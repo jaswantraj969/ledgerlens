@@ -8,6 +8,7 @@
 | Hours lost re-downloading packages | A private `UV_CACHE_DIR`, added to avoid a lock conflict, bypassed the default cache | Keep the default uv cache. Avoid the lock by not running two uv jobs at once |
 | Large wheels never finished | `uv` cannot resume, so each timeout discarded partial downloads | `scripts/fetch_wheels.py`: resumable curl plus PyPI SHA-256 check, then `--find-links` |
 | False exit-0 notices (failed sync, failed pre-commit, unverified CORD downloads) | The notice reports the wrapper's last command, not the step that mattered | Every log ends in `EXIT=<code>`. Read that line and the log tail before marking anything done. Verify downloads by hash |
+| Wrapper lost heartbeats and misjudged progress | Native Windows children ignore append mode on a shared file and overwrite wrapper lines. The first self-tests used shell children, so they hid it | Child output goes through a pipe; `scripts/test_run_logged.sh` tests with a real native child |
 | pre-commit reported "files modified" | Its log was written inside the repo during the run | Write logs for pre-commit outside the tree, then copy them in |
 
 ## 2026-11-05

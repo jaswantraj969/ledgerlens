@@ -7,6 +7,10 @@
 # always ends the log with EXIT=<code>. That line is the authoritative result: a wrapper's own
 # exit status or a job-completion notice is not. EXIT=125 means the stall detector stopped it.
 # Progress means output grew or WATCH_PATH (a file or directory) grew.
+#
+# Child output reaches the log through a pipe. Native Windows programs do not honour O_APPEND
+# on an inherited handle, so sharing the file overwrites heartbeat lines and breaks the
+# progress count.
 set -u
 name=$1; limit=$2; stall=$3; shift 3
 watch=""
@@ -14,11 +18,14 @@ if [ "$1" != "--" ]; then watch=$1; shift; fi
 shift
 
 root=$(cd "$(dirname "$0")/.." && pwd)
-log="$root/docs/progress/logs/run-$name.log"
-heartbeat_every=240
-poll=15
+log="${RUN_LOG_DIR:-$root/docs/progress/logs}/run-$name.log"
+heartbeat_every=${HEARTBEAT_EVERY:-240}
+poll=${POLL:-15}
+pid_file="$log.pid"
+code_file="$log.code"
 
 : > "$log"
+rm -f "$pid_file" "$code_file"
 stamp() { date -u +%Y-%m-%dT%H:%M:%SZ; }
 append_meta() { printf '%s\n' "$1" >> "$log"; meta_bytes=$((meta_bytes + ${#1} + 1)); }
 progress() {
@@ -30,14 +37,19 @@ progress() {
 
 meta_bytes=0
 append_meta "START $(stamp) timeout=${limit}s stall=${stall}s cmd: $*"
-timeout -k 15 "$limit" "$@" >> "$log" 2>&1 &
-pid=$!
+(
+  timeout -k 15 "$limit" "$@" 2>&1 &
+  echo $! > "$pid_file"
+  wait $!
+  echo $? > "$code_file"
+) | cat >> "$log" &
+pipeline=$!
 
 last_progress=$(progress)
 last_change=$SECONDS
 last_heartbeat=$SECONDS
 stalled=0
-while kill -0 "$pid" 2>/dev/null; do
+while kill -0 "$pipeline" 2>/dev/null; do
   sleep "$poll"
   current=$(progress)
   if [ "$current" != "$last_progress" ]; then
@@ -51,13 +63,14 @@ while kill -0 "$pid" 2>/dev/null; do
   if [ $((SECONDS - last_change)) -ge "$stall" ]; then
     append_meta "STALLED $(stamp) no progress for ${stall}s"
     stalled=1
-    kill "$pid" 2>/dev/null
+    kill "$(cat "$pid_file")" 2>/dev/null
     break
   fi
 done
-wait "$pid"
-code=$?
+wait "$pipeline"
+code=$(cat "$code_file" 2>/dev/null || echo 1)
 [ "$stalled" -eq 1 ] && code=125
+rm -f "$pid_file" "$code_file"
 append_meta "END $(stamp) elapsed=${SECONDS}s"
 append_meta "EXIT=$code"
 exit "$code"

@@ -1,4 +1,0 @@
-START 2026-11-06T08:02:35Z timeout=60s stall=20s cmd: sleep 50
-STALLED 2026-11-06T08:03:05Z no progress for 20s
-END 2026-11-06T08:03:05Z elapsed=30s
-EXIT=125

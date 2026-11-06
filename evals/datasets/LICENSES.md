@@ -12,11 +12,13 @@ No dataset files are committed. Each dataset keeps its own licence.
 |---|---|---|
 | total_amount | total.total_price | 779 / 98 / 95 |
 | subtotal | sub_total.subtotal_price | 530 / 67 / 65 |
-| tax_amount | sub_total.tax_price | 355 / 47 / 43 |
+| tax_amount | sub_total.tax_price | 355 / 47 / 43 (41 usable on test) |
 | line_items.description | menu.nm | 795 / 100 / 100 |
 | line_items.quantity | menu.cnt | 729 / 94 / 87 |
 | line_items.unit_price | menu.unitprice | 291 / 31 / 34 |
 | line_items.amount | menu.price | 799 / 99 / 99 |
+
+Counts are documents holding the key. On test, 2 of the 43 `tax_price` labels (image_id 60 and 65) contain only `-`, which the protocol treats as absent, so evaluated n is 41. Reported results use usable values.
 
 **Not evaluable on CORD:** vendor_name, invoice_number, invoice_date, currency. CORD does not label them.
 
