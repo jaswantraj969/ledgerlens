@@ -1,6 +1,7 @@
 """Print S1 errors on the CORD validation split. Refuses every other split by construction."""
 
 import collections
+import hashlib
 import json
 import sys
 
@@ -11,7 +12,6 @@ from ledgerlens.extraction.layout import build_lines
 from ledgerlens.parsing.model import ParsedDocument
 from ledgerlens.pipeline import process
 from ledgerlens.schema import load_schema
-import hashlib
 
 
 def main() -> None:
@@ -36,7 +36,11 @@ def main() -> None:
                     for line in lines
                     for token in line.tokens
                 )
-                kind = "gold_absent" if gold is None else ("missed" if predicted[field] is None else "wrong")
+                kind = (
+                    "gold_absent"
+                    if gold is None
+                    else ("missed" if predicted[field] is None else "wrong")
+                )
                 kinds[f"{field}:{kind}:gold_token_in_ocr={in_ocr}"] += 1
         if problem and shown < show:
             shown += 1

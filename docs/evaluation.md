@@ -66,6 +66,20 @@ S1 is RapidOCR followed by the deterministic extractor. It needs no LLM.
 
 Entries are added as tuning happens, on train or validation only.
 
+### Round 1, 2026-11-06, validation only
+
+Baseline before tuning (schema 1.0.0, validation, n=100): total F1 0.776, subtotal F1 0.800, tax F1 0.765, line items F1 0.000. Source: `docs/progress/logs/run-cord-s1-validation.log` and the first committed `evals/results/dev/` run.
+
+Changes, all from reading validation errors:
+
+- Values glued to a label (`Change:9,000`) are split from the token and keep its box.
+- Trailing punctuation is stripped from amounts in the extractor. The frozen normaliser is unchanged.
+- A value may sit alone on the line below its label.
+- `cord_receipt` schema 1.1.0 adds label variants (`grandtotal`, `net amt`, `tax amt`, `pb 1`, `pajak`), and ignores count lines such as `total item`.
+- Headerless receipt rows: rows run from the top of the receipt to the first summary line, and read `[qty] description [@price] [qty] amount`.
+
+Pure OCR misreads such as `590050` for `59,500` were left alone. Patching them would fit noise.
+
 ## Changes after first results
 
 None.

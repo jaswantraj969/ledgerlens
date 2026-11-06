@@ -1,0 +1,14 @@
+START 2026-11-06T08:22:31Z timeout=900s stall=300s cmd: env PYTHONPATH=. backend/.venv/Scripts/python.exe -m evals.runners.run_cord_s1 --split validation
+processed 10 documents, crashes=0
+processed 20 documents, crashes=0
+processed 30 documents, crashes=0
+processed 40 documents, crashes=0
+processed 50 documents, crashes=0
+processed 60 documents, crashes=0
+processed 70 documents, crashes=0
+processed 80 documents, crashes=0
+processed 90 documents, crashes=0
+processed 100 documents, crashes=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\cord_s1_validation.json
+END 2026-11-06T08:22:47Z elapsed=16s
+EXIT=0

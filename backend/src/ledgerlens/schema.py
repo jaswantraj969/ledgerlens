@@ -25,8 +25,9 @@ class FieldSpec(BaseModel):
 class LineItemSpec(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
-    header_labels: list[str]
+    header_labels: list[str] = []
     end_labels: list[str]
+    headerless: bool = False
 
 
 class Schema(BaseModel):
@@ -36,6 +37,7 @@ class Schema(BaseModel):
     version: str
     fields: list[FieldSpec]
     line_items: LineItemSpec | None = None
+    ignore_labels: list[str] = []
 
     def field(self, name: str) -> FieldSpec | None:
         return next((spec for spec in self.fields if spec.name == name), None)

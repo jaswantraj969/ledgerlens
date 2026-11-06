@@ -17,11 +17,17 @@ class Line:
         return " ".join(token.text for token in self.tokens)
 
     def tokens_between(self, start: int, stop: int | None = None) -> tuple[Token, ...]:
-        """Tokens starting in the character range [start, stop) of `text`."""
+        """Tokens in the character range [start, stop) of `text`, splitting one glued at start."""
         selected: list[Token] = []
         position = 0
         for token in self.tokens:
-            if position >= start and (stop is None or position < stop):
+            inside = position < start < position + len(token.text)
+            if inside:
+                # A value glued to its label: keep the rest of the token and its box.
+                rest = token.text[start - position :].lstrip(":#.-")
+                if rest:
+                    selected.append(token.model_copy(update={"text": rest}))
+            elif position >= start and (stop is None or position < stop):
                 selected.append(token)
             position += len(token.text) + 1
         return tuple(selected)

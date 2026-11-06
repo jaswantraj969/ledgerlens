@@ -21,6 +21,10 @@ from ledgerlens.verification.normalize import (
 SOURCE = "deterministic"
 _LABEL_NOISE = re.compile(r"^[:#.\-]+$")
 _MAX_DATE_TOKENS = 4
+_IGNORED = "__ignored__"
+_TRAILING_PUNCTUATION = ".,:;"
+_LEADING_QUANTITY = re.compile(r"^(\d{1,3})[xX×]?$")
+_UNIT_PRICE_PREFIX = "@"
 
 Claim = tuple[Line, tuple[Token, ...]]
 
@@ -46,7 +50,9 @@ class DeterministicExtractor:
         for line, tokens in reversed(claimed) if spec.take == "last" else claimed:
             value = _value_tokens(spec.type, tokens)
             if value:
-                return _record(spec.name, line, value)
+                return _record(spec.name, line, value, spec.type)
+            if spec.type == "amount" and (following := _next_line_amount(lines, line)):
+                return _record(spec.name, following[0], following[1], spec.type)
         if spec.scan:
             for line in lines:
                 for token in line.tokens:
@@ -58,7 +64,8 @@ class DeterministicExtractor:
 def _claim_lines(lines: list[Line], schema: Schema) -> dict[str, list[Claim]]:
     """Find labels on each line. Longest labels win; a line may hold several fields."""
     labels = sorted(
-        ((label, spec.name) for spec in schema.fields for label in spec.labels),
+        [(label, spec.name) for spec in schema.fields for label in spec.labels]
+        + [(label, _IGNORED) for label in schema.ignore_labels],
         key=lambda pair: len(pair[0]),
         reverse=True,
     )
@@ -76,7 +83,8 @@ def _claim_lines(lines: list[Line], schema: Schema) -> dict[str, list[Claim]]:
         spans.sort()
         for index, (_, end, name) in enumerate(spans):
             stop = spans[index + 1][0] if index + 1 < len(spans) else None
-            claims.setdefault(name, []).append((line, line.tokens_between(end, stop)))
+            if name != _IGNORED:
+                claims.setdefault(name, []).append((line, line.tokens_between(end, stop)))
     return claims
 
 
@@ -85,7 +93,7 @@ def _value_tokens(field_type: FieldType, tokens: tuple[Token, ...]) -> tuple[Tok
     if not tokens:
         return ()
     if field_type == "amount":
-        amounts = [token for token in tokens if normalize_amount(token.text) is not None]
+        amounts = [token for token in tokens if _amount(token) is not None]
         return (amounts[-1],) if amounts else ()
     if field_type == "currency":
         return next(((t,) for t in tokens if normalize_currency(t.text) is not None), ())
@@ -100,8 +108,25 @@ def _value_tokens(field_type: FieldType, tokens: tuple[Token, ...]) -> tuple[Tok
     return tokens
 
 
-def _record(name: str, line: Line, tokens: tuple[Token, ...]) -> FieldRecord:
+def _amount(token: Token) -> object | None:
+    return normalize_amount(token.text.rstrip(_TRAILING_PUNCTUATION))
+
+
+def _next_line_amount(lines: list[Line], line: Line) -> tuple[Line, tuple[Token, ...]] | None:
+    """A value printed on the line below its label, when that line is only an amount."""
+    following = lines[lines.index(line) + 1 :][:1]
+    if not following or len(following[0].tokens) != 1:
+        return None
+    token = following[0].tokens[0]
+    return (following[0], (token,)) if _amount(token) is not None else None
+
+
+def _record(
+    name: str, line: Line, tokens: tuple[Token, ...], field_type: FieldType = "text"
+) -> FieldRecord:
     raw = " ".join(token.text for token in tokens)
+    if field_type == "amount":
+        raw = raw.rstrip(_TRAILING_PUNCTUATION)
     return FieldRecord(
         name=name,
         value_raw=raw,
@@ -138,6 +163,8 @@ def normalized_value(field_type: FieldType, raw: str | None) -> str | None:
 
 
 def _extract_line_items(lines: list[Line], spec: LineItemSpec) -> list[FieldRecord]:
+    if spec.headerless:
+        return _extract_headerless_rows(lines, spec)
     records: list[FieldRecord] = []
     in_table = False
     row = 0
@@ -154,6 +181,50 @@ def _extract_line_items(lines: list[Line], spec: LineItemSpec) -> list[FieldReco
         elif words & set(spec.end_labels):
             break
     return records
+
+
+def _extract_headerless_rows(lines: list[Line], spec: LineItemSpec) -> list[FieldRecord]:
+    """Receipts without a table header: rows run from the top to the first summary line."""
+    records: list[FieldRecord] = []
+    row = 0
+    for line in lines:
+        if set(normalize_text(line.text).split()) & set(spec.end_labels):
+            break
+        cells = _receipt_row(line.tokens)
+        if cells is None:
+            continue
+        for name, tokens in cells.items():
+            kind: FieldType = "text" if name == "description" else "amount"
+            records.append(_record(f"line_items[{row}].{name}", line, tokens, kind))
+        row += 1
+    return records
+
+
+def _receipt_row(tokens: tuple[Token, ...]) -> dict[str, tuple[Token, ...]] | None:
+    """Read `[qty] description [@price] [qty] amount`. Requires a priced row with a name."""
+    if len(tokens) < 2 or not _looks_like_price(tokens[-1]):
+        return None
+    cells: dict[str, tuple[Token, ...]] = {"amount": (tokens[-1],)}
+    body = list(tokens[:-1])
+    if body and body[-1].text.startswith(_UNIT_PRICE_PREFIX) and len(body[-1].text) > 1:
+        price = body.pop()
+        cells["unit_price"] = (price.model_copy(update={"text": price.text[1:]}),)
+    if body and (match := _LEADING_QUANTITY.match(body[0].text)):
+        cells["quantity"] = (body.pop(0).model_copy(update={"text": match[1]}),)
+    elif body and (match := _LEADING_QUANTITY.match(body[-1].text)):
+        cells["quantity"] = (body.pop().model_copy(update={"text": match[1]}),)
+    if not any(sum(c.isalpha() for c in token.text) >= 2 for token in body):
+        return None
+    cells["description"] = tuple(body)
+    return cells
+
+
+def _looks_like_price(token: Token) -> bool:
+    """An amount with grouping, or at least three digits, to skip codes and counts."""
+    text = token.text.rstrip(_TRAILING_PUNCTUATION)
+    return _amount(token) is not None and (
+        "," in text or "." in text or sum(c.isdigit() for c in text) >= 3
+    )
 
 
 def _is_number(token: Token) -> bool:
