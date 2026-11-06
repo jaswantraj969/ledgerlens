@@ -1,0 +1,21 @@
+START 2026-11-06T08:36:45Z timeout=3000s stall=300s cmd: backend/.venv/Scripts/python.exe -I evals/datasets/download_sroie_labels.py
+curl: (28) Operation timed out after 40002 milliseconds with 28796 bytes received
+curl: (28) Operation timed out after 40002 milliseconds with 105948 out of 591056 bytes received
+curl: (28) Operation timed out after 40008 milliseconds with 8256 out of 591056 bytes received
+key files listed: 626
+checked 50, failed 0
+checked 100, failed 0
+checked 150, failed 0
+checked 200, failed 0
+HEARTBEAT 2026-11-06T08:40:48Z elapsed=243s progress=40341 idle=0s
+checked 250, failed 0
+checked 300, failed 0
+checked 350, failed 0
+checked 400, failed 0
+checked 450, failed 0
+checked 500, failed 0
+checked 550, failed 0
+checked 600, failed 0
+done: 626 listed, 0 failed
+END 2026-11-06T08:44:21Z elapsed=456s
+EXIT=0

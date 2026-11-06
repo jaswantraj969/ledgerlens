@@ -32,3 +32,15 @@
 - Mutation check: 6 of 6 deliberate breaks caught. Log: docs/progress/logs/phase5-mutation-check.txt.
 - Started docs/limitations.md. Deterministic evidence matching is circular; see that file.
 - Next: Phase 4 backend (models, migrations, auth, org scoping, upload, jobs).
+
+## 2026-11-06, supervisor review steps 1-8
+- Step 1: `scripts/run_logged.sh` and `scripts/test_run_logged.sh`; Operational lessons added above.
+- Step 2: `make ci` and `scripts/ci_local.sh`. `make` is not installed here, so the log comes from running the script directly. Log: docs/progress/logs/ci-local.txt.
+- Step 3: 10 ADRs, acceptance criteria and architecture confirmed present.
+- Step 4: RapidOCR and AutoParser added. ADR-0002 Accepted as a deviation.
+- Step 5: `self_sourced` status, `evidence_independent` flag, feature builder excludes dependent matches.
+- Step 6: five synthetic layouts, `ledger` held out, overlap and wording tests.
+- Step 7: normalisation frozen, protocol committed before metrics, one tuning round on validation, one read of test. Result: evals/results/cord_s1_v1.md.
+- Step 8: SROIE adapter and vendor split on 626 labels from a community mirror. Terms unverified, so research-only.
+- Step 9: `ollama` is not on PATH, so S2-S5 stay BLOCKED.
+- Next: Phase 4 backend.

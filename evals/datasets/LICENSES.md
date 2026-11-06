@@ -24,9 +24,19 @@ Counts are documents holding the key. On test, 2 of the 43 `tax_price` labels (i
 
 **No vendor identifier.** Metadata holds only `image_id`, `image_size`, `split` and `version`. A grouped split must use derived layout groups, and reports must call them derived.
 
+## SROIE (ICDAR 2019)
+
+**Status: research-only. Terms unverified.** No licence for the dataset was found on 2026-11-06.
+
+- **Official source:** https://rrc.cvc.uab.es/?ch=13, 1000 receipts. The download section requires a free portal account. The public Downloads page states no licence, and the terms inside the registered area have not been read. Registration needs the project owner.
+- **Community mirror used for labels:** `zzzDavid/ICDAR-2019-SROIE`, which states 600 trainval and 400 test receipts. Its MIT licence covers the repository's code. It states no licence for the dataset and cannot grant one for the receipts.
+- **Hugging Face copies:** several exist, some tagged MIT. A tag from a re-uploader is not evidence of a right to use the data.
+- **Paper:** arXiv 2103.10213 is CC BY 4.0, which covers the paper only.
+
+Rules until the owner confirms terms: no SROIE file, company name or receipt text is committed; it never appears in the public demo; only document IDs and anonymous group numbers are committed. The fetch script takes key files only, not images.
+
 ## Not yet obtained
 
-- **SROIE:** source and licence not verified. Treat as research-only. Several community copies exist on Hugging Face; a repository tag alone is not evidence of a right to use the data.
 - **DocILE:** access needs a human request. Never redistributed.
 - **FUNSD:** forms, not invoices. Not used for the main schema.
 

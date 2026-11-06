@@ -26,6 +26,19 @@ CORD has no vendor identifier, so groups are derived and approximate a layout, n
 
 k=12 was set in advance and is not tuned. Assignments are in `evals/splits/cord_v2/layout_groups.json`. SROIE vendor groups are the primary A12 check, and these groups are a secondary check.
 
+## SROIE vendor groups
+
+SROIE is research-only with unverified terms; see `evals/datasets/LICENSES.md`. Vendor groups are the primary A12 check, because SROIE has a company label.
+
+- Labels: 626 key files from a community mirror, verified against git blob hashes. The official set has 1000 receipts. This mirror lacks the labelled test portion, so the split covers 626 documents.
+- Grouping: company text is casefolded, punctuation and legal suffixes are removed, and near-identical names merge at a RapidFuzz ratio of at least 92.
+- Split: whole vendors are assigned to train, calibration and test at 60/20/20, largest first, seed 20261106.
+- Result: 221 vendor groups, of which 150 hold one document. Train 376 documents and 79 vendors, calibration 125 and 71, test 125 and 71.
+
+`evals/splits/sroie/vendor_groups.json` holds document IDs and anonymous group numbers only. No company name is committed. Fuzzy merging can join two different vendors or miss a variant, so groups approximate vendors.
+
+No SROIE metric has been computed. Images are not downloaded.
+
 ## Mapped fields
 
 | Field | CORD label |

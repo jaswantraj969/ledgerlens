@@ -46,7 +46,7 @@ src\ledgerlens\verification\normalize.py        76      2    97%
 src\ledgerlens\verification\rules.py            30      0   100%
 ----------------------------------------------------------------
 TOTAL                                          671     24    96%
-159 passed in 22.51s
+159 passed in 16.61s
 STEP_EXIT[pytest-coverage]=0
 
 === npm-lint
@@ -69,8 +69,8 @@ $ npm test
 
  Test Files  1 passed (1)
       Tests  1 passed (1)
-   Start at  13:33:44
-   Duration  7.46s (environment 74%, setup 23%, tests 2%, transform 1%)
+   Start at  13:34:38
+   Duration  2.79s (environment 73%, setup 18%, tests 6%, transform 1%, worker 1%, import 1%)
 
 STEP_EXIT[npm-test]=0
 
@@ -89,25 +89,14 @@ dist/index.html                   0.46 kB │ gzip:  0.29 kB
 dist/assets/index-Dm_kgmD5.css    6.70 kB │ gzip:  2.02 kB
 dist/assets/index-CxFXa7To.js   219.75 kB │ gzip: 68.71 kB
 
-[32m✓ built in 311ms[39m
+[32m✓ built in 191ms[39m
 STEP_EXIT[npm-build]=0
 
 === gitleaks-full-history
-$ /c/Users/jknm6/.cache/pre-commit/repomsx10mrf/.github/workflows/gitleaks.yml detect --source . --no-banner --redact --log-opts=--all
-/c/Users/jknm6/.cache/pre-commit/repomsx10mrf/.github/workflows/gitleaks.yml: line 1: name:: command not found
-/c/Users/jknm6/.cache/pre-commit/repomsx10mrf/.github/workflows/gitleaks.yml: line 2: on:: command not found
-/c/Users/jknm6/.cache/pre-commit/repomsx10mrf/.github/workflows/gitleaks.yml: line 3: jobs:: command not found
-/c/Users/jknm6/.cache/pre-commit/repomsx10mrf/.github/workflows/gitleaks.yml: line 4: scan:: command not found
-/c/Users/jknm6/.cache/pre-commit/repomsx10mrf/.github/workflows/gitleaks.yml: line 5: name:: command not found
-/c/Users/jknm6/.cache/pre-commit/repomsx10mrf/.github/workflows/gitleaks.yml: line 6: runs-on:: command not found
-/c/Users/jknm6/.cache/pre-commit/repomsx10mrf/.github/workflows/gitleaks.yml: line 7: steps:: command not found
-/c/Users/jknm6/.cache/pre-commit/repomsx10mrf/.github/workflows/gitleaks.yml: line 8: -: command not found
-/c/Users/jknm6/.cache/pre-commit/repomsx10mrf/.github/workflows/gitleaks.yml: line 9: with:: command not found
-/c/Users/jknm6/.cache/pre-commit/repomsx10mrf/.github/workflows/gitleaks.yml: line 10: fetch-depth:: command not found
-/c/Users/jknm6/.cache/pre-commit/repomsx10mrf/.github/workflows/gitleaks.yml: line 11: -: command not found
-/c/Users/jknm6/.cache/pre-commit/repomsx10mrf/.github/workflows/gitleaks.yml: line 12: env:: command not found
-/c/Users/jknm6/.cache/pre-commit/repomsx10mrf/.github/workflows/gitleaks.yml: line 13: ${{ secrets.GITHUB_TOKEN }}: bad substitution
-/c/Users/jknm6/.cache/pre-commit/repomsx10mrf/.github/workflows/gitleaks.yml: line 14: ${{ secrets.GITLEAKS_LICENSE}}: bad substitution
-STEP_EXIT[gitleaks-full-history]=1
+$ /c/Users/jknm6/.cache/pre-commit/repomsx10mrf/golangenv-default/bin/gitleaks.exe detect --source . --no-banner --redact --log-opts=--all
+[90m1:34PM[0m [32mINF[0m 20 commits scanned.
+[90m1:34PM[0m [32mINF[0m scan completed in 290ms
+[90m1:34PM[0m [32mINF[0m no leaks found
+STEP_EXIT[gitleaks-full-history]=0
 
-CI_LOCAL_EXIT=1
+CI_LOCAL_EXIT=0
