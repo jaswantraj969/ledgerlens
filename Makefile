@@ -1,7 +1,7 @@
 COMPOSE := docker compose -f infra/docker-compose.yml --env-file .env
 PY := uv run --directory backend
 
-.PHONY: dev up down test lint typecheck eval-smoke eval-full tables figures reproduce demo-data
+.PHONY: dev up down test lint typecheck ci eval-smoke eval-full tables figures reproduce demo-data
 
 dev:
 	$(COMPOSE) up -d postgres redis
@@ -22,6 +22,10 @@ lint:
 
 typecheck:
 	$(PY) mypy
+
+# Local mirror of .github/workflows/ci.yml; see the script header for what it does not prove.
+ci:
+	bash scripts/ci_local.sh 2>&1 | tee docs/progress/logs/ci-local.txt
 
 # The evaluation targets below are wired up in Phase 7.
 eval-smoke eval-full tables figures reproduce demo-data:

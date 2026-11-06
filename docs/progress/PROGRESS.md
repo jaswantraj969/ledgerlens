@@ -1,5 +1,15 @@
 # Progress
 
+## Operational lessons
+
+| Failure | Cause | Permanent fix |
+|---|---|---|
+| Backend install hung about 12 hours | Retry loop had no stall detection; `uv` waited on dead connections, and `TaskStop` ended the shell but not its `uv` child | All long commands run through `scripts/run_logged.sh`: hard timeout, stall detector, heartbeat, child killed |
+| Hours lost re-downloading packages | A private `UV_CACHE_DIR`, added to avoid a lock conflict, bypassed the default cache | Keep the default uv cache. Avoid the lock by not running two uv jobs at once |
+| Large wheels never finished | `uv` cannot resume, so each timeout discarded partial downloads | `scripts/fetch_wheels.py`: resumable curl plus PyPI SHA-256 check, then `--find-links` |
+| False exit-0 notices (failed sync, failed pre-commit, unverified CORD downloads) | The notice reports the wrapper's last command, not the step that mattered | Every log ends in `EXIT=<code>`. Read that line and the log tail before marking anything done. Verify downloads by hash |
+| pre-commit reported "files modified" | Its log was written inside the repo during the run | Write logs for pre-commit outside the tree, then copy them in |
+
 ## 2026-11-05
 - Phase 1 done. Started Docker Desktop; chose Docker-first services with native Python and Node.
 - Phase 2 documents written. ADR-0002 is Proposed until Docling is tested.

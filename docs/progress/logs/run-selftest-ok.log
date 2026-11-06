@@ -1,0 +1,4 @@
+START 2026-11-06T08:02:34Z timeout=30s stall=10s cmd: bash -c echo hi; exit 7
+hi
+END 2026-11-06T08:02:34Z elapsed=0s
+EXIT=7
