@@ -1,20 +1,10 @@
 ........................................................................ [ 45%]
 ........................................................................ [ 90%]
 ...............                                                          [100%]
-159 passed in 29.68s
+159 passed in 17.98s
 pytest_exit=0
-RUF001 String contains ambiguous `×` (MULTIPLICATION SIGN). Did you mean `x` (LATIN SMALL LETTER X)?
-  --> src\ledgerlens\extraction\deterministic.py:26:47
-   |
-24 | _IGNORED = "__ignored__"
-25 | _TRAILING_PUNCTUATION = ".,:;"
-26 | _LEADING_QUANTITY = re.compile(r"^(\d{1,3})[xX×]?$")
-   |                                               ^
-27 | _UNIT_PRICE_PREFIX = "@"
-   |
-
-Found 1 error.
-ruff_exit=1
+All checks passed!
+ruff_exit=0
 31 files already formatted
 format_exit=0
 Success: no issues found in 21 source files

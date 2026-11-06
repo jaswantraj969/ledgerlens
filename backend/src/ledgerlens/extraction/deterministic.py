@@ -23,7 +23,7 @@ _LABEL_NOISE = re.compile(r"^[:#.\-]+$")
 _MAX_DATE_TOKENS = 4
 _IGNORED = "__ignored__"
 _TRAILING_PUNCTUATION = ".,:;"
-_LEADING_QUANTITY = re.compile(r"^(\d{1,3})[xX×]?$")
+_LEADING_QUANTITY = re.compile(r"^(\d{1,3})[xX×]?$")  # noqa: RUF001 - receipts print the multiplication sign
 _UNIT_PRICE_PREFIX = "@"
 
 Claim = tuple[Line, tuple[Token, ...]]
