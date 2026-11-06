@@ -8,7 +8,7 @@ import re
 
 from ledgerlens.extraction.layout import Line, build_lines
 from ledgerlens.fields import Evidence, FieldRecord
-from ledgerlens.parsing.model import COORDINATE_SYSTEM, ParsedDocument, Token
+from ledgerlens.parsing.model import ParsedDocument, Token
 from ledgerlens.schema import FieldSpec, FieldType, LineItemSpec, Schema
 from ledgerlens.verification.normalize import (
     normalize_amount,
@@ -40,16 +40,16 @@ class DeterministicExtractor:
         self, spec: FieldSpec, lines: list[Line], claimed: list[tuple[Line, int]]
     ) -> FieldRecord:
         if spec.position == "first_line" and lines:
-            return _record(spec.name, lines[0].page, lines[0].tokens)
+            return _record(spec.name, lines[0], lines[0].tokens)
         for line, label_end in reversed(claimed) if spec.take == "last" else claimed:
             value = _value_tokens(spec.type, line.tokens_after(label_end))
             if value:
-                return _record(spec.name, line.page, value)
+                return _record(spec.name, line, value)
         if spec.scan:
             for line in lines:
                 for token in line.tokens:
                     if normalize_currency(token.text) is not None:
-                        return _record(spec.name, line.page, (token,))
+                        return _record(spec.name, line, (token,))
         return FieldRecord(name=spec.name, value_raw=None, value_normalized=None, source=SOURCE)
 
 
@@ -92,7 +92,7 @@ def _value_tokens(field_type: FieldType, tokens: tuple[Token, ...]) -> tuple[Tok
     return tokens
 
 
-def _record(name: str, page: int, tokens: tuple[Token, ...]) -> FieldRecord:
+def _record(name: str, line: Line, tokens: tuple[Token, ...]) -> FieldRecord:
     raw = " ".join(token.text for token in tokens)
     return FieldRecord(
         name=name,
@@ -101,10 +101,11 @@ def _record(name: str, page: int, tokens: tuple[Token, ...]) -> FieldRecord:
         source=SOURCE,
         evidence=[
             Evidence(
-                page=page,
+                page=line.page,
                 text=token.text,
                 bbox=token.bbox,
-                coordinate_system=COORDINATE_SYSTEM,
+                coordinate_system=line.coordinate_system,
+                confidence=token.confidence,
             )
             for token in tokens
         ],
@@ -146,7 +147,7 @@ def _extract_line_items(lines: list[Line], spec: LineItemSpec) -> list[FieldReco
         if cells is None:
             continue
         for name, tokens in cells.items():
-            records.append(_record(f"line_items[{row}].{name}", line.page, tokens))
+            records.append(_record(f"line_items[{row}].{name}", line, tokens))
         row += 1
     return records
 

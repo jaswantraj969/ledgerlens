@@ -10,6 +10,7 @@ from ledgerlens.parsing.model import ParsedDocument, Token
 class Line:
     page: int
     tokens: tuple[Token, ...]
+    coordinate_system: str
 
     @property
     def text(self) -> str:
@@ -37,14 +38,15 @@ def build_lines(document: ParsedDocument) -> list[Line]:
         for token in ordered:
             token_center = (token.bbox[1] + token.bbox[3]) / 2
             if group and token_center - center > tolerance:
-                lines.append(_line(page.number, group))
+                lines.append(_line(page.number, group, page.coordinate_system))
                 group = []
             if not group:
                 center = token_center
             group.append(token)
-        lines.append(_line(page.number, group))
+        lines.append(_line(page.number, group, page.coordinate_system))
     return lines
 
 
-def _line(page: int, tokens: list[Token]) -> Line:
-    return Line(page=page, tokens=tuple(sorted(tokens, key=lambda token: token.bbox[0])))
+def _line(page: int, tokens: list[Token], coordinate_system: str) -> Line:
+    ordered = tuple(sorted(tokens, key=lambda token: token.bbox[0]))
+    return Line(page=page, tokens=ordered, coordinate_system=coordinate_system)

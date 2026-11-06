@@ -5,7 +5,7 @@ from typing import Literal
 
 from pydantic import BaseModel
 
-EvidenceStatus = Literal["exact", "fuzzy", "not_found"]
+EvidenceStatus = Literal["exact", "fuzzy", "not_found", "self_sourced"]
 Decision = Literal["auto_accepted", "needs_review", "corrected", "rejected"]
 SignalValue = float | int | bool | str | None
 
@@ -15,6 +15,7 @@ class Evidence(BaseModel):
     text: str
     bbox: tuple[float, float, float, float] | None
     coordinate_system: str | None
+    confidence: float | None = None
 
 
 class ValidationResult(BaseModel):
@@ -30,6 +31,7 @@ class FieldRecord(BaseModel):
     source: str
     evidence: list[Evidence] = []
     evidence_status: EvidenceStatus = "not_found"
+    evidence_independent: bool = False
     validation_results: list[ValidationResult] = []
     signals: dict[str, SignalValue] = {}
     risk_score: float | None = None

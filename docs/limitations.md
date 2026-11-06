@@ -4,9 +4,9 @@ Research prototype evaluated on public datasets. Not validated for production us
 
 This file grows as limitations are found.
 
-## Evidence matching is not independent for the deterministic extractor
+## Deterministic values have no independent evidence
 
-The deterministic extractor reads values from the same tokens the evidence matcher searches, so `evidence_status` is almost always `exact` for it. That result says the value came from the document, not that it is the right value. The signal only carries real information for LLM-extracted values.
+The deterministic extractor copies values from the tokens, so matching them against those tokens proves nothing. Such fields are recorded as `evidence_status: self_sourced` with `evidence_independent: false`, never `exact`, and the feature builder excludes them. Only a value from a different source, such as an LLM pass, gets a real match result. A `self_sourced` field shows where a value was read from, not that it is correct.
 
 ## The risk score is unfitted
 

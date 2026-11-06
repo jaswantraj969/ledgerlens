@@ -5,9 +5,11 @@ from dataclasses import dataclass
 from rapidfuzz import fuzz
 
 from ledgerlens.extraction.layout import Line
-from ledgerlens.fields import EvidenceStatus
+from ledgerlens.fields import EvidenceStatus, FieldRecord
 from ledgerlens.verification.normalize import normalize_amount, normalize_text
 
+# Sources whose values are copied from the tokens the matcher would search.
+TOKEN_DERIVED_SOURCES = frozenset({"deterministic"})
 FUZZY_THRESHOLD = 85.0
 _MAX_WINDOW = 8
 
@@ -20,6 +22,22 @@ class EvidenceMatch:
 
 
 NOT_FOUND = EvidenceMatch(status="not_found", kind=None, score=None)
+
+
+def assess_evidence(record: FieldRecord, lines: list[Line], *, is_amount: bool) -> None:
+    """Set evidence status. A token-derived value is `self_sourced`: matching it proves nothing."""
+    if record.value_raw is None:
+        record.evidence_status = "not_found"
+        record.evidence_independent = False
+        return
+    if record.source in TOKEN_DERIVED_SOURCES:
+        record.evidence_status = "self_sourced"
+        record.evidence_independent = False
+        return
+    match = match_evidence(record.value_raw, lines, is_amount=is_amount)
+    record.evidence_status = match.status
+    record.evidence_independent = True
+    record.signals.update(evidence_kind=match.kind, evidence_score=match.score)
 
 
 def match_evidence(value: str | None, lines: list[Line], *, is_amount: bool) -> EvidenceMatch:

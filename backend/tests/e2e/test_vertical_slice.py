@@ -55,7 +55,8 @@ def test_line_items_sum_to_subtotal() -> None:
 def test_every_field_carries_the_required_record_parts() -> None:
     _, fields = run(3)
     for record in fields.values():
-        assert record.evidence_status in {"exact", "fuzzy", "not_found"}
+        assert record.evidence_status in {"self_sourced", "not_found"}
+        assert record.evidence_independent is False
         assert record.risk_score is not None
         assert record.decision in {"auto_accepted", "needs_review"}
         assert "value_present" in record.signals

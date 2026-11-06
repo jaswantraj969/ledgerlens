@@ -2,13 +2,14 @@
 
 import re
 
+from ledgerlens.confidence.features import build_features
 from ledgerlens.confidence.risk import route
 from ledgerlens.extraction.deterministic import DeterministicExtractor, normalized_value
 from ledgerlens.extraction.layout import build_lines
 from ledgerlens.fields import FieldRecord
 from ledgerlens.parsing.model import ParsedDocument
 from ledgerlens.schema import FieldType, Schema
-from ledgerlens.verification.evidence import match_evidence
+from ledgerlens.verification.evidence import assess_evidence
 from ledgerlens.verification.rules import check_arithmetic
 
 _LINE_CELL = re.compile(r"^line_items\[\d+\]\.(\w+)$")
@@ -35,15 +36,9 @@ def process(document: ParsedDocument, schema: Schema) -> list[FieldRecord]:
     for record in records:
         kind = field_type(schema, record.name)
         record.value_normalized = normalized_value(kind, record.value_raw)
-        match = match_evidence(record.value_raw, lines, is_amount=kind == "amount")
-        record.evidence_status = match.status
-        record.signals.update(
-            evidence_kind=match.kind,
-            evidence_score=match.score,
-            value_present=record.value_raw is not None,
-            value_valid=record.value_normalized is not None,
-        )
+        assess_evidence(record, lines, is_amount=kind == "amount")
     check_arithmetic(records)
     for record in records:
         route(record)
+        record.signals.update(build_features(record))
     return records
