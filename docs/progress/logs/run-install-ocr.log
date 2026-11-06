@@ -21,3 +21,8 @@ shapely==2.2.0
 curl: (56) Recv failure: Connection was reset
 OK  onnxruntime-1.31.1-cp312-cp312-win_amd64.whl
 NO WHEEL opencv-python-headless==5.0.0.93
+OK  rapidocr-3.10.0-py3-none-any.whl
+OK  shapely-2.2.0-cp312-cp312-win_amd64.whl
+DONE failed=opencv-python-headless==5.0.0.93
+END 2026-11-06T08:07:26Z elapsed=213s
+EXIT=3

@@ -6,10 +6,10 @@ fields:
     position: first_line
   - name: invoice_number
     type: identifier
-    labels: ["invoice number", "invoice no", "invoice #", "inv no", "invoice"]
+    labels: ["invoice number", "invoice no", "invoice #", "inv no", "bill no", "receipt no", "ref", "invoice"]
   - name: invoice_date
     type: date
-    labels: ["invoice date", "date"]
+    labels: ["invoice date", "issue date", "date"]
   - name: currency
     type: currency
     labels: ["currency"]
@@ -27,5 +27,5 @@ fields:
     labels: ["grand total", "total due", "amount due", "total"]
     take: last
 line_items:
-  header_labels: ["description", "item", "qty"]
-  end_labels: ["subtotal", "sub total", "tax", "vat", "total"]
+  header_labels: ["description", "item", "qty", "quantity", "amount", "amt", "price"]
+  end_labels: ["subtotal", "sub", "net", "tax", "vat", "gst", "total", "cash", "change"]

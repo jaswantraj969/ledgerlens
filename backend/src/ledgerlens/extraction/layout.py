@@ -16,14 +16,15 @@ class Line:
     def text(self) -> str:
         return " ".join(token.text for token in self.tokens)
 
-    def tokens_after(self, char_offset: int) -> tuple[Token, ...]:
-        """Tokens starting at or after a character offset in `text`."""
+    def tokens_between(self, start: int, stop: int | None = None) -> tuple[Token, ...]:
+        """Tokens starting in the character range [start, stop) of `text`."""
+        selected: list[Token] = []
         position = 0
-        for index, token in enumerate(self.tokens):
-            if position >= char_offset:
-                return self.tokens[index:]
+        for token in self.tokens:
+            if position >= start and (stop is None or position < stop):
+                selected.append(token)
             position += len(token.text) + 1
-        return ()
+        return tuple(selected)
 
 
 def build_lines(document: ParsedDocument) -> list[Line]:

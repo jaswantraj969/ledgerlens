@@ -22,6 +22,8 @@ SOURCE = "deterministic"
 _LABEL_NOISE = re.compile(r"^[:#.\-]+$")
 _MAX_DATE_TOKENS = 4
 
+Claim = tuple[Line, tuple[Token, ...]]
+
 
 class DeterministicExtractor:
     name = SOURCE
@@ -37,12 +39,12 @@ class DeterministicExtractor:
         return records
 
     def _extract_field(
-        self, spec: FieldSpec, lines: list[Line], claimed: list[tuple[Line, int]]
+        self, spec: FieldSpec, lines: list[Line], claimed: list[Claim]
     ) -> FieldRecord:
         if spec.position == "first_line" and lines:
             return _record(spec.name, lines[0], lines[0].tokens)
-        for line, label_end in reversed(claimed) if spec.take == "last" else claimed:
-            value = _value_tokens(spec.type, line.tokens_after(label_end))
+        for line, tokens in reversed(claimed) if spec.take == "last" else claimed:
+            value = _value_tokens(spec.type, tokens)
             if value:
                 return _record(spec.name, line, value)
         if spec.scan:
@@ -53,7 +55,8 @@ class DeterministicExtractor:
         return FieldRecord(name=spec.name, value_raw=None, value_normalized=None, source=SOURCE)
 
 
-def _claim_lines(lines: list[Line], schema: Schema) -> dict[str, list[tuple[Line, int]]]:
+def _claim_lines(lines: list[Line], schema: Schema) -> dict[str, list[Claim]]:
+    """Find labels on each line. Longest labels win; a line may hold several fields."""
     labels = sorted(
         ((label, spec.name) for spec in schema.fields for label in spec.labels),
         key=lambda pair: len(pair[0]),
@@ -63,12 +66,17 @@ def _claim_lines(lines: list[Line], schema: Schema) -> dict[str, list[tuple[Line
         (re.compile(rf"(?<!\w){re.escape(label)}(?!\w)", re.IGNORECASE), name)
         for label, name in labels
     ]
-    claims: dict[str, list[tuple[Line, int]]] = {}
+    claims: dict[str, list[Claim]] = {}
     for line in lines:
+        spans: list[tuple[int, int, str]] = []
         for pattern, name in patterns:
-            if match := pattern.search(line.text):
-                claims.setdefault(name, []).append((line, match.end()))
-                break
+            for match in pattern.finditer(line.text):
+                if all(match.end() <= s or match.start() >= e for s, e, _ in spans):
+                    spans.append((match.start(), match.end(), name))
+        spans.sort()
+        for index, (_, end, name) in enumerate(spans):
+            stop = spans[index + 1][0] if index + 1 < len(spans) else None
+            claims.setdefault(name, []).append((line, line.tokens_between(end, stop)))
     return claims
 
 
@@ -134,34 +142,37 @@ def _extract_line_items(lines: list[Line], spec: LineItemSpec) -> list[FieldReco
     in_table = False
     row = 0
     for line in lines:
-        text = normalize_text(line.text)
-        words = set(text.split())
+        words = set(normalize_text(line.text).split())
         if not in_table:
-            in_table = all(label in words for label in spec.header_labels[:1]) and any(
-                label in words for label in spec.header_labels[1:]
-            )
+            in_table = len(words & set(spec.header_labels)) >= 2
             continue
-        if words & set(spec.end_labels):
-            break
         cells = _row_cells(line.tokens)
-        if cells is None:
-            continue
-        for name, tokens in cells.items():
-            records.append(_record(f"line_items[{row}].{name}", line, tokens))
-        row += 1
+        if cells is not None:
+            for name, tokens in cells.items():
+                records.append(_record(f"line_items[{row}].{name}", line, tokens))
+            row += 1
+        elif words & set(spec.end_labels):
+            break
     return records
 
 
+def _is_number(token: Token) -> bool:
+    return normalize_amount(token.text) is not None
+
+
 def _row_cells(tokens: tuple[Token, ...]) -> dict[str, tuple[Token, ...]] | None:
-    """Split a row into description, quantity, unit_price and amount from the right."""
-    if len(tokens) < 4:
-        return None
-    description, quantity, unit_price, amount = tokens[:-3], tokens[-3], tokens[-2], tokens[-1]
-    if any(normalize_amount(token.text) is None for token in (quantity, unit_price, amount)):
-        return None
-    return {
-        "description": description,
-        "quantity": (quantity,),
-        "unit_price": (unit_price,),
-        "amount": (amount,),
-    }
+    """Read columns from the right: quantity, optional unit price, amount."""
+    if len(tokens) >= 4 and all(_is_number(token) for token in tokens[-3:]):
+        return {
+            "description": tokens[:-3],
+            "quantity": (tokens[-3],),
+            "unit_price": (tokens[-2],),
+            "amount": (tokens[-1],),
+        }
+    if len(tokens) >= 3 and all(_is_number(token) for token in tokens[-2:]):
+        return {
+            "description": tokens[:-2],
+            "quantity": (tokens[-2],),
+            "amount": (tokens[-1],),
+        }
+    return None

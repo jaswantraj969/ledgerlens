@@ -36,7 +36,7 @@ for spec in sys.argv[3:]:
     urls = json.loads(meta.read_text(encoding="utf-8"))["urls"]
     wheels = [u for u in urls if u["filename"].endswith(".whl")
               and (platform in u["filename"] or "py3-none-any" in u["filename"])
-              and ("cp312" in u["filename"] or "py3-none" in u["filename"])]
+              and any(tag in u["filename"] for tag in ("cp312", "py3-none", "abi3"))]
     if not wheels:
         print("NO WHEEL", spec, flush=True); failed.append(spec); continue
     wheel = wheels[0]
