@@ -162,6 +162,29 @@ Deterministic-versus-LLM agreement is a feature with both sources independent (`
 - **Reported, on test:** automation rate (auto-accepted units over all units, header slots counted whether or not filled) at each target, with achieved precision and 95% document-bootstrap intervals, reported even when the target is not met. Also ECE (10 equal-width bins), Brier score and ROC-AUC of the calibrated probabilities on test. The word "calibrated probability" is used only for these outputs.
 - **Layout-group-held-out variant:** `evals/splits/cord_v2/layout_group_holdout.json`, written before any S5 result. Groups 6, 7, 9 and 10 are evaluation groups and the other eight are calibration groups. The calibrator is fitted on train documents in calibration groups (540), thresholds are chosen on validation documents in calibration groups (74), and results are reported on test documents in evaluation groups (37), next to the test documents in calibration groups (63). Only the calibrator and thresholds are group-held-out. The rules and prompts were developed on documents from every group, and 37 documents give wide intervals. This is the only A12 generalisation result available.
 
+## Pre-registered on 2026-11-08, before any qwen3 or S5 result exists
+
+Committed before the qwen3:4b smoke test, the model comparison, or any S5 fit. Nothing here changes after a result is seen.
+
+### Model comparison: llama3.2:3b against qwen3:4b, as S4h
+
+- **Candidate:** `qwen3:4b`, approved by the owner on 2026-11-08; `qwen2.5:7b` was declined for lack of RAM. The digest is recorded after the pull. Thinking is turned off through Ollama's `think: false`; a reply that still holds reasoning text is an LLM error, so that pass counts as failed.
+- **Prompt:** 2.2, unchanged. If the smoke test shows qwen3 replies that do not parse as the schema's JSON, one format-only adaptation is allowed (wording about the reply format only, no change to field definitions, rules or the example), recorded here with the reason. No other prompt change.
+- **num_ctx for qwen3:** the same rule as for llama (smallest multiple of 256 holding the longest CORD prompt in qwen3 tokens plus `num_predict` 1024), measured on input only before the comparison.
+- **Smoke test:** the first 10 documents of the train subset in sorted order, S4h with qwen3. It checks that replies parse and carry no reasoning. It selects nothing.
+- **Comparison:** S4h on the same 100-document train subset (`prompt_dev_train100.json`), llama3.2:3b (prompt 2.2, `num_ctx` 2304) against qwen3:4b (prompt 2.2, its measured `num_ctx`). Score: the mean of total, subtotal, tax and row-level F1 under metrics 1.1.1.
+- **Rule:** adopt qwen3:4b only if (a) its mean F1 is at least 0.05 higher than llama's, and (b) its warm p95 LLM latency per document (both passes, model load excluded) is at most twice llama's, and (c) no more than one of its runs aborts on memory. Otherwise keep llama3.2:3b.
+- **Validation:** if qwen3 is adopted, S4h with qwen3 is read once on validation and added as a new row, S4h-qwen; earlier rows stay. If llama is kept, no new validation read is made, because the existing S4h row is that system.
+
+### S5 on two bases: S5-S4h and S5-S1
+
+Both use the S5 protocol registered on 2026-11-07 (units, labels, logistic regression with C=1.0, thresholds on validation at 0.98 and 0.99, the grouped holdout variant), with one difference: the base system.
+
+- **S5-S4h:** base S4h with the model adopted above.
+- **S5-S1:** base S1. Features are those `build_features` gives for S1 records: rule results (`rules_passed`, `rules_failed`, `rules_checked`), the format check (`value_valid`), OCR confidence (`ocr_confidence_mean`, `ocr_confidence_min`, `ocr_confidence_available`) and value presence, plus the field name and source. No LLM feature exists for S1. Label proximity is not available for S1: rule values are found by their label, so the check gives no result for them by design (circular), and its feature is null. Independent-evidence features are null for the same reason.
+- **Train predictions:** S1 and the adopted S4h on all 800 CORD train documents, with per-field records saved.
+- **This round reports validation only:** automation rate at target precision 0.98 and 0.99 with achieved precision, ECE (10 bins), Brier score and ROC-AUC, with 95% document-bootstrap intervals. Test is not read until the final read of S1 to S5 together, from a clean commit.
+
 ## Synthetic evaluation
 
 Fixed before the held-out layout was first run through extraction.
