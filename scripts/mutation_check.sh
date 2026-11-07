@@ -1,16 +1,24 @@
 #!/usr/bin/env bash
+# With arguments, runs only the mutations whose label contains one of them.
 # Breaks one behaviour at a time and confirms the test suite notices. Needs a clean tree for
 # the mutated files, and restores each from HEAD afterwards.
 cd "$(dirname "$0")/../backend" || exit 2
 PY=.venv/Scripts/python.exe
 [ -x "$PY" ] || PY=.venv/bin/python
 
+FILTERS=("$@")
+
 mutate_eval() { mutate "$1" "../$2" "$3" "$4"; }
 
 mutate() {
   local label=$1 file=$2 from=$3 to=$4
+  if [ "${#FILTERS[@]}" -gt 0 ]; then
+    local wanted=0 filter
+    for filter in "${FILTERS[@]}"; do [[ "$label" == *"$filter"* ]] && wanted=1; done
+    [ "$wanted" -eq 1 ] || return
+  fi
   git diff --quiet HEAD -- "$file" || { echo "SKIP $label: $file has local changes"; return; }
-  sed -i "s/$from/$to/" "$file"
+  sed -i "s#$from#$to#" "$file"
   if git diff --quiet HEAD -- "$file"; then echo "NOOP $label: pattern did not match"; return; fi
   if timeout 180 "$PY" -m pytest -q -x --no-header -p no:cacheprovider >/dev/null 2>&1; then
     echo "SURVIVED $label"

@@ -143,6 +143,20 @@ def test_assignment_prefers_full_matches_over_many_partial_ones() -> None:
     assert match_rows(predicted, gold).correct == 1
 
 
+@pytest.mark.parametrize("flip_predicted", [False, True])
+@pytest.mark.parametrize("flip_gold", [False, True])
+def test_a_partial_score_tie_still_keeps_the_full_match(
+    flip_predicted: bool, flip_gold: bool
+) -> None:
+    """Both pairings total 1.0 on partial share. Only one of them has a fully correct row."""
+    exact = {"description": "tea", "quantity": 1, "unit_price": 2, "amount": 5}
+    near = {"description": "tea", "quantity": 1, "unit_price": 2, "amount": 7}
+    other = {"description": "x", "quantity": 8, "unit_price": 9, "amount": 5}
+    gold = [near, exact] if flip_gold else [exact, near]
+    predicted = [other, exact] if flip_predicted else [exact, other]
+    assert match_rows(predicted, gold).correct == 1
+
+
 def test_row_summary_hand_computed() -> None:
     summary = summarize_rows([RowOutcome(2, 2, 2), RowOutcome(1, 3, 2), RowOutcome(0, 1, 0)])
     assert (summary["rows_correct"], summary["rows_predicted"], summary["rows_gold"]) == (3, 6, 4)

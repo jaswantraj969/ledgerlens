@@ -1,0 +1,24 @@
+CAUGHT label order ignored
+CAUGHT arithmetic rule always passes
+CAUGHT bbox not flipped to top-left
+CAUGHT failed rules add no risk
+CAUGHT invented native confidence
+CAUGHT formula text passes to CSV
+CAUGHT self-sourced evidence reaches features
+CAUGHT document get ignores organization
+CAUGHT document list ignores organization
+CAUGHT job lookup ignores organization
+CAUGHT roles are not enforced
+CAUGHT rate limit never trips
+CAUGHT jwt signature not verified
+CAUGHT refresh token not rotated
+CAUGHT extension not checked
+CAUGHT size not checked
+CAUGHT filename not cleaned
+CAUGHT log redaction disabled
+CAUGHT api key stored in clear
+CAUGHT fallback values are scored
+sed: -e expression #1, char 37: unknown option to `s'
+NOOP exact match counts empty documents: pattern did not match
+SURVIVED rows match by best partial only
+EXIT=0
