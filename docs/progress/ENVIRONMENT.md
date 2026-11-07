@@ -44,6 +44,13 @@ Fit for `llama3.2:3b`, measured in `evals/results/dev/llm_smoke_llama3.2-3b.json
 - **RAM:** 15.64 GB total, 1.66 GB free just after the run. The runner process held 0.98 GB. Free RAM is the tight resource here, so a model that spills out of VRAM would be at risk.
 - **Cold start:** the first load took 69.6 s by Ollama's own `load_duration`.
 
+Low-RAM settings, from the 2026-11-07 review:
+
+- `OLLAMA_MAX_LOADED_MODELS=1`, set as a user environment variable. The Ollama app was stopped and started again (not reinstalled), and its server log shows `OLLAMA_MAX_LOADED_MODELS:1` and `OLLAMA_NUM_PARALLEL:1`. Evidence: `docs/progress/logs/ollama-config.txt`.
+- One worker, no parallel model calls.
+- Every evaluation run aborts cleanly when free system RAM falls below 0.4 GiB, records the abort under `evals/results/aborted/`, and writes no results (`evals/memory_guard.py`). The S2 and S4 validation runs of 2026-11-07 reached 0.27 and 0.25 GiB free, so under this rule they would have aborted.
+- `num_ctx` for round-two prompts is measured per prompt by `evals/runners/measure_prompt_tokens.py`.
+
 ## Decision
 
 Docker-first for services (`postgres:16-alpine`, `redis:7-alpine`, both pulled), native Python and
