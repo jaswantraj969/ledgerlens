@@ -20,7 +20,13 @@ from evals.datasets.cord import DEFAULT_RAW_DIR, iter_documents
 from evals.memory_guard import MemoryLog
 from evals.runners.run_cord_s1 import OCR_CACHE, cached_parse, environment
 from ledgerlens.extraction import prompts
-from ledgerlens.extraction.llm import DEFAULT_PARAMS, SYSTEM_PROMPT, LlmExtractor, _output_model
+from ledgerlens.extraction.llm import (
+    DEFAULT_PARAMS,
+    SYSTEM_PROMPT,
+    LlmExtractor,
+    _output_model,
+    thinking_off,
+)
 from ledgerlens.parsing.model import ParsedDocument
 from ledgerlens.parsing.ocr import RapidOcrParser
 from ledgerlens.schema import load_schema
@@ -45,6 +51,7 @@ def count_tokens(client: httpx.Client, model: str, system: str, prompt: str, fmt
             "stream": False,
             "format": fmt,
             "options": {"temperature": 0, "num_predict": 1, "num_ctx": MEASURE_CTX},
+            **({"think": False} if thinking_off(model) is False else {}),
             "messages": [
                 {"role": "system", "content": system},
                 {"role": "user", "content": prompt},
