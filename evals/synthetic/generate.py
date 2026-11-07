@@ -22,6 +22,7 @@ CENT = Decimal("0.01")
 A4_ROWS_PER_PAGE = 28
 RECEIPT_WIDTH = 226.0
 RECEIPT_VENDOR_CHARS = 26
+RECEIPT_DESCRIPTION_CHARS = 20
 _EU_NUMBERS = str.maketrans(",.", ".,")
 
 
@@ -259,7 +260,7 @@ def _receipt(vendor, meta, rows, summary, money) -> bytes:  # type: ignore[no-un
     pdf.drawRightString(214, y, "Amt")
     y -= 15
     for row in rows:
-        pdf.drawString(12, y, row.description[:20])
+        pdf.drawString(12, y, row.description[:RECEIPT_DESCRIPTION_CHARS])
         pdf.drawRightString(160, y, str(row.quantity))
         pdf.drawRightString(214, y, money(row.amount))
         y -= 15

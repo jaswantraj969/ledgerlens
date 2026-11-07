@@ -120,9 +120,26 @@ Cold start and warm running are reported separately.
 
 Runs use one worker and no parallel model calls. Each run logs peak process memory and lowest free system RAM.
 
-## S1 system
+## Systems
 
-S1 is RapidOCR followed by the deterministic extractor. It needs no LLM.
+Fixed before S2, S3 and S4 were first run.
+
+- **S1:** RapidOCR, then the deterministic extractor. It needs no LLM.
+- **S2:** LLM pass A (field-guided), with values as returned.
+- **S3:** S2 plus verification. A value is withheld, and so counts as no prediction, if it does not parse or if the independent evidence check does not find it in the document. Arithmetic results are reported but withhold nothing, because a failed sum does not show which field is wrong.
+- **S4:** pass A, pass B (document-guided) and the deterministic extractor, merged by normalised agreement. The most-agreed value wins, and a tie goes to the earliest of pass A, pass B, rules. Rows come from the first LLM pass that produced rows. The S3 check then applies. A failed pass is an empty source, and the document is a failed extraction only if both passes fail. Partial failures are counted as pass fallbacks.
+- **S5:** S4 plus a calibrator and thresholds. Not built yet.
+
+## Synthetic evaluation
+
+Fixed before the held-out layout was first run through extraction.
+
+- Layouts: `classic`, `modern`, `receipt` and `statement` are development layouts. `ledger` is held out. Its wording appears in no schema, and a test enforces that.
+- Documents: seeds from 700000, 40 per layout on the native PDF route and 20 per layout on the OCR route. The same seeds are used for each layout. All are single-page with 1 to 8 items, and rotated and low-DPI variants are not included in this run.
+- Schema: `default`, unchanged. No rule may be changed after reading held-out results.
+- Reported: per-layout metrics 1.1, plus F1 pooled across development layouts against F1 on the held-out layout, with the gap.
+
+Synthetic results are reported separately and are never presented as real-dataset results.
 
 ## Tuning log
 
