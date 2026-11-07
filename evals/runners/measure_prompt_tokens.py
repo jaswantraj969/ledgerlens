@@ -121,7 +121,9 @@ def main() -> None:
         "environment": environment(),
     }
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    path = OUTPUT_DIR / f"prompt_tokens_p{arguments.prompt}.json"
+    # The default model keeps the original name; others carry theirs, so nothing is overwritten.
+    model_part = "" if arguments.model == "llama3.2:3b" else "_" + arguments.model.replace(":", "-")
+    path = OUTPUT_DIR / f"prompt_tokens_p{arguments.prompt}{model_part}.json"
     path.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(f"longest {longest} tokens -> num_ctx {num_ctx}; wrote {path}")
 
