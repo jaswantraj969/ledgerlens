@@ -17,7 +17,8 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 | 4 | Auth, roles, API keys, org scoping, rate limits, audit, problem responses | VERIFIED | backend/tests/api/test_auth.py, backend/tests/api/test_documents.py |
 | 4 | Upload, validation, dedup, storage, batch, list, get, delete, job status | VERIFIED | backend/tests/api/test_documents.py |
 | 4 | Health, readiness, metrics, log redaction | VERIFIED | backend/tests/api/test_health.py |
-| 4 | RQ worker and persisted pipeline | NOT STARTED | Upload enqueues `ledgerlens.workers.tasks.process_document`, which does not exist yet, so jobs stay `queued` |
+| 4 | RQ worker and persisted pipeline: idempotent steps, retries with backoff, dead-letter, crash recovery | VERIFIED | backend/tests/api/test_worker.py (9 tests), docs/progress/logs/run-worker-tests.log |
+| 4 | Worker service in Compose | NOT STARTED | Needs the Dockerfile (Phase 9) |
 | 4 | Webhooks | NOT STARTED | Tables exist only |
 | 5 | Normalisation 1.0, frozen | VERIFIED | evals/normalization.lock |
 | 5 | Parsers, deterministic extractor, evidence, features, heuristic risk, export | VERIFIED | backend/tests/unit |
@@ -26,6 +27,11 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 | 5 | Calibrators | NOT STARTED | Later, on train and validation only |
 | 7 | CORD v2 data, splits, layout groups | VERIFIED | evals/splits/cord_v2/ |
 | 7 | Metrics 1.1 with row-level matching | VERIFIED | backend/tests/unit/test_metrics_v1_1.py, docs/evaluation.md |
+| 7 | Metrics 1.1.1 (exact match dropped from tables), results rescored from saved predictions | VERIFIED | docs/progress/logs/metrics-1-1-1-rescore.txt |
+| 7 | Memory sampler test and 0.4 GiB abort | VERIFIED | backend/tests/unit/test_memory_guard.py |
+| 7 | Pre-registration: prompt round, label proximity, S4h, S5, layout-group holdout | VERIFIED | docs/evaluation.md, evals/splits/cord_v2/layout_group_holdout.json, prompt_dev_train100.json (commit eb5c68f) |
+| 5 | Label proximity check and feature | VERIFIED | backend/tests/unit/test_label_proximity.py |
+| 5 | S4h hybrid | VERIFIED | backend/tests/unit/test_hybrid.py, backend/tests/unit/test_systems.py |
 | 7 | S1 reproduction under 1.0 | VERIFIED | docs/progress/logs/s1-reproduction.txt |
 | 7 | S1 on CORD test under 1.1 | VERIFIED | evals/results/cord_s1_v1_1.md |
 | 7 | S1 synthetic, dev versus held-out | VERIFIED | evals/results/synthetic_s1_v1_1.md |
@@ -36,7 +42,7 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 | 7 | S5 | NOT STARTED | Needs features on train, then calibration |
 | 7 | Final S1-S5 test read, once, from a clean commit | NOT STARTED | Last step |
 | 7 | Ablations, degradation | NOT STARTED | Follow S5 |
-| 7 | SROIE results | BLOCKED | Official access is unavailable, and unofficial image mirrors are not used |
+| 7 | SROIE | BLOCKED | Removed: official access unavailable; mirror terms unverified. Labels and vendor groups deleted; adapter kept with fictional fixtures |
 | 6 | Frontend pages | NOT STARTED | |
 | 8 | Testing and hardening | NOT STARTED | |
 | 9 | Deployment | NOT STARTED | |
@@ -48,14 +54,14 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 
 | Id | Status | Note |
 |---|---|---|
-| A1 | IN PROGRESS | Upload, batch, rejection and dedup work; no processing behind them yet |
+| A1 | IN PROGRESS | Upload, batch, rejection and dedup work, and the worker processes jobs; no frontend yet |
 | A2 | VERIFIED | test_ocr_parser.py, test_pdfium_parser.py |
 | A3 | IN PROGRESS | Default and alternative schemas work offline; Ollama used with cord_receipt only |
-| A4 | IN PROGRESS | True in the in-process pipeline; not persisted yet |
+| A4 | IN PROGRESS | Fields, evidence and validations are persisted by the worker; no review API yet |
 | A5 | NOT STARTED | |
 | A6 | IN PROGRESS | Export functions and OpenAPI exist; no export endpoints or webhooks |
 | A7 | VERIFIED | backend/tests/api, docs/progress/logs/mutation-check.txt |
-| A8 | IN PROGRESS | Health and fallback verified; the worker crash test needs the worker |
+| A8 | IN PROGRESS | Worker crash, retry, dead-letter and model-unavailable tests pass; webhooks not built |
 | A9 | IMPLEMENTED BUT UNVERIFIED (local mirror; GitHub run pending human approval) | docs/progress/logs/ci-local.txt |
 | A10 | NOT STARTED | |
 | A11 | IN PROGRESS | S1 on CORD test; S2-S4 on validation only; S5 not started |
