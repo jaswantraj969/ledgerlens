@@ -46,6 +46,15 @@ _TYPE_HINTS: dict[FieldType, str] = {
     "currency": "currency code or symbol, as printed",
     "amount": "amount, as printed",
 }
+# Models that reason before answering unless told not to. Thinking is turned off for them.
+THINKING_MODEL_PREFIXES = ("qwen3",)
+
+
+def thinking_off(model: str) -> bool | None:
+    """False for a reasoning model (turn thinking off); None leaves other models unchanged."""
+    return False if model.startswith(THINKING_MODEL_PREFIXES) else None
+
+
 _EMPTY_VALUES = frozenset({"", "null", "none", "n/a", "na"})
 _LINE_ITEM_FIELDS = ("description", "quantity", "unit_price", "amount")
 
@@ -152,6 +161,7 @@ class LlmExtractor:
                 json_schema=output_model.model_json_schema(),
                 schema_version=f"{schema.name}:{schema.version}:{self.prompt_version}",
                 params=self._params,
+                think=thinking_off(self._model),
             )
             try:
                 response = self._provider.complete(request)

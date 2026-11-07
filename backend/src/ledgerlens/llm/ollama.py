@@ -10,6 +10,7 @@ from ledgerlens.llm.base import LLMError, LLMRequest, LLMResponse
 DEFAULT_BASE_URL = "http://localhost:11434"
 DEFAULT_TIMEOUT_SECONDS = 300.0
 _NANOSECONDS = 1_000_000_000
+_THINK_TAG = "<think>"
 
 
 class OllamaProvider:
@@ -24,26 +25,30 @@ class OllamaProvider:
 
     def complete(self, request: LLMRequest) -> LLMResponse:
         started = time.perf_counter()
+        payload: dict[str, Any] = {
+            "model": request.model,
+            "stream": False,
+            "format": request.json_schema,
+            "options": request.params,
+            "messages": [
+                {"role": "system", "content": request.system},
+                {"role": "user", "content": request.prompt},
+            ],
+        }
+        if request.think is not None:
+            payload["think"] = request.think
         try:
-            reply = self._client.post(
-                "/api/chat",
-                json={
-                    "model": request.model,
-                    "stream": False,
-                    "format": request.json_schema,
-                    "options": request.params,
-                    "messages": [
-                        {"role": "system", "content": request.system},
-                        {"role": "user", "content": request.prompt},
-                    ],
-                },
-            )
+            reply = self._client.post("/api/chat", json=payload)
             reply.raise_for_status()
         except httpx.HTTPError as error:
             raise LLMError(f"ollama request failed: {type(error).__name__}") from error
         body = reply.json()
+        content = body["message"]["content"]
+        if request.think is False and (body["message"].get("thinking") or _THINK_TAG in content):
+            # Thinking was turned off; a reply carrying reasoning is not a usable answer.
+            raise LLMError("ollama reply contained reasoning text although thinking was off")
         return LLMResponse(
-            text=body["message"]["content"],
+            text=content,
             model=request.model,
             model_digest=self._digest(request.model),
             done_reason=body.get("done_reason"),

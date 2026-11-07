@@ -1,0 +1,2 @@
+# S2' validation replay after adding LLMRequest.think, 2026-11-08: predictions identical to the committed file, live calls 0, cache hits 100. File restored afterwards.
+same True 0 100
