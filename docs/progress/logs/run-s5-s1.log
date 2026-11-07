@@ -1,0 +1,5 @@
+START 2026-11-07T20:51:01Z timeout=1200s stall=600s cmd: bash -c uv run --project backend --no-sync python -m evals.runners.run_s5 --base s1 --train-scope train_all_p1.0 && uv run --project backend --no-sync python -m evals.runners.run_s5 --base s1 --train-scope train_all_p1.0 --variant grouped
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\cord_s5_s1_validation_v1_1_1.json
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\cord_s5_s1_grouped_validation_v1_1_1.json
+END 2026-11-07T20:51:16Z elapsed=16s
+EXIT=0

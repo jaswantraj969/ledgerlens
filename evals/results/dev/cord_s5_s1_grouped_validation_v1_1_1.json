@@ -1,0 +1,122 @@
+{
+  "system": "S5-S1",
+  "base": "s1",
+  "variant": "grouped",
+  "train_scope": "train_all_p1.0",
+  "train_units": {
+    "header": 921,
+    "row": 1619
+  },
+  "validation_units": {
+    "header": 131,
+    "row": 167
+  },
+  "thresholds": {
+    "header": {
+      "0.98": 0.891,
+      "0.99": 0.891
+    },
+    "row": {
+      "0.98": 0.738,
+      "0.99": 0.738
+    }
+  },
+  "validation": {
+    "header": {
+      "units": 131,
+      "slots": 222,
+      "documents": 74,
+      "ece_10_bins": 0.03459425178140082,
+      "brier": 0.07560092627282601,
+      "roc_auc": 0.8314863102998696,
+      "targets": {
+        "0.98": {
+          "threshold": 0.891,
+          "accepted": 53,
+          "automation_rate": 0.23873873873873874,
+          "automation_rate_ci95": [
+            0.15765765765765766,
+            0.32882882882882886
+          ],
+          "achieved_precision": 1.0,
+          "achieved_precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "target_met": true
+        },
+        "0.99": {
+          "threshold": 0.891,
+          "accepted": 53,
+          "automation_rate": 0.23873873873873874,
+          "automation_rate_ci95": [
+            0.15765765765765766,
+            0.32882882882882886
+          ],
+          "achieved_precision": 1.0,
+          "achieved_precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "target_met": true
+        }
+      }
+    },
+    "row": {
+      "units": 167,
+      "slots": 167,
+      "documents": 74,
+      "ece_10_bins": 0.03807701806192501,
+      "brier": 0.12812504137392416,
+      "roc_auc": 0.8534798534798536,
+      "targets": {
+        "0.98": {
+          "threshold": 0.738,
+          "accepted": 3,
+          "automation_rate": 0.017964071856287425,
+          "automation_rate_ci95": [
+            0.0,
+            0.04023084934043045
+          ],
+          "achieved_precision": 1.0,
+          "achieved_precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "target_met": true
+        },
+        "0.99": {
+          "threshold": 0.738,
+          "accepted": 3,
+          "automation_rate": 0.017964071856287425,
+          "automation_rate_ci95": [
+            0.0,
+            0.04023084934043045
+          ],
+          "achieved_precision": 1.0,
+          "achieved_precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "target_met": true
+        }
+      }
+    }
+  },
+  "environment": {
+    "git_commit": "5b934f8720f209bffc46798390e125b7afa4faf3",
+    "git_dirty": false,
+    "python": "3.12.13",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "cpu_count": 12,
+    "packages": {
+      "rapidocr": "3.10.0",
+      "onnxruntime": "1.31.1",
+      "numpy": "2.5.4",
+      "pypdfium2": "5.14.0",
+      "rapidfuzz": "3.14.6"
+    },
+    "ocr_execution": "CPU, onnxruntime defaults"
+  }
+}
