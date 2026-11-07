@@ -1,24 +1,25 @@
 """Evaluate one system on CORD under metrics 1.1. One worker, no parallel model calls.
 
 Validation results go to evals/results/dev/. Reading the test split needs --final and refuses
-to replace a result. Per-document predictions are saved under data/ (gitignored), with their
-hash in the results file. A replay miss or provider failure counts as a failed extraction.
+to replace a result. If free RAM falls below 0.4 GiB the run stops, the abort is recorded in
+evals/results/aborted/, and no results or predictions are written. Per-document predictions
+are saved under data/ (gitignored), with their hash in the results file. A replay miss or
+provider failure counts as a failed extraction.
 """
 
 import argparse
 import hashlib
 import json
 import sys
-import threading
 import time
 from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
 import numpy as np
-import psutil
 
 from evals.datasets.cord import DEFAULT_RAW_DIR, HEADER_FIELDS, ROW_FIELDS, iter_documents
+from evals.memory_guard import MemoryLog, abort_run
 from evals.runners.run_cord_s1 import OCR_CACHE, SPLIT_FILE, cached_parse, environment
 from evals.scoring import DocumentPrediction, score, to_prediction
 from evals.systems import LLM_SYSTEMS, SystemOutput, build_system
@@ -36,43 +37,7 @@ CACHE_DIR = ROOT / "evals" / "cache" / "cord-v2"
 SCHEMA = "cord_receipt"
 DEFAULT_MODEL = "llama3.2:3b"
 LOAD_THRESHOLD_SECONDS = 1.0
-GIB = 1024**3
-
-
-class MemoryLog(threading.Thread):
-    """Samples this process, the model runner and free system RAM."""
-
-    def __init__(self, interval: float = 2.0) -> None:
-        super().__init__(daemon=True)
-        self.interval = interval
-        self.stop_event = threading.Event()
-        self.peak_process = 0
-        self.peak_runner = 0
-        self.lowest_available = psutil.virtual_memory().available
-
-    def sample(self) -> None:
-        self.peak_process = max(self.peak_process, psutil.Process().memory_info().rss)
-        self.lowest_available = min(self.lowest_available, psutil.virtual_memory().available)
-        for process in psutil.process_iter(["name", "memory_info"]):
-            name = (process.info.get("name") or "").lower()
-            memory = process.info.get("memory_info")
-            if memory is not None and ("llama-server" in name or "ollama" in name):
-                self.peak_runner = max(self.peak_runner, memory.rss)
-
-    def run(self) -> None:
-        self.sample()
-        while not self.stop_event.wait(self.interval):
-            self.sample()
-
-    def report(self) -> dict[str, float | int]:
-        self.stop_event.set()
-        self.sample()
-        return {
-            "peak_process_rss_gib": round(self.peak_process / GIB, 3),
-            "peak_model_runner_rss_gib": round(self.peak_runner / GIB, 3),
-            "lowest_available_system_ram_gib": round(self.lowest_available / GIB, 3),
-            "total_system_ram_gib": round(psutil.virtual_memory().total / GIB, 3),
-        }
+ABORTED = RESULTS / "aborted"
 
 
 def percentiles(values: list[float]) -> dict[str, float | None]:
@@ -111,6 +76,18 @@ def latency_report(rows: list[dict[str, Any]], *, replayed: bool) -> dict[str, A
     }
 
 
+def stop_if_low_memory(memory: MemoryLog, system: str, split: str, processed: int) -> None:
+    """Abort before the next document, so a partial run never becomes a result."""
+    if memory.abort_reason:
+        details = {"system": system, "split": split, "documents_processed": processed}
+        abort_run(
+            memory,
+            ABORTED,
+            f"cord_{system.lower()}_{split}",
+            details | {"environment": environment()},
+        )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--system", choices=["S1", *LLM_SYSTEMS], required=True)
@@ -146,6 +123,7 @@ def main() -> None:
     crashes: list[str] = []
 
     for document in iter_documents(arguments.split, DEFAULT_RAW_DIR):
+        stop_if_low_memory(memory, arguments.system, arguments.split, len(predictions))
         gold_headers[document.document_id] = {f: document.gold[f] for f in HEADER_FIELDS}
         gold_rows[document.document_id] = document.gold_rows
         try:
@@ -201,6 +179,7 @@ def main() -> None:
                 flush=True,
             )
 
+    stop_if_low_memory(memory, arguments.system, arguments.split, len(predictions))
     split_info = json.loads(SPLIT_FILE.read_text(encoding="utf-8"))[arguments.split]
     if len(predictions) != split_info["n"]:
         sys.exit(f"expected {split_info['n']} documents, saw {len(predictions)}")
