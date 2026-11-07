@@ -68,6 +68,12 @@ The two free-RAM measures agree within 0.02 GiB, so the gap between the "about 3
 - The completed prompt-2.2 validation runs used `num_ctx` 2304 with no images, and their lowest free RAM was about 3.3 GiB.
 - Two S4' attempts aborted at 0.35 and 0.37 GiB under that same lean configuration. Something outside the run took about 3 GiB for a while. It was not identified; candidates are other applications on this machine (VS Code, browsers, Defender). The statement "about 0.3 to 0.4 GiB with the model loaded" in the 2026-11-07 report was too general and is corrected here.
 
+### llama3.2:3b S4h baseline on the train subset, 2026-11-08
+
+Recorded as measured and not rerun: mean F1 0.578 (total, subtotal, tax, row-level), warm LLM p50 7.95 s and p95 19.73 s per document (both passes, load excluded), 3 memory aborts before the run that completed (records in `evals/results/aborted/`). Source: `evals/results/dev/prompt_round/cord_s4h_prompt_dev_train100_p2.2_v1_1_1.json`.
+
+Why p95 is higher than S4' on validation (14.05 s): the medians are close (7.95 s against 7.68 s), so the shift is in the tail. On the train subset, 6 replies were truncated (generation ran to `num_predict` 1024) and 4 calls were retried, each a full extra call, against 1 and 1 on validation. With about 96 warm documents, p95 is set by the five or so slowest, which are those cases. The document sets also differ (train subset against validation). Nothing points to the machine running slower. Most timings in both files were recorded when each call was first made, some in runs that later aborted (labelled "mixed").
+
 ## Decision
 
 Docker-first for services (`postgres:16-alpine`, `redis:7-alpine`, both pulled), native Python and
