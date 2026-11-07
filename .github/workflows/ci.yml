@@ -12,7 +12,7 @@ jobs:
       postgres:
         image: postgres:16-alpine
         env:
-          POSTGRES_DB: ledgerlens_test
+          POSTGRES_DB: postgres
           POSTGRES_USER: ledgerlens
           POSTGRES_PASSWORD: ci-only
         ports: ["5432:5432"]
@@ -32,6 +32,9 @@ jobs:
       - run: uv run --project backend pre-commit run --all-files
         working-directory: .
       - run: uv run pytest -q --cov=ledgerlens --cov-report=term
+        env:
+          LEDGERLENS_TEST_POSTGRES: postgresql://ledgerlens:ci-only@127.0.0.1:5432
+          LEDGERLENS_TEST_REDIS: redis://127.0.0.1:6379
 
   frontend:
     runs-on: ubuntu-latest
