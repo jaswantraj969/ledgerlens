@@ -18,8 +18,9 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 | 4 | Upload, validation, dedup, storage, batch, list, get, delete, job status | VERIFIED | backend/tests/api/test_documents.py |
 | 4 | Health, readiness, metrics, log redaction | VERIFIED | backend/tests/api/test_health.py |
 | 4 | RQ worker and persisted pipeline: idempotent steps, retries with backoff, dead-letter, crash recovery | VERIFIED | backend/tests/api/test_worker.py (9 tests), docs/progress/logs/run-worker-tests.log |
-| 4 | Worker service in Compose | NOT STARTED | Needs the Dockerfile (Phase 9) |
-| 4 | Webhooks | NOT STARTED | Tables exist only |
+| 4 | Worker service in Compose | IMPLEMENTED BUT UNVERIFIED | infra/docker-compose.yml; images not built yet (bandwidth during the model pull) |
+| 4 | Webhooks: HMAC-signed, retries with backoff, URL safety | VERIFIED | backend/tests/api/test_webhooks.py (10 tests) |
+| 4 | Review, queue, page image, export and evaluation report endpoints | VERIFIED | backend/tests/api/test_review.py (13 tests) |
 | 5 | Normalisation 1.0, frozen | VERIFIED | evals/normalization.lock |
 | 5 | Parsers, deterministic extractor, evidence, features, heuristic risk, export | VERIFIED | backend/tests/unit |
 | 5 | Replay cache, Ollama provider, LLM passes A and B, cross-pass merge | VERIFIED | backend/tests/unit/test_llm.py, backend/tests/unit/test_merge.py, backend/tests/unit/test_systems.py |
@@ -42,14 +43,20 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 | 7 | Prompt round 2 on train subset; 2.2 chosen | VERIFIED | evals/results/dev/prompt_round/prompt_round.md |
 | 7 | S2', S3', S4', S4h on validation, read once | VERIFIED | evals/results/dev/cord_validation_comparison_v1_1_1.md. Test read is pending |
 | 7 | S2' on synthetic, dev versus held-out ledger | VERIFIED | evals/results/synthetic_s2p_v1_1_1.md |
-| 7 | S5 code (units, calibrator, thresholds, grouped variant) | IMPLEMENTED BUT UNVERIFIED | backend/tests/unit/test_s5.py; not run on real predictions yet |
-| 7 | S5 run | NOT STARTED | Needs S4h on all 800 train documents; waits for the model decision |
+| 7 | Memory measurement and explanation | VERIFIED | evals/results/dev/memory_measurement.json, docs/progress/ENVIRONMENT.md |
+| 7 | Thinking-off for qwen3 in the Ollama provider | VERIFIED | backend/tests/unit/test_thinking_off.py |
+| 7 | Model comparison llama3.2:3b against qwen3:4b | BLOCKED | qwen3:4b aborted twice on memory before any result; not adopted under the pre-registered rule (ADR-0012). No S4h-qwen row |
+| 7 | llama S4h baseline on the train subset | VERIFIED | evals/results/dev/prompt_round/cord_s4h_prompt_dev_train100_p2.2_v1_1_1.json (mean F1 0.578, warm p95 19.73 s, 3 aborts) |
+| 7 | S5 code (units, calibrator, thresholds, grouped variant) | VERIFIED | backend/tests/unit/test_s5.py; run on real predictions for S5-S1 |
+| 7 | S5-S1 on validation (calibrator fitted on train) | VERIFIED | evals/results/dev/cord_s5_validation_comparison_v1_1_1.md. Test not read |
+| 7 | S5-S4h on validation | IN PROGRESS | S4h with llama3.2:3b on all 800 train documents is running |
 | 7 | Final S1-S5 test read, once, from a clean commit | NOT STARTED | Last step |
 | 7 | Ablations, degradation | NOT STARTED | Follow S5 |
 | 7 | SROIE | BLOCKED | Removed: official access unavailable; mirror terms unverified. Labels and vendor groups deleted; adapter kept with fictional fixtures |
-| 6 | Frontend pages | NOT STARTED | |
+| 6 | Frontend: upload and batch, job status, review with boxes, approve/reject/correct, queue, export, evaluation page | VERIFIED | frontend/src (36 Vitest tests), npm run build |
+| 6 | Playwright upload, review, export flow | VERIFIED (local dev stack, not Docker) | docs/progress/logs/run-e2e-local.log |
 | 8 | Testing and hardening | NOT STARTED | |
-| 9 | Deployment | NOT STARTED | |
+| 9 | Dockerfiles and full compose stack | IMPLEMENTED BUT UNVERIFIED | backend/Dockerfile, frontend/Dockerfile, infra/docker-compose.yml; build and healthy up still to run |
 | 10 | Documentation | IN PROGRESS | Minimal README only |
 | 11 | Portfolio and publication preparation | NOT STARTED | |
 | 12 | Final verification and report | NOT STARTED | |
@@ -58,14 +65,14 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 
 | Id | Status | Note |
 |---|---|---|
-| A1 | IN PROGRESS | Upload, batch, rejection and dedup work, and the worker processes jobs; no frontend yet |
+| A1 | IN PROGRESS | Upload, batch, rejection, dedup, processing and the frontend work; Docker deployment unverified |
 | A2 | VERIFIED | test_ocr_parser.py, test_pdfium_parser.py |
 | A3 | IN PROGRESS | Default and alternative schemas work offline; Ollama used with cord_receipt only |
-| A4 | IN PROGRESS | Fields, evidence and validations are persisted by the worker; no review API yet |
+| A4 | VERIFIED | Fields, evidence, validations and review decisions persist; backend/tests/api/test_review.py |
 | A5 | NOT STARTED | |
-| A6 | IN PROGRESS | Export functions and OpenAPI exist; no export endpoints or webhooks |
+| A6 | VERIFIED | JSON and CSV export endpoints, signed webhooks; test_review.py, test_webhooks.py |
 | A7 | VERIFIED | backend/tests/api, docs/progress/logs/mutation-check.txt |
-| A8 | IN PROGRESS | Worker crash, retry, dead-letter and model-unavailable tests pass; webhooks not built |
+| A8 | VERIFIED | Worker crash, retry, dead-letter, model-unavailable and webhook retry tests pass |
 | A9 | IMPLEMENTED BUT UNVERIFIED (local mirror; GitHub run pending human approval) | docs/progress/logs/ci-local.txt |
 | A10 | NOT STARTED | |
 | A11 | IN PROGRESS | S1 on CORD test; S2-S4 on validation only; S5 not started |
@@ -82,4 +89,4 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 |---|---|
 | SROIE results | None required. Blocked by decision; reopen only if official access appears |
 | CI on GitHub unverified | Approve creating a remote; nothing is pushed until then |
-| LLM still below rules on CORD after prompt 2.2 (S4h row F1 0.292 vs 0.377) | Decide on the model proposal; nothing is pulled without approval |
+| LLM below rules on CORD (S4h row F1 0.292 against 0.377) and qwen3:4b does not fit in RAM | None required now. A larger model needs a machine with more RAM |

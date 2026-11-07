@@ -224,6 +224,10 @@ Run as pre-registered above. S2 on the 100-document train subset, metrics 1.1.1 
 
 S4' needed three attempts: two aborted below 0.4 GiB free RAM (records in `evals/results/aborted/`) and wrote no result, so no S4' number was seen before the completed run. Recorded replies replayed on each retry; timings are labelled mixed where that happened.
 
+### Model comparison, 2026-11-08
+
+Run as pre-registered above (commit `33eb171`). llama3.2:3b S4h on the train subset: mean F1 0.578, warm p95 19.73 s, completed after 3 memory aborts. qwen3:4b: its first step, the token measurement for `num_ctx`, aborted twice on memory (0.321 and 0.304 GiB free), before any extraction result. By rule (c), qwen3:4b is not adopted and llama3.2:3b stays (ADR-0012). No qwen3 smoke test, comparison or validation read was made.
+
 ## Changes after first results
 
 No S1 rule, schema, normalisation or metric definition has changed since `evals/results/cord_s1_v1.json`. Metrics 1.1 added new definitions and left the 1.0 path intact, which the reproduction in `docs/progress/logs/s1-reproduction.txt` confirms.
