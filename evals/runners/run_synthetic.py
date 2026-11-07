@@ -6,10 +6,12 @@ layout are scored separately, and the gap between them is reported. Seeds are fi
 
 import argparse
 import json
+from collections.abc import Callable
 from decimal import Decimal
 from pathlib import Path
 from typing import Any
 
+from evals.memory_guard import MemoryLog
 from evals.runners.run_cord_s1 import environment
 from evals.scoring import DocumentPrediction, row_key, score, to_prediction
 from evals.synthetic.generate import (
@@ -19,7 +21,11 @@ from evals.synthetic.generate import (
     SyntheticInvoice,
     generate_invoice,
 )
+from evals.systems import SystemOutput, build_system
 from ledgerlens.extraction.deterministic import normalized_value
+from ledgerlens.extraction.llm import DEFAULT_PARAMS
+from ledgerlens.llm.cache import CachingProvider, ReplayCache
+from ledgerlens.llm.ollama import OllamaProvider
 from ledgerlens.parsing.ocr import RapidOcrParser
 from ledgerlens.parsing.pdfium import PdfiumParser
 from ledgerlens.pipeline import process
@@ -27,6 +33,7 @@ from ledgerlens.schema import FieldType, load_schema
 
 ROOT = Path(__file__).resolve().parents[2]
 OUTPUT = ROOT / "evals" / "results" / "synthetic_s1_v1_1.json"
+CACHE_DIR = ROOT / "evals" / "cache" / "synthetic"
 SEED_BASE = 700000
 NATIVE_PER_LAYOUT = 40
 OCR_PER_LAYOUT = 20
@@ -63,19 +70,40 @@ def gold_rows(invoice: SyntheticInvoice) -> list[dict[str, str | None]]:
     ]
 
 
-def evaluate(layout: str, count: int, parser: Any) -> dict[str, Any]:
+def evaluate(
+    layout: str, count: int, parser: Any, system: Callable[..., SystemOutput] | None = None,
+    memory: MemoryLog | None = None,
+) -> dict[str, Any]:  # fmt: skip
+    """Score one layout. With `system`, an LLM failure is a failed extraction, scored empty."""
     schema = load_schema("default")
     predictions: list[DocumentPrediction] = []
+    failed = fallbacks = 0
+    seconds: list[float] = []
     headers: dict[str, dict[str, str | None]] = {}
     rows: dict[str, list[dict[str, str | None]]] = {}
     for index in range(count):
         invoice = generate_invoice(SEED_BASE + index, layout=layout)
         headers[invoice.document_id] = {name: invoice.truth[name] for name in HEADER_TYPES}
         rows[invoice.document_id] = gold_rows(invoice)
-        records = process(parser.parse(invoice.pdf), schema)
-        predictions.append(to_prediction(invoice.document_id, records, tuple(HEADER_TYPES)))
-    print(f"{layout}: {count} documents", flush=True)
-    return score(predictions, headers, rows, tuple(HEADER_TYPES), ROW_FIELDS, header_key)
+        if memory is not None and memory.abort_reason:
+            raise SystemExit(f"ABORTED in {layout} at {index}: {memory.abort_reason}. No results.")
+        parsed = parser.parse(invoice.pdf)
+        if system is None:
+            records, fell_back = process(parsed, schema), False
+        else:
+            output = system(parsed, schema)
+            records, fell_back = output.records, output.failed
+            fallbacks += output.fallbacks
+            seconds += [r.latency_seconds or 0.0 for r in output.responses if not r.cache_hit]
+        failed += int(fell_back)
+        predictions.append(
+            to_prediction(invoice.document_id, records, tuple(HEADER_TYPES), fell_back=fell_back)
+        )
+    print(f"{layout}: {count} documents, {failed} failed", flush=True)
+    result = score(predictions, headers, rows, tuple(HEADER_TYPES), ROW_FIELDS, header_key)
+    result["failures"] = {"failed_extractions": failed, "pass_fallbacks": fallbacks}
+    result["live_llm_seconds"] = seconds
+    return result
 
 
 def _pooled(layouts: dict[str, Any], names: tuple[str, ...], field: str) -> float | None:
@@ -107,26 +135,58 @@ def gaps(layouts: dict[str, Any]) -> dict[str, Any]:
     return table
 
 
-def run_route(parser: Any, count: int) -> dict[str, Any]:
-    layouts = {name: evaluate(name, count, parser) for name in (*DEV_LAYOUTS, *HELD_OUT_LAYOUTS)}
+def run_route(
+    parser: Any, count: int, system: Callable[..., SystemOutput] | None = None,
+    memory: MemoryLog | None = None,
+) -> dict[str, Any]:  # fmt: skip
+    layouts = {
+        name: evaluate(name, count, parser, system, memory)
+        for name in (*DEV_LAYOUTS, *HELD_OUT_LAYOUTS)
+    }
     return {"documents_per_layout": count, "layouts": layouts, "dev_vs_held_out": gaps(layouts)}
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--smoke", action="store_true", help="three native documents per layout")
+    parser.add_argument("--system", choices=["S1", "S2"], default="S1")
+    parser.add_argument("--label", help="reported name, e.g. S2'")
+    parser.add_argument("--prompt", default="1.0")
+    parser.add_argument("--num-ctx", type=int)
+    parser.add_argument("--model", default="llama3.2:3b")
+    parser.add_argument("--replay", action="store_true", help="never call a model")
     arguments = parser.parse_args()
+
+    system = None
+    llm: dict[str, Any] = {}
+    provider = None
+    if arguments.system == "S2":
+        params = dict(DEFAULT_PARAMS)
+        if arguments.num_ctx:
+            params["num_ctx"] = arguments.num_ctx
+        live = None if arguments.replay else OllamaProvider()
+        provider = CachingProvider(ReplayCache(CACHE_DIR), live)
+        system = build_system("S2", provider, arguments.model, params, arguments.prompt)
+        llm = {"model": arguments.model, "params": params, "prompt": arguments.prompt}
+    label = arguments.label or arguments.system
+    memory = MemoryLog()
+    memory.start()
 
     routes: dict[str, Any] = {}
     if arguments.smoke:
-        routes["native_pdf"] = run_route(PdfiumParser(), 3)
+        routes["native_pdf"] = run_route(PdfiumParser(), 3, system, memory)
         output = ROOT / "evals" / "results" / "dev" / "synthetic_smoke.json"
     else:
-        routes["native_pdf"] = run_route(PdfiumParser(), NATIVE_PER_LAYOUT)
-        routes["ocr"] = run_route(RapidOcrParser(), OCR_PER_LAYOUT)
-        output = OUTPUT
+        routes["native_pdf"] = run_route(PdfiumParser(), NATIVE_PER_LAYOUT, system, memory)
+        routes["ocr"] = run_route(RapidOcrParser(), OCR_PER_LAYOUT, system, memory)
+        name = label.lower().replace("'", "p")
+        output = OUTPUT if label == "S1" else OUTPUT.with_name(f"synthetic_{name}_v1_1_1.json")
+    if provider is not None:
+        llm |= {"live_calls": provider.live_calls, "cache_hits": provider.hits}
     result = {
-        "system": "S1",
+        "system": label,
+        "llm": llm or None,
+        "memory": memory.report(),
         "dataset": "synthetic",
         "note": "Synthetic results are reported apart and are not real-dataset claims.",
         "dev_layouts": DEV_LAYOUTS,
