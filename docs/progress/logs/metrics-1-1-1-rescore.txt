@@ -1,0 +1,13 @@
+# Rescore metrics 1.1 -> 1.1.1 from saved predictions, no rerun. 2026-11-07T14:46:10+05:00, HEAD 65c1c75, tree clean: no
+cord_s1_v1_1.json: 155 values compared, 0 different; wrote cord_s1_v1_1_1.json
+cord_s1_validation_v1_1.json: 155 values compared, 0 different; wrote cord_s1_validation_v1_1_1.json
+cord_s2_validation_v1_1.json: 155 values compared, 0 different; wrote cord_s2_validation_v1_1_1.json
+cord_s3_validation_v1_1.json: 155 values compared, 0 different; wrote cord_s3_validation_v1_1_1.json
+cord_s4_validation_v1_1.json: 155 values compared, 0 different; wrote cord_s4_validation_v1_1_1.json
+wrote evals\results\cord_s1_v1_1_1.md
+wrote evals\results\dev\cord_s1_validation_v1_1_1.md
+wrote evals\results\dev\cord_s2_validation_v1_1_1.md
+wrote evals\results\dev\cord_s3_validation_v1_1_1.md
+wrote evals\results\dev\cord_s4_validation_v1_1_1.md
+EXIT=0
+Note: 'tree clean: no' above is this log file, which tee created before the check ran. The rescored files record dirty: False.
