@@ -1,0 +1,5 @@
+START 2026-11-07T11:40:42Z timeout=2400s stall=600s cmd: bash -c for p in 2.0 2.1 2.2; do uv run --project backend --no-sync python -m evals.runners.measure_prompt_tokens --prompt $p || exit $?; done
+longest 864 tokens -> num_ctx 2048; wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\prompt_round\prompt_tokens_p2.0.json
+ABORTED: free system RAM 0.283 GiB fell below 0.400 GiB
+END 2026-11-07T11:41:58Z elapsed=76s
+EXIT=1

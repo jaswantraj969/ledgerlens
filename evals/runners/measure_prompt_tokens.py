@@ -28,7 +28,7 @@ from ledgerlens.schema import load_schema
 ROOT = Path(__file__).resolve().parents[2]
 OUTPUT_DIR = ROOT / "evals" / "results" / "dev" / "prompt_round"
 TOP = 30
-MEASURE_CTX = 8192
+MEASURE_CTX = 4096  # holds every prompt measured; the count does not depend on it
 STEP = 256
 
 
@@ -70,8 +70,9 @@ def main() -> None:
 
     lengths: dict[str, list[tuple[int, str, str]]] = {"a": [], "b": []}
     for split in ("train", "validation", "test"):
-        for document in iter_documents(split, DEFAULT_RAW_DIR):
-            entry = cached_parse(document.document_id, document.image or b"", ocr, OCR_CACHE)
+        for document in iter_documents(split, DEFAULT_RAW_DIR, with_images=False):
+            # OCR is already cached for every split; no image is loaded.
+            entry = cached_parse(document.document_id, b"", ocr, OCR_CACHE)
             parsed = ParsedDocument.model_validate(entry["parsed"])
             for mode in ("a", "b"):
                 extractor = LlmExtractor(_NoProvider(), arguments.model, mode=mode,  # type: ignore[arg-type]

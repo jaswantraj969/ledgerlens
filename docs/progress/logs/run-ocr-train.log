@@ -1,0 +1,28 @@
+START 2026-11-07T11:05:33Z timeout=5400s stall=600s cmd: uv run --project backend --no-sync python -m evals.runners.ocr_cache --split train
+cached 50
+HEARTBEAT 2026-11-07T11:09:49Z elapsed=256s progress=620505 idle=0s
+cached 100
+cached 150
+HEARTBEAT 2026-11-07T11:14:01Z elapsed=508s progress=808798 idle=0s
+cached 200
+cached 250
+HEARTBEAT 2026-11-07T11:18:16Z elapsed=763s progress=1014496 idle=0s
+cached 300
+cached 350
+HEARTBEAT 2026-11-07T11:22:28Z elapsed=1015s progress=1210993 idle=0s
+cached 400
+HEARTBEAT 2026-11-07T11:26:42Z elapsed=1269s progress=1422789 idle=0s
+cached 450
+cached 500
+HEARTBEAT 2026-11-07T11:30:43Z elapsed=1510s progress=1609689 idle=0s
+cached 550
+cached 600
+HEARTBEAT 2026-11-07T11:34:57Z elapsed=1764s progress=1856483 idle=0s
+cached 650
+cached 700
+cached 750
+HEARTBEAT 2026-11-07T11:39:07Z elapsed=2014s progress=2131828 idle=0s
+cached 800
+done: 800 documents; memory {'peak_process_rss_gib': 2.204, 'peak_model_runner_rss_gib': 0.046, 'lowest_available_system_ram_gib': 0.426, 'total_system_ram_gib': 15.638, 'abort_below_gib': 0.4}
+END 2026-11-07T11:40:26Z elapsed=2093s
+EXIT=0

@@ -1,0 +1,403 @@
+{
+  "prompt": "2.0",
+  "model": "llama3.2:3b",
+  "documents_ranked": {
+    "a": 1000,
+    "b": 1000
+  },
+  "top_measured_per_pass": 30,
+  "measured": {
+    "a": [
+      {
+        "document_id": "cord-v2:train:544",
+        "characters": 2201,
+        "tokens_first": 775,
+        "tokens_second": 775
+      },
+      {
+        "document_id": "cord-v2:train:748",
+        "characters": 2068,
+        "tokens_first": 664,
+        "tokens_second": 664
+      },
+      {
+        "document_id": "cord-v2:train:787",
+        "characters": 2017,
+        "tokens_first": 649,
+        "tokens_second": 649
+      },
+      {
+        "document_id": "cord-v2:train:750",
+        "characters": 2015,
+        "tokens_first": 635,
+        "tokens_second": 635
+      },
+      {
+        "document_id": "cord-v2:train:427",
+        "characters": 1995,
+        "tokens_first": 624,
+        "tokens_second": 624
+      },
+      {
+        "document_id": "cord-v2:train:303",
+        "characters": 1993,
+        "tokens_first": 644,
+        "tokens_second": 644
+      },
+      {
+        "document_id": "cord-v2:train:0",
+        "characters": 1973,
+        "tokens_first": 597,
+        "tokens_second": 597
+      },
+      {
+        "document_id": "cord-v2:train:65",
+        "characters": 1966,
+        "tokens_first": 637,
+        "tokens_second": 637
+      },
+      {
+        "document_id": "cord-v2:train:567",
+        "characters": 1939,
+        "tokens_first": 607,
+        "tokens_second": 607
+      },
+      {
+        "document_id": "cord-v2:train:203",
+        "characters": 1926,
+        "tokens_first": 630,
+        "tokens_second": 630
+      },
+      {
+        "document_id": "cord-v2:train:527",
+        "characters": 1925,
+        "tokens_first": 594,
+        "tokens_second": 594
+      },
+      {
+        "document_id": "cord-v2:train:266",
+        "characters": 1923,
+        "tokens_first": 601,
+        "tokens_second": 601
+      },
+      {
+        "document_id": "cord-v2:train:149",
+        "characters": 1898,
+        "tokens_first": 586,
+        "tokens_second": 586
+      },
+      {
+        "document_id": "cord-v2:train:674",
+        "characters": 1896,
+        "tokens_first": 595,
+        "tokens_second": 595
+      },
+      {
+        "document_id": "cord-v2:train:777",
+        "characters": 1891,
+        "tokens_first": 587,
+        "tokens_second": 587
+      },
+      {
+        "document_id": "cord-v2:train:584",
+        "characters": 1880,
+        "tokens_first": 613,
+        "tokens_second": 613
+      },
+      {
+        "document_id": "cord-v2:train:297",
+        "characters": 1873,
+        "tokens_first": 592,
+        "tokens_second": 592
+      },
+      {
+        "document_id": "cord-v2:train:124",
+        "characters": 1871,
+        "tokens_first": 577,
+        "tokens_second": 577
+      },
+      {
+        "document_id": "cord-v2:train:505",
+        "characters": 1869,
+        "tokens_first": 577,
+        "tokens_second": 577
+      },
+      {
+        "document_id": "cord-v2:train:277",
+        "characters": 1860,
+        "tokens_first": 580,
+        "tokens_second": 580
+      },
+      {
+        "document_id": "cord-v2:train:711",
+        "characters": 1857,
+        "tokens_first": 572,
+        "tokens_second": 572
+      },
+      {
+        "document_id": "cord-v2:train:475",
+        "characters": 1856,
+        "tokens_first": 572,
+        "tokens_second": 572
+      },
+      {
+        "document_id": "cord-v2:train:103",
+        "characters": 1851,
+        "tokens_first": 571,
+        "tokens_second": 571
+      },
+      {
+        "document_id": "cord-v2:train:321",
+        "characters": 1850,
+        "tokens_first": 540,
+        "tokens_second": 540
+      },
+      {
+        "document_id": "cord-v2:train:701",
+        "characters": 1840,
+        "tokens_first": 569,
+        "tokens_second": 569
+      },
+      {
+        "document_id": "cord-v2:train:19",
+        "characters": 1826,
+        "tokens_first": 559,
+        "tokens_second": 559
+      },
+      {
+        "document_id": "cord-v2:train:75",
+        "characters": 1825,
+        "tokens_first": 567,
+        "tokens_second": 567
+      },
+      {
+        "document_id": "cord-v2:test:70",
+        "characters": 1824,
+        "tokens_first": 553,
+        "tokens_second": 553
+      },
+      {
+        "document_id": "cord-v2:train:388",
+        "characters": 1821,
+        "tokens_first": 535,
+        "tokens_second": 535
+      },
+      {
+        "document_id": "cord-v2:train:709",
+        "characters": 1814,
+        "tokens_first": 562,
+        "tokens_second": 562
+      }
+    ],
+    "b": [
+      {
+        "document_id": "cord-v2:train:544",
+        "characters": 2431,
+        "tokens_first": 864,
+        "tokens_second": 864
+      },
+      {
+        "document_id": "cord-v2:train:748",
+        "characters": 2274,
+        "tokens_first": 754,
+        "tokens_second": 754
+      },
+      {
+        "document_id": "cord-v2:train:787",
+        "characters": 2243,
+        "tokens_first": 743,
+        "tokens_second": 743
+      },
+      {
+        "document_id": "cord-v2:train:750",
+        "characters": 2229,
+        "tokens_first": 710,
+        "tokens_second": 710
+      },
+      {
+        "document_id": "cord-v2:train:303",
+        "characters": 2191,
+        "tokens_first": 734,
+        "tokens_second": 734
+      },
+      {
+        "document_id": "cord-v2:train:427",
+        "characters": 2189,
+        "tokens_first": 710,
+        "tokens_second": 710
+      },
+      {
+        "document_id": "cord-v2:train:0",
+        "characters": 2183,
+        "tokens_first": 674,
+        "tokens_second": 674
+      },
+      {
+        "document_id": "cord-v2:train:65",
+        "characters": 2164,
+        "tokens_first": 730,
+        "tokens_second": 730
+      },
+      {
+        "document_id": "cord-v2:train:567",
+        "characters": 2161,
+        "tokens_first": 693,
+        "tokens_second": 693
+      },
+      {
+        "document_id": "cord-v2:train:203",
+        "characters": 2156,
+        "tokens_first": 733,
+        "tokens_second": 733
+      },
+      {
+        "document_id": "cord-v2:train:527",
+        "characters": 2151,
+        "tokens_first": 691,
+        "tokens_second": 691
+      },
+      {
+        "document_id": "cord-v2:train:266",
+        "characters": 2129,
+        "tokens_first": 691,
+        "tokens_second": 691
+      },
+      {
+        "document_id": "cord-v2:train:149",
+        "characters": 2104,
+        "tokens_first": 671,
+        "tokens_second": 671
+      },
+      {
+        "document_id": "cord-v2:train:674",
+        "characters": 2102,
+        "tokens_first": 678,
+        "tokens_second": 678
+      },
+      {
+        "document_id": "cord-v2:train:777",
+        "characters": 2093,
+        "tokens_first": 662,
+        "tokens_second": 662
+      },
+      {
+        "document_id": "cord-v2:train:505",
+        "characters": 2083,
+        "tokens_first": 657,
+        "tokens_second": 657
+      },
+      {
+        "document_id": "cord-v2:train:297",
+        "characters": 2079,
+        "tokens_first": 679,
+        "tokens_second": 679
+      },
+      {
+        "document_id": "cord-v2:train:124",
+        "characters": 2065,
+        "tokens_first": 658,
+        "tokens_second": 658
+      },
+      {
+        "document_id": "cord-v2:train:277",
+        "characters": 2062,
+        "tokens_first": 655,
+        "tokens_second": 655
+      },
+      {
+        "document_id": "cord-v2:train:711",
+        "characters": 2055,
+        "tokens_first": 654,
+        "tokens_second": 654
+      },
+      {
+        "document_id": "cord-v2:train:584",
+        "characters": 2054,
+        "tokens_first": 671,
+        "tokens_second": 671
+      },
+      {
+        "document_id": "cord-v2:train:475",
+        "characters": 2050,
+        "tokens_first": 650,
+        "tokens_second": 650
+      },
+      {
+        "document_id": "cord-v2:train:103",
+        "characters": 2045,
+        "tokens_first": 647,
+        "tokens_second": 647
+      },
+      {
+        "document_id": "cord-v2:train:701",
+        "characters": 2038,
+        "tokens_first": 639,
+        "tokens_second": 639
+      },
+      {
+        "document_id": "cord-v2:train:321",
+        "characters": 2032,
+        "tokens_first": 600,
+        "tokens_second": 600
+      },
+      {
+        "document_id": "cord-v2:validation:41",
+        "characters": 2014,
+        "tokens_first": 629,
+        "tokens_second": 629
+      },
+      {
+        "document_id": "cord-v2:train:388",
+        "characters": 2011,
+        "tokens_first": 618,
+        "tokens_second": 618
+      },
+      {
+        "document_id": "cord-v2:train:19",
+        "characters": 2008,
+        "tokens_first": 632,
+        "tokens_second": 632
+      },
+      {
+        "document_id": "cord-v2:test:70",
+        "characters": 2006,
+        "tokens_first": 625,
+        "tokens_second": 625
+      },
+      {
+        "document_id": "cord-v2:train:709",
+        "characters": 1996,
+        "tokens_first": 625,
+        "tokens_second": 625
+      }
+    ]
+  },
+  "counts_stable_across_repeats": true,
+  "longest_prompt_tokens": 864,
+  "num_predict": 1024,
+  "num_ctx": 2048,
+  "rule": "smallest multiple of 256 >= longest prompt tokens + num_predict",
+  "memory": {
+    "peak_process_rss_gib": 1.826,
+    "peak_model_runner_rss_gib": 2.774,
+    "lowest_available_system_ram_gib": 0.435,
+    "total_system_ram_gib": 15.638,
+    "abort_below_gib": 0.4
+  },
+  "environment": {
+    "git_commit": "1cb8ff85b3c60a0a8fdfa25b4bb3aeed9c840c87",
+    "git_dirty": false,
+    "python": "3.12.13",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "cpu_count": 12,
+    "packages": {
+      "rapidocr": "3.10.0",
+      "onnxruntime": "1.31.1",
+      "numpy": "2.5.4",
+      "pypdfium2": "5.14.0",
+      "rapidfuzz": "3.14.6"
+    },
+    "ocr_execution": "CPU, onnxruntime defaults"
+  }
+}

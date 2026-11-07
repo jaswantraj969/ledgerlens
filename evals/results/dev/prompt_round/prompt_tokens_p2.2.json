@@ -1,0 +1,403 @@
+{
+  "prompt": "2.2",
+  "model": "llama3.2:3b",
+  "documents_ranked": {
+    "a": 1000,
+    "b": 1000
+  },
+  "top_measured_per_pass": 30,
+  "measured": {
+    "a": [
+      {
+        "document_id": "cord-v2:train:544",
+        "characters": 3022,
+        "tokens_first": 1041,
+        "tokens_second": 1041
+      },
+      {
+        "document_id": "cord-v2:train:748",
+        "characters": 2889,
+        "tokens_first": 930,
+        "tokens_second": 930
+      },
+      {
+        "document_id": "cord-v2:train:787",
+        "characters": 2838,
+        "tokens_first": 915,
+        "tokens_second": 915
+      },
+      {
+        "document_id": "cord-v2:train:750",
+        "characters": 2836,
+        "tokens_first": 901,
+        "tokens_second": 901
+      },
+      {
+        "document_id": "cord-v2:train:427",
+        "characters": 2816,
+        "tokens_first": 890,
+        "tokens_second": 890
+      },
+      {
+        "document_id": "cord-v2:train:303",
+        "characters": 2814,
+        "tokens_first": 910,
+        "tokens_second": 910
+      },
+      {
+        "document_id": "cord-v2:train:0",
+        "characters": 2794,
+        "tokens_first": 863,
+        "tokens_second": 863
+      },
+      {
+        "document_id": "cord-v2:train:65",
+        "characters": 2787,
+        "tokens_first": 903,
+        "tokens_second": 903
+      },
+      {
+        "document_id": "cord-v2:train:567",
+        "characters": 2760,
+        "tokens_first": 873,
+        "tokens_second": 873
+      },
+      {
+        "document_id": "cord-v2:train:203",
+        "characters": 2747,
+        "tokens_first": 896,
+        "tokens_second": 896
+      },
+      {
+        "document_id": "cord-v2:train:527",
+        "characters": 2746,
+        "tokens_first": 860,
+        "tokens_second": 860
+      },
+      {
+        "document_id": "cord-v2:train:266",
+        "characters": 2744,
+        "tokens_first": 867,
+        "tokens_second": 867
+      },
+      {
+        "document_id": "cord-v2:train:149",
+        "characters": 2719,
+        "tokens_first": 852,
+        "tokens_second": 852
+      },
+      {
+        "document_id": "cord-v2:train:674",
+        "characters": 2717,
+        "tokens_first": 861,
+        "tokens_second": 861
+      },
+      {
+        "document_id": "cord-v2:train:777",
+        "characters": 2712,
+        "tokens_first": 853,
+        "tokens_second": 853
+      },
+      {
+        "document_id": "cord-v2:train:584",
+        "characters": 2701,
+        "tokens_first": 879,
+        "tokens_second": 879
+      },
+      {
+        "document_id": "cord-v2:train:297",
+        "characters": 2694,
+        "tokens_first": 858,
+        "tokens_second": 858
+      },
+      {
+        "document_id": "cord-v2:train:124",
+        "characters": 2692,
+        "tokens_first": 843,
+        "tokens_second": 843
+      },
+      {
+        "document_id": "cord-v2:train:505",
+        "characters": 2690,
+        "tokens_first": 843,
+        "tokens_second": 843
+      },
+      {
+        "document_id": "cord-v2:train:277",
+        "characters": 2681,
+        "tokens_first": 846,
+        "tokens_second": 846
+      },
+      {
+        "document_id": "cord-v2:train:711",
+        "characters": 2678,
+        "tokens_first": 838,
+        "tokens_second": 838
+      },
+      {
+        "document_id": "cord-v2:train:475",
+        "characters": 2677,
+        "tokens_first": 838,
+        "tokens_second": 838
+      },
+      {
+        "document_id": "cord-v2:train:103",
+        "characters": 2672,
+        "tokens_first": 837,
+        "tokens_second": 837
+      },
+      {
+        "document_id": "cord-v2:train:321",
+        "characters": 2671,
+        "tokens_first": 806,
+        "tokens_second": 806
+      },
+      {
+        "document_id": "cord-v2:train:701",
+        "characters": 2661,
+        "tokens_first": 835,
+        "tokens_second": 835
+      },
+      {
+        "document_id": "cord-v2:train:19",
+        "characters": 2647,
+        "tokens_first": 825,
+        "tokens_second": 825
+      },
+      {
+        "document_id": "cord-v2:train:75",
+        "characters": 2646,
+        "tokens_first": 833,
+        "tokens_second": 833
+      },
+      {
+        "document_id": "cord-v2:test:70",
+        "characters": 2645,
+        "tokens_first": 819,
+        "tokens_second": 819
+      },
+      {
+        "document_id": "cord-v2:train:388",
+        "characters": 2642,
+        "tokens_first": 801,
+        "tokens_second": 801
+      },
+      {
+        "document_id": "cord-v2:train:709",
+        "characters": 2635,
+        "tokens_first": 828,
+        "tokens_second": 828
+      }
+    ],
+    "b": [
+      {
+        "document_id": "cord-v2:train:544",
+        "characters": 3252,
+        "tokens_first": 1129,
+        "tokens_second": 1129
+      },
+      {
+        "document_id": "cord-v2:train:748",
+        "characters": 3095,
+        "tokens_first": 1019,
+        "tokens_second": 1019
+      },
+      {
+        "document_id": "cord-v2:train:787",
+        "characters": 3064,
+        "tokens_first": 1008,
+        "tokens_second": 1008
+      },
+      {
+        "document_id": "cord-v2:train:750",
+        "characters": 3050,
+        "tokens_first": 975,
+        "tokens_second": 975
+      },
+      {
+        "document_id": "cord-v2:train:303",
+        "characters": 3012,
+        "tokens_first": 999,
+        "tokens_second": 999
+      },
+      {
+        "document_id": "cord-v2:train:427",
+        "characters": 3010,
+        "tokens_first": 975,
+        "tokens_second": 975
+      },
+      {
+        "document_id": "cord-v2:train:0",
+        "characters": 3004,
+        "tokens_first": 939,
+        "tokens_second": 939
+      },
+      {
+        "document_id": "cord-v2:train:65",
+        "characters": 2985,
+        "tokens_first": 995,
+        "tokens_second": 995
+      },
+      {
+        "document_id": "cord-v2:train:567",
+        "characters": 2982,
+        "tokens_first": 958,
+        "tokens_second": 958
+      },
+      {
+        "document_id": "cord-v2:train:203",
+        "characters": 2977,
+        "tokens_first": 998,
+        "tokens_second": 998
+      },
+      {
+        "document_id": "cord-v2:train:527",
+        "characters": 2972,
+        "tokens_first": 956,
+        "tokens_second": 956
+      },
+      {
+        "document_id": "cord-v2:train:266",
+        "characters": 2950,
+        "tokens_first": 956,
+        "tokens_second": 956
+      },
+      {
+        "document_id": "cord-v2:train:149",
+        "characters": 2925,
+        "tokens_first": 936,
+        "tokens_second": 936
+      },
+      {
+        "document_id": "cord-v2:train:674",
+        "characters": 2923,
+        "tokens_first": 943,
+        "tokens_second": 943
+      },
+      {
+        "document_id": "cord-v2:train:777",
+        "characters": 2914,
+        "tokens_first": 927,
+        "tokens_second": 927
+      },
+      {
+        "document_id": "cord-v2:train:505",
+        "characters": 2904,
+        "tokens_first": 922,
+        "tokens_second": 922
+      },
+      {
+        "document_id": "cord-v2:train:297",
+        "characters": 2900,
+        "tokens_first": 944,
+        "tokens_second": 944
+      },
+      {
+        "document_id": "cord-v2:train:124",
+        "characters": 2886,
+        "tokens_first": 923,
+        "tokens_second": 923
+      },
+      {
+        "document_id": "cord-v2:train:277",
+        "characters": 2883,
+        "tokens_first": 920,
+        "tokens_second": 920
+      },
+      {
+        "document_id": "cord-v2:train:711",
+        "characters": 2876,
+        "tokens_first": 919,
+        "tokens_second": 919
+      },
+      {
+        "document_id": "cord-v2:train:584",
+        "characters": 2875,
+        "tokens_first": 936,
+        "tokens_second": 936
+      },
+      {
+        "document_id": "cord-v2:train:475",
+        "characters": 2871,
+        "tokens_first": 915,
+        "tokens_second": 915
+      },
+      {
+        "document_id": "cord-v2:train:103",
+        "characters": 2866,
+        "tokens_first": 912,
+        "tokens_second": 912
+      },
+      {
+        "document_id": "cord-v2:train:701",
+        "characters": 2859,
+        "tokens_first": 904,
+        "tokens_second": 904
+      },
+      {
+        "document_id": "cord-v2:train:321",
+        "characters": 2853,
+        "tokens_first": 865,
+        "tokens_second": 865
+      },
+      {
+        "document_id": "cord-v2:validation:41",
+        "characters": 2835,
+        "tokens_first": 894,
+        "tokens_second": 894
+      },
+      {
+        "document_id": "cord-v2:train:388",
+        "characters": 2832,
+        "tokens_first": 883,
+        "tokens_second": 883
+      },
+      {
+        "document_id": "cord-v2:train:19",
+        "characters": 2829,
+        "tokens_first": 897,
+        "tokens_second": 897
+      },
+      {
+        "document_id": "cord-v2:test:70",
+        "characters": 2827,
+        "tokens_first": 890,
+        "tokens_second": 890
+      },
+      {
+        "document_id": "cord-v2:train:709",
+        "characters": 2817,
+        "tokens_first": 890,
+        "tokens_second": 890
+      }
+    ]
+  },
+  "counts_stable_across_repeats": true,
+  "longest_prompt_tokens": 1129,
+  "num_predict": 1024,
+  "num_ctx": 2304,
+  "rule": "smallest multiple of 256 >= longest prompt tokens + num_predict",
+  "memory": {
+    "peak_process_rss_gib": 0.12,
+    "peak_model_runner_rss_gib": 3.793,
+    "lowest_available_system_ram_gib": 1.181,
+    "total_system_ram_gib": 15.638,
+    "abort_below_gib": 0.4
+  },
+  "environment": {
+    "git_commit": "1cb8ff85b3c60a0a8fdfa25b4bb3aeed9c840c87",
+    "git_dirty": false,
+    "python": "3.12.13",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "cpu_count": 12,
+    "packages": {
+      "rapidocr": "3.10.0",
+      "onnxruntime": "1.31.1",
+      "numpy": "2.5.4",
+      "pypdfium2": "5.14.0",
+      "rapidfuzz": "3.14.6"
+    },
+    "ocr_execution": "CPU, onnxruntime defaults"
+  }
+}

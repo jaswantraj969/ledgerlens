@@ -1,0 +1,5 @@
+START 2026-11-07T11:42:19Z timeout=1800s stall=600s cmd: bash -c for p in 2.1 2.2; do uv run --project backend --no-sync python -m evals.runners.measure_prompt_tokens --prompt $p || exit $?; done
+longest 908 tokens -> num_ctx 2048; wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\prompt_round\prompt_tokens_p2.1.json
+longest 1129 tokens -> num_ctx 2304; wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\prompt_round\prompt_tokens_p2.2.json
+END 2026-11-07T11:43:35Z elapsed=76s
+EXIT=0
