@@ -1,0 +1,8 @@
+# Ollama server configuration after restart, 2026-11-07T14:53:32+05:00
+User environment: OLLAMA_MAX_LOADED_MODELS=1 (set with [Environment]::SetEnvironmentVariable, scope User). Ollama app stopped and started again; not reinstalled.
+ollama version is 0.40.15
+From server.log (server config line):
+OLLAMA_CONTEXT_LENGTH:0
+OLLAMA_KEEP_ALIVE:5m0s
+OLLAMA_MAX_LOADED_MODELS:1
+OLLAMA_NUM_PARALLEL:1

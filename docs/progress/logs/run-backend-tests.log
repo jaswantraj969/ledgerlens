@@ -1,0 +1,75 @@
+START 2026-11-07T11:00:54Z timeout=1500s stall=300s cmd: bash -c cd backend && uv run --no-sync pytest -q -p no:cacheprovider --cov=ledgerlens --cov-report=term tests
+........................................................................ [ 21%]
+........................................................................ [ 42%]
+........................................................................ [ 64%]
+........................................................................ [ 85%]
+...............................................                          [100%]
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\jknm6\Desktop\VS Projects\LedgerLens\backend\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+tests/api/test_auth.py::test_register_makes_the_first_user_an_admin
+tests/api/test_auth.py::test_register_makes_the_first_user_an_admin
+  C:\Users\jknm6\Desktop\VS Projects\LedgerLens\backend\.venv\Lib\site-packages\alembic\config.py:604: DeprecationWarning: No path_separator found in configuration; falling back to legacy splitting on spaces, commas, and colons for prepend_sys_path.  Consider adding path_separator=os to Alembic config.
+    util.warn_deprecated(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=============================== tests coverage ================================
+______________ coverage: platform win32, python 3.12.13-final-0 _______________
+
+Name                                         Stmts   Miss  Cover
+----------------------------------------------------------------
+src\ledgerlens\__init__.py                       1      0   100%
+src\ledgerlens\api\__init__.py                   0      0   100%
+src\ledgerlens\api\app.py                       45      0   100%
+src\ledgerlens\api\auth.py                     111      4    96%
+src\ledgerlens\api\deps.py                      65      0   100%
+src\ledgerlens\api\documents.py                121      2    98%
+src\ledgerlens\api\health.py                    30      0   100%
+src\ledgerlens\confidence\__init__.py            0      0   100%
+src\ledgerlens\confidence\features.py            7      0   100%
+src\ledgerlens\confidence\risk.py               31      1    97%
+src\ledgerlens\core\__init__.py                  0      0   100%
+src\ledgerlens\core\config.py                   26      0   100%
+src\ledgerlens\core\errors.py                   25      0   100%
+src\ledgerlens\core\logs.py                     13      0   100%
+src\ledgerlens\core\security.py                 37      0   100%
+src\ledgerlens\db\__init__.py                    0      0   100%
+src\ledgerlens\db\models.py                    175      0   100%
+src\ledgerlens\db\repositories.py               26      0   100%
+src\ledgerlens\export\__init__.py                0      0   100%
+src\ledgerlens\export\exporters.py              27      1    96%
+src\ledgerlens\extraction\__init__.py            0      0   100%
+src\ledgerlens\extraction\deterministic.py     159      3    98%
+src\ledgerlens\extraction\layout.py             46      1    98%
+src\ledgerlens\extraction\llm.py               100      0   100%
+src\ledgerlens\extraction\merge.py              54      0   100%
+src\ledgerlens\fields.py                        31      0   100%
+src\ledgerlens\ingest\__init__.py                0      0   100%
+src\ledgerlens\ingest\validate.py               61      1    98%
+src\ledgerlens\llm\__init__.py                   0      0   100%
+src\ledgerlens\llm\base.py                      28      0   100%
+src\ledgerlens\llm\cache.py                     39      0   100%
+src\ledgerlens\llm\ollama.py                    31      2    94%
+src\ledgerlens\parsing\__init__.py               0      0   100%
+src\ledgerlens\parsing\model.py                 22      0   100%
+src\ledgerlens\parsing\ocr.py                   79      5    94%
+src\ledgerlens\parsing\pdfium.py                43      0   100%
+src\ledgerlens\pipeline.py                      38      1    97%
+src\ledgerlens\schema.py                        33      0   100%
+src\ledgerlens\storage\__init__.py               0      0   100%
+src\ledgerlens\storage\local.py                 33      1    97%
+src\ledgerlens\verification\__init__.py          0      0   100%
+src\ledgerlens\verification\evidence.py         55      5    91%
+src\ledgerlens\verification\normalize.py        76      2    97%
+src\ledgerlens\verification\rules.py            30      0   100%
+src\ledgerlens\workers\__init__.py               0      0   100%
+src\ledgerlens\workers\queue.py                 21      0   100%
+src\ledgerlens\workers\run.py                   19     19     0%
+src\ledgerlens\workers\tasks.py                292     34    88%
+----------------------------------------------------------------
+TOTAL                                         2030     82    96%
+335 passed, 3 warnings in 155.16s (0:02:35)
+END 2026-11-07T11:03:41Z elapsed=167s
+EXIT=0

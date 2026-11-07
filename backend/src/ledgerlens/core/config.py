@@ -1,6 +1,7 @@
 """Application settings, read from the environment."""
 
 from pathlib import Path
+from typing import Literal
 
 from pydantic import SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -21,3 +22,13 @@ class Settings(BaseSettings):
     upload_rate_limit: int = 60
     rate_window_seconds: int = 60
     queue_name: str = "ledgerlens"
+    # Worker. "rules" needs no model. "llm" fails a job when the model is unavailable.
+    # "llm_or_rules" degrades to rules and records why on the extraction run.
+    extraction_mode: Literal["rules", "llm", "llm_or_rules"] = "rules"
+    schema_name: str = "default"
+    llm_model: str = "llama3.2:3b"
+    ollama_url: str = "http://127.0.0.1:11434"
+    llm_timeout_seconds: float = 300.0
+    llm_cache_dir: Path = Path("var/llm-cache")
+    job_retry_intervals: list[int] = [10, 60, 300]
+    job_timeout_seconds: int = 900

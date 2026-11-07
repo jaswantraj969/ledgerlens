@@ -7,7 +7,6 @@ from typing import Annotated
 import redis
 from fastapi import APIRouter, Depends, Query, Request, Response, UploadFile
 from pydantic import BaseModel
-from rq import Queue
 
 from ledgerlens.api.deps import (
     DocumentsDep,
@@ -24,10 +23,10 @@ from ledgerlens.db.models import Document, Job
 from ledgerlens.db.repositories import DocumentRepository, audit
 from ledgerlens.ingest.validate import validate_upload
 from ledgerlens.storage.local import StorageBackend
+from ledgerlens.workers.queue import enqueue
 
 router = APIRouter(tags=["documents"])
 MAX_BATCH_FILES = 20
-WORKER_TASK = "ledgerlens.workers.tasks.process_document"
 UploaderDep = Annotated[Principal, Depends(require_role("admin", "reviewer"))]
 AdminDep = Annotated[Principal, Depends(require_role("admin"))]
 _not_found = Problem(404, "Not found", "No such document.", "not_found")
@@ -58,6 +57,8 @@ class JobOut(BaseModel):
     state: str
     attempts: int
     error_code: str | None
+    error_detail: str | None
+    dead_lettered: bool
 
 
 def _out(document: Document, duplicate: bool, job: Job | None) -> DocumentOut:
@@ -75,12 +76,13 @@ def _out(document: Document, duplicate: bool, job: Job | None) -> DocumentOut:
 
 
 def _enqueue(request: Request, settings: Settings, job: Job) -> None:
-    """Queue a job once. Safe to repeat, so a retry recovers an upload that missed the queue."""
+    """Queue a job once. Safe to repeat, so a retry recovers an upload that missed the queue.
+
+    A job RQ already holds (waiting, running or scheduled for a retry) is not queued again.
+    """
     client: redis.Redis = request.app.state.redis
     try:
-        queue = Queue(settings.queue_name, connection=client)
-        if str(job.id) not in queue.job_ids:
-            queue.enqueue(WORKER_TASK, str(job.id), job_id=str(job.id))
+        enqueue(client, settings, str(job.id))
     except redis.RedisError as error:
         raise Problem(
             503, "Service unavailable", "The job queue is unavailable.", "redis_unavailable"
@@ -227,4 +229,6 @@ def get_job(job_id: uuid.UUID, repository: DocumentsDep, _principal: PrincipalDe
         state=job.state,
         attempts=job.attempts,
         error_code=job.error_code,
+        error_detail=job.error_detail,
+        dead_lettered=job.dead_lettered_at is not None,
     )

@@ -1,0 +1,152 @@
+START 2026-11-07T10:55:42Z timeout=400s stall=120s cmd: bash -c cd backend && uv run --no-sync pytest -x -s -p no:cacheprovider tests/api/test_worker.py -k unavailable_model_fails -o log_cli=true --log-cli-level=INFO
+============================= test session starts =============================
+platform win32 -- Python 3.12.13, pytest-9.2.0, pluggy-1.7.0
+rootdir: C:\Users\jknm6\Desktop\VS Projects\LedgerLens\backend
+configfile: pyproject.toml
+plugins: anyio-4.16.0, Faker-40.44.0, hypothesis-6.170.14, platformdirs-4.14.5, cov-7.1.0
+collected 9 items / 8 deselected / 1 selected
+
+tests/api/test_worker.py::test_an_unavailable_model_fails_the_job_with_a_recorded_reason 
+------------------------------- live log setup --------------------------------
+INFO     alembic.runtime.migration:migration.py:205 Context impl PostgresqlImpl.
+INFO     alembic.runtime.migration:migration.py:208 Will assume transactional DDL.
+INFO     alembic.runtime.migration:migration.py:611 Running downgrade 0002 -> 0001, worker: job error detail, dead-letter time, degraded extraction runs
+INFO     alembic.runtime.migration:migration.py:611 Running downgrade 0001 -> , initial schema
+INFO     alembic.runtime.migration:migration.py:205 Context impl PostgresqlImpl.
+INFO     alembic.runtime.migration:migration.py:208 Will assume transactional DDL.
+INFO     alembic.runtime.migration:migration.py:611 Running upgrade  -> 0001, initial schema
+INFO     alembic.runtime.migration:migration.py:611 Running upgrade 0001 -> 0002, worker: job error detail, dead-letter time, degraded extraction runs
+{"method": "POST", "path": "/auth/register", "status": 201, "seconds": 0.2295, "event": "request", "request_id": "50572e5989554772b6d8623282a08678", "level": "info", "timestamp": "2026-11-07T10:55:52.503792Z"}
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/auth/register "HTTP/1.1 201 Created"
+{"method": "POST", "path": "/documents", "status": 201, "seconds": 0.1162, "event": "request", "request_id": "0aa1234d37af42d7b430f148111145b4", "level": "info", "timestamp": "2026-11-07T10:55:52.630437Z"}
+-------------------------------- live log call --------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/documents "HTTP/1.1 201 Created"
+INFO     rq.worker:base.py:1009 Worker eb82da3712a244878b8882fa7808e54f: started with PID 4608, version 3.0.0
+INFO     rq.worker:base.py:1105 Worker eb82da3712a244878b8882fa7808e54f: subscribing to channel rq:pubsub:eb82da3712a244878b8882fa7808e54f
+INFO     rq.worker:base.py:1013 *** Listening on ledgerlens...
+INFO     rq.worker:base.py:483 Worker eb82da3712a244878b8882fa7808e54f: cleaning registries for queue: ledgerlens
+INFO     rq.worker:base.py:498 Worker eb82da3712a244878b8882fa7808e54f: cleaning group registries
+INFO     rq.worker:base.py:1187 Worker eb82da3712a244878b8882fa7808e54f: ledgerlens: ledgerlens.workers.tasks.process_document('2a668445-134f-427a-bb58-a95c13e4513c') (2a668445-134f-427a-bb58-a95c13e4513c)
+{"job_id": "2a668445-134f-427a-bb58-a95c13e4513c", "attempt": 1, "event": "job.start", "level": "info", "timestamp": "2026-11-07T10:55:52.923808Z"}
+{"job_id": "2a668445-134f-427a-bb58-a95c13e4513c", "code": "llm_unavailable", "retry": true, "event": "job.failed", "level": "warning", "timestamp": "2026-11-07T10:55:55.368745Z"}
+ERROR    rq.worker:base.py:1347 Worker eb82da3712a244878b8882fa7808e54f: job 2a668445-134f-427a-bb58-a95c13e4513c: exception raised while executing (ledgerlens.workers.tasks.process_document)
+Traceback (most recent call last):
+  File "C:\Users\jknm6\Desktop\VS Projects\LedgerLens\backend\.venv\Lib\site-packages\rq\worker\base.py", line 1671, in perform_job
+    return_value = job.perform()
+                   ^^^^^^^^^^^^^
+  File "C:\Users\jknm6\Desktop\VS Projects\LedgerLens\backend\.venv\Lib\site-packages\rq\job.py", line 1478, in perform
+    self._result = self._execute()
+                   ^^^^^^^^^^^^^^^
+  File "C:\Users\jknm6\Desktop\VS Projects\LedgerLens\backend\.venv\Lib\site-packages\rq\job.py", line 1539, in _execute
+    result = self.func(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jknm6\Desktop\VS Projects\LedgerLens\backend\src\ledgerlens\workers\tasks.py", line 505, in process_document
+    return run_job(context or _process_context(), uuid.UUID(job_id), final_attempt=final)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jknm6\Desktop\VS Projects\LedgerLens\backend\src\ledgerlens\workers\tasks.py", line 435, in run_job
+    run = extract_step(context, job_id, document, parsed, schema)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jknm6\Desktop\VS Projects\LedgerLens\backend\src\ledgerlens\workers\tasks.py", line 339, in extract_step
+    outcome = extract(context, parsed, schema)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jknm6\Desktop\VS Projects\LedgerLens\backend\src\ledgerlens\workers\tasks.py", line 287, in extract
+    raise TransientJobError(code, detail)
+ledgerlens.workers.tasks.TransientJobError: llm_unavailable: provider: ollama request failed: ConnectError
+
+INFO     rq.job:job.py:1797 Job 2a668445-134f-427a-bb58-a95c13e4513c: scheduled for retry at 2026-11-07 10:56:05.384539+00:00, 2 remaining
+INFO     rq.worker:base.py:667 Worker eb82da3712a244878b8882fa7808e54f: done, quitting
+INFO     rq.worker:base.py:1137 Worker eb82da3712a244878b8882fa7808e54f: unsubscribing from channel rq:pubsub:eb82da3712a244878b8882fa7808e54f
+FAILED
+
+================================== FAILURES ===================================
+_______ test_an_unavailable_model_fails_the_job_with_a_recorded_reason ________
+
+client = <starlette.testclient.TestClient object at 0x00000254A258E5A0>
+admin = <tests.api.conftest.Account object at 0x00000254A2556BA0>
+settings = Settings(database_url='postgresql+psycopg://ledgerlens:whWqN9qGdzgObitavVVLmRQnQDFufAiO@127.0.0.1:5433/ledgerlens_test..._seconds=300.0, llm_cache_dir=WindowsPath('var/llm-cache'), job_retry_intervals=[10, 60, 300], job_timeout_seconds=900)
+tmp_path = WindowsPath('C:/Users/jknm6/AppData/Local/Temp/pytest-of-~JR/pytest-365/test_an_unavailable_model_fail0')
+
+    def test_an_unavailable_model_fails_the_job_with_a_recorded_reason(
+        client: TestClient, admin: Account, settings: Settings, tmp_path: Path
+    ) -> None:
+        body = upload(client, admin)
+        context = context_for(
+            settings,
+            extraction_mode="llm",
+            ollama_url=UNREACHABLE,
+            llm_timeout_seconds=5.0,
+            llm_cache_dir=tmp_path / "llm-cache",
+            job_retry_intervals=[0, 0],
+        )
+        drain(context)
+    
+        failed = job(context, body["job_id"])
+>       assert failed.state == "failed"
+E       AssertionError: assert 'queued' == 'failed'
+E         
+E         - failed
+E         + queued
+
+tests\api\test_worker.py:208: AssertionError
+----------------------------- Captured log setup ------------------------------
+INFO     alembic.runtime.migration:migration.py:205 Context impl PostgresqlImpl.
+INFO     alembic.runtime.migration:migration.py:208 Will assume transactional DDL.
+INFO     alembic.runtime.migration:migration.py:611 Running downgrade 0002 -> 0001, worker: job error detail, dead-letter time, degraded extraction runs
+INFO     alembic.runtime.migration:migration.py:611 Running downgrade 0001 -> , initial schema
+INFO     alembic.runtime.migration:migration.py:205 Context impl PostgresqlImpl.
+INFO     alembic.runtime.migration:migration.py:208 Will assume transactional DDL.
+INFO     alembic.runtime.migration:migration.py:611 Running upgrade  -> 0001, initial schema
+INFO     alembic.runtime.migration:migration.py:611 Running upgrade 0001 -> 0002, worker: job error detail, dead-letter time, degraded extraction runs
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/auth/register "HTTP/1.1 201 Created"
+------------------------------ Captured log call ------------------------------
+INFO     httpx:_client.py:1025 HTTP Request: POST http://testserver/documents "HTTP/1.1 201 Created"
+INFO     rq.worker:base.py:1009 Worker eb82da3712a244878b8882fa7808e54f: started with PID 4608, version 3.0.0
+INFO     rq.worker:base.py:1105 Worker eb82da3712a244878b8882fa7808e54f: subscribing to channel rq:pubsub:eb82da3712a244878b8882fa7808e54f
+INFO     rq.worker:base.py:1013 *** Listening on ledgerlens...
+INFO     rq.worker:base.py:483 Worker eb82da3712a244878b8882fa7808e54f: cleaning registries for queue: ledgerlens
+INFO     rq.worker:base.py:498 Worker eb82da3712a244878b8882fa7808e54f: cleaning group registries
+INFO     rq.worker:base.py:1187 Worker eb82da3712a244878b8882fa7808e54f: ledgerlens: ledgerlens.workers.tasks.process_document('2a668445-134f-427a-bb58-a95c13e4513c') (2a668445-134f-427a-bb58-a95c13e4513c)
+ERROR    rq.worker:base.py:1347 Worker eb82da3712a244878b8882fa7808e54f: job 2a668445-134f-427a-bb58-a95c13e4513c: exception raised while executing (ledgerlens.workers.tasks.process_document)
+Traceback (most recent call last):
+  File "C:\Users\jknm6\Desktop\VS Projects\LedgerLens\backend\.venv\Lib\site-packages\rq\worker\base.py", line 1671, in perform_job
+    return_value = job.perform()
+                   ^^^^^^^^^^^^^
+  File "C:\Users\jknm6\Desktop\VS Projects\LedgerLens\backend\.venv\Lib\site-packages\rq\job.py", line 1478, in perform
+    self._result = self._execute()
+                   ^^^^^^^^^^^^^^^
+  File "C:\Users\jknm6\Desktop\VS Projects\LedgerLens\backend\.venv\Lib\site-packages\rq\job.py", line 1539, in _execute
+    result = self.func(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jknm6\Desktop\VS Projects\LedgerLens\backend\src\ledgerlens\workers\tasks.py", line 505, in process_document
+    return run_job(context or _process_context(), uuid.UUID(job_id), final_attempt=final)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jknm6\Desktop\VS Projects\LedgerLens\backend\src\ledgerlens\workers\tasks.py", line 435, in run_job
+    run = extract_step(context, job_id, document, parsed, schema)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jknm6\Desktop\VS Projects\LedgerLens\backend\src\ledgerlens\workers\tasks.py", line 339, in extract_step
+    outcome = extract(context, parsed, schema)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jknm6\Desktop\VS Projects\LedgerLens\backend\src\ledgerlens\workers\tasks.py", line 287, in extract
+    raise TransientJobError(code, detail)
+ledgerlens.workers.tasks.TransientJobError: llm_unavailable: provider: ollama request failed: ConnectError
+
+INFO     rq.job:job.py:1797 Job 2a668445-134f-427a-bb58-a95c13e4513c: scheduled for retry at 2026-11-07 10:56:05.384539+00:00, 2 remaining
+INFO     rq.worker:base.py:667 Worker eb82da3712a244878b8882fa7808e54f: done, quitting
+INFO     rq.worker:base.py:1137 Worker eb82da3712a244878b8882fa7808e54f: unsubscribing from channel rq:pubsub:eb82da3712a244878b8882fa7808e54f
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\jknm6\Desktop\VS Projects\LedgerLens\backend\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+tests/api/test_worker.py::test_an_unavailable_model_fails_the_job_with_a_recorded_reason
+tests/api/test_worker.py::test_an_unavailable_model_fails_the_job_with_a_recorded_reason
+  C:\Users\jknm6\Desktop\VS Projects\LedgerLens\backend\.venv\Lib\site-packages\alembic\config.py:604: DeprecationWarning: No path_separator found in configuration; falling back to legacy splitting on spaces, commas, and colons for prepend_sys_path.  Consider adding path_separator=os to Alembic config.
+    util.warn_deprecated(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/api/test_worker.py::test_an_unavailable_model_fails_the_job_with_a_recorded_reason
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+================= 1 failed, 8 deselected, 3 warnings in 7.39s =================
+END 2026-11-07T10:56:12Z elapsed=31s
+EXIT=1

@@ -146,6 +146,8 @@ class Job(Base):
     state: Mapped[str] = mapped_column(String(30), nullable=False, default="queued")
     attempts: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     error_code: Mapped[str | None] = mapped_column(String(60))
+    error_detail: Mapped[str | None] = mapped_column(Text)
+    dead_lettered_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     created_at: Mapped[datetime] = _created()
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=utcnow, onupdate=utcnow, nullable=False
@@ -169,6 +171,7 @@ class ExtractionRun(Base):
     cost_usd: Mapped[float | None] = mapped_column()
     latency_seconds: Mapped[float | None] = mapped_column()
     cache_hit: Mapped[bool | None] = mapped_column()
+    degraded_reason: Mapped[str | None] = mapped_column(Text)
     created_at: Mapped[datetime] = _created()
 
 
