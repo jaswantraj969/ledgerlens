@@ -1,6 +1,7 @@
 """In-process pipeline: parse, extract, verify, score, route."""
 
 import re
+from typing import Protocol
 
 from ledgerlens.confidence.features import build_features
 from ledgerlens.confidence.risk import route
@@ -30,8 +31,14 @@ def field_type(schema: Schema, name: str) -> FieldType:
     return spec.type
 
 
-def process(document: ParsedDocument, schema: Schema) -> list[FieldRecord]:
-    records = DeterministicExtractor().extract(document, schema)
+class Extractor(Protocol):
+    def extract(self, document: ParsedDocument, schema: Schema) -> list[FieldRecord]: ...
+
+
+def process(
+    document: ParsedDocument, schema: Schema, extractor: Extractor | None = None
+) -> list[FieldRecord]:
+    records = (extractor or DeterministicExtractor()).extract(document, schema)
     lines = build_lines(document)
     for record in records:
         kind = field_type(schema, record.name)

@@ -1,0 +1,11 @@
+........................................................................ [ 38%]
+........................................................................ [ 77%]
+..........................................                               [100%]
+186 passed in 11.09s
+pytest_exit=0
+All checks passed!
+ruff_exit=0
+38 files already formatted
+format_exit=0
+Success: no issues found in 26 source files
+mypy_exit=0

@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 from evals import normalization
-from evals.runners import run_cord_s1
+from evals.runners import llm_smoke, run_cord_s1
 
 ROOT = Path(__file__).resolve().parents[3]
 SPLITS = ROOT / "evals" / "splits" / "cord_v2"
@@ -27,6 +27,22 @@ def test_test_split_requires_final_flag() -> None:
     completed = run_module("--split", "test")
     assert completed.returncode != 0
     assert "--final" in completed.stderr
+
+
+def test_llm_smoke_can_only_read_validation() -> None:
+    source = (ROOT / "evals" / "runners" / "llm_smoke.py").read_text(encoding="utf-8")
+    assert 'SPLIT = "validation"' in source
+    assert "--split" not in source
+    assert llm_smoke.SPLIT == "validation"
+
+
+def test_llm_smoke_sample_is_seeded_and_inside_validation() -> None:
+    splits = json.loads((SPLITS / "ids.json").read_text(encoding="utf-8"))
+    sample = llm_smoke.sample_ids()
+    assert sample == llm_smoke.sample_ids()
+    assert len(sample) == 10
+    assert set(sample) <= set(splits["validation"]["ids"])
+    assert not set(sample) & set(splits["test"]["ids"])
 
 
 def test_split_ids_do_not_overlap_and_match_official_sizes() -> None:

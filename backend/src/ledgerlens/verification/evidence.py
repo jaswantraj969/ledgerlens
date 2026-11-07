@@ -9,7 +9,7 @@ from ledgerlens.fields import EvidenceStatus, FieldRecord
 from ledgerlens.verification.normalize import normalize_amount, normalize_text
 
 # Sources whose values are copied from the tokens the matcher would search.
-TOKEN_DERIVED_SOURCES = frozenset({"deterministic"})
+TOKEN_DERIVED_SOURCES = frozenset({"deterministic", "deterministic_fallback"})
 FUZZY_THRESHOLD = 85.0
 _MAX_WINDOW = 8
 
