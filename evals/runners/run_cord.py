@@ -24,6 +24,7 @@ from evals.metrics import METRICS_VERSION
 from evals.runners.run_cord_s1 import OCR_CACHE, SPLIT_FILE, cached_parse, environment
 from evals.scoring import DocumentPrediction, score, to_prediction
 from evals.systems import LLM_SYSTEMS, SystemOutput, build_system
+from ledgerlens.confidence.features import build_features
 from ledgerlens.extraction.llm import DEFAULT_PARAMS
 from ledgerlens.llm.cache import CachingProvider, ReplayCache
 from ledgerlens.llm.ollama import OllamaProvider
@@ -35,6 +36,7 @@ from ledgerlens.verification.label_proximity import RULE_ID as LABEL_RULE
 ROOT = Path(__file__).resolve().parents[2]
 RESULTS = ROOT / "evals" / "results"
 PREDICTIONS = ROOT / "data" / "cord-v2" / "predictions"
+RECORDS = ROOT / "data" / "cord-v2" / "records"
 CACHE_DIR = ROOT / "evals" / "cache" / "cord-v2"
 SCHEMA = "cord_receipt"
 DEFAULT_MODEL = "llama3.2:3b"
@@ -101,6 +103,9 @@ def main() -> None:
     parser.add_argument("--prompt", default="1.0", help="prompt version for passes A and B")
     parser.add_argument("--num-ctx", type=int, help="context length; default from DEFAULT_PARAMS")
     parser.add_argument("--label", help="reported system name, e.g. S2' for the round-2 prompt")
+    parser.add_argument(
+        "--save-records", action="store_true", help="also save per-field features (for S5)"
+    )
     arguments = parser.parse_args()
 
     label = arguments.label or arguments.system
@@ -138,6 +143,7 @@ def main() -> None:
     memory.start()
 
     predictions: list[DocumentPrediction] = []
+    saved_records: dict[str, list[dict[str, Any]]] = {}
     gold_headers: dict[str, dict[str, str | None]] = {}
     gold_rows: dict[str, list[dict[str, str | None]]] = {}
     rows: list[dict[str, Any]] = []
@@ -168,6 +174,18 @@ def main() -> None:
                 document.document_id, output.records, HEADER_FIELDS, fell_back=output.failed
             )
         )
+        if arguments.save_records:
+            saved_records[document.document_id] = [
+                {
+                    "name": r.name,
+                    "value_normalized": None if output.failed else r.value_normalized,
+                    "source": r.source,
+                    "decision": r.decision,
+                    "risk_score": r.risk_score,
+                    "features": build_features(r) | {"s4h_choice": r.signals.get("s4h_choice")},
+                }
+                for r in output.records
+            ]
         llm_seconds, load_seconds = llm_timing(output)
         live_seconds = sum((r.latency_seconds or 0) for r in output.responses if not r.cache_hit)
         rows.append(
@@ -224,6 +242,10 @@ def main() -> None:
     scope = arguments.split if wanted is None else f"{arguments.subset.stem}_p{arguments.prompt}"
     prediction_path = PREDICTIONS / f"{name}_{scope}.json"
     prediction_path.write_text(dump, encoding="utf-8", newline="\n")
+    if arguments.save_records:
+        records_path = RECORDS / f"{name}_{scope}.json"
+        records_path.parent.mkdir(parents=True, exist_ok=True)
+        records_path.write_text(json.dumps(saved_records), encoding="utf-8", newline="\n")
 
     replayed = provider is not None and provider.live_calls == 0
     result = score(predictions, gold_headers, gold_rows, tuple(HEADER_FIELDS), tuple(ROW_FIELDS))
