@@ -1,0 +1,18 @@
+{
+ "split": "train",
+ "method": "first 10 ids of prompt_dev_train100.json in sorted order (smoke test, selects nothing)",
+ "n": 10,
+ "sha256": "24557d5b4ad628a9b4a2478cb9bdd01fd2eb9d4748fa8b8d172e3e1e1fd5192d",
+ "ids": [
+  "cord-v2:train:10",
+  "cord-v2:train:101",
+  "cord-v2:train:105",
+  "cord-v2:train:108",
+  "cord-v2:train:119",
+  "cord-v2:train:122",
+  "cord-v2:train:13",
+  "cord-v2:train:142",
+  "cord-v2:train:155",
+  "cord-v2:train:158"
+ ]
+}
