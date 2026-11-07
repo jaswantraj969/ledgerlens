@@ -1,0 +1,15 @@
+# Label keywords for the label proximity check, per schema and monetary header field.
+# A value is label-supported if it appears on the same line as one of its field's keywords, or
+# on the line directly above or below. Matching is case-insensitive on whole words.
+# Fixed on 2026-11-07 before any result used it: each field's schema labels, plus the terms the
+# review named (PB1, PPN, Pajak, Service, Subtotal, Total). Not tuned on any split.
+version: "1.0"
+schemas:
+  cord_receipt:
+    subtotal: ["subtotal", "sub total", "sub-total", "net amount", "net amt"]
+    tax_amount: ["tax amount", "tax amt", "tax", "vat", "gst", "ppn", "pb1", "pb 1", "pajak", "service"]
+    total_amount: ["grand total", "grandtotal", "total due", "amount due", "total"]
+  default:
+    subtotal: ["subtotal", "sub total", "net amount"]
+    tax_amount: ["tax amount", "tax", "vat", "gst", "ppn", "pb1"]
+    total_amount: ["grand total", "total due", "amount due", "total"]

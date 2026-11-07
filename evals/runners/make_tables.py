@@ -120,6 +120,15 @@ def _llm_latency(result: dict[str, Any]) -> list[str]:
     ]
 
 
+def _label_lines(verification: dict[str, Any]) -> list[str]:
+    if "label_supported" not in verification:
+        return []
+    return [
+        f"- Label proximity: {verification['label_supported']} values next to a label for "
+        f"their field, {verification['label_unsupported']} not.",
+    ]
+
+
 def render_v1_1(result: dict[str, Any], source: str) -> str:
     failures = result["failures"]
     latency = result["latency_seconds"]
@@ -187,7 +196,8 @@ def render_v1_1(result: dict[str, Any], source: str) -> str:
         f"- Values output: {result['verification']['values_output']}.",
         f"- Not found in the document: {result['verification']['values_not_found_in_document']}.",
         f"- Withheld: {result['verification']['values_withheld']}.",
-        f"- Rule failures: {result['verification']['rule_failures']}.",
+        f"- Rule failures (arithmetic): {result['verification']['rule_failures']}.",
+        *_label_lines(result["verification"]),
         "",
         "## Latency and memory",
         "",

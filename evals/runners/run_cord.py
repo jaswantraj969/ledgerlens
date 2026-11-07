@@ -29,6 +29,7 @@ from ledgerlens.llm.ollama import OllamaProvider
 from ledgerlens.parsing.model import ParsedDocument
 from ledgerlens.parsing.ocr import RapidOcrParser
 from ledgerlens.schema import load_schema
+from ledgerlens.verification.label_proximity import RULE_ID as LABEL_RULE
 
 ROOT = Path(__file__).resolve().parents[2]
 RESULTS = ROOT / "evals" / "results"
@@ -169,7 +170,16 @@ def main() -> None:
                     for r in output.records
                 ),
                 "rule_failures": sum(
-                    not v.passed for r in output.records for v in r.validation_results
+                    not v.passed
+                    for r in output.records
+                    for v in r.validation_results
+                    if v.rule_id != LABEL_RULE
+                ),
+                "label_supported": sum(
+                    r.signals.get("label_supported") is True for r in output.records
+                ),
+                "label_unsupported": sum(
+                    r.signals.get("label_supported") is False for r in output.records
                 ),
             }
         )
@@ -215,6 +225,8 @@ def main() -> None:
             "values_not_found_in_document": sum(row["values_not_found"] for row in rows),
             "values_withheld": sum(row["withheld"] for row in rows),
             "rule_failures": sum(row["rule_failures"] for row in rows),
+            "label_supported": sum(row["label_supported"] for row in rows),
+            "label_unsupported": sum(row["label_unsupported"] for row in rows),
         },
         "latency_seconds": latency_report(rows, replayed=replayed),
         "memory": memory.report(),

@@ -49,7 +49,7 @@ Secondary score, set-based, ignores row alignment.
 - Values output: 1072.
 - Not found in the document: 31.
 - Withheld: 0.
-- Rule failures: 412.
+- Rule failures (arithmetic): 412.
 
 ## Latency and memory
 

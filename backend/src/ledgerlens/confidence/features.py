@@ -35,4 +35,8 @@ def build_features(record: FieldRecord) -> Features:
         "agree_pass_a_b": record.signals.get("agree_pass_a_b"),
         "agree_pass_a_deterministic": record.signals.get("agree_pass_a_deterministic"),
         "cross_pass_available": "agree_count" in record.signals,
+        # None when not checked: rule-extracted values are found by their label (circular).
+        "label_supported": record.signals.get("label_supported"),
+        # Deterministic rules and an LLM pass are independent sources (S4h).
+        "agree_rules_llm": record.signals.get("agree_rules_llm"),
     }

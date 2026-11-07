@@ -11,6 +11,7 @@ from ledgerlens.fields import FieldRecord
 from ledgerlens.parsing.model import ParsedDocument
 from ledgerlens.schema import FieldType, Schema
 from ledgerlens.verification.evidence import assess_evidence
+from ledgerlens.verification.label_proximity import check_label_proximity, keywords_for
 from ledgerlens.verification.rules import check_arithmetic
 
 _LINE_CELL = re.compile(r"^line_items\[\d+\]\.(\w+)$")
@@ -50,10 +51,13 @@ def process(
 ) -> list[FieldRecord]:
     records = (extractor or DeterministicExtractor()).extract(document, schema)
     lines = build_lines(document)
+    keywords = keywords_for(schema.name)
     for record in records:
         kind = field_type(schema, record.name)
         record.value_normalized = normalized_value(kind, record.value_raw)
         assess_evidence(record, lines, is_amount=kind == "amount")
+        if record.name in keywords:
+            check_label_proximity(record, lines, keywords[record.name])
     check_arithmetic(records)
     for record in records:
         route(record)
