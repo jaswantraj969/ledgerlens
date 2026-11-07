@@ -26,18 +26,9 @@ CORD has no vendor identifier, so groups are derived and approximate a layout, n
 
 k=12 was set in advance and is not tuned. Assignments are in `evals/splits/cord_v2/layout_groups.json`. These groups are the only A12 check available, because SROIE is blocked.
 
-## SROIE vendor groups
+## SROIE
 
-**SROIE results are BLOCKED.** Official access is unavailable, and unofficial image mirrors are not used, so no real vendor-grouped split was possible. The material below stays for the case where official access appears. See `evals/datasets/LICENSES.md`.
-
-- Labels: 626 key files from a community mirror, verified against git blob hashes. The official set has 1000 receipts. This mirror lacks the labelled test portion, so the split covers 626 documents.
-- Grouping: company text is casefolded, punctuation and legal suffixes are removed, and near-identical names merge at a RapidFuzz ratio of at least 92.
-- Split: whole vendors are assigned to train, calibration and test at 60/20/20, largest first, seed 20261106.
-- Result: 221 vendor groups, of which 150 hold one document. Train 376 documents and 79 vendors, calibration 125 and 71, test 125 and 71.
-
-`evals/splits/sroie/vendor_groups.json` holds document IDs and anonymous group numbers only. No company name is committed. Fuzzy merging can join two different vendors or miss a variant, so groups approximate vendors.
-
-No SROIE metric has been computed. Images are not downloaded.
+**SROIE: removed — official access unavailable; mirror terms unverified.** The local labels and the committed vendor-group file were deleted on 2026-11-07 in a normal commit; history was not rewritten. The adapter in `evals/datasets/sroie.py` remains, tested on fictional fixtures only, for the case where official access appears. No SROIE metric was ever computed. See `evals/datasets/LICENSES.md`.
 
 ## Mapped fields
 

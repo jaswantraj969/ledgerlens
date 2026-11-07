@@ -1,7 +1,6 @@
 import json
 from pathlib import Path
 
-import pytest
 from evals.datasets.sroie import (
     SroieDocument,
     load_documents,
@@ -9,10 +8,6 @@ from evals.datasets.sroie import (
     split_payload,
     vendor_groups,
     vendor_key,
-)
-
-SPLIT_FILE = (
-    Path(__file__).resolve().parents[3] / "evals" / "splits" / "sroie" / "vendor_groups.json"
 )
 
 
@@ -74,22 +69,3 @@ def test_payload_never_holds_company_names() -> None:
     text = json.dumps(split_payload(documents)).casefold()
     assert "dominant" not in text
     assert "fictional" not in text
-
-
-def test_committed_split_has_no_overlap_and_only_expected_keys() -> None:
-    if not SPLIT_FILE.exists():
-        pytest.skip("split not generated")
-    payload = json.loads(SPLIT_FILE.read_text(encoding="utf-8"))
-    vendor_splits: dict[int, set[str]] = {}
-    for row in payload["documents"].values():
-        assert set(row) == {"split", "vendor_group"}
-        vendor_splits.setdefault(row["vendor_group"], set()).add(row["split"])
-    assert all(len(names) == 1 for names in vendor_splits.values())
-
-
-def test_committed_split_does_not_contain_real_company_names() -> None:
-    keys = load_documents()
-    if not keys or not SPLIT_FILE.exists():
-        pytest.skip("labels not present")
-    text = SPLIT_FILE.read_text(encoding="utf-8").casefold()
-    assert not [d.document_id for d in keys if len(d.company) > 3 and d.company.casefold() in text]

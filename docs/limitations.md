@@ -12,9 +12,9 @@ The deterministic extractor copies values from the tokens, so matching them agai
 
 With `llama3.2:3b` and prompts `a-1.0` and `b-1.0`, line items are poor: row-level F1 0.058 for S2, against 0.377 for rules. The model often omits quantity, lists summary lines such as `TOTAL` as items, and confuses columns. It also fills fields that are not printed, with false fill rates of about 0.7 to 0.8 on subtotal and tax. The evidence check cannot catch that, because the number it copies does appear in the document, in a different role. JSON validity is enforced by Ollama's schema constraint, so a high validity rate says nothing about whether values are right.
 
-## SROIE is blocked, so no real vendor-grouped result exists
+## SROIE: removed — official access unavailable; mirror terms unverified
 
-Official SROIE access is unavailable and unofficial image mirrors are not used, so SROIE results are BLOCKED. The adapter and split exist, but no metric has been computed. CORD has no vendor label, so no real vendor-grouped split was possible on any dataset. The A12 check uses derived CORD layout groups, which approximate layouts, not vendors.
+The SROIE labels and vendor groups were deleted, and no SROIE metric exists. CORD has no vendor label, so no real vendor-grouped split was possible on any dataset. The A12 check uses derived CORD layout groups, which approximate layouts, not vendors.
 
 ## The risk score is unfitted
 

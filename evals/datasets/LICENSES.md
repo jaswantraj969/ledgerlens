@@ -26,14 +26,12 @@ Counts are documents holding the key. On test, 2 of the 43 `tax_price` labels (i
 
 ## SROIE (ICDAR 2019)
 
-**Status: results BLOCKED. Research-only, terms unverified.** Official access is unavailable to this project, as confirmed by the project owner on 2026-11-07. No SROIE result will be produced, and unofficial image mirrors must not be used. No licence for the dataset was found on 2026-11-06.
+**SROIE: removed — official access unavailable; mirror terms unverified.**
 
-- **Official source:** https://rrc.cvc.uab.es/?ch=13, 1000 receipts. The download section requires a free portal account. The public Downloads page states no licence, and the terms inside the registered area have not been read. Registration needs the project owner.
-- **Community mirror used for labels:** `zzzDavid/ICDAR-2019-SROIE`, which states 600 trainval and 400 test receipts. Its MIT licence covers the repository's code. It states no licence for the dataset and cannot grant one for the receipts.
-- **Hugging Face copies:** several exist, some tagged MIT. A tag from a re-uploader is not evidence of a right to use the data.
-- **Paper:** arXiv 2103.10213 is CC BY 4.0, which covers the paper only.
-
-Rules until the owner confirms terms: no SROIE file, company name or receipt text is committed; it never appears in the public demo; only document IDs and anonymous group numbers are committed. The fetch script takes key files only, not images.
+- **Official source:** https://rrc.cvc.uab.es/?ch=13. Its download section requires a portal account, and the terms inside it were never read. Official access is unavailable to this project, as confirmed by the project owner on 2026-11-07.
+- **Community mirror:** `zzzDavid/ICDAR-2019-SROIE`. Its MIT licence covers the repository's code and cannot grant rights to the receipts. Its dataset terms are unverified.
+- **What was removed on 2026-11-07:** the 626 label files fetched from that mirror (local only, never committed), the fetch script, the split script, and `evals/splits/sroie/vendor_groups.json`, which held only document IDs and anonymous group numbers. Removal was a normal commit; earlier commits still contain the vendor-group file, which never held a company name or receipt text.
+- **What remains:** the adapter `evals/datasets/sroie.py` and its tests on fictional fixtures. No images were ever downloaded and no SROIE result was produced.
 
 ## Not yet obtained
 
