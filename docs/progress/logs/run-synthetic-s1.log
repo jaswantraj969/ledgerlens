@@ -1,0 +1,6 @@
+START 2026-11-07T06:55:07Z timeout=3000s stall=600s cmd: backend/.venv/Scripts/python.exe -m evals.runners.run_synthetic
+classic: 40 documents
+modern: 40 documents
+receipt: 40 documents
+statement: 40 documents
+ledger: 40 documents

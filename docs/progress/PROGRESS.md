@@ -1,5 +1,9 @@
 # Progress
 
+## Commit hooks
+
+`--no-verify` was never used: no command in the working sessions passed it. Git does not record that flag, so this rests on the session record, not on history. The stronger fact is that no hook was installed until 2026-11-07, so every earlier commit ran with no hook at all, and two commits went in with ruff failing. History was not rewritten. Hooks are now installed, and CI and `scripts/ci_local.sh` run pre-commit on all files.
+
 ## Operational lessons
 
 | Failure | Cause | Permanent fix |

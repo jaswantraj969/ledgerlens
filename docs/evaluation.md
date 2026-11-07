@@ -24,11 +24,11 @@ CORD has no vendor identifier, so groups are derived and approximate a layout, n
 2. Grouping: k-means with k=12, `n_init=10`, `random_state=20261106`, fitted on **train only**.
 3. Validation and test documents join the nearest train centroid.
 
-k=12 was set in advance and is not tuned. Assignments are in `evals/splits/cord_v2/layout_groups.json`. SROIE vendor groups are the primary A12 check, and these groups are a secondary check.
+k=12 was set in advance and is not tuned. Assignments are in `evals/splits/cord_v2/layout_groups.json`. These groups are the only A12 check available, because SROIE is blocked.
 
 ## SROIE vendor groups
 
-SROIE is research-only with unverified terms; see `evals/datasets/LICENSES.md`. Vendor groups are the primary A12 check, because SROIE has a company label.
+**SROIE results are BLOCKED.** Official access is unavailable, and unofficial image mirrors are not used, so no real vendor-grouped split was possible. The material below stays for the case where official access appears. See `evals/datasets/LICENSES.md`.
 
 - Labels: 626 key files from a community mirror, verified against git blob hashes. The official set has 1000 receipts. This mirror lacks the labelled test portion, so the split covers 626 documents.
 - Grouping: company text is casefolded, punctuation and legal suffixes are removed, and near-identical names merge at a RapidFuzz ratio of at least 92.

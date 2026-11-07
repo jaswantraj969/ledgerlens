@@ -1,0 +1,3063 @@
+{
+  "system": "S1",
+  "dataset": "cord-v2",
+  "split": "test",
+  "statement": "No real vendor-grouped split was possible: CORD has no vendor label, and SROIE is blocked. These are derived layout groups, fitted on train word positions. Every group appears in train, validation and test, and S1 has no fitted parameters, so this shows variation across layouts, not generalisation to unseen vendors.",
+  "metrics_version": "1.1",
+  "groups": {
+    "0": {
+      "n": 8,
+      "metrics_version": "1.1",
+      "normalization": {
+        "version": "1.0",
+        "sha256": "aa5cf4994ce5fd1b12b2aaf843fa3568f15bffe515b9cefd4dc1bb200760dee1"
+      },
+      "fields": {
+        "total_amount": {
+          "n_documents": 8,
+          "n_present": 8,
+          "n_absent": 0,
+          "tp": 7,
+          "fp": 0,
+          "fn": 1,
+          "false_fills": 0,
+          "precision": 1.0,
+          "recall": 0.875,
+          "f1": 0.9333333333333333,
+          "exact_match": 0.875,
+          "false_fill_rate": null,
+          "precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "recall_ci95": [
+            0.625,
+            1.0
+          ],
+          "f1_ci95": [
+            0.7692307692307693,
+            1.0
+          ],
+          "exact_match_ci95": [
+            0.625,
+            1.0
+          ],
+          "false_fill_rate_ci95": null
+        },
+        "subtotal": {
+          "n_documents": 8,
+          "n_present": 3,
+          "n_absent": 5,
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "false_fills": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "exact_match": 1.0,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "recall_ci95": [
+            1.0,
+            1.0
+          ],
+          "f1_ci95": [
+            1.0,
+            1.0
+          ],
+          "exact_match_ci95": [
+            1.0,
+            1.0
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "tax_amount": {
+          "n_documents": 8,
+          "n_present": 2,
+          "n_absent": 6,
+          "tp": 1,
+          "fp": 0,
+          "fn": 1,
+          "false_fills": 0,
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.6666666666666666,
+          "exact_match": 0.5,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "recall_ci95": [
+            0.0,
+            1.0
+          ],
+          "f1_ci95": [
+            0.0,
+            1.0
+          ],
+          "exact_match_ci95": [
+            0.0,
+            1.0
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "gold_values_excluded_unparsable": {
+        "total_amount": 0,
+        "subtotal": 0,
+        "tax_amount": 0
+      },
+      "line_items_row_level": {
+        "n_documents": 8,
+        "n_documents_with_rows": 8,
+        "rows_correct": 18,
+        "rows_predicted": 25,
+        "rows_gold": 21,
+        "precision": 0.72,
+        "recall": 0.8571428571428571,
+        "f1": 0.782608695652174,
+        "documents_all_rows_correct": 0.625,
+        "precision_ci95": [
+          0.3153947368421053,
+          0.972972972972973
+        ],
+        "recall_ci95": [
+          0.46153846153846156,
+          1.0
+        ],
+        "f1_ci95": [
+          0.38452380952380955,
+          0.9666666666666667
+        ],
+        "documents_all_rows_correct_ci95": [
+          0.25,
+          0.875
+        ]
+      },
+      "line_items_set_based": {
+        "label": "set-based, ignores row alignment",
+        "fields": {
+          "description": {
+            "n_documents": 8,
+            "n_labelled": 8,
+            "tp": 18,
+            "fp": 7,
+            "fn": 3,
+            "precision": 0.72,
+            "recall": 0.8571428571428571,
+            "f1": 0.782608695652174,
+            "exact_match": 0.625,
+            "precision_ci95": [
+              0.3153947368421053,
+              0.972972972972973
+            ],
+            "recall_ci95": [
+              0.46153846153846156,
+              1.0
+            ],
+            "f1_ci95": [
+              0.38452380952380955,
+              0.9666666666666667
+            ],
+            "exact_match_ci95": [
+              0.25,
+              0.875
+            ]
+          },
+          "quantity": {
+            "n_documents": 8,
+            "n_labelled": 7,
+            "tp": 8,
+            "fp": 0,
+            "fn": 3,
+            "precision": 1.0,
+            "recall": 0.7272727272727273,
+            "f1": 0.8421052631578947,
+            "exact_match": 0.75,
+            "precision_ci95": [
+              1.0,
+              1.0
+            ],
+            "recall_ci95": [
+              0.36363636363636365,
+              1.0
+            ],
+            "f1_ci95": [
+              0.5333333333333333,
+              1.0
+            ],
+            "exact_match_ci95": [
+              0.5,
+              1.0
+            ]
+          },
+          "unit_price": {
+            "n_documents": 8,
+            "n_labelled": 2,
+            "tp": 1,
+            "fp": 0,
+            "fn": 2,
+            "precision": 1.0,
+            "recall": 0.3333333333333333,
+            "f1": 0.5,
+            "exact_match": 0.875,
+            "precision_ci95": [
+              1.0,
+              1.0
+            ],
+            "recall_ci95": [
+              0.0,
+              1.0
+            ],
+            "f1_ci95": [
+              0.0,
+              1.0
+            ],
+            "exact_match_ci95": [
+              0.625,
+              1.0
+            ]
+          },
+          "amount": {
+            "n_documents": 8,
+            "n_labelled": 8,
+            "tp": 19,
+            "fp": 6,
+            "fn": 2,
+            "precision": 0.76,
+            "recall": 0.9047619047619048,
+            "f1": 0.8260869565217391,
+            "exact_match": 0.75,
+            "precision_ci95": [
+              0.375,
+              1.0
+            ],
+            "recall_ci95": [
+              0.5714285714285714,
+              1.0
+            ],
+            "f1_ci95": [
+              0.47058823529411764,
+              1.0
+            ],
+            "exact_match_ci95": [
+              0.375,
+              1.0
+            ]
+          }
+        }
+      }
+    },
+    "1": {
+      "n": 16,
+      "metrics_version": "1.1",
+      "normalization": {
+        "version": "1.0",
+        "sha256": "aa5cf4994ce5fd1b12b2aaf843fa3568f15bffe515b9cefd4dc1bb200760dee1"
+      },
+      "fields": {
+        "total_amount": {
+          "n_documents": 16,
+          "n_present": 15,
+          "n_absent": 1,
+          "tp": 12,
+          "fp": 0,
+          "fn": 3,
+          "false_fills": 0,
+          "precision": 1.0,
+          "recall": 0.8,
+          "f1": 0.8888888888888888,
+          "exact_match": 0.8,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "recall_ci95": [
+            0.5714285714285714,
+            1.0
+          ],
+          "f1_ci95": [
+            0.7272727272727273,
+            1.0
+          ],
+          "exact_match_ci95": [
+            0.5714285714285714,
+            1.0
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "subtotal": {
+          "n_documents": 16,
+          "n_present": 11,
+          "n_absent": 5,
+          "tp": 7,
+          "fp": 0,
+          "fn": 4,
+          "false_fills": 0,
+          "precision": 1.0,
+          "recall": 0.6363636363636364,
+          "f1": 0.7777777777777778,
+          "exact_match": 0.6363636363636364,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "recall_ci95": [
+            0.3333333333333333,
+            0.9090909090909091
+          ],
+          "f1_ci95": [
+            0.5,
+            0.9523809523809523
+          ],
+          "exact_match_ci95": [
+            0.3333333333333333,
+            0.9090909090909091
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "tax_amount": {
+          "n_documents": 16,
+          "n_present": 9,
+          "n_absent": 7,
+          "tp": 5,
+          "fp": 3,
+          "fn": 4,
+          "false_fills": 0,
+          "precision": 0.625,
+          "recall": 0.5555555555555556,
+          "f1": 0.5882352941176471,
+          "exact_match": 0.5555555555555556,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            0.25,
+            1.0
+          ],
+          "recall_ci95": [
+            0.2,
+            0.875
+          ],
+          "f1_ci95": [
+            0.2222222222222222,
+            0.8888888888888888
+          ],
+          "exact_match_ci95": [
+            0.2,
+            0.875
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "gold_values_excluded_unparsable": {
+        "total_amount": 0,
+        "subtotal": 0,
+        "tax_amount": 0
+      },
+      "line_items_row_level": {
+        "n_documents": 16,
+        "n_documents_with_rows": 16,
+        "rows_correct": 14,
+        "rows_predicted": 56,
+        "rows_gold": 55,
+        "precision": 0.25,
+        "recall": 0.2545454545454545,
+        "f1": 0.25225225225225223,
+        "documents_all_rows_correct": 0.1875,
+        "precision_ci95": [
+          0.07998412698412699,
+          0.4773200757575755
+        ],
+        "recall_ci95": [
+          0.07809495192307693,
+          0.5002450980392144
+        ],
+        "f1_ci95": [
+          0.08107018308631213,
+          0.4858016443987662
+        ],
+        "documents_all_rows_correct_ci95": [
+          0.0,
+          0.375
+        ]
+      },
+      "line_items_set_based": {
+        "label": "set-based, ignores row alignment",
+        "fields": {
+          "description": {
+            "n_documents": 16,
+            "n_labelled": 16,
+            "tp": 27,
+            "fp": 29,
+            "fn": 28,
+            "precision": 0.48214285714285715,
+            "recall": 0.4909090909090909,
+            "f1": 0.4864864864864865,
+            "exact_match": 0.1875,
+            "precision_ci95": [
+              0.275,
+              0.6575432588320115
+            ],
+            "recall_ci95": [
+              0.2777777777777778,
+              0.65
+            ],
+            "f1_ci95": [
+              0.2822941176470588,
+              0.641228575543713
+            ],
+            "exact_match_ci95": [
+              0.0,
+              0.375
+            ]
+          },
+          "quantity": {
+            "n_documents": 16,
+            "n_labelled": 13,
+            "tp": 30,
+            "fp": 0,
+            "fn": 21,
+            "precision": 1.0,
+            "recall": 0.5882352941176471,
+            "f1": 0.7407407407407407,
+            "exact_match": 0.3125,
+            "precision_ci95": [
+              1.0,
+              1.0
+            ],
+            "recall_ci95": [
+              0.309478021978022,
+              0.7464788732394366
+            ],
+            "f1_ci95": [
+              0.47267379679144383,
+              0.8548387096774194
+            ],
+            "exact_match_ci95": [
+              0.125,
+              0.5625
+            ]
+          },
+          "unit_price": {
+            "n_documents": 16,
+            "n_labelled": 5,
+            "tp": 0,
+            "fp": 0,
+            "fn": 11,
+            "precision": null,
+            "recall": 0.0,
+            "f1": 0.0,
+            "exact_match": 0.6875,
+            "precision_ci95": null,
+            "recall_ci95": [
+              0.0,
+              0.0
+            ],
+            "f1_ci95": [
+              0.0,
+              0.0
+            ],
+            "exact_match_ci95": [
+              0.4375,
+              0.875
+            ]
+          },
+          "amount": {
+            "n_documents": 16,
+            "n_labelled": 16,
+            "tp": 42,
+            "fp": 14,
+            "fn": 13,
+            "precision": 0.75,
+            "recall": 0.7636363636363637,
+            "f1": 0.7567567567567568,
+            "exact_match": 0.3125,
+            "precision_ci95": [
+              0.64,
+              0.8620689655172413
+            ],
+            "recall_ci95": [
+              0.6078431372549019,
+              0.8928571428571429
+            ],
+            "f1_ci95": [
+              0.6428571428571429,
+              0.8468468468468469
+            ],
+            "exact_match_ci95": [
+              0.125,
+              0.5625
+            ]
+          }
+        }
+      }
+    },
+    "2": {
+      "n": 6,
+      "metrics_version": "1.1",
+      "normalization": {
+        "version": "1.0",
+        "sha256": "aa5cf4994ce5fd1b12b2aaf843fa3568f15bffe515b9cefd4dc1bb200760dee1"
+      },
+      "fields": {
+        "total_amount": {
+          "n_documents": 6,
+          "n_present": 5,
+          "n_absent": 1,
+          "tp": 2,
+          "fp": 1,
+          "fn": 3,
+          "false_fills": 0,
+          "precision": 0.6666666666666666,
+          "recall": 0.4,
+          "f1": 0.5,
+          "exact_match": 0.4,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            0.0,
+            1.0
+          ],
+          "recall_ci95": [
+            0.0,
+            0.8333333333333334
+          ],
+          "f1_ci95": [
+            0.0,
+            0.8888888888888888
+          ],
+          "exact_match_ci95": [
+            0.0,
+            0.8333333333333334
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "subtotal": {
+          "n_documents": 6,
+          "n_present": 3,
+          "n_absent": 3,
+          "tp": 3,
+          "fp": 2,
+          "fn": 0,
+          "false_fills": 2,
+          "precision": 0.6,
+          "recall": 1.0,
+          "f1": 0.75,
+          "exact_match": 1.0,
+          "false_fill_rate": 0.6666666666666666,
+          "precision_ci95": [
+            0.16666666666666666,
+            1.0
+          ],
+          "recall_ci95": [
+            1.0,
+            1.0
+          ],
+          "f1_ci95": [
+            0.2857142857142857,
+            1.0
+          ],
+          "exact_match_ci95": [
+            1.0,
+            1.0
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            1.0
+          ]
+        },
+        "tax_amount": {
+          "n_documents": 6,
+          "n_present": 1,
+          "n_absent": 5,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "false_fills": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "exact_match": 1.0,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "recall_ci95": [
+            1.0,
+            1.0
+          ],
+          "f1_ci95": [
+            1.0,
+            1.0
+          ],
+          "exact_match_ci95": [
+            1.0,
+            1.0
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "gold_values_excluded_unparsable": {
+        "total_amount": 0,
+        "subtotal": 0,
+        "tax_amount": 0
+      },
+      "line_items_row_level": {
+        "n_documents": 6,
+        "n_documents_with_rows": 6,
+        "rows_correct": 3,
+        "rows_predicted": 6,
+        "rows_gold": 11,
+        "precision": 0.5,
+        "recall": 0.2727272727272727,
+        "f1": 0.35294117647058826,
+        "documents_all_rows_correct": 0.16666666666666666,
+        "precision_ci95": [
+          0.0,
+          0.9
+        ],
+        "recall_ci95": [
+          0.0,
+          0.6923076923076923
+        ],
+        "f1_ci95": [
+          0.0,
+          0.7508152173912999
+        ],
+        "documents_all_rows_correct_ci95": [
+          0.0,
+          0.5
+        ]
+      },
+      "line_items_set_based": {
+        "label": "set-based, ignores row alignment",
+        "fields": {
+          "description": {
+            "n_documents": 6,
+            "n_labelled": 6,
+            "tp": 4,
+            "fp": 2,
+            "fn": 7,
+            "precision": 0.6666666666666666,
+            "recall": 0.36363636363636365,
+            "f1": 0.47058823529411764,
+            "exact_match": 0.3333333333333333,
+            "precision_ci95": [
+              0.0,
+              1.0
+            ],
+            "recall_ci95": [
+              0.0,
+              0.8
+            ],
+            "f1_ci95": [
+              0.0,
+              0.8695652173913043
+            ],
+            "exact_match_ci95": [
+              0.0,
+              0.6666666666666666
+            ]
+          },
+          "quantity": {
+            "n_documents": 6,
+            "n_labelled": 5,
+            "tp": 4,
+            "fp": 1,
+            "fn": 6,
+            "precision": 0.8,
+            "recall": 0.4,
+            "f1": 0.5333333333333333,
+            "exact_match": 0.3333333333333333,
+            "precision_ci95": [
+              0.0,
+              1.0
+            ],
+            "recall_ci95": [
+              0.0,
+              0.9
+            ],
+            "f1_ci95": [
+              0.0,
+              0.8888888888888888
+            ],
+            "exact_match_ci95": [
+              0.0,
+              0.6666666666666666
+            ]
+          },
+          "unit_price": {
+            "n_documents": 6,
+            "n_labelled": 5,
+            "tp": 0,
+            "fp": 0,
+            "fn": 8,
+            "precision": null,
+            "recall": 0.0,
+            "f1": 0.0,
+            "exact_match": 0.16666666666666666,
+            "precision_ci95": null,
+            "recall_ci95": [
+              0.0,
+              0.0
+            ],
+            "f1_ci95": [
+              0.0,
+              0.0
+            ],
+            "exact_match_ci95": [
+              0.0,
+              0.5
+            ]
+          },
+          "amount": {
+            "n_documents": 6,
+            "n_labelled": 5,
+            "tp": 6,
+            "fp": 0,
+            "fn": 2,
+            "precision": 1.0,
+            "recall": 0.75,
+            "f1": 0.8571428571428571,
+            "exact_match": 0.6666666666666666,
+            "precision_ci95": [
+              1.0,
+              1.0
+            ],
+            "recall_ci95": [
+              0.375,
+              1.0
+            ],
+            "f1_ci95": [
+              0.5454545454545454,
+              1.0
+            ],
+            "exact_match_ci95": [
+              0.3333333333333333,
+              1.0
+            ]
+          }
+        }
+      }
+    },
+    "3": {
+      "n": 9,
+      "metrics_version": "1.1",
+      "normalization": {
+        "version": "1.0",
+        "sha256": "aa5cf4994ce5fd1b12b2aaf843fa3568f15bffe515b9cefd4dc1bb200760dee1"
+      },
+      "fields": {
+        "total_amount": {
+          "n_documents": 9,
+          "n_present": 9,
+          "n_absent": 0,
+          "tp": 8,
+          "fp": 1,
+          "fn": 1,
+          "false_fills": 0,
+          "precision": 0.8888888888888888,
+          "recall": 0.8888888888888888,
+          "f1": 0.8888888888888888,
+          "exact_match": 0.8888888888888888,
+          "false_fill_rate": null,
+          "precision_ci95": [
+            0.6666666666666666,
+            1.0
+          ],
+          "recall_ci95": [
+            0.6666666666666666,
+            1.0
+          ],
+          "f1_ci95": [
+            0.6666666666666666,
+            1.0
+          ],
+          "exact_match_ci95": [
+            0.6666666666666666,
+            1.0
+          ],
+          "false_fill_rate_ci95": null
+        },
+        "subtotal": {
+          "n_documents": 9,
+          "n_present": 7,
+          "n_absent": 2,
+          "tp": 6,
+          "fp": 0,
+          "fn": 1,
+          "false_fills": 0,
+          "precision": 1.0,
+          "recall": 0.8571428571428571,
+          "f1": 0.9230769230769231,
+          "exact_match": 0.8571428571428571,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "recall_ci95": [
+            0.571031746031746,
+            1.0
+          ],
+          "f1_ci95": [
+            0.726948051948052,
+            1.0
+          ],
+          "exact_match_ci95": [
+            0.571031746031746,
+            1.0
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "tax_amount": {
+          "n_documents": 9,
+          "n_present": 4,
+          "n_absent": 5,
+          "tp": 4,
+          "fp": 0,
+          "fn": 0,
+          "false_fills": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "exact_match": 1.0,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "recall_ci95": [
+            1.0,
+            1.0
+          ],
+          "f1_ci95": [
+            1.0,
+            1.0
+          ],
+          "exact_match_ci95": [
+            1.0,
+            1.0
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "gold_values_excluded_unparsable": {
+        "total_amount": 0,
+        "subtotal": 0,
+        "tax_amount": 0
+      },
+      "line_items_row_level": {
+        "n_documents": 9,
+        "n_documents_with_rows": 9,
+        "rows_correct": 17,
+        "rows_predicted": 23,
+        "rows_gold": 25,
+        "precision": 0.7391304347826086,
+        "recall": 0.68,
+        "f1": 0.7083333333333334,
+        "documents_all_rows_correct": 0.6666666666666666,
+        "precision_ci95": [
+          0.36,
+          1.0
+        ],
+        "recall_ci95": [
+          0.3157894736842105,
+          1.0
+        ],
+        "f1_ci95": [
+          0.32653061224489793,
+          1.0
+        ],
+        "documents_all_rows_correct_ci95": [
+          0.3333333333333333,
+          1.0
+        ]
+      },
+      "line_items_set_based": {
+        "label": "set-based, ignores row alignment",
+        "fields": {
+          "description": {
+            "n_documents": 9,
+            "n_labelled": 9,
+            "tp": 17,
+            "fp": 6,
+            "fn": 8,
+            "precision": 0.7391304347826086,
+            "recall": 0.68,
+            "f1": 0.7083333333333334,
+            "exact_match": 0.6666666666666666,
+            "precision_ci95": [
+              0.36,
+              1.0
+            ],
+            "recall_ci95": [
+              0.3157894736842105,
+              1.0
+            ],
+            "f1_ci95": [
+              0.32653061224489793,
+              1.0
+            ],
+            "exact_match_ci95": [
+              0.3333333333333333,
+              1.0
+            ]
+          },
+          "quantity": {
+            "n_documents": 9,
+            "n_labelled": 8,
+            "tp": 16,
+            "fp": 0,
+            "fn": 7,
+            "precision": 1.0,
+            "recall": 0.6956521739130435,
+            "f1": 0.8205128205128205,
+            "exact_match": 0.6666666666666666,
+            "precision_ci95": [
+              1.0,
+              1.0
+            ],
+            "recall_ci95": [
+              0.318122009569378,
+              1.0
+            ],
+            "f1_ci95": [
+              0.4826896551724138,
+              1.0
+            ],
+            "exact_match_ci95": [
+              0.3333333333333333,
+              1.0
+            ]
+          },
+          "unit_price": {
+            "n_documents": 9,
+            "n_labelled": 2,
+            "tp": 0,
+            "fp": 0,
+            "fn": 5,
+            "precision": null,
+            "recall": 0.0,
+            "f1": 0.0,
+            "exact_match": 0.7777777777777778,
+            "precision_ci95": null,
+            "recall_ci95": [
+              0.0,
+              0.0
+            ],
+            "f1_ci95": [
+              0.0,
+              0.0
+            ],
+            "exact_match_ci95": [
+              0.4444444444444444,
+              1.0
+            ]
+          },
+          "amount": {
+            "n_documents": 9,
+            "n_labelled": 9,
+            "tp": 22,
+            "fp": 1,
+            "fn": 3,
+            "precision": 0.9565217391304348,
+            "recall": 0.88,
+            "f1": 0.9166666666666666,
+            "exact_match": 0.6666666666666666,
+            "precision_ci95": [
+              0.8636363636363636,
+              1.0
+            ],
+            "recall_ci95": [
+              0.6666666666666666,
+              1.0
+            ],
+            "f1_ci95": [
+              0.7824879227053141,
+              1.0
+            ],
+            "exact_match_ci95": [
+              0.3333333333333333,
+              1.0
+            ]
+          }
+        }
+      }
+    },
+    "4": {
+      "n": 9,
+      "metrics_version": "1.1",
+      "normalization": {
+        "version": "1.0",
+        "sha256": "aa5cf4994ce5fd1b12b2aaf843fa3568f15bffe515b9cefd4dc1bb200760dee1"
+      },
+      "fields": {
+        "total_amount": {
+          "n_documents": 9,
+          "n_present": 9,
+          "n_absent": 0,
+          "tp": 8,
+          "fp": 0,
+          "fn": 1,
+          "false_fills": 0,
+          "precision": 1.0,
+          "recall": 0.8888888888888888,
+          "f1": 0.9411764705882353,
+          "exact_match": 0.8888888888888888,
+          "false_fill_rate": null,
+          "precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "recall_ci95": [
+            0.6666666666666666,
+            1.0
+          ],
+          "f1_ci95": [
+            0.8,
+            1.0
+          ],
+          "exact_match_ci95": [
+            0.6666666666666666,
+            1.0
+          ],
+          "false_fill_rate_ci95": null
+        },
+        "subtotal": {
+          "n_documents": 9,
+          "n_present": 7,
+          "n_absent": 2,
+          "tp": 4,
+          "fp": 0,
+          "fn": 3,
+          "false_fills": 0,
+          "precision": 1.0,
+          "recall": 0.5714285714285714,
+          "f1": 0.7272727272727273,
+          "exact_match": 0.5714285714285714,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "recall_ci95": [
+            0.2,
+            1.0
+          ],
+          "f1_ci95": [
+            0.3333333333333333,
+            1.0
+          ],
+          "exact_match_ci95": [
+            0.2,
+            1.0
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "tax_amount": {
+          "n_documents": 9,
+          "n_present": 5,
+          "n_absent": 4,
+          "tp": 5,
+          "fp": 0,
+          "fn": 0,
+          "false_fills": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "exact_match": 1.0,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "recall_ci95": [
+            1.0,
+            1.0
+          ],
+          "f1_ci95": [
+            1.0,
+            1.0
+          ],
+          "exact_match_ci95": [
+            1.0,
+            1.0
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "gold_values_excluded_unparsable": {
+        "total_amount": 0,
+        "subtotal": 0,
+        "tax_amount": 0
+      },
+      "line_items_row_level": {
+        "n_documents": 9,
+        "n_documents_with_rows": 9,
+        "rows_correct": 7,
+        "rows_predicted": 27,
+        "rows_gold": 22,
+        "precision": 0.25925925925925924,
+        "recall": 0.3181818181818182,
+        "f1": 0.2857142857142857,
+        "documents_all_rows_correct": 0.0,
+        "precision_ci95": [
+          0.0,
+          0.42857142857142855
+        ],
+        "recall_ci95": [
+          0.0,
+          0.6666666666666666
+        ],
+        "f1_ci95": [
+          0.0,
+          0.5
+        ],
+        "documents_all_rows_correct_ci95": [
+          0.0,
+          0.0
+        ]
+      },
+      "line_items_set_based": {
+        "label": "set-based, ignores row alignment",
+        "fields": {
+          "description": {
+            "n_documents": 9,
+            "n_labelled": 9,
+            "tp": 12,
+            "fp": 15,
+            "fn": 10,
+            "precision": 0.4444444444444444,
+            "recall": 0.5454545454545454,
+            "f1": 0.4897959183673469,
+            "exact_match": 0.2222222222222222,
+            "precision_ci95": [
+              0.32,
+              0.5789473684210527
+            ],
+            "recall_ci95": [
+              0.260829307568438,
+              0.9
+            ],
+            "f1_ci95": [
+              0.2916477272727273,
+              0.6538461538461539
+            ],
+            "exact_match_ci95": [
+              0.0,
+              0.5555555555555556
+            ]
+          },
+          "quantity": {
+            "n_documents": 9,
+            "n_labelled": 9,
+            "tp": 9,
+            "fp": 0,
+            "fn": 13,
+            "precision": 1.0,
+            "recall": 0.4090909090909091,
+            "f1": 0.5806451612903226,
+            "exact_match": 0.4444444444444444,
+            "precision_ci95": [
+              1.0,
+              1.0
+            ],
+            "recall_ci95": [
+              0.08695652173913043,
+              0.8
+            ],
+            "f1_ci95": [
+              0.16,
+              0.8888888888888888
+            ],
+            "exact_match_ci95": [
+              0.1111111111111111,
+              0.7777777777777778
+            ]
+          },
+          "unit_price": {
+            "n_documents": 9,
+            "n_labelled": 3,
+            "tp": 2,
+            "fp": 0,
+            "fn": 4,
+            "precision": 1.0,
+            "recall": 0.3333333333333333,
+            "f1": 0.5,
+            "exact_match": 0.7777777777777778,
+            "precision_ci95": [
+              1.0,
+              1.0
+            ],
+            "recall_ci95": [
+              0.0,
+              1.0
+            ],
+            "f1_ci95": [
+              0.0,
+              1.0
+            ],
+            "exact_match_ci95": [
+              0.4444444444444444,
+              1.0
+            ]
+          },
+          "amount": {
+            "n_documents": 9,
+            "n_labelled": 9,
+            "tp": 17,
+            "fp": 10,
+            "fn": 5,
+            "precision": 0.6296296296296297,
+            "recall": 0.7727272727272727,
+            "f1": 0.6938775510204082,
+            "exact_match": 0.3333333333333333,
+            "precision_ci95": [
+              0.5,
+              0.8666666666666667
+            ],
+            "recall_ci95": [
+              0.5,
+              1.0
+            ],
+            "f1_ci95": [
+              0.5580749354005168,
+              0.8148526077097503
+            ],
+            "exact_match_ci95": [
+              0.10833333333333349,
+              0.6666666666666666
+            ]
+          }
+        }
+      }
+    },
+    "5": {
+      "n": 4,
+      "metrics_version": "1.1",
+      "normalization": {
+        "version": "1.0",
+        "sha256": "aa5cf4994ce5fd1b12b2aaf843fa3568f15bffe515b9cefd4dc1bb200760dee1"
+      },
+      "fields": {
+        "total_amount": {
+          "n_documents": 4,
+          "n_present": 3,
+          "n_absent": 1,
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "false_fills": 0,
+          "precision": 1.0,
+          "recall": 0.6666666666666666,
+          "f1": 0.8,
+          "exact_match": 0.6666666666666666,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "recall_ci95": [
+            0.0,
+            1.0
+          ],
+          "f1_ci95": [
+            0.0,
+            1.0
+          ],
+          "exact_match_ci95": [
+            0.0,
+            1.0
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "subtotal": {
+          "n_documents": 4,
+          "n_present": 3,
+          "n_absent": 1,
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "false_fills": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "exact_match": 1.0,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "recall_ci95": [
+            1.0,
+            1.0
+          ],
+          "f1_ci95": [
+            1.0,
+            1.0
+          ],
+          "exact_match_ci95": [
+            1.0,
+            1.0
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "tax_amount": {
+          "n_documents": 4,
+          "n_present": 2,
+          "n_absent": 2,
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "false_fills": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "exact_match": 1.0,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "recall_ci95": [
+            1.0,
+            1.0
+          ],
+          "f1_ci95": [
+            1.0,
+            1.0
+          ],
+          "exact_match_ci95": [
+            1.0,
+            1.0
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "gold_values_excluded_unparsable": {
+        "total_amount": 0,
+        "subtotal": 0,
+        "tax_amount": 0
+      },
+      "line_items_row_level": {
+        "n_documents": 4,
+        "n_documents_with_rows": 4,
+        "rows_correct": 6,
+        "rows_predicted": 26,
+        "rows_gold": 21,
+        "precision": 0.23076923076923078,
+        "recall": 0.2857142857142857,
+        "f1": 0.2553191489361702,
+        "documents_all_rows_correct": 0.25,
+        "precision_ci95": [
+          0.04878048780487805,
+          0.8
+        ],
+        "recall_ci95": [
+          0.07142857142857142,
+          0.8
+        ],
+        "f1_ci95": [
+          0.057971014492753624,
+          0.8
+        ],
+        "documents_all_rows_correct_ci95": [
+          0.0,
+          0.75
+        ]
+      },
+      "line_items_set_based": {
+        "label": "set-based, ignores row alignment",
+        "fields": {
+          "description": {
+            "n_documents": 4,
+            "n_labelled": 4,
+            "tp": 13,
+            "fp": 13,
+            "fn": 8,
+            "precision": 0.5,
+            "recall": 0.6190476190476191,
+            "f1": 0.5531914893617021,
+            "exact_match": 0.5,
+            "precision_ci95": [
+              0.38095238095238093,
+              1.0
+            ],
+            "recall_ci95": [
+              0.4444444444444444,
+              1.0
+            ],
+            "f1_ci95": [
+              0.4050632911392405,
+              1.0
+            ],
+            "exact_match_ci95": [
+              0.0,
+              1.0
+            ]
+          },
+          "quantity": {
+            "n_documents": 4,
+            "n_labelled": 4,
+            "tp": 7,
+            "fp": 0,
+            "fn": 11,
+            "precision": 1.0,
+            "recall": 0.3888888888888889,
+            "f1": 0.56,
+            "exact_match": 0.25,
+            "precision_ci95": [
+              1.0,
+              1.0
+            ],
+            "recall_ci95": [
+              0.0,
+              0.6923076923076923
+            ],
+            "f1_ci95": [
+              0.0,
+              0.8181818181818182
+            ],
+            "exact_match_ci95": [
+              0.0,
+              0.75
+            ]
+          },
+          "unit_price": {
+            "n_documents": 4,
+            "n_labelled": 3,
+            "tp": 0,
+            "fp": 0,
+            "fn": 11,
+            "precision": null,
+            "recall": 0.0,
+            "f1": 0.0,
+            "exact_match": 0.25,
+            "precision_ci95": null,
+            "recall_ci95": [
+              0.0,
+              0.0
+            ],
+            "f1_ci95": [
+              0.0,
+              0.0
+            ],
+            "exact_match_ci95": [
+              0.0,
+              0.75
+            ]
+          },
+          "amount": {
+            "n_documents": 4,
+            "n_labelled": 4,
+            "tp": 16,
+            "fp": 10,
+            "fn": 3,
+            "precision": 0.6153846153846154,
+            "recall": 0.8421052631578947,
+            "f1": 0.7111111111111111,
+            "exact_match": 0.5,
+            "precision_ci95": [
+              0.36363636363636365,
+              1.0
+            ],
+            "recall_ci95": [
+              0.5714285714285714,
+              1.0
+            ],
+            "f1_ci95": [
+              0.4444444444444444,
+              1.0
+            ],
+            "exact_match_ci95": [
+              0.0,
+              1.0
+            ]
+          }
+        }
+      }
+    },
+    "6": {
+      "n": 13,
+      "metrics_version": "1.1",
+      "normalization": {
+        "version": "1.0",
+        "sha256": "aa5cf4994ce5fd1b12b2aaf843fa3568f15bffe515b9cefd4dc1bb200760dee1"
+      },
+      "fields": {
+        "total_amount": {
+          "n_documents": 13,
+          "n_present": 13,
+          "n_absent": 0,
+          "tp": 7,
+          "fp": 2,
+          "fn": 6,
+          "false_fills": 0,
+          "precision": 0.7777777777777778,
+          "recall": 0.5384615384615384,
+          "f1": 0.6363636363636364,
+          "exact_match": 0.5384615384615384,
+          "false_fill_rate": null,
+          "precision_ci95": [
+            0.4444444444444444,
+            1.0
+          ],
+          "recall_ci95": [
+            0.3076923076923077,
+            0.7692307692307693
+          ],
+          "f1_ci95": [
+            0.35294117647058826,
+            0.8695652173913043
+          ],
+          "exact_match_ci95": [
+            0.3076923076923077,
+            0.7692307692307693
+          ],
+          "false_fill_rate_ci95": null
+        },
+        "subtotal": {
+          "n_documents": 13,
+          "n_present": 10,
+          "n_absent": 3,
+          "tp": 7,
+          "fp": 0,
+          "fn": 3,
+          "false_fills": 0,
+          "precision": 1.0,
+          "recall": 0.7,
+          "f1": 0.8235294117647058,
+          "exact_match": 0.7,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "recall_ci95": [
+            0.375,
+            1.0
+          ],
+          "f1_ci95": [
+            0.5454545454545454,
+            1.0
+          ],
+          "exact_match_ci95": [
+            0.375,
+            1.0
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "tax_amount": {
+          "n_documents": 13,
+          "n_present": 7,
+          "n_absent": 6,
+          "tp": 5,
+          "fp": 0,
+          "fn": 2,
+          "false_fills": 0,
+          "precision": 1.0,
+          "recall": 0.7142857142857143,
+          "f1": 0.8333333333333334,
+          "exact_match": 0.7142857142857143,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "recall_ci95": [
+            0.3333333333333333,
+            1.0
+          ],
+          "f1_ci95": [
+            0.5,
+            1.0
+          ],
+          "exact_match_ci95": [
+            0.3333333333333333,
+            1.0
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "gold_values_excluded_unparsable": {
+        "total_amount": 0,
+        "subtotal": 0,
+        "tax_amount": 0
+      },
+      "line_items_row_level": {
+        "n_documents": 13,
+        "n_documents_with_rows": 13,
+        "rows_correct": 15,
+        "rows_predicted": 32,
+        "rows_gold": 34,
+        "precision": 0.46875,
+        "recall": 0.4411764705882353,
+        "f1": 0.45454545454545453,
+        "documents_all_rows_correct": 0.23076923076923078,
+        "precision_ci95": [
+          0.17130952380952383,
+          0.764754901960784
+        ],
+        "recall_ci95": [
+          0.15207326892109502,
+          0.7381912442396309
+        ],
+        "f1_ci95": [
+          0.16129032258064516,
+          0.7301587301587301
+        ],
+        "documents_all_rows_correct_ci95": [
+          0.0,
+          0.46153846153846156
+        ]
+      },
+      "line_items_set_based": {
+        "label": "set-based, ignores row alignment",
+        "fields": {
+          "description": {
+            "n_documents": 13,
+            "n_labelled": 13,
+            "tp": 19,
+            "fp": 13,
+            "fn": 15,
+            "precision": 0.59375,
+            "recall": 0.5588235294117647,
+            "f1": 0.5757575757575758,
+            "exact_match": 0.23076923076923078,
+            "precision_ci95": [
+              0.3333333333333333,
+              0.8261244377811092
+            ],
+            "recall_ci95": [
+              0.3157894736842105,
+              0.7804878048780488
+            ],
+            "f1_ci95": [
+              0.3333333333333333,
+              0.7710929432013769
+            ],
+            "exact_match_ci95": [
+              0.0,
+              0.46153846153846156
+            ]
+          },
+          "quantity": {
+            "n_documents": 13,
+            "n_labelled": 11,
+            "tp": 12,
+            "fp": 1,
+            "fn": 18,
+            "precision": 0.9230769230769231,
+            "recall": 0.4,
+            "f1": 0.5581395348837209,
+            "exact_match": 0.38461538461538464,
+            "precision_ci95": [
+              0.5714285714285714,
+              1.0
+            ],
+            "recall_ci95": [
+              0.08322368421052631,
+              0.7200555555555552
+            ],
+            "f1_ci95": [
+              0.14285714285714285,
+              0.8333333333333334
+            ],
+            "exact_match_ci95": [
+              0.15384615384615385,
+              0.6173076923076819
+            ]
+          },
+          "unit_price": {
+            "n_documents": 13,
+            "n_labelled": 2,
+            "tp": 0,
+            "fp": 0,
+            "fn": 3,
+            "precision": null,
+            "recall": 0.0,
+            "f1": 0.0,
+            "exact_match": 0.8461538461538461,
+            "precision_ci95": null,
+            "recall_ci95": [
+              0.0,
+              0.0
+            ],
+            "f1_ci95": [
+              0.0,
+              0.0
+            ],
+            "exact_match_ci95": [
+              0.6153846153846154,
+              1.0
+            ]
+          },
+          "amount": {
+            "n_documents": 13,
+            "n_labelled": 13,
+            "tp": 22,
+            "fp": 10,
+            "fn": 12,
+            "precision": 0.6875,
+            "recall": 0.6470588235294118,
+            "f1": 0.6666666666666666,
+            "exact_match": 0.38461538461538464,
+            "precision_ci95": [
+              0.43243243243243246,
+              0.95
+            ],
+            "recall_ci95": [
+              0.37492732558139535,
+              0.9090909090909091
+            ],
+            "f1_ci95": [
+              0.4166666666666667,
+              0.875
+            ],
+            "exact_match_ci95": [
+              0.15384615384615385,
+              0.6173076923076819
+            ]
+          }
+        }
+      }
+    },
+    "7": {
+      "n": 14,
+      "metrics_version": "1.1",
+      "normalization": {
+        "version": "1.0",
+        "sha256": "aa5cf4994ce5fd1b12b2aaf843fa3568f15bffe515b9cefd4dc1bb200760dee1"
+      },
+      "fields": {
+        "total_amount": {
+          "n_documents": 14,
+          "n_present": 13,
+          "n_absent": 1,
+          "tp": 9,
+          "fp": 4,
+          "fn": 4,
+          "false_fills": 1,
+          "precision": 0.6923076923076923,
+          "recall": 0.6923076923076923,
+          "f1": 0.6923076923076923,
+          "exact_match": 0.6923076923076923,
+          "false_fill_rate": 1.0,
+          "precision_ci95": [
+            0.42857142857142855,
+            0.9230769230769231
+          ],
+          "recall_ci95": [
+            0.42857142857142855,
+            0.9230769230769231
+          ],
+          "f1_ci95": [
+            0.44420289855072465,
+            0.9230769230769231
+          ],
+          "exact_match_ci95": [
+            0.42857142857142855,
+            0.9230769230769231
+          ],
+          "false_fill_rate_ci95": [
+            1.0,
+            1.0
+          ]
+        },
+        "subtotal": {
+          "n_documents": 14,
+          "n_present": 6,
+          "n_absent": 8,
+          "tp": 3,
+          "fp": 0,
+          "fn": 3,
+          "false_fills": 0,
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.6666666666666666,
+          "exact_match": 0.5,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "recall_ci95": [
+            0.0,
+            1.0
+          ],
+          "f1_ci95": [
+            0.0,
+            1.0
+          ],
+          "exact_match_ci95": [
+            0.0,
+            1.0
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "tax_amount": {
+          "n_documents": 14,
+          "n_present": 3,
+          "n_absent": 11,
+          "tp": 2,
+          "fp": 1,
+          "fn": 1,
+          "false_fills": 0,
+          "precision": 0.6666666666666666,
+          "recall": 0.6666666666666666,
+          "f1": 0.6666666666666666,
+          "exact_match": 0.6666666666666666,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            0.0,
+            1.0
+          ],
+          "recall_ci95": [
+            0.0,
+            1.0
+          ],
+          "f1_ci95": [
+            0.0,
+            1.0
+          ],
+          "exact_match_ci95": [
+            0.0,
+            1.0
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "gold_values_excluded_unparsable": {
+        "total_amount": 0,
+        "subtotal": 0,
+        "tax_amount": 0
+      },
+      "line_items_row_level": {
+        "n_documents": 14,
+        "n_documents_with_rows": 14,
+        "rows_correct": 2,
+        "rows_predicted": 23,
+        "rows_gold": 24,
+        "precision": 0.08695652173913043,
+        "recall": 0.08333333333333333,
+        "f1": 0.0851063829787234,
+        "documents_all_rows_correct": 0.0,
+        "precision_ci95": [
+          0.0,
+          0.1923387096774192
+        ],
+        "recall_ci95": [
+          0.0,
+          0.18518518518518517
+        ],
+        "f1_ci95": [
+          0.0,
+          0.18867924528301888
+        ],
+        "documents_all_rows_correct_ci95": [
+          0.0,
+          0.0
+        ]
+      },
+      "line_items_set_based": {
+        "label": "set-based, ignores row alignment",
+        "fields": {
+          "description": {
+            "n_documents": 14,
+            "n_labelled": 14,
+            "tp": 13,
+            "fp": 10,
+            "fn": 11,
+            "precision": 0.5652173913043478,
+            "recall": 0.5416666666666666,
+            "f1": 0.5531914893617021,
+            "exact_match": 0.35714285714285715,
+            "precision_ci95": [
+              0.3123798076923077,
+              0.7916666666666666
+            ],
+            "recall_ci95": [
+              0.2916666666666667,
+              0.75
+            ],
+            "f1_ci95": [
+              0.3076923076923077,
+              0.7600476190476187
+            ],
+            "exact_match_ci95": [
+              0.14285714285714285,
+              0.6428571428571429
+            ]
+          },
+          "quantity": {
+            "n_documents": 14,
+            "n_labelled": 13,
+            "tp": 7,
+            "fp": 2,
+            "fn": 15,
+            "precision": 0.7777777777777778,
+            "recall": 0.3181818181818182,
+            "f1": 0.45161290322580644,
+            "exact_match": 0.21428571428571427,
+            "precision_ci95": [
+              0.3333333333333333,
+              1.0
+            ],
+            "recall_ci95": [
+              0.058823529411764705,
+              0.5714285714285714
+            ],
+            "f1_ci95": [
+              0.1,
+              0.7027027027027027
+            ],
+            "exact_match_ci95": [
+              0.0,
+              0.42857142857142855
+            ]
+          },
+          "unit_price": {
+            "n_documents": 14,
+            "n_labelled": 5,
+            "tp": 0,
+            "fp": 0,
+            "fn": 10,
+            "precision": null,
+            "recall": 0.0,
+            "f1": 0.0,
+            "exact_match": 0.6428571428571429,
+            "precision_ci95": null,
+            "recall_ci95": [
+              0.0,
+              0.0
+            ],
+            "f1_ci95": [
+              0.0,
+              0.0
+            ],
+            "exact_match_ci95": [
+              0.35714285714285715,
+              0.8571428571428571
+            ]
+          },
+          "amount": {
+            "n_documents": 14,
+            "n_labelled": 14,
+            "tp": 19,
+            "fp": 4,
+            "fn": 5,
+            "precision": 0.8260869565217391,
+            "recall": 0.7916666666666666,
+            "f1": 0.8085106382978723,
+            "exact_match": 0.6428571428571429,
+            "precision_ci95": [
+              0.6086956521739131,
+              1.0
+            ],
+            "recall_ci95": [
+              0.5354793233082706,
+              1.0
+            ],
+            "f1_ci95": [
+              0.5789473684210527,
+              0.96
+            ],
+            "exact_match_ci95": [
+              0.35714285714285715,
+              0.8571428571428571
+            ]
+          }
+        }
+      }
+    },
+    "8": {
+      "n": 7,
+      "metrics_version": "1.1",
+      "normalization": {
+        "version": "1.0",
+        "sha256": "aa5cf4994ce5fd1b12b2aaf843fa3568f15bffe515b9cefd4dc1bb200760dee1"
+      },
+      "fields": {
+        "total_amount": {
+          "n_documents": 7,
+          "n_present": 7,
+          "n_absent": 0,
+          "tp": 4,
+          "fp": 0,
+          "fn": 3,
+          "false_fills": 0,
+          "precision": 1.0,
+          "recall": 0.5714285714285714,
+          "f1": 0.7272727272727273,
+          "exact_match": 0.5714285714285714,
+          "false_fill_rate": null,
+          "precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "recall_ci95": [
+            0.14285714285714285,
+            0.8571428571428571
+          ],
+          "f1_ci95": [
+            0.25,
+            0.9230769230769231
+          ],
+          "exact_match_ci95": [
+            0.14285714285714285,
+            0.8571428571428571
+          ],
+          "false_fill_rate_ci95": null
+        },
+        "subtotal": {
+          "n_documents": 7,
+          "n_present": 6,
+          "n_absent": 1,
+          "tp": 4,
+          "fp": 0,
+          "fn": 2,
+          "false_fills": 0,
+          "precision": 1.0,
+          "recall": 0.6666666666666666,
+          "f1": 0.8,
+          "exact_match": 0.6666666666666666,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "recall_ci95": [
+            0.25,
+            1.0
+          ],
+          "f1_ci95": [
+            0.4,
+            1.0
+          ],
+          "exact_match_ci95": [
+            0.25,
+            1.0
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "tax_amount": {
+          "n_documents": 7,
+          "n_present": 2,
+          "n_absent": 5,
+          "tp": 1,
+          "fp": 1,
+          "fn": 1,
+          "false_fills": 0,
+          "precision": 0.5,
+          "recall": 0.5,
+          "f1": 0.5,
+          "exact_match": 0.5,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            0.0,
+            1.0
+          ],
+          "recall_ci95": [
+            0.0,
+            1.0
+          ],
+          "f1_ci95": [
+            0.0,
+            1.0
+          ],
+          "exact_match_ci95": [
+            0.0,
+            1.0
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "gold_values_excluded_unparsable": {
+        "total_amount": 0,
+        "subtotal": 0,
+        "tax_amount": 0
+      },
+      "line_items_row_level": {
+        "n_documents": 7,
+        "n_documents_with_rows": 7,
+        "rows_correct": 1,
+        "rows_predicted": 4,
+        "rows_gold": 9,
+        "precision": 0.25,
+        "recall": 0.1111111111111111,
+        "f1": 0.15384615384615385,
+        "documents_all_rows_correct": 0.14285714285714285,
+        "precision_ci95": [
+          0.0,
+          1.0
+        ],
+        "recall_ci95": [
+          0.0,
+          0.375
+        ],
+        "f1_ci95": [
+          0.0,
+          0.5
+        ],
+        "documents_all_rows_correct_ci95": [
+          0.0,
+          0.42857142857142855
+        ]
+      },
+      "line_items_set_based": {
+        "label": "set-based, ignores row alignment",
+        "fields": {
+          "description": {
+            "n_documents": 7,
+            "n_labelled": 7,
+            "tp": 1,
+            "fp": 3,
+            "fn": 8,
+            "precision": 0.25,
+            "recall": 0.1111111111111111,
+            "f1": 0.15384615384615385,
+            "exact_match": 0.14285714285714285,
+            "precision_ci95": [
+              0.0,
+              1.0
+            ],
+            "recall_ci95": [
+              0.0,
+              0.375
+            ],
+            "f1_ci95": [
+              0.0,
+              0.5
+            ],
+            "exact_match_ci95": [
+              0.0,
+              0.42857142857142855
+            ]
+          },
+          "quantity": {
+            "n_documents": 7,
+            "n_labelled": 7,
+            "tp": 1,
+            "fp": 0,
+            "fn": 8,
+            "precision": 1.0,
+            "recall": 0.1111111111111111,
+            "f1": 0.2,
+            "exact_match": 0.14285714285714285,
+            "precision_ci95": [
+              1.0,
+              1.0
+            ],
+            "recall_ci95": [
+              0.0,
+              0.375
+            ],
+            "f1_ci95": [
+              0.0,
+              0.5454545454545454
+            ],
+            "exact_match_ci95": [
+              0.0,
+              0.42857142857142855
+            ]
+          },
+          "unit_price": {
+            "n_documents": 7,
+            "n_labelled": 5,
+            "tp": 0,
+            "fp": 0,
+            "fn": 7,
+            "precision": null,
+            "recall": 0.0,
+            "f1": 0.0,
+            "exact_match": 0.2857142857142857,
+            "precision_ci95": null,
+            "recall_ci95": [
+              0.0,
+              0.0
+            ],
+            "f1_ci95": [
+              0.0,
+              0.0
+            ],
+            "exact_match_ci95": [
+              0.0,
+              0.5714285714285714
+            ]
+          },
+          "amount": {
+            "n_documents": 7,
+            "n_labelled": 7,
+            "tp": 2,
+            "fp": 2,
+            "fn": 7,
+            "precision": 0.5,
+            "recall": 0.2222222222222222,
+            "f1": 0.3076923076923077,
+            "exact_match": 0.14285714285714285,
+            "precision_ci95": [
+              0.3333333333333333,
+              1.0
+            ],
+            "recall_ci95": [
+              0.0,
+              0.5714285714285714
+            ],
+            "f1_ci95": [
+              0.0,
+              0.5714285714285714
+            ],
+            "exact_match_ci95": [
+              0.0,
+              0.42857142857142855
+            ]
+          }
+        }
+      }
+    },
+    "9": {
+      "n": 3,
+      "metrics_version": "1.1",
+      "normalization": {
+        "version": "1.0",
+        "sha256": "aa5cf4994ce5fd1b12b2aaf843fa3568f15bffe515b9cefd4dc1bb200760dee1"
+      },
+      "fields": {
+        "total_amount": {
+          "n_documents": 3,
+          "n_present": 3,
+          "n_absent": 0,
+          "tp": 3,
+          "fp": 0,
+          "fn": 0,
+          "false_fills": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "exact_match": 1.0,
+          "false_fill_rate": null,
+          "precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "recall_ci95": [
+            1.0,
+            1.0
+          ],
+          "f1_ci95": [
+            1.0,
+            1.0
+          ],
+          "exact_match_ci95": [
+            1.0,
+            1.0
+          ],
+          "false_fill_rate_ci95": null
+        },
+        "subtotal": {
+          "n_documents": 3,
+          "n_present": 1,
+          "n_absent": 2,
+          "tp": 1,
+          "fp": 0,
+          "fn": 0,
+          "false_fills": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "exact_match": 1.0,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "recall_ci95": [
+            1.0,
+            1.0
+          ],
+          "f1_ci95": [
+            1.0,
+            1.0
+          ],
+          "exact_match_ci95": [
+            1.0,
+            1.0
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "tax_amount": {
+          "n_documents": 3,
+          "n_present": 1,
+          "n_absent": 2,
+          "tp": 0,
+          "fp": 1,
+          "fn": 1,
+          "false_fills": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "exact_match": 0.0,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            0.0,
+            0.0
+          ],
+          "recall_ci95": [
+            0.0,
+            0.0
+          ],
+          "f1_ci95": [
+            0.0,
+            0.0
+          ],
+          "exact_match_ci95": [
+            0.0,
+            0.0
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "gold_values_excluded_unparsable": {
+        "total_amount": 0,
+        "subtotal": 0,
+        "tax_amount": 0
+      },
+      "line_items_row_level": {
+        "n_documents": 3,
+        "n_documents_with_rows": 3,
+        "rows_correct": 4,
+        "rows_predicted": 10,
+        "rows_gold": 10,
+        "precision": 0.4,
+        "recall": 0.4,
+        "f1": 0.4,
+        "documents_all_rows_correct": 0.0,
+        "precision_ci95": [
+          0.0,
+          0.6666666666666666
+        ],
+        "recall_ci95": [
+          0.0,
+          0.6666666666666666
+        ],
+        "f1_ci95": [
+          0.0,
+          0.6666666666666666
+        ],
+        "documents_all_rows_correct_ci95": [
+          0.0,
+          0.0
+        ]
+      },
+      "line_items_set_based": {
+        "label": "set-based, ignores row alignment",
+        "fields": {
+          "description": {
+            "n_documents": 3,
+            "n_labelled": 3,
+            "tp": 8,
+            "fp": 2,
+            "fn": 2,
+            "precision": 0.8,
+            "recall": 0.8,
+            "f1": 0.8,
+            "exact_match": 0.3333333333333333,
+            "precision_ci95": [
+              0.5,
+              1.0
+            ],
+            "recall_ci95": [
+              0.6666666666666666,
+              1.0
+            ],
+            "f1_ci95": [
+              0.6666666666666666,
+              1.0
+            ],
+            "exact_match_ci95": [
+              0.0,
+              1.0
+            ]
+          },
+          "quantity": {
+            "n_documents": 3,
+            "n_labelled": 3,
+            "tp": 4,
+            "fp": 0,
+            "fn": 6,
+            "precision": 1.0,
+            "recall": 0.4,
+            "f1": 0.5714285714285714,
+            "exact_match": 0.0,
+            "precision_ci95": [
+              1.0,
+              1.0
+            ],
+            "recall_ci95": [
+              0.0,
+              0.6666666666666666
+            ],
+            "f1_ci95": [
+              0.0,
+              0.8
+            ],
+            "exact_match_ci95": [
+              0.0,
+              0.0
+            ]
+          },
+          "unit_price": {
+            "n_documents": 3,
+            "n_labelled": 0,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "exact_match": 1.0,
+            "precision_ci95": null,
+            "recall_ci95": null,
+            "f1_ci95": null,
+            "exact_match_ci95": [
+              1.0,
+              1.0
+            ]
+          },
+          "amount": {
+            "n_documents": 3,
+            "n_labelled": 3,
+            "tp": 9,
+            "fp": 1,
+            "fn": 1,
+            "precision": 0.9,
+            "recall": 0.9,
+            "f1": 0.9,
+            "exact_match": 0.3333333333333333,
+            "precision_ci95": [
+              0.5,
+              1.0
+            ],
+            "recall_ci95": [
+              0.8333333333333334,
+              1.0
+            ],
+            "f1_ci95": [
+              0.6666666666666666,
+              1.0
+            ],
+            "exact_match_ci95": [
+              0.0,
+              1.0
+            ]
+          }
+        }
+      }
+    },
+    "10": {
+      "n": 7,
+      "metrics_version": "1.1",
+      "normalization": {
+        "version": "1.0",
+        "sha256": "aa5cf4994ce5fd1b12b2aaf843fa3568f15bffe515b9cefd4dc1bb200760dee1"
+      },
+      "fields": {
+        "total_amount": {
+          "n_documents": 7,
+          "n_present": 6,
+          "n_absent": 1,
+          "tp": 3,
+          "fp": 2,
+          "fn": 3,
+          "false_fills": 0,
+          "precision": 0.6,
+          "recall": 0.5,
+          "f1": 0.5454545454545454,
+          "exact_match": 0.5,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            0.16666666666666666,
+            1.0
+          ],
+          "recall_ci95": [
+            0.14285714285714285,
+            0.8571428571428571
+          ],
+          "f1_ci95": [
+            0.16666666666666666,
+            0.9230769230769231
+          ],
+          "exact_match_ci95": [
+            0.14285714285714285,
+            0.8571428571428571
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "subtotal": {
+          "n_documents": 7,
+          "n_present": 5,
+          "n_absent": 2,
+          "tp": 2,
+          "fp": 0,
+          "fn": 3,
+          "false_fills": 0,
+          "precision": 1.0,
+          "recall": 0.4,
+          "f1": 0.5714285714285714,
+          "exact_match": 0.4,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "recall_ci95": [
+            0.0,
+            0.8333333333333334
+          ],
+          "f1_ci95": [
+            0.0,
+            0.9090909090909091
+          ],
+          "exact_match_ci95": [
+            0.0,
+            0.8333333333333334
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "tax_amount": {
+          "n_documents": 7,
+          "n_present": 3,
+          "n_absent": 4,
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "false_fills": 0,
+          "precision": 1.0,
+          "recall": 0.6666666666666666,
+          "f1": 0.8,
+          "exact_match": 0.6666666666666666,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "recall_ci95": [
+            0.0,
+            1.0
+          ],
+          "f1_ci95": [
+            0.0,
+            1.0
+          ],
+          "exact_match_ci95": [
+            0.0,
+            1.0
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "gold_values_excluded_unparsable": {
+        "total_amount": 0,
+        "subtotal": 0,
+        "tax_amount": 0
+      },
+      "line_items_row_level": {
+        "n_documents": 7,
+        "n_documents_with_rows": 7,
+        "rows_correct": 3,
+        "rows_predicted": 16,
+        "rows_gold": 12,
+        "precision": 0.1875,
+        "recall": 0.25,
+        "f1": 0.21428571428571427,
+        "documents_all_rows_correct": 0.14285714285714285,
+        "precision_ci95": [
+          0.035683497536945816,
+          0.5555555555555556
+        ],
+        "recall_ci95": [
+          0.0625,
+          0.5
+        ],
+        "f1_ci95": [
+          0.04542929292929293,
+          0.5005434782608666
+        ],
+        "documents_all_rows_correct_ci95": [
+          0.0,
+          0.42857142857142855
+        ]
+      },
+      "line_items_set_based": {
+        "label": "set-based, ignores row alignment",
+        "fields": {
+          "description": {
+            "n_documents": 7,
+            "n_labelled": 7,
+            "tp": 8,
+            "fp": 8,
+            "fn": 4,
+            "precision": 0.5,
+            "recall": 0.6666666666666666,
+            "f1": 0.5714285714285714,
+            "exact_match": 0.2857142857142857,
+            "precision_ci95": [
+              0.2727272727272727,
+              0.7777777777777778
+            ],
+            "recall_ci95": [
+              0.3333333333333333,
+              0.9333333333333333
+            ],
+            "f1_ci95": [
+              0.30303030303030304,
+              0.7857142857142857
+            ],
+            "exact_match_ci95": [
+              0.0,
+              0.5714285714285714
+            ]
+          },
+          "quantity": {
+            "n_documents": 7,
+            "n_labelled": 4,
+            "tp": 1,
+            "fp": 1,
+            "fn": 7,
+            "precision": 0.5,
+            "recall": 0.125,
+            "f1": 0.2,
+            "exact_match": 0.2857142857142857,
+            "precision_ci95": [
+              0.0,
+              1.0
+            ],
+            "recall_ci95": [
+              0.0,
+              0.4
+            ],
+            "f1_ci95": [
+              0.0,
+              0.5
+            ],
+            "exact_match_ci95": [
+              0.0,
+              0.5714285714285714
+            ]
+          },
+          "unit_price": {
+            "n_documents": 7,
+            "n_labelled": 0,
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "exact_match": 1.0,
+            "precision_ci95": null,
+            "recall_ci95": null,
+            "f1_ci95": null,
+            "exact_match_ci95": [
+              1.0,
+              1.0
+            ]
+          },
+          "amount": {
+            "n_documents": 7,
+            "n_labelled": 7,
+            "tp": 11,
+            "fp": 5,
+            "fn": 1,
+            "precision": 0.6875,
+            "recall": 0.9166666666666666,
+            "f1": 0.7857142857142857,
+            "exact_match": 0.5714285714285714,
+            "precision_ci95": [
+              0.5,
+              1.0
+            ],
+            "recall_ci95": [
+              0.75,
+              1.0
+            ],
+            "f1_ci95": [
+              0.6511337209302326,
+              0.9565217391304348
+            ],
+            "exact_match_ci95": [
+              0.14285714285714285,
+              0.8571428571428571
+            ]
+          }
+        }
+      }
+    },
+    "11": {
+      "n": 4,
+      "metrics_version": "1.1",
+      "normalization": {
+        "version": "1.0",
+        "sha256": "aa5cf4994ce5fd1b12b2aaf843fa3568f15bffe515b9cefd4dc1bb200760dee1"
+      },
+      "fields": {
+        "total_amount": {
+          "n_documents": 4,
+          "n_present": 4,
+          "n_absent": 0,
+          "tp": 4,
+          "fp": 0,
+          "fn": 0,
+          "false_fills": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "exact_match": 1.0,
+          "false_fill_rate": null,
+          "precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "recall_ci95": [
+            1.0,
+            1.0
+          ],
+          "f1_ci95": [
+            1.0,
+            1.0
+          ],
+          "exact_match_ci95": [
+            1.0,
+            1.0
+          ],
+          "false_fill_rate_ci95": null
+        },
+        "subtotal": {
+          "n_documents": 4,
+          "n_present": 3,
+          "n_absent": 1,
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "false_fills": 0,
+          "precision": 1.0,
+          "recall": 0.6666666666666666,
+          "f1": 0.8,
+          "exact_match": 0.6666666666666666,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "recall_ci95": [
+            0.0,
+            1.0
+          ],
+          "f1_ci95": [
+            0.0,
+            1.0
+          ],
+          "exact_match_ci95": [
+            0.0,
+            1.0
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "tax_amount": {
+          "n_documents": 4,
+          "n_present": 2,
+          "n_absent": 2,
+          "tp": 1,
+          "fp": 0,
+          "fn": 1,
+          "false_fills": 0,
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.6666666666666666,
+          "exact_match": 0.5,
+          "false_fill_rate": 0.0,
+          "precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "recall_ci95": [
+            0.0,
+            1.0
+          ],
+          "f1_ci95": [
+            0.0,
+            1.0
+          ],
+          "exact_match_ci95": [
+            0.0,
+            1.0
+          ],
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "gold_values_excluded_unparsable": {
+        "total_amount": 0,
+        "subtotal": 0,
+        "tax_amount": 0
+      },
+      "line_items_row_level": {
+        "n_documents": 4,
+        "n_documents_with_rows": 4,
+        "rows_correct": 2,
+        "rows_predicted": 5,
+        "rows_gold": 7,
+        "precision": 0.4,
+        "recall": 0.2857142857142857,
+        "f1": 0.3333333333333333,
+        "documents_all_rows_correct": 0.25,
+        "precision_ci95": [
+          0.0,
+          1.0
+        ],
+        "recall_ci95": [
+          0.0,
+          0.6666666666666666
+        ],
+        "f1_ci95": [
+          0.0,
+          0.75
+        ],
+        "documents_all_rows_correct_ci95": [
+          0.0,
+          0.75
+        ]
+      },
+      "line_items_set_based": {
+        "label": "set-based, ignores row alignment",
+        "fields": {
+          "description": {
+            "n_documents": 4,
+            "n_labelled": 4,
+            "tp": 3,
+            "fp": 2,
+            "fn": 4,
+            "precision": 0.6,
+            "recall": 0.42857142857142855,
+            "f1": 0.5,
+            "exact_match": 0.25,
+            "precision_ci95": [
+              0.0,
+              1.0
+            ],
+            "recall_ci95": [
+              0.0,
+              0.75
+            ],
+            "f1_ci95": [
+              0.0,
+              0.75
+            ],
+            "exact_match_ci95": [
+              0.0,
+              0.75
+            ]
+          },
+          "quantity": {
+            "n_documents": 4,
+            "n_labelled": 3,
+            "tp": 2,
+            "fp": 0,
+            "fn": 4,
+            "precision": 1.0,
+            "recall": 0.3333333333333333,
+            "f1": 0.5,
+            "exact_match": 0.25,
+            "precision_ci95": [
+              1.0,
+              1.0
+            ],
+            "recall_ci95": [
+              0.0,
+              0.6666666666666666
+            ],
+            "f1_ci95": [
+              0.0,
+              0.8
+            ],
+            "exact_match_ci95": [
+              0.0,
+              0.75
+            ]
+          },
+          "unit_price": {
+            "n_documents": 4,
+            "n_labelled": 2,
+            "tp": 0,
+            "fp": 0,
+            "fn": 3,
+            "precision": null,
+            "recall": 0.0,
+            "f1": 0.0,
+            "exact_match": 0.5,
+            "precision_ci95": null,
+            "recall_ci95": [
+              0.0,
+              0.0
+            ],
+            "f1_ci95": [
+              0.0,
+              0.0
+            ],
+            "exact_match_ci95": [
+              0.0,
+              1.0
+            ]
+          },
+          "amount": {
+            "n_documents": 4,
+            "n_labelled": 4,
+            "tp": 5,
+            "fp": 0,
+            "fn": 2,
+            "precision": 1.0,
+            "recall": 0.7142857142857143,
+            "f1": 0.8333333333333334,
+            "exact_match": 0.75,
+            "precision_ci95": [
+              1.0,
+              1.0
+            ],
+            "recall_ci95": [
+              0.14285714285714285,
+              1.0
+            ],
+            "f1_ci95": [
+              0.25,
+              1.0
+            ],
+            "exact_match_ci95": [
+              0.25,
+              1.0
+            ]
+          }
+        }
+      }
+    }
+  },
+  "spread_for_groups_with_at_least_5_documents": {
+    "total_amount_f1": {
+      "lowest": 0.5,
+      "highest": 0.9411764705882353,
+      "overall": 0.7931034482758621
+    },
+    "subtotal_f1": {
+      "lowest": 0.5714285714285714,
+      "highest": 1.0,
+      "overall": 0.8035714285714286
+    },
+    "row_level_f1": {
+      "lowest": 0.0851063829787234,
+      "highest": 0.782608695652174,
+      "overall": 0.36507936507936506
+    }
+  },
+  "environment": {
+    "git_commit": "d7f46c54f320c704494e225a5676d8d77ebd882a",
+    "git_dirty": true,
+    "python": "3.12.13",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "cpu_count": 12,
+    "packages": {
+      "rapidocr": "3.10.0",
+      "onnxruntime": "1.31.1",
+      "numpy": "2.5.4",
+      "pypdfium2": "5.14.0",
+      "rapidfuzz": "3.14.6"
+    },
+    "ocr_execution": "CPU, onnxruntime defaults"
+  }
+}

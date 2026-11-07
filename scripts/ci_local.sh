@@ -16,12 +16,12 @@ step() {
   [ "$code" -eq 0 ] || failures=$((failures + 1))
 }
 
+PY=backend/.venv/Scripts/python.exe
+[ -x "$PY" ] || PY=backend/.venv/bin/python
+PY=$root/$PY
+step pre-commit-all-files "$PY" -m pre_commit run --all-files
+
 cd "$root/backend" || exit 2
-PY=.venv/Scripts/python.exe
-[ -x "$PY" ] || PY=.venv/bin/python
-step ruff-check "$PY" -m ruff check . ../evals --config pyproject.toml
-step ruff-format "$PY" -m ruff format --check .
-step mypy "$PY" -m mypy
 step pytest-coverage "$PY" -m pytest -q --cov=ledgerlens --cov-report=term
 
 cd "$root/frontend" || exit 2

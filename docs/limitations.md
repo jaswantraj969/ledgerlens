@@ -12,6 +12,10 @@ The deterministic extractor copies values from the tokens, so matching them agai
 
 Only pass A (field-guided) exists. Pass B (document-guided) and cross-pass agreement are not implemented. JSON validity is enforced by Ollama's schema constraint, so a high validity rate says nothing about whether values are right.
 
+## SROIE is blocked, so no real vendor-grouped result exists
+
+Official SROIE access is unavailable and unofficial image mirrors are not used, so SROIE results are BLOCKED. The adapter and split exist, but no metric has been computed. CORD has no vendor label, so no real vendor-grouped split was possible on any dataset. The A12 check uses derived CORD layout groups, which approximate layouts, not vendors.
+
 ## The risk score is unfitted
 
 `risk_score` uses hand-picked weights and is not a probability. `calibrated_prob` stays null until a calibrator is fitted.

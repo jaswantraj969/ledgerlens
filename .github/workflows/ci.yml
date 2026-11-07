@@ -29,9 +29,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
       - run: uv sync --python 3.12 --extra eval --extra ocr
-      - run: uv run ruff check . ../evals --config pyproject.toml
-      - run: uv run ruff format --check .
-      - run: uv run mypy
+      - run: uv run --project backend pre-commit run --all-files
+        working-directory: .
       - run: uv run pytest -q --cov=ledgerlens --cov-report=term
 
   frontend:

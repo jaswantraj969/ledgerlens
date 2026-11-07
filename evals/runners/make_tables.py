@@ -65,7 +65,8 @@ def render_v1(result: dict[str, Any], source: str) -> str:
 
 def field_table(fields: dict[str, Any]) -> list[str]:
     lines = [
-        "| Field | n present | n absent | Precision | Recall | F1 | Exact match | False fill rate |",
+        "| Field | n present | n absent | Precision | Recall | F1 | Exact match "
+        "| False fill rate |",
         "|---|---|---|---|---|---|---|---|",
     ]
     for name, row in fields.items():

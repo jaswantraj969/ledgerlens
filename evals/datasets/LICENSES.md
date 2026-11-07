@@ -26,7 +26,7 @@ Counts are documents holding the key. On test, 2 of the 43 `tax_price` labels (i
 
 ## SROIE (ICDAR 2019)
 
-**Status: research-only. Terms unverified.** No licence for the dataset was found on 2026-11-06.
+**Status: results BLOCKED. Research-only, terms unverified.** Official access is unavailable to this project, as confirmed by the project owner on 2026-11-07. No SROIE result will be produced, and unofficial image mirrors must not be used. No licence for the dataset was found on 2026-11-06.
 
 - **Official source:** https://rrc.cvc.uab.es/?ch=13, 1000 receipts. The download section requires a free portal account. The public Downloads page states no licence, and the terms inside the registered area have not been read. Registration needs the project owner.
 - **Community mirror used for labels:** `zzzDavid/ICDAR-2019-SROIE`, which states 600 trainval and 400 test receipts. Its MIT licence covers the repository's code. It states no licence for the dataset and cannot grant one for the receipts.
