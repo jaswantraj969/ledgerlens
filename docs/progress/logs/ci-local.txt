@@ -6,19 +6,19 @@ STEP_EXIT[ruff-check]=0
 
 === ruff-format
 $ .venv/Scripts/python.exe -m ruff format --check .
-32 files already formatted
+38 files already formatted
 STEP_EXIT[ruff-format]=0
 
 === mypy
 $ .venv/Scripts/python.exe -m mypy
-Success: no issues found in 21 source files
+Success: no issues found in 26 source files
 STEP_EXIT[mypy]=0
 
 === pytest-coverage
 $ .venv/Scripts/python.exe -m pytest -q --cov=ledgerlens --cov-report=term
-........................................................................ [ 42%]
-........................................................................ [ 85%]
-........................                                                 [100%]
+........................................................................ [ 38%]
+........................................................................ [ 77%]
+..........................................                               [100%]
 =============================== tests coverage ================================
 ______________ coverage: platform win32, python 3.12.13-final-0 _______________
 
@@ -27,26 +27,31 @@ Name                                         Stmts   Miss  Cover
 src\ledgerlens\__init__.py                       1      0   100%
 src\ledgerlens\confidence\__init__.py            0      0   100%
 src\ledgerlens\confidence\features.py            7      0   100%
-src\ledgerlens\confidence\risk.py               31      6    81%
+src\ledgerlens\confidence\risk.py               31      2    94%
 src\ledgerlens\export\__init__.py                0      0   100%
 src\ledgerlens\export\exporters.py              27      1    96%
 src\ledgerlens\extraction\__init__.py            0      0   100%
 src\ledgerlens\extraction\deterministic.py     159      3    98%
 src\ledgerlens\extraction\layout.py             46      1    98%
+src\ledgerlens\extraction\llm.py                88      0   100%
 src\ledgerlens\fields.py                        31      0   100%
+src\ledgerlens\llm\__init__.py                   0      0   100%
+src\ledgerlens\llm\base.py                      28      0   100%
+src\ledgerlens\llm\cache.py                     39      0   100%
+src\ledgerlens\llm\ollama.py                    31      2    94%
 src\ledgerlens\parsing\__init__.py               0      0   100%
 src\ledgerlens\parsing\model.py                 22      0   100%
 src\ledgerlens\parsing\ocr.py                   79      5    94%
 src\ledgerlens\parsing\pdfium.py                43      0   100%
-src\ledgerlens\pipeline.py                      31      1    97%
+src\ledgerlens\pipeline.py                      33      1    97%
 src\ledgerlens\schema.py                        33      0   100%
 src\ledgerlens\verification\__init__.py          0      0   100%
 src\ledgerlens\verification\evidence.py         55      5    91%
 src\ledgerlens\verification\normalize.py        76      2    97%
 src\ledgerlens\verification\rules.py            30      0   100%
 ----------------------------------------------------------------
-TOTAL                                          671     24    96%
-168 passed in 26.44s
+TOTAL                                          859     22    97%
+186 passed in 23.02s
 STEP_EXIT[pytest-coverage]=0
 
 === npm-lint
@@ -69,8 +74,8 @@ $ npm test
 
  Test Files  1 passed (1)
       Tests  1 passed (1)
-   Start at  13:46:50
-   Duration  6.66s (environment 79%, setup 15%, tests 4%, transform 1%)
+   Start at  11:40:33
+   Duration  7.52s (environment 72%, setup 23%, tests 2%, transform 1%, worker 1%)
 
 STEP_EXIT[npm-test]=0
 
@@ -89,15 +94,15 @@ dist/index.html                   0.46 kB │ gzip:  0.29 kB
 dist/assets/index-Dm_kgmD5.css    6.70 kB │ gzip:  2.02 kB
 dist/assets/index-CxFXa7To.js   219.75 kB │ gzip: 68.71 kB
 
-[32m✓ built in 289ms[39m
+[32m✓ built in 273ms[39m
 STEP_EXIT[npm-build]=0
 
 === gitleaks-full-history
 $ /c/Users/jknm6/.cache/pre-commit/repomsx10mrf/golangenv-default/bin/gitleaks.exe detect --source . --no-banner --redact --log-opts=--all
-[90m1:47PM[0m [32mINF[0m 21 commits scanned.
-[90m1:47PM[0m [32mINF[0m scan completed in 342ms
-[90m1:47PM[0m [32mINF[0m no leaks found
+[90m11:40AM[0m [32mINF[0m 24 commits scanned.
+[90m11:40AM[0m [32mINF[0m scan completed in 327ms
+[90m11:40AM[0m [32mINF[0m no leaks found
 STEP_EXIT[gitleaks-full-history]=0
 
 CI_LOCAL_EXIT=0
-COMMIT=ba5a3f7322ed2ac009c8e435ab656df4c4b3686b
+COMMIT=2d8ec197c03b6cb37bca18c3a7956497ffc496e8
