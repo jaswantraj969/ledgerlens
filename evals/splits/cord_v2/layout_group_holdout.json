@@ -1,0 +1,50 @@
+{
+ "seed": 20261107,
+ "method": "random.Random(20261107).sample(sorted group ids, 4)",
+ "layout_groups_sha256": "824eed79e8a68690f2a4947bf4e86f35cc4a9828a0ed9d5b9a7155cf16ba9b28",
+ "group_roles": {
+  "0": "calibration",
+  "1": "calibration",
+  "2": "calibration",
+  "3": "calibration",
+  "4": "calibration",
+  "5": "calibration",
+  "6": "evaluation",
+  "7": "evaluation",
+  "8": "calibration",
+  "9": "evaluation",
+  "10": "evaluation",
+  "11": "calibration"
+ },
+ "use": {
+  "calibrator_fit": "train documents in calibration groups",
+  "threshold_choice": "validation documents in calibration groups",
+  "evaluation": "test documents in evaluation groups, read once at the end"
+ },
+ "counts": {
+  "test/calibration": {
+   "n": 63,
+   "sha256": "92af35f50ed2f3d8028a0217323012eff606d8f068a3296191b5de06f2077da3"
+  },
+  "test/evaluation": {
+   "n": 37,
+   "sha256": "316803f4eabb258ada550af56db53a60c388c5f1beb13e227a822cd39fc15475"
+  },
+  "train/calibration": {
+   "n": 540,
+   "sha256": "f669afdefdcde36a92e9c517d3a2e8db99cd478930611b435fcabfa97962336c"
+  },
+  "train/evaluation": {
+   "n": 260,
+   "sha256": "9513e198f48e8df9ed0eddf2d6c79eeaab9ba38f8b59cfddc8221327374f7fd5"
+  },
+  "validation/calibration": {
+   "n": 74,
+   "sha256": "1a1aeb4ddba8a9207264451ac33acb3191d931fde847558ab2447314eee2c42d"
+  },
+  "validation/evaluation": {
+   "n": 26,
+   "sha256": "9b15377e503885b894693e63244db651298309c9149143ed32f1e569248e43ca"
+  }
+ }
+}

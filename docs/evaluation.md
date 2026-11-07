@@ -123,6 +123,45 @@ Fixed before S2, S3 and S4 were first run.
 - **S4:** pass A, pass B (document-guided) and the deterministic extractor, merged by normalised agreement. The most-agreed value wins, and a tie goes to the earliest of pass A, pass B, rules. Rows come from the first LLM pass that produced rows. The S3 check then applies. A failed pass is an empty source, and the document is a failed extraction only if both passes fail. Partial failures are counted as pass fallbacks.
 - **S5:** S4 plus a calibrator and thresholds. Not built yet.
 
+## Pre-registered on 2026-11-07, before any result below exists
+
+Written and committed before S2', S3', S4', S4h or S5 has produced a number. Nothing in this section changes after a result is seen; a change would be a new, separately named system.
+
+### Prompt round (S2', S3', S4')
+
+- Development set: 100 CORD **train** documents, `evals/splits/cord_v2/prompt_dev_train100.json` (seed 20261107, sha256 `ff174afe618302ac1af5dffeb750ccde6268af8187bd408d4009d2b1ff06e847`). Validation is not used to develop prompts.
+- One round, with at most three candidates, each a revision of both pass A and pass B with the same changes. Candidates are scored as S2 (pass A, as returned) on the development set under metrics 1.1.1. The final prompt is the candidate with the highest mean of the four F1 values (total, subtotal, tax, row-level), ties to the shorter prompt. Prompt `a-1.0`/`b-1.0` is scored the same way as the reference.
+- The final prompt is then evaluated once on validation as S2', S3' and S4', defined as S2, S3 and S4 with that prompt. No further prompt change follows the validation read.
+- `num_ctx` is the smallest multiple of 256 that holds the longest CORD prompt (all splits; input only, no labels) plus `num_predict`. It is measured with the final prompt before the validation read.
+
+### Label proximity check
+
+A monetary header field (total, subtotal, tax) is **label-supported** if a token sequence matching its value lies on the same line as a label keyword for that field, or on the line directly above or below it. Lines and keywords come from the parsed document only. Keywords are configured per field in the schema, and include Indonesian terms (`PB1`, `PPN`, `Pajak`, `Service`, `Subtotal`, `Total`). It is a verification result and a confidence feature. It changes no extracted value, and S3' withholds by the S3 rule only.
+
+### S4h (hybrid)
+
+For each single-valued field:
+
+1. If the deterministic extractor produced a value and it equals (after normalisation) the value of pass A or pass B, take the deterministic value.
+2. Otherwise take an LLM value from pass A or B, among those that parse and are found by the independent evidence check. Rank them by support: +1 if label-supported, +1 if pass A and pass B agree on it. Highest support wins; a tie goes to pass A.
+3. Otherwise null.
+
+For line items, as one unit: take the deterministic rows if there is at least one, and at least one of them equals (all four cells, normalised) a row from pass A or pass B. Otherwise take the rows of the LLM pass with more rows whose description is found by the independent evidence check, tie to pass A. Otherwise no rows.
+
+Deterministic-versus-LLM agreement is a feature with both sources independent (`agree_rules_llm`): the rule value comes from regular expressions over OCR tokens and the LLM value from the model, so agreement is not circular. A failed LLM pass is an empty source, as in S4. S4h uses the final prompt and is evaluated once on validation.
+
+### S5 (calibrated routing)
+
+- **Base system:** S4h. Chosen now, before any S4h or S4' result, because it is the system whose records carry every independent source.
+- **Units:** each single-valued header field slot with a predicted value, and each predicted line-item row. A slot without a value always goes to review and counts against automation.
+- **Label:** a header unit is correct if its normalised value equals gold. A row unit is correct if the metrics 1.1.1 row assignment matches it to a gold row with all scored cells equal.
+- **Features:** `build_features` only, including label support, A/B agreement and rule/LLM agreement. Dependent evidence matches stay excluded.
+- **Calibrator:** logistic regression (scikit-learn, L2, C=1.0, a one-hot field name), one for header units and one for row units. Fitted on S4h predictions for **CORD train** (800 documents). Nothing else is tuned.
+- **Thresholds:** for target precision 0.98 and 0.99, the lowest calibrated-probability threshold on a 0.001 grid at which precision of accepted units on **validation** is at least the target. If no threshold reaches it, nothing is auto-accepted at that target.
+- **Test:** read once at the end, with S1 to S5 together, from a clean commit.
+- **Reported, on test:** automation rate (auto-accepted units over all units, header slots counted whether or not filled) at each target, with achieved precision and 95% document-bootstrap intervals, reported even when the target is not met. Also ECE (10 equal-width bins), Brier score and ROC-AUC of the calibrated probabilities on test. The word "calibrated probability" is used only for these outputs.
+- **Layout-group-held-out variant:** `evals/splits/cord_v2/layout_group_holdout.json`, written before any S5 result. Groups 6, 7, 9 and 10 are evaluation groups and the other eight are calibration groups. The calibrator is fitted on train documents in calibration groups (540), thresholds are chosen on validation documents in calibration groups (74), and results are reported on test documents in evaluation groups (37), next to the test documents in calibration groups (63). Only the calibrator and thresholds are group-held-out. The rules and prompts were developed on documents from every group, and 37 documents give wide intervals. This is the only A12 generalisation result available.
+
 ## Synthetic evaluation
 
 Fixed before the held-out layout was first run through extraction.
