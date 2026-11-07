@@ -1,0 +1,1141 @@
+{
+  "metrics_version": "1.1.1",
+  "split": "validation",
+  "note": "Development only. Test has not been read for these systems.",
+  "systems": [
+    {
+      "system": "S1",
+      "source": "evals/results/dev/cord_s1_validation_v1_1_1.json",
+      "model": null,
+      "prompt": null,
+      "n_documents": 100,
+      "fields": {
+        "total_amount": {
+          "n_present": 98,
+          "n_absent": 2,
+          "precision": 0.8666666666666667,
+          "precision_ci95": [
+            0.7934782608695652,
+            0.9340659340659341
+          ],
+          "recall": 0.7959183673469388,
+          "recall_ci95": [
+            0.7142477203647417,
+            0.8762886597938144
+          ],
+          "f1": 0.8297872340425532,
+          "f1_ci95": [
+            0.7553191489361702,
+            0.8994708994708994
+          ],
+          "false_fill_rate": 0.0,
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "subtotal": {
+          "n_present": 67,
+          "n_absent": 33,
+          "precision": 0.96,
+          "precision_ci95": [
+            0.8958059210526316,
+            1.0
+          ],
+          "recall": 0.7164179104477612,
+          "recall_ci95": [
+            0.605572322825844,
+            0.8194807213930346
+          ],
+          "f1": 0.8205128205128205,
+          "f1_ci95": [
+            0.7339449541284404,
+            0.892569362455726
+          ],
+          "false_fill_rate": 0.0,
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "tax_amount": {
+          "n_present": 47,
+          "n_absent": 53,
+          "precision": 0.8780487804878049,
+          "precision_ci95": [
+            0.7714136904761905,
+            0.9722409909909909
+          ],
+          "recall": 0.7659574468085106,
+          "recall_ci95": [
+            0.6444047619047619,
+            0.8863636363636364
+          ],
+          "f1": 0.8181818181818182,
+          "f1_ci95": [
+            0.7110964912280702,
+            0.9156626506024096
+          ],
+          "false_fill_rate": 0.0,
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "line_items_row_level": {
+        "n_documents": 100,
+        "n_documents_with_rows": 100,
+        "rows_correct": 85,
+        "rows_predicted": 230,
+        "rows_gold": 221,
+        "precision": 0.3695652173913043,
+        "recall": 0.38461538461538464,
+        "f1": 0.376940133037694,
+        "documents_all_rows_correct": 0.21,
+        "precision_ci95": [
+          0.2863631357629155,
+          0.4555677655677655
+        ],
+        "recall_ci95": [
+          0.3009145148669797,
+          0.47107636681500314
+        ],
+        "f1_ci95": [
+          0.2958250802997859,
+          0.4561682536360781
+        ],
+        "documents_all_rows_correct_ci95": [
+          0.13975000000000004,
+          0.29
+        ]
+      },
+      "failures": {
+        "crashes": 0,
+        "crash_detail": [],
+        "failed_extractions": 0,
+        "documents_with_a_fallback": 0,
+        "pass_fallbacks": 0,
+        "retries": 0,
+        "truncated_replies": 0
+      },
+      "values_withheld": 0,
+      "latency_seconds": {
+        "source": "measured in this run",
+        "warm_llm": null,
+        "warm_total": {
+          "n": 100,
+          "p50": 2.5509770500066224,
+          "p95": 4.706929900008253
+        },
+        "cold": {
+          "documents": 0,
+          "model_load_seconds": [],
+          "cold_llm_seconds_excluding_load": []
+        }
+      },
+      "lowest_available_system_ram_gib": 1.622
+    },
+    {
+      "system": "S2",
+      "source": "evals/results/dev/cord_s2_validation_v1_1_1.json",
+      "model": "llama3.2:3b",
+      "prompt": "a-1.0",
+      "n_documents": 100,
+      "fields": {
+        "total_amount": {
+          "n_present": 98,
+          "n_absent": 2,
+          "precision": 0.8229166666666666,
+          "precision_ci95": [
+            0.7422680412371134,
+            0.8979591836734694
+          ],
+          "recall": 0.8061224489795918,
+          "recall_ci95": [
+            0.7244897959183674,
+            0.8830095184770435
+          ],
+          "f1": 0.8144329896907216,
+          "f1_ci95": [
+            0.7357512953367875,
+            0.8900808398665327
+          ],
+          "false_fill_rate": 1.0,
+          "false_fill_rate_ci95": [
+            1.0,
+            1.0
+          ]
+        },
+        "subtotal": {
+          "n_present": 67,
+          "n_absent": 33,
+          "precision": 0.5714285714285714,
+          "precision_ci95": [
+            0.47251203852327445,
+            0.6736899313501143
+          ],
+          "recall": 0.7761194029850746,
+          "recall_ci95": [
+            0.6714236790606654,
+            0.873015873015873
+          ],
+          "f1": 0.6582278481012658,
+          "f1_ci95": [
+            0.5625,
+            0.753116402116402
+          ],
+          "false_fill_rate": 0.7878787878787878,
+          "false_fill_rate_ci95": [
+            0.6428571428571429,
+            0.9200263157894736
+          ]
+        },
+        "tax_amount": {
+          "n_present": 47,
+          "n_absent": 53,
+          "precision": 0.35064935064935066,
+          "precision_ci95": [
+            0.246371237458194,
+            0.4605263157894737
+          ],
+          "recall": 0.574468085106383,
+          "recall_ci95": [
+            0.4313640973630832,
+            0.7209302325581395
+          ],
+          "f1": 0.43548387096774194,
+          "f1_ci95": [
+            0.3185840707964602,
+            0.5484178773701057
+          ],
+          "false_fill_rate": 0.7169811320754716,
+          "false_fill_rate_ci95": [
+            0.5961436170212766,
+            0.8333333333333334
+          ]
+        }
+      },
+      "line_items_row_level": {
+        "n_documents": 100,
+        "n_documents_with_rows": 100,
+        "rows_correct": 17,
+        "rows_predicted": 361,
+        "rows_gold": 221,
+        "precision": 0.04709141274238227,
+        "recall": 0.07692307692307693,
+        "f1": 0.058419243986254296,
+        "documents_all_rows_correct": 0.01,
+        "precision_ci95": [
+          0.017906849003712404,
+          0.08943500634428307
+        ],
+        "recall_ci95": [
+          0.02898401006108516,
+          0.14095779220779192
+        ],
+        "f1_ci95": [
+          0.022421645066349975,
+          0.10978488362943958
+        ],
+        "documents_all_rows_correct_ci95": [
+          0.0,
+          0.03
+        ]
+      },
+      "failures": {
+        "crashes": 0,
+        "crash_detail": [],
+        "failed_extractions": 0,
+        "documents_with_a_fallback": 0,
+        "pass_fallbacks": 0,
+        "retries": 0,
+        "truncated_replies": 0
+      },
+      "values_withheld": 0,
+      "latency_seconds": {
+        "source": "recorded when the call was first made",
+        "warm_llm": {
+          "n": 98,
+          "p50": 2.3719832000066026,
+          "p95": 7.313741515011507
+        },
+        "warm_total": {
+          "n": 98,
+          "p50": 5.258191500016075,
+          "p95": 9.909243390033046
+        },
+        "cold": {
+          "documents": 2,
+          "model_load_seconds": [
+            69.5487653,
+            7.331563
+          ],
+          "cold_llm_seconds_excluding_load": [
+            58.07148729999791,
+            4.314486800008768
+          ]
+        }
+      },
+      "lowest_available_system_ram_gib": 0.265
+    },
+    {
+      "system": "S3",
+      "source": "evals/results/dev/cord_s3_validation_v1_1_1.json",
+      "model": "llama3.2:3b",
+      "prompt": "a-1.0",
+      "n_documents": 100,
+      "fields": {
+        "total_amount": {
+          "n_present": 98,
+          "n_absent": 2,
+          "precision": 0.8229166666666666,
+          "precision_ci95": [
+            0.7422680412371134,
+            0.8979591836734694
+          ],
+          "recall": 0.8061224489795918,
+          "recall_ci95": [
+            0.7244897959183674,
+            0.8830095184770435
+          ],
+          "f1": 0.8144329896907216,
+          "f1_ci95": [
+            0.7357512953367875,
+            0.8900808398665327
+          ],
+          "false_fill_rate": 1.0,
+          "false_fill_rate_ci95": [
+            1.0,
+            1.0
+          ]
+        },
+        "subtotal": {
+          "n_present": 67,
+          "n_absent": 33,
+          "precision": 0.5714285714285714,
+          "precision_ci95": [
+            0.47251203852327445,
+            0.6736899313501143
+          ],
+          "recall": 0.7761194029850746,
+          "recall_ci95": [
+            0.6714236790606654,
+            0.873015873015873
+          ],
+          "f1": 0.6582278481012658,
+          "f1_ci95": [
+            0.5625,
+            0.753116402116402
+          ],
+          "false_fill_rate": 0.7878787878787878,
+          "false_fill_rate_ci95": [
+            0.6428571428571429,
+            0.9200263157894736
+          ]
+        },
+        "tax_amount": {
+          "n_present": 47,
+          "n_absent": 53,
+          "precision": 0.3698630136986301,
+          "precision_ci95": [
+            0.2602739726027397,
+            0.48530462184873946
+          ],
+          "recall": 0.574468085106383,
+          "recall_ci95": [
+            0.4313640973630832,
+            0.7209302325581395
+          ],
+          "f1": 0.45,
+          "f1_ci95": [
+            0.33043478260869563,
+            0.5645253632110317
+          ],
+          "false_fill_rate": 0.6415094339622641,
+          "false_fill_rate_ci95": [
+            0.5165277777777778,
+            0.7708806818181816
+          ]
+        }
+      },
+      "line_items_row_level": {
+        "n_documents": 100,
+        "n_documents_with_rows": 100,
+        "rows_correct": 16,
+        "rows_predicted": 357,
+        "rows_gold": 221,
+        "precision": 0.04481792717086835,
+        "recall": 0.07239819004524888,
+        "f1": 0.05536332179930796,
+        "documents_all_rows_correct": 0.01,
+        "precision_ci95": [
+          0.016666666666666666,
+          0.08454920595773915
+        ],
+        "recall_ci95": [
+          0.027519793892170418,
+          0.13001086956521735
+        ],
+        "f1_ci95": [
+          0.020936982882565177,
+          0.10169923167678627
+        ],
+        "documents_all_rows_correct_ci95": [
+          0.0,
+          0.03
+        ]
+      },
+      "failures": {
+        "crashes": 0,
+        "crash_detail": [],
+        "failed_extractions": 0,
+        "documents_with_a_fallback": 0,
+        "pass_fallbacks": 0,
+        "retries": 0,
+        "truncated_replies": 0
+      },
+      "values_withheld": 44,
+      "latency_seconds": {
+        "source": "recorded when the call was first made",
+        "warm_llm": {
+          "n": 98,
+          "p50": 2.3719832000066026,
+          "p95": 7.313741515011507
+        },
+        "warm_total": {
+          "n": 98,
+          "p50": 5.257473450020008,
+          "p95": 9.908382310008713
+        },
+        "cold": {
+          "documents": 2,
+          "model_load_seconds": [
+            69.5487653,
+            7.331563
+          ],
+          "cold_llm_seconds_excluding_load": [
+            58.07148729999791,
+            4.314486800008768
+          ]
+        }
+      },
+      "lowest_available_system_ram_gib": 1.647
+    },
+    {
+      "system": "S4",
+      "source": "evals/results/dev/cord_s4_validation_v1_1_1.json",
+      "model": "llama3.2:3b",
+      "prompt": "a-1.0",
+      "n_documents": 100,
+      "fields": {
+        "total_amount": {
+          "n_present": 98,
+          "n_absent": 2,
+          "precision": 0.83,
+          "precision_ci95": [
+            0.75,
+            0.9
+          ],
+          "recall": 0.8469387755102041,
+          "recall_ci95": [
+            0.7731958762886598,
+            0.9183673469387755
+          ],
+          "f1": 0.8383838383838383,
+          "f1_ci95": [
+            0.7614213197969543,
+            0.9090909090909091
+          ],
+          "false_fill_rate": 1.0,
+          "false_fill_rate_ci95": [
+            1.0,
+            1.0
+          ]
+        },
+        "subtotal": {
+          "n_present": 67,
+          "n_absent": 33,
+          "precision": 0.6086956521739131,
+          "precision_ci95": [
+            0.5106274424663482,
+            0.7065217391304348
+          ],
+          "recall": 0.835820895522388,
+          "recall_ci95": [
+            0.7424120234604106,
+            0.9193709677419354
+          ],
+          "f1": 0.7044025157232704,
+          "f1_ci95": [
+            0.6124741242038217,
+            0.7904261244951957
+          ],
+          "false_fill_rate": 0.7878787878787878,
+          "false_fill_rate_ci95": [
+            0.6428571428571429,
+            0.9200263157894736
+          ]
+        },
+        "tax_amount": {
+          "n_present": 47,
+          "n_absent": 53,
+          "precision": 0.4,
+          "precision_ci95": [
+            0.2911392405063291,
+            0.512828947368421
+          ],
+          "recall": 0.6808510638297872,
+          "recall_ci95": [
+            0.5434782608695652,
+            0.8163265306122449
+          ],
+          "f1": 0.5039370078740157,
+          "f1_ci95": [
+            0.38596491228070173,
+            0.6179152148664343
+          ],
+          "false_fill_rate": 0.660377358490566,
+          "false_fill_rate_ci95": [
+            0.5319148936170213,
+            0.7903561827956987
+          ]
+        }
+      },
+      "line_items_row_level": {
+        "n_documents": 100,
+        "n_documents_with_rows": 100,
+        "rows_correct": 16,
+        "rows_predicted": 357,
+        "rows_gold": 221,
+        "precision": 0.04481792717086835,
+        "recall": 0.07239819004524888,
+        "f1": 0.05536332179930796,
+        "documents_all_rows_correct": 0.01,
+        "precision_ci95": [
+          0.016666666666666666,
+          0.08454920595773915
+        ],
+        "recall_ci95": [
+          0.027519793892170418,
+          0.13001086956521735
+        ],
+        "f1_ci95": [
+          0.020936982882565177,
+          0.10169923167678627
+        ],
+        "documents_all_rows_correct_ci95": [
+          0.0,
+          0.03
+        ]
+      },
+      "failures": {
+        "crashes": 0,
+        "crash_detail": [],
+        "failed_extractions": 0,
+        "documents_with_a_fallback": 0,
+        "pass_fallbacks": 0,
+        "retries": 1,
+        "truncated_replies": 1
+      },
+      "values_withheld": 37,
+      "latency_seconds": {
+        "source": "recorded when the call was first made",
+        "warm_llm": {
+          "n": 98,
+          "p50": 4.731182400007244,
+          "p95": 11.198216270007991
+        },
+        "warm_total": {
+          "n": 98,
+          "p50": 7.427266749995016,
+          "p95": 14.792401384986714
+        },
+        "cold": {
+          "documents": 2,
+          "model_load_seconds": [
+            69.6028201,
+            7.438691
+          ],
+          "cold_llm_seconds_excluding_load": [
+            63.45819709997241,
+            8.120966700010575
+          ]
+        }
+      },
+      "lowest_available_system_ram_gib": 0.253
+    },
+    {
+      "system": "S2'",
+      "source": "evals/results/dev/cord_s2p_validation_v1_1_1.json",
+      "model": "llama3.2:3b",
+      "prompt": "a-2.2",
+      "n_documents": 100,
+      "fields": {
+        "total_amount": {
+          "n_present": 98,
+          "n_absent": 2,
+          "precision": 0.7340425531914894,
+          "precision_ci95": [
+            0.6420852402745996,
+            0.8191758307434854
+          ],
+          "recall": 0.7040816326530612,
+          "recall_ci95": [
+            0.6099673913043479,
+            0.7938144329896907
+          ],
+          "f1": 0.71875,
+          "f1_ci95": [
+            0.6282722513089005,
+            0.8021317525125626
+          ],
+          "false_fill_rate": 1.0,
+          "false_fill_rate_ci95": [
+            1.0,
+            1.0
+          ]
+        },
+        "subtotal": {
+          "n_present": 67,
+          "n_absent": 33,
+          "precision": 0.8409090909090909,
+          "precision_ci95": [
+            0.720855694692904,
+            0.9411764705882353
+          ],
+          "recall": 0.5522388059701493,
+          "recall_ci95": [
+            0.4266617647058824,
+            0.671875
+          ],
+          "f1": 0.6666666666666666,
+          "f1_ci95": [
+            0.5471657797129496,
+            0.7703734061930783
+          ],
+          "false_fill_rate": 0.09090909090909091,
+          "false_fill_rate_ci95": [
+            0.0,
+            0.2
+          ]
+        },
+        "tax_amount": {
+          "n_present": 47,
+          "n_absent": 53,
+          "precision": 0.4931506849315068,
+          "precision_ci95": [
+            0.37681159420289856,
+            0.6081081081081081
+          ],
+          "recall": 0.7659574468085106,
+          "recall_ci95": [
+            0.6410256410256411,
+            0.8837209302325582
+          ],
+          "f1": 0.6,
+          "f1_ci95": [
+            0.4827586206896552,
+            0.704
+          ],
+          "false_fill_rate": 0.5660377358490566,
+          "false_fill_rate_ci95": [
+            0.42857142857142855,
+            0.7021525930851062
+          ]
+        }
+      },
+      "line_items_row_level": {
+        "n_documents": 100,
+        "n_documents_with_rows": 100,
+        "rows_correct": 65,
+        "rows_predicted": 422,
+        "rows_gold": 221,
+        "precision": 0.15402843601895735,
+        "recall": 0.29411764705882354,
+        "f1": 0.20217729393468117,
+        "documents_all_rows_correct": 0.06,
+        "precision_ci95": [
+          0.10416540556900727,
+          0.20833333333333334
+        ],
+        "recall_ci95": [
+          0.20852586887835703,
+          0.3813569176192353
+        ],
+        "f1_ci95": [
+          0.13979553791429683,
+          0.26687623978751307
+        ],
+        "documents_all_rows_correct_ci95": [
+          0.02,
+          0.11
+        ]
+      },
+      "failures": {
+        "crashes": 0,
+        "crash_detail": [],
+        "failed_extractions": 0,
+        "documents_with_a_fallback": 0,
+        "pass_fallbacks": 0,
+        "retries": 0,
+        "truncated_replies": 0
+      },
+      "values_withheld": 0,
+      "latency_seconds": {
+        "source": "mixed: 99 calls measured in this run, 1 recorded earlier (an aborted run or an earlier system) and replayed",
+        "warm_llm": {
+          "n": 99,
+          "p50": 3.4199010000098573,
+          "p95": 6.611833599994931
+        },
+        "warm_total": {
+          "n": 99,
+          "p50": 6.3200841999874795,
+          "p95": 10.271190230016755
+        },
+        "cold": {
+          "documents": 1,
+          "model_load_seconds": [
+            4.7619866
+          ],
+          "cold_llm_seconds_excluding_load": [
+            5.6672831999917435
+          ]
+        }
+      },
+      "lowest_available_system_ram_gib": 2.994
+    },
+    {
+      "system": "S3'",
+      "source": "evals/results/dev/cord_s3p_validation_v1_1_1.json",
+      "model": "llama3.2:3b",
+      "prompt": "a-2.2",
+      "n_documents": 100,
+      "fields": {
+        "total_amount": {
+          "n_present": 98,
+          "n_absent": 2,
+          "precision": 0.7931034482758621,
+          "precision_ci95": [
+            0.7011494252873564,
+            0.875
+          ],
+          "recall": 0.7040816326530612,
+          "recall_ci95": [
+            0.6099673913043479,
+            0.7938144329896907
+          ],
+          "f1": 0.745945945945946,
+          "f1_ci95": [
+            0.6559139784946236,
+            0.8254140786749481
+          ],
+          "false_fill_rate": 1.0,
+          "false_fill_rate_ci95": [
+            1.0,
+            1.0
+          ]
+        },
+        "subtotal": {
+          "n_present": 67,
+          "n_absent": 33,
+          "precision": 0.9736842105263158,
+          "precision_ci95": [
+            0.9142546583850931,
+            1.0
+          ],
+          "recall": 0.5522388059701493,
+          "recall_ci95": [
+            0.4266617647058824,
+            0.671875
+          ],
+          "f1": 0.7047619047619048,
+          "f1_ci95": [
+            0.5894736842105263,
+            0.8
+          ],
+          "false_fill_rate": 0.0,
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "tax_amount": {
+          "n_present": 47,
+          "n_absent": 53,
+          "precision": 0.5538461538461539,
+          "precision_ci95": [
+            0.42857142857142855,
+            0.676923076923077
+          ],
+          "recall": 0.7659574468085106,
+          "recall_ci95": [
+            0.6410256410256411,
+            0.8837209302325582
+          ],
+          "f1": 0.6428571428571429,
+          "f1_ci95": [
+            0.524249160693222,
+            0.7478296217744786
+          ],
+          "false_fill_rate": 0.4339622641509434,
+          "false_fill_rate_ci95": [
+            0.30605867346938775,
+            0.5714947089947086
+          ]
+        }
+      },
+      "line_items_row_level": {
+        "n_documents": 100,
+        "n_documents_with_rows": 100,
+        "rows_correct": 65,
+        "rows_predicted": 410,
+        "rows_gold": 221,
+        "precision": 0.15853658536585366,
+        "recall": 0.29411764705882354,
+        "f1": 0.20602218700475436,
+        "documents_all_rows_correct": 0.06,
+        "precision_ci95": [
+          0.10688364581552842,
+          0.21463478482952367
+        ],
+        "recall_ci95": [
+          0.20852586887835703,
+          0.3813569176192353
+        ],
+        "f1_ci95": [
+          0.14209190397066407,
+          0.271387195121951
+        ],
+        "documents_all_rows_correct_ci95": [
+          0.02,
+          0.11
+        ]
+      },
+      "failures": {
+        "crashes": 0,
+        "crash_detail": [],
+        "failed_extractions": 0,
+        "documents_with_a_fallback": 0,
+        "pass_fallbacks": 0,
+        "retries": 0,
+        "truncated_replies": 0
+      },
+      "values_withheld": 94,
+      "latency_seconds": {
+        "source": "recorded when the call was first made",
+        "warm_llm": {
+          "n": 99,
+          "p50": 3.4199010000098573,
+          "p95": 6.611833599994931
+        },
+        "warm_total": {
+          "n": 99,
+          "p50": 6.250463200014212,
+          "p95": 10.171176010018161
+        },
+        "cold": {
+          "documents": 1,
+          "model_load_seconds": [
+            4.7619866
+          ],
+          "cold_llm_seconds_excluding_load": [
+            5.6672831999917435
+          ]
+        }
+      },
+      "lowest_available_system_ram_gib": 3.31
+    },
+    {
+      "system": "S4'",
+      "source": "evals/results/dev/cord_s4p_validation_v1_1_1.json",
+      "model": "llama3.2:3b",
+      "prompt": "a-2.2",
+      "n_documents": 100,
+      "fields": {
+        "total_amount": {
+          "n_present": 98,
+          "n_absent": 2,
+          "precision": 0.8297872340425532,
+          "precision_ci95": [
+            0.7473684210526316,
+            0.9042553191489362
+          ],
+          "recall": 0.7959183673469388,
+          "recall_ci95": [
+            0.7142857142857143,
+            0.8775510204081632
+          ],
+          "f1": 0.8125,
+          "f1_ci95": [
+            0.7340160966915451,
+            0.8877551020408163
+          ],
+          "false_fill_rate": 1.0,
+          "false_fill_rate_ci95": [
+            1.0,
+            1.0
+          ]
+        },
+        "subtotal": {
+          "n_present": 67,
+          "n_absent": 33,
+          "precision": 0.6404494382022472,
+          "precision_ci95": [
+            0.5411764705882353,
+            0.7391417572463767
+          ],
+          "recall": 0.8507462686567164,
+          "recall_ci95": [
+            0.7611940298507462,
+            0.9296019170579028
+          ],
+          "f1": 0.7307692307692307,
+          "f1_ci95": [
+            0.6394557823129252,
+            0.8121212121212121
+          ],
+          "false_fill_rate": 0.7878787878787878,
+          "false_fill_rate_ci95": [
+            0.6363636363636364,
+            0.925
+          ]
+        },
+        "tax_amount": {
+          "n_present": 47,
+          "n_absent": 53,
+          "precision": 0.4578313253012048,
+          "precision_ci95": [
+            0.345679012345679,
+            0.5682177790563865
+          ],
+          "recall": 0.8085106382978723,
+          "recall_ci95": [
+            0.6874693627450981,
+            0.9111403508771928
+          ],
+          "f1": 0.5846153846153846,
+          "f1_ci95": [
+            0.47239462714219543,
+            0.6906474820143885
+          ],
+          "false_fill_rate": 0.7169811320754716,
+          "false_fill_rate_ci95": [
+            0.5961436170212766,
+            0.8363729128014842
+          ]
+        }
+      },
+      "line_items_row_level": {
+        "n_documents": 100,
+        "n_documents_with_rows": 100,
+        "rows_correct": 65,
+        "rows_predicted": 412,
+        "rows_gold": 221,
+        "precision": 0.15776699029126215,
+        "recall": 0.29411764705882354,
+        "f1": 0.20537124802527645,
+        "documents_all_rows_correct": 0.06,
+        "precision_ci95": [
+          0.10619414399650388,
+          0.21391814532117365
+        ],
+        "recall_ci95": [
+          0.20852586887835703,
+          0.3813569176192353
+        ],
+        "f1_ci95": [
+          0.1415915588835943,
+          0.2706086667300198
+        ],
+        "documents_all_rows_correct_ci95": [
+          0.02,
+          0.11
+        ]
+      },
+      "failures": {
+        "crashes": 0,
+        "crash_detail": [],
+        "failed_extractions": 0,
+        "documents_with_a_fallback": 0,
+        "pass_fallbacks": 0,
+        "retries": 1,
+        "truncated_replies": 1
+      },
+      "values_withheld": 109,
+      "latency_seconds": {
+        "source": "mixed: 14 calls measured in this run, 187 recorded earlier (an aborted run or an earlier system) and replayed",
+        "warm_llm": {
+          "n": 97,
+          "p50": 7.676443700007459,
+          "p95": 14.051588340008685
+        },
+        "warm_total": {
+          "n": 97,
+          "p50": 10.431549100001135,
+          "p95": 17.92597274000077
+        },
+        "cold": {
+          "documents": 3,
+          "model_load_seconds": [
+            4.8176947000000006,
+            6.9252932000000005,
+            6.735469
+          ],
+          "cold_llm_seconds_excluding_load": [
+            11.8937661999982,
+            8.75035230001407,
+            9.192992300005438
+          ]
+        }
+      },
+      "lowest_available_system_ram_gib": 3.289
+    },
+    {
+      "system": "S4h",
+      "source": "evals/results/dev/cord_s4h_validation_v1_1_1.json",
+      "model": "llama3.2:3b",
+      "prompt": "a-2.2",
+      "n_documents": 100,
+      "fields": {
+        "total_amount": {
+          "n_present": 98,
+          "n_absent": 2,
+          "precision": 0.8315789473684211,
+          "precision_ci95": [
+            0.75,
+            0.9052631578947369
+          ],
+          "recall": 0.8061224489795918,
+          "recall_ci95": [
+            0.7272727272727273,
+            0.8877551020408163
+          ],
+          "f1": 0.8186528497409327,
+          "f1_ci95": [
+            0.7407118055555555,
+            0.8934010152284264
+          ],
+          "false_fill_rate": 1.0,
+          "false_fill_rate_ci95": [
+            1.0,
+            1.0
+          ]
+        },
+        "subtotal": {
+          "n_present": 67,
+          "n_absent": 33,
+          "precision": 0.6373626373626373,
+          "precision_ci95": [
+            0.5384615384615384,
+            0.7333333333333333
+          ],
+          "recall": 0.8656716417910447,
+          "recall_ci95": [
+            0.7777777777777778,
+            0.9402985074626866
+          ],
+          "f1": 0.7341772151898734,
+          "f1_ci95": [
+            0.6447258036029672,
+            0.8143941416529996
+          ],
+          "false_fill_rate": 0.8181818181818182,
+          "false_fill_rate_ci95": [
+            0.6841507177033493,
+            0.9411764705882353
+          ]
+        },
+        "tax_amount": {
+          "n_present": 47,
+          "n_absent": 53,
+          "precision": 0.4470588235294118,
+          "precision_ci95": [
+            0.3373493975903614,
+            0.5568512156448201
+          ],
+          "recall": 0.8085106382978723,
+          "recall_ci95": [
+            0.6874693627450981,
+            0.9111403508771928
+          ],
+          "f1": 0.5757575757575758,
+          "f1_ci95": [
+            0.4654793103448276,
+            0.6811594202898551
+          ],
+          "false_fill_rate": 0.7547169811320755,
+          "false_fill_rate_ci95": [
+            0.6378918495297806,
+            0.8679245283018868
+          ]
+        }
+      },
+      "line_items_row_level": {
+        "n_documents": 100,
+        "n_documents_with_rows": 100,
+        "rows_correct": 84,
+        "rows_predicted": 354,
+        "rows_gold": 221,
+        "precision": 0.23728813559322035,
+        "recall": 0.38009049773755654,
+        "f1": 0.2921739130434783,
+        "documents_all_rows_correct": 0.18,
+        "precision_ci95": [
+          0.17134388602085232,
+          0.3064066852367688
+        ],
+        "recall_ci95": [
+          0.29318094751628143,
+          0.4663935574229692
+        ],
+        "f1_ci95": [
+          0.21921594982078854,
+          0.36741801353129105
+        ],
+        "documents_all_rows_correct_ci95": [
+          0.11,
+          0.26
+        ]
+      },
+      "failures": {
+        "crashes": 0,
+        "crash_detail": [],
+        "failed_extractions": 0,
+        "documents_with_a_fallback": 0,
+        "pass_fallbacks": 0,
+        "retries": 1,
+        "truncated_replies": 1
+      },
+      "values_withheld": 0,
+      "latency_seconds": {
+        "source": "recorded when the call was first made",
+        "warm_llm": {
+          "n": 97,
+          "p50": 7.676443700007459,
+          "p95": 14.051588340008685
+        },
+        "warm_total": {
+          "n": 97,
+          "p50": 10.431692300014689,
+          "p95": 17.935461839996467
+        },
+        "cold": {
+          "documents": 3,
+          "model_load_seconds": [
+            4.8176947000000006,
+            6.9252932000000005,
+            6.735469
+          ],
+          "cold_llm_seconds_excluding_load": [
+            11.8937661999982,
+            8.75035230001407,
+            9.192992300005438
+          ]
+        }
+      },
+      "lowest_available_system_ram_gib": 3.285
+    }
+  ]
+}

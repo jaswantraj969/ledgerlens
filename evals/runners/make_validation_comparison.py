@@ -26,6 +26,51 @@ def _seconds(block: dict[str, Any]) -> str:
     return "n/a" if not block["n"] else f"{block['p50']:.2f} / {block['p95']:.2f}"
 
 
+_FIELD_METRICS = (
+    *("n_present", "n_absent", "precision", "precision_ci95", "recall", "recall_ci95"),
+    *("f1", "f1_ci95", "false_fill_rate", "false_fill_rate_ci95"),
+)
+
+
+def _summary(loaded: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    """The table's numbers as JSON, one entry per system, with the source file of each."""
+    systems = []
+    for name, result in loaded.items():
+        latency = result["latency_seconds"]
+        llm = result.get("llm") or {}
+        systems.append(
+            {
+                "system": result["system"],
+                "source": f"evals/results/dev/cord_{name}_validation_v1_1_1.json",
+                "model": llm.get("model"),
+                "prompt": llm.get("prompt_versions", {}).get("a"),
+                "n_documents": result["n_documents"],
+                "fields": {
+                    key: {metric: result["fields"][key][metric] for metric in _FIELD_METRICS}
+                    for key, _ in FIELDS
+                },
+                "line_items_row_level": result["line_items_row_level"],
+                "failures": result["failures"],
+                "values_withheld": result["verification"]["values_withheld"],
+                "latency_seconds": {
+                    "source": latency["source"],
+                    "warm_llm": latency["warm_llm"] if llm else None,
+                    "warm_total": latency["warm_total"],
+                    "cold": latency.get("cold"),
+                },
+                "lowest_available_system_ram_gib": result.get("memory_live_run", result["memory"])[
+                    "lowest_available_system_ram_gib"
+                ],
+            }
+        )
+    return {
+        "metrics_version": next(iter(loaded.values()))["metrics_version"],
+        "split": "validation",
+        "note": "Development only. Test has not been read for these systems.",
+        "systems": systems,
+    }
+
+
 def main() -> None:
     loaded = {}
     for name in SYSTEMS:
@@ -88,6 +133,9 @@ def main() -> None:
         )
     lines.append("")
     OUTPUT.write_text("\n".join(lines), encoding="utf-8", newline="\n")
+    OUTPUT.with_suffix(".json").write_text(
+        json.dumps(_summary(loaded), indent=2) + "\n", encoding="utf-8", newline="\n"
+    )
     print("wrote", OUTPUT, "systems:", ", ".join(r["system"] for r in loaded.values()))
 
 
