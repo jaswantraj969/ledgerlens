@@ -1,0 +1,359 @@
+{
+  "metrics_version": "1.1",
+  "normalization": {
+    "version": "1.0",
+    "sha256": "aa5cf4994ce5fd1b12b2aaf843fa3568f15bffe515b9cefd4dc1bb200760dee1"
+  },
+  "fields": {
+    "total_amount": {
+      "n_documents": 100,
+      "n_present": 98,
+      "n_absent": 2,
+      "tp": 79,
+      "fp": 17,
+      "fn": 19,
+      "false_fills": 2,
+      "precision": 0.8229166666666666,
+      "recall": 0.8061224489795918,
+      "f1": 0.8144329896907216,
+      "exact_match": 0.8061224489795918,
+      "false_fill_rate": 1.0,
+      "precision_ci95": [
+        0.7422680412371134,
+        0.8979591836734694
+      ],
+      "recall_ci95": [
+        0.7244897959183674,
+        0.8830095184770435
+      ],
+      "f1_ci95": [
+        0.7357512953367875,
+        0.8900808398665327
+      ],
+      "exact_match_ci95": [
+        0.7244897959183674,
+        0.8830095184770435
+      ],
+      "false_fill_rate_ci95": [
+        1.0,
+        1.0
+      ]
+    },
+    "subtotal": {
+      "n_documents": 100,
+      "n_present": 67,
+      "n_absent": 33,
+      "tp": 52,
+      "fp": 39,
+      "fn": 15,
+      "false_fills": 26,
+      "precision": 0.5714285714285714,
+      "recall": 0.7761194029850746,
+      "f1": 0.6582278481012658,
+      "exact_match": 0.7761194029850746,
+      "false_fill_rate": 0.7878787878787878,
+      "precision_ci95": [
+        0.47251203852327445,
+        0.6736899313501143
+      ],
+      "recall_ci95": [
+        0.6714236790606654,
+        0.873015873015873
+      ],
+      "f1_ci95": [
+        0.5625,
+        0.753116402116402
+      ],
+      "exact_match_ci95": [
+        0.6714236790606654,
+        0.873015873015873
+      ],
+      "false_fill_rate_ci95": [
+        0.6428571428571429,
+        0.9200263157894736
+      ]
+    },
+    "tax_amount": {
+      "n_documents": 100,
+      "n_present": 47,
+      "n_absent": 53,
+      "tp": 27,
+      "fp": 50,
+      "fn": 20,
+      "false_fills": 38,
+      "precision": 0.35064935064935066,
+      "recall": 0.574468085106383,
+      "f1": 0.43548387096774194,
+      "exact_match": 0.574468085106383,
+      "false_fill_rate": 0.7169811320754716,
+      "precision_ci95": [
+        0.246371237458194,
+        0.4605263157894737
+      ],
+      "recall_ci95": [
+        0.4313640973630832,
+        0.7209302325581395
+      ],
+      "f1_ci95": [
+        0.3185840707964602,
+        0.5484178773701057
+      ],
+      "exact_match_ci95": [
+        0.4313640973630832,
+        0.7209302325581395
+      ],
+      "false_fill_rate_ci95": [
+        0.5961436170212766,
+        0.8333333333333334
+      ]
+    }
+  },
+  "gold_values_excluded_unparsable": {
+    "total_amount": 0,
+    "subtotal": 0,
+    "tax_amount": 0
+  },
+  "line_items_row_level": {
+    "n_documents": 100,
+    "n_documents_with_rows": 100,
+    "rows_correct": 17,
+    "rows_predicted": 361,
+    "rows_gold": 221,
+    "precision": 0.04709141274238227,
+    "recall": 0.07692307692307693,
+    "f1": 0.058419243986254296,
+    "documents_all_rows_correct": 0.01,
+    "precision_ci95": [
+      0.017906849003712404,
+      0.08943500634428307
+    ],
+    "recall_ci95": [
+      0.02898401006108516,
+      0.14095779220779192
+    ],
+    "f1_ci95": [
+      0.022421645066349975,
+      0.10978488362943958
+    ],
+    "documents_all_rows_correct_ci95": [
+      0.0,
+      0.03
+    ]
+  },
+  "line_items_set_based": {
+    "label": "set-based, ignores row alignment",
+    "fields": {
+      "description": {
+        "n_documents": 100,
+        "n_labelled": 100,
+        "tp": 74,
+        "fp": 149,
+        "fn": 147,
+        "precision": 0.33183856502242154,
+        "recall": 0.334841628959276,
+        "f1": 0.3333333333333333,
+        "exact_match": 0.13,
+        "precision_ci95": [
+          0.2401472341588216,
+          0.441180578376602
+        ],
+        "recall_ci95": [
+          0.2410994595466645,
+          0.44393821391484933
+        ],
+        "f1_ci95": [
+          0.24785598705501619,
+          0.4352044319600498
+        ],
+        "exact_match_ci95": [
+          0.07,
+          0.2
+        ]
+      },
+      "quantity": {
+        "n_documents": 100,
+        "n_labelled": 94,
+        "tp": 83,
+        "fp": 57,
+        "fn": 127,
+        "precision": 0.5928571428571429,
+        "recall": 0.3952380952380952,
+        "f1": 0.4742857142857143,
+        "exact_match": 0.22,
+        "precision_ci95": [
+          0.4824450965543355,
+          0.7218736404505244
+        ],
+        "recall_ci95": [
+          0.28309810433098104,
+          0.5000531914893614
+        ],
+        "f1_ci95": [
+          0.36628919860627174,
+          0.5683673822834618
+        ],
+        "exact_match_ci95": [
+          0.14,
+          0.31
+        ]
+      },
+      "unit_price": {
+        "n_documents": 100,
+        "n_labelled": 31,
+        "tp": 24,
+        "fp": 104,
+        "fn": 26,
+        "precision": 0.1875,
+        "recall": 0.48,
+        "f1": 0.2696629213483146,
+        "exact_match": 0.55,
+        "precision_ci95": [
+          0.09321125907990314,
+          0.3333333333333333
+        ],
+        "recall_ci95": [
+          0.2888782051282051,
+          0.6458639705882352
+        ],
+        "f1_ci95": [
+          0.14666666666666667,
+          0.41512160540953197
+        ],
+        "exact_match_ci95": [
+          0.45,
+          0.65
+        ]
+      },
+      "amount": {
+        "n_documents": 100,
+        "n_labelled": 99,
+        "tp": 142,
+        "fp": 157,
+        "fn": 78,
+        "precision": 0.47491638795986624,
+        "recall": 0.6454545454545455,
+        "f1": 0.5472061657032755,
+        "exact_match": 0.28,
+        "precision_ci95": [
+          0.4,
+          0.5520749689322243
+        ],
+        "recall_ci95": [
+          0.5365853658536586,
+          0.751401994817386
+        ],
+        "f1_ci95": [
+          0.4765856129685917,
+          0.6183972681331981
+        ],
+        "exact_match_ci95": [
+          0.19975000000000004,
+          0.37
+        ]
+      }
+    }
+  },
+  "system": "S2",
+  "dataset": "cord-v2",
+  "split": "validation",
+  "n_documents": 100,
+  "schema": "cord_receipt",
+  "schema_version": "1.1.0",
+  "split_sha256": "e809a1edf8320960479a1f79e7e2c086aaca4793dbf9c91fc354eaca2c656852",
+  "bootstrap": {
+    "resamples": 2000,
+    "seed": 20261106,
+    "unit": "document"
+  },
+  "predictions_sha256": "6537370725cf59762407408107f8765f811632a83522c261d66aa37170b1e44d",
+  "failures": {
+    "crashes": 0,
+    "crash_detail": [],
+    "failed_extractions": 0,
+    "documents_with_a_fallback": 0,
+    "pass_fallbacks": 0,
+    "retries": 0,
+    "truncated_replies": 0
+  },
+  "verification": {
+    "values_output": 1084,
+    "values_not_found_in_document": 43,
+    "values_withheld": 0,
+    "rule_failures": 398
+  },
+  "latency_seconds": {
+    "source": "measured in this run",
+    "ocr": {
+      "n": 100,
+      "p50": 2.5504033000033814,
+      "p95": 4.705523555011313
+    },
+    "extraction_excluding_llm": {
+      "n": 100,
+      "p50": 0.03178565000416711,
+      "p95": 0.17025177499162963
+    },
+    "warm_llm": {
+      "n": 98,
+      "p50": 2.3719832000066026,
+      "p95": 7.313741515011507
+    },
+    "warm_total": {
+      "n": 98,
+      "p50": 5.29970490000445,
+      "p95": 9.94156337501536
+    },
+    "cold": {
+      "documents": 2,
+      "model_load_seconds": [
+        69.5487653,
+        7.331563
+      ],
+      "cold_llm_seconds_excluding_load": [
+        58.07148729999791,
+        4.314486800008768
+      ]
+    }
+  },
+  "memory": {
+    "peak_process_rss_gib": 0.98,
+    "peak_model_runner_rss_gib": 1.888,
+    "lowest_available_system_ram_gib": 0.265,
+    "total_system_ram_gib": 15.638
+  },
+  "workers": 1,
+  "cost_per_document_usd": 0,
+  "output_file": "evals/results/dev/cord_s2_validation_v1_1.json",
+  "environment": {
+    "git_commit": "a3514c2e69cd45d30cddd871061fcbfcdade5e24",
+    "git_dirty": false,
+    "python": "3.12.13",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "cpu_count": 12,
+    "packages": {
+      "rapidocr": "3.10.0",
+      "onnxruntime": "1.31.1",
+      "numpy": "2.5.4",
+      "pypdfium2": "5.14.0",
+      "rapidfuzz": "3.14.6"
+    },
+    "ocr_execution": "CPU, onnxruntime defaults"
+  },
+  "llm": {
+    "model": "llama3.2:3b",
+    "params": {
+      "temperature": 0,
+      "seed": 20261106,
+      "num_ctx": 4096,
+      "num_predict": 1024
+    },
+    "prompt_versions": {
+      "a": "a-1.0",
+      "b": "b-1.0"
+    },
+    "mode": "record",
+    "live_calls": 89,
+    "cache_hits": 11
+  }
+}
