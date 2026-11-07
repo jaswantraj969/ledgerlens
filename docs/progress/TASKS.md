@@ -39,7 +39,11 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 | 7 | S2 on validation | IN PROGRESS | evals/results/dev/cord_s2_validation_v1_1.md. Test read is pending |
 | 7 | S3 on validation | IN PROGRESS | evals/results/dev/cord_s3_validation_v1_1.md. Test read is pending |
 | 7 | S4 on validation | IN PROGRESS | evals/results/dev/cord_s4_validation_v1_1.md. Test read is pending |
-| 7 | S5 | NOT STARTED | Needs features on train, then calibration |
+| 7 | Prompt round 2 on train subset; 2.2 chosen | VERIFIED | evals/results/dev/prompt_round/prompt_round.md |
+| 7 | S2', S3', S4', S4h on validation, read once | VERIFIED | evals/results/dev/cord_validation_comparison_v1_1_1.md. Test read is pending |
+| 7 | S2' on synthetic, dev versus held-out ledger | VERIFIED | evals/results/synthetic_s2p_v1_1_1.md |
+| 7 | S5 code (units, calibrator, thresholds, grouped variant) | IMPLEMENTED BUT UNVERIFIED | backend/tests/unit/test_s5.py; not run on real predictions yet |
+| 7 | S5 run | NOT STARTED | Needs S4h on all 800 train documents; waits for the model decision |
 | 7 | Final S1-S5 test read, once, from a clean commit | NOT STARTED | Last step |
 | 7 | Ablations, degradation | NOT STARTED | Follow S5 |
 | 7 | SROIE | BLOCKED | Removed: official access unavailable; mirror terms unverified. Labels and vendor groups deleted; adapter kept with fictional fixtures |
@@ -78,4 +82,4 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 |---|---|
 | SROIE results | None required. Blocked by decision; reopen only if official access appears |
 | CI on GitHub unverified | Approve creating a remote; nothing is pushed until then |
-| LLM line items are poor on validation (row F1 0.058) | Decide whether to tune prompts on validation, or approve a larger model. Proposed name, size and speed would need checking first |
+| LLM still below rules on CORD after prompt 2.2 (S4h row F1 0.292 vs 0.377) | Decide on the model proposal; nothing is pulled without approval |

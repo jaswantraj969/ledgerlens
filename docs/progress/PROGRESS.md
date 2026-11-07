@@ -70,3 +70,15 @@
 - Mutation check: 22 of 22 caught. Log: docs/progress/logs/mutation-check.txt.
 - A commit went in with one test failing (a2d4c67), fixed in 3f5d7de. The hook checks lint and types, not tests, so commit commands must gate on pytest.
 - Next: RQ worker and persisted pipeline, then S5 on train and validation.
+
+## 2026-11-07, review 3
+- SROIE labels and vendor groups removed in a normal commit; adapter kept with fictional fixtures.
+- Metrics 1.1.1: exact match dropped from single-field tables, kept in JSON as redundant. Five results rescored from saved predictions: 155 values each, 0 different.
+- Memory sampler tested; runs abort below 0.4 GiB free RAM and write nothing. Five aborts happened and were retried from the replay cache.
+- OLLAMA_MAX_LOADED_MODELS=1 set and confirmed in the server log.
+- RQ worker and persisted pipeline: 9 tests pass, including a worker killed at two points, an unavailable model, and duplicate uploads.
+- Pre-registered prompt round, label proximity, S4h and S5 before any new result (commit eb5c68f).
+- Prompt round on train subset: 2.2 chosen (mean F1 0.495 against 0.449 for 1.0). Validation read once for S2', S3', S4', S4h.
+- S2' on synthetic: transfers to the held-out layout for most header fields; subtotal does not.
+- Local CI: all steps exit 0; 378 backend tests, 96% coverage, gitleaks 69 commits, no leaks.
+- Next: model decision, then S4h on all train documents and S5.

@@ -195,6 +195,12 @@ Pure OCR misreads such as `590050` for `59,500` were left alone. Patching them w
 
 The LLM extractor now treats the literal strings `null`, `none`, `n/a` and `na` as no value. Reading S2 rows showed the model sometimes returns these. Field scores did not change, because such strings never normalised to a value, but verification counts did. No prompt changed, so replies come from the replay cache.
 
+### Round 3, 2026-11-07, prompt round on train only
+
+Run as pre-registered above. S2 on the 100-document train subset, metrics 1.1.1 ([table](../evals/results/dev/prompt_round/prompt_round.md)): mean of four F1 for 1.0 (reference) 0.449, 2.0 0.461, 2.1 0.477, 2.2 0.495. Prompt 2.2 was chosen by the rule. `num_ctx` per prompt: 2048, 2048 and 2304, from the longest CORD prompt (864, 908 and 1129 tokens) plus `num_predict` 1024; counts were stable across repeated calls. The first reference run aborted at 95 of 100 documents below 0.4 GiB free RAM and wrote nothing; the rerun replayed the recorded replies. Validation was then read once, for S2', S3', S4' and S4h. No prompt changes after that read.
+
+S4' needed three attempts: two aborted below 0.4 GiB free RAM (records in `evals/results/aborted/`) and wrote no result, so no S4' number was seen before the completed run. Recorded replies replayed on each retry; timings are labelled mixed where that happened.
+
 ## Changes after first results
 
 No S1 rule, schema, normalisation or metric definition has changed since `evals/results/cord_s1_v1.json`. Metrics 1.1 added new definitions and left the 1.0 path intact, which the reproduction in `docs/progress/logs/s1-reproduction.txt` confirms.
@@ -203,14 +209,15 @@ The `memory` block of `evals/results/cord_s1_v1_1.json` reads 0.0 for process an
 
 ## Results
 
-Reported test result: [S1 on CORD test, metrics 1.1](../evals/results/cord_s1_v1_1.md). History: [metrics 1.0](../evals/results/cord_s1_v1.md).
+Reported test result: [S1 on CORD test, metrics 1.1.1](../evals/results/cord_s1_v1_1_1.md), rescored from saved predictions; [metrics 1.1](../evals/results/cord_s1_v1_1.md). History: [metrics 1.0](../evals/results/cord_s1_v1.md).
 
-The test split has been read for S1 only: once at commit `1b53a77`, and again for the reproduction check and metrics 1.1, as the 2026-11-07 review directed, with no rule change. S2 to S5 have not read it.
+The test split has been read for S1 only: once at commit `1b53a77`, and again for the reproduction check and metrics 1.1, as the 2026-11-07 review directed, with no rule change. S2 to S5, S2'-S4' and S4h have not read it.
 
 - Reproduction log: `docs/progress/logs/s1-reproduction.txt`. 140 values, 0 different, with fresh OCR, and again at clean HEAD.
 - Layout groups: [S1 by layout group](../evals/results/cord_s1_v1_1_layout_groups.md).
 - Synthetic: [S1 per layout, dev versus held-out](../evals/results/synthetic_s1_v1_1.md).
-- Validation, for development only: [S1](../evals/results/dev/cord_s1_validation_v1_1.md), [S2](../evals/results/dev/cord_s2_validation_v1_1.md), [S3](../evals/results/dev/cord_s3_validation_v1_1.md), [S4](../evals/results/dev/cord_s4_validation_v1_1.md).
+- Validation, for development only: [all systems, metrics 1.1.1](../evals/results/dev/cord_validation_comparison_v1_1_1.md), covering S1-S4 (prompt 1.0), S2', S3', S4' (prompt 2.2) and S4h.
+- Synthetic S2' (prompt 2.2), dev versus held-out: [table](../evals/results/synthetic_s2p_v1_1_1.md), next to [S1](../evals/results/synthetic_s1_v1_1.md).
 
 The S1 latency differed between runs (p50 2.57 s, then 2.00 s). Timings are not reproducible in the way scores are.
 
