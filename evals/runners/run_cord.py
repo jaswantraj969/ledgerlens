@@ -80,6 +80,11 @@ def latency_report(rows: list[dict[str, Any]], *, source: str) -> dict[str, Any]
     }
 
 
+def slug(label: str) -> str:
+    """File name part for a reported system name: S4' becomes s4p."""
+    return label.lower().replace("'", "p")
+
+
 def stop_if_low_memory(memory: MemoryLog, system: str, split: str, processed: int) -> None:
     """Abort before the next document, so a partial run never becomes a result."""
     if memory.abort_reason:
@@ -87,7 +92,7 @@ def stop_if_low_memory(memory: MemoryLog, system: str, split: str, processed: in
         abort_run(
             memory,
             ABORTED,
-            f"cord_{system.lower()}_{split}",
+            f"cord_{slug(system)}_{split}",
             details | {"environment": environment()},
         )
 
@@ -109,7 +114,7 @@ def main() -> None:
     arguments = parser.parse_args()
 
     label = arguments.label or arguments.system
-    name = label.lower().replace("'", "p")
+    name = slug(label)
     suffix = "v" + METRICS_VERSION.replace(".", "_")
     wanted: set[str] | None = None
     if arguments.split == "train":
