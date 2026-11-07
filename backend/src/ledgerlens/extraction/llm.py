@@ -1,15 +1,14 @@
-"""LLM extractor, pass A (field-guided).
+"""LLM extractor: pass A (field-guided) and pass B (document-guided).
 
 Output is constrained by a JSON schema and validated with Pydantic. Invalid output is retried
 once with the validation error; a second failure falls back to the deterministic extractor,
 with that source recorded on every field. Document text is untrusted data: it is fenced in the
 prompt, the model has no tools, and its output is checked against the document afterwards.
-Pass B (document-guided) is not implemented.
 """
 
 import json
 from dataclasses import dataclass, field
-from typing import Any
+from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, ValidationError, create_model
 
@@ -21,7 +20,10 @@ from ledgerlens.parsing.model import ParsedDocument
 from ledgerlens.schema import FieldType, Schema
 
 PROMPT_VERSION = "a-1.0"
+PROMPT_VERSION_B = "b-1.0"
+PROMPT_VERSIONS = {"a": PROMPT_VERSION, "b": PROMPT_VERSION_B}
 SOURCE_PASS_A = "llm_pass_a"  # noqa: S105 - a source label, not a secret
+SOURCE_PASS_B = "llm_pass_b"  # noqa: S105 - a source label, not a secret
 FALLBACK_SOURCE = "deterministic_fallback"
 DEFAULT_PARAMS: dict[str, Any] = {
     "temperature": 0,
@@ -72,6 +74,22 @@ def _prompt(document: ParsedDocument, schema: Schema) -> str:
     )
 
 
+def _prompt_b(document: ParsedDocument, schema: Schema) -> str:
+    """Document-guided: read the receipt top to bottom before filling any field."""
+    lines = build_lines(document)
+    numbered = "\n".join(f"{index + 1}: {line.text}" for index, line in enumerate(lines))
+    names = ", ".join(spec.name for spec in schema.fields)
+    rows = " Every purchased item goes in line_items." if schema.line_items is not None else ""
+    return (
+        "<document>\n" + numbered + "\n</document>\n\n"
+        "Read the whole document in order. First find where the purchased items end and "
+        "the summary lines begin. Then fill these fields from the lines you found: "
+        + names
+        + "."
+        + rows
+    )
+
+
 @dataclass
 class ExtractionAttempts:
     records: list[FieldRecord]
@@ -89,18 +107,21 @@ class LlmExtractor:
         model: str,
         params: dict[str, Any] | None = None,
         fallback: DeterministicExtractor | None = None,
+        mode: Literal["a", "b"] = "a",
     ) -> None:
         self._provider = provider
         self._model = model
         self._params = DEFAULT_PARAMS if params is None else params
         self._fallback = fallback or DeterministicExtractor()
+        self._mode = mode
+        self._source = SOURCE_PASS_A if mode == "a" else SOURCE_PASS_B
 
     def extract(self, document: ParsedDocument, schema: Schema) -> list[FieldRecord]:
         return self.run(document, schema).records
 
     def run(self, document: ParsedDocument, schema: Schema) -> ExtractionAttempts:
         output_model = _output_model(schema)
-        base_prompt = _prompt(document, schema)
+        base_prompt = (_prompt if self._mode == "a" else _prompt_b)(document, schema)
         errors: list[str] = []
         responses: list[LLMResponse] = []
         prompt = base_prompt
@@ -110,7 +131,7 @@ class LlmExtractor:
                 prompt=prompt,
                 system=SYSTEM_PROMPT,
                 json_schema=output_model.model_json_schema(),
-                schema_version=f"{schema.name}:{schema.version}:{PROMPT_VERSION}",
+                schema_version=f"{schema.name}:{schema.version}:{PROMPT_VERSIONS[self._mode]}",
                 params=self._params,
             )
             try:
@@ -127,7 +148,7 @@ class LlmExtractor:
                 prompt = f"{base_prompt}\n\nYour last reply was invalid: {summary}\nReply again."
                 continue
             return ExtractionAttempts(
-                records=_records(parsed.model_dump(), schema),
+                records=_records(parsed.model_dump(), schema, self._source),
                 first_attempt_valid=attempt == 1,
                 attempts=attempt,
                 fell_back=False,
@@ -153,13 +174,13 @@ def _clean(value: str | None) -> str | None:
     return value.strip()
 
 
-def _records(output: dict[str, Any], schema: Schema) -> list[FieldRecord]:
+def _records(output: dict[str, Any], schema: Schema, source: str) -> list[FieldRecord]:
     records = [
         FieldRecord(
             name=spec.name,
             value_raw=_clean(output.get(spec.name)),
             value_normalized=None,
-            source=SOURCE_PASS_A,
+            source=source,
         )
         for spec in schema.fields
     ]
@@ -172,7 +193,7 @@ def _records(output: dict[str, Any], schema: Schema) -> list[FieldRecord]:
                         name=f"line_items[{row}].{name}",
                         value_raw=value,
                         value_normalized=None,
-                        source=SOURCE_PASS_A,
+                        source=source,
                     )
                 )
     return records

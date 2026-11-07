@@ -24,7 +24,7 @@ from ledgerlens.extraction.llm import DEFAULT_PARAMS, PROMPT_VERSION, LlmExtract
 from ledgerlens.llm.cache import CachingProvider, ReplayCache
 from ledgerlens.llm.ollama import OllamaProvider
 from ledgerlens.parsing.model import ParsedDocument
-from ledgerlens.pipeline import process
+from ledgerlens.pipeline import PrecomputedExtractor, process
 from ledgerlens.schema import load_schema
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -78,7 +78,7 @@ def main() -> None:
         started = time.perf_counter()
         result = extractor.run(parsed, schema)
         seconds = time.perf_counter() - started
-        records = process(parsed, schema, _Fixed(result.records))
+        records = process(parsed, schema, PrecomputedExtractor(result.records))
         predicted = predictions(records)
         counts = {
             field: compare(field, predicted[field], document.gold[field])[0]
@@ -175,16 +175,6 @@ def main() -> None:
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8", newline="\n")
     print("wrote", output)
-
-
-class _Fixed:
-    """Hands an already-computed extraction to the pipeline, so nothing is called twice."""
-
-    def __init__(self, records: list[Any]) -> None:
-        self._records = records
-
-    def extract(self, document: ParsedDocument, schema: Any) -> list[Any]:
-        return self._records
 
 
 if __name__ == "__main__":

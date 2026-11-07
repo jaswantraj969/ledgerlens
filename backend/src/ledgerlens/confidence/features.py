@@ -30,4 +30,9 @@ def build_features(record: FieldRecord) -> Features:
         "ocr_confidence_mean": mean(confidences) if confidences else None,
         "ocr_confidence_min": min(confidences) if confidences else None,
         "ocr_confidence_available": bool(confidences),
+        "agree_count": record.signals.get("agree_count"),
+        "sources_with_value": record.signals.get("sources_with_value"),
+        "agree_pass_a_b": record.signals.get("agree_pass_a_b"),
+        "agree_pass_a_deterministic": record.signals.get("agree_pass_a_deterministic"),
+        "cross_pass_available": "agree_count" in record.signals,
     }

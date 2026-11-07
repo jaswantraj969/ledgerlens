@@ -1,0 +1,11 @@
+=== Stage 1: fresh OCR, old metrics, code as at ba38d42
+original commit      1b53a77461f85c0351fffd01092e7f5852f71968
+reproduction commit  ba38d42b01d6c14248f5e6de08fcfe5cf11f09f3
+reproduction dirty   True
+values compared      140
+values different     0
+latency p50: 2.5665 s -> 1.9974 s (timing, not compared)
+latency p95: 5.3878 s -> 4.0193 s (timing, not compared)
+latency extraction_only_p50: 0.0012 s -> 0.0009 s (timing, not compared)
+RESULT: IDENTICAL
+STAGE1_EXIT=0

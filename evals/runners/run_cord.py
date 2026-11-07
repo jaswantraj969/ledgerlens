@@ -150,7 +150,7 @@ def main() -> None:
             started = time.perf_counter()
             output = system(parsed, schema)
             elapsed = time.perf_counter() - started
-        except Exception as error:  # noqa: BLE001 - a crash is a measured outcome
+        except Exception as error:
             crashes.append(f"{document.document_id}: {type(error).__name__}")
             predictions.append(
                 DocumentPrediction(
@@ -164,9 +164,7 @@ def main() -> None:
             )
         )
         llm_seconds, load_seconds = llm_timing(output)
-        live_seconds = sum(
-            (r.latency_seconds or 0) for r in output.responses if not r.cache_hit
-        )
+        live_seconds = sum((r.latency_seconds or 0) for r in output.responses if not r.cache_hit)
         rows.append(
             {
                 "document_id": document.document_id,
@@ -194,7 +192,10 @@ def main() -> None:
             }
         )
         if len(predictions) % 10 == 0:
-            print(f"processed {len(predictions)}, failed={sum(p.failed for p in predictions)}", flush=True)
+            print(
+                f"processed {len(predictions)}, failed={sum(p.failed for p in predictions)}",
+                flush=True,
+            )
 
     split_info = json.loads(SPLIT_FILE.read_text(encoding="utf-8"))[arguments.split]
     if len(predictions) != split_info["n"]:

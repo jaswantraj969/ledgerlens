@@ -35,6 +35,16 @@ class Extractor(Protocol):
     def extract(self, document: ParsedDocument, schema: Schema) -> list[FieldRecord]: ...
 
 
+class PrecomputedExtractor:
+    """Hands an already-run extraction to the pipeline, so no model is called twice."""
+
+    def __init__(self, records: list[FieldRecord]) -> None:
+        self._records = records
+
+    def extract(self, document: ParsedDocument, schema: Schema) -> list[FieldRecord]:
+        return self._records
+
+
 def process(
     document: ParsedDocument, schema: Schema, extractor: Extractor | None = None
 ) -> list[FieldRecord]:
