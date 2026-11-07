@@ -24,9 +24,17 @@ Official SROIE access is unavailable and unofficial image mirrors are not used, 
 
 One separator followed by exactly three digits is read as thousands grouping (`45.000` is 45000). This suits Indonesian receipts and misreads three-decimal currencies.
 
-## Synthetic invoices share one layout
+## Rule-based extraction does not transfer to unseen wording
 
-The generator renders a single template today. It has no rotated scans, low-DPI renders or noise yet, and passing tests on it says little about real documents.
+On the held-out synthetic layout, S1 scored F1 0.000 on vendor, invoice number, date, subtotal, tax and total, against about 1.000 on development layouts (`evals/results/synthetic_s1_v1_1.md`). Line items and currency held up because they do not depend on label wording. Development-layout scores mostly show fit to known wording.
+
+## Currency scan false fills
+
+The currency scan fills a value on layouts that print no currency: F1 0.000 on the `receipt` layout. The likely cause, unconfirmed, is item words that match ISO codes, such as "Try" or "Sar". It is left unfixed, because rules may not change after reading held-out results without a new protocol.
+
+## Synthetic evaluation scope
+
+The synthetic evaluation covers five single-page layouts. Rotated, low-DPI and multi-page variants exist in the generator but are outside this run.
 
 ## Native-text PDFs only
 

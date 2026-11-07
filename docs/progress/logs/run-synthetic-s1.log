@@ -4,3 +4,12 @@ modern: 40 documents
 receipt: 40 documents
 statement: 40 documents
 ledger: 40 documents
+classic: 20 documents
+modern: 20 documents
+receipt: 20 documents
+statement: 20 documents
+HEARTBEAT 2026-11-07T06:59:14Z elapsed=247s progress=208 idle=15s
+ledger: 20 documents
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\synthetic_s1_v1_1.json
+END 2026-11-07T07:00:00Z elapsed=293s
+EXIT=0
