@@ -1,0 +1,95 @@
+=== lint
+All checks passed!
+102 files already formatted
+TASK_EXIT[lint]=0
+=== typecheck
+Success: no issues found in 45 source files
+TASK_EXIT[typecheck]=0
+=== eval-smoke
+classic: 3 documents
+modern: 3 documents
+receipt: 3 documents
+statement: 3 documents
+ledger: 3 documents
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\synthetic_smoke.json
+TASK_EXIT[eval-smoke]=0
+=== dev
+ Container ledgerlens-postgres-1 Recreate 
+ Container ledgerlens-redis-1 Recreate 
+ Container ledgerlens-redis-1 Recreated 
+ Container ledgerlens-postgres-1 Recreated 
+ Container ledgerlens-redis-1 Starting 
+ Container ledgerlens-postgres-1 Starting 
+ Container ledgerlens-redis-1 Started 
+ Container ledgerlens-postgres-1 Started 
+ Container ledgerlens-postgres-1 Waiting 
+ Container ledgerlens-redis-1 Waiting 
+ Container ledgerlens-redis-1 Healthy 
+ Container ledgerlens-postgres-1 Healthy 
+TASK_EXIT[dev]=0
+=== tables
+wrote evals\results\cord_s1_v1.md
+wrote evals\results\cord_s1_v1_1.md
+wrote evals\results\dev\cord_s1_validation_v1_1.md
+wrote evals\results\dev\cord_s2_validation_v1_1.md
+wrote evals\results\dev\cord_s3_validation_v1_1.md
+wrote evals\results\dev\cord_s4_validation_v1_1.md
+wrote evals\results\synthetic_s1_v1_1.md
+TASK_EXIT[tables]=0
+=== reproduce
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\cord_s1_validation_v1_1.json
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\cord_s2_validation_v1_1.json
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\cord_s3_validation_v1_1.json
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\cord_s4_validation_v1_1.json
+wrote evals\results\cord_s1_v1.md
+wrote evals\results\cord_s1_v1_1.md
+wrote evals\results\dev\cord_s1_validation_v1_1.md
+wrote evals\results\dev\cord_s2_validation_v1_1.md
+wrote evals\results\dev\cord_s3_validation_v1_1.md
+wrote evals\results\dev\cord_s4_validation_v1_1.md
+wrote evals\results\synthetic_s1_v1_1.md
+TASK_EXIT[reproduce]=0
+predictions s1 identical -
+predictions s2 identical 0
+predictions s3 identical 0
+predictions s4 identical 0

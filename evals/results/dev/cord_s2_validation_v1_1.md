@@ -7,7 +7,7 @@ Generated from `cord_s2_validation_v1_1.json`. Do not edit by hand.
 - Schema: cord_receipt 1.1.0. Split sha256: `e809a1edf8320960479a1f79e7e2c086aaca4793dbf9c91fc354eaca2c656852`.
 - Predictions sha256: `7626291638eea48de28bf545ba67090e318b2a04ab41c3a37f7bd706587d95e8`.
 - Intervals: 95% bootstrap, 2000 resamples of documents, seed 20261106.
-- Commit: `1c1f7655d09aa4309fe163fd8dce637b9877db09`, dirty: False.
+- Commit: `86cb81e4cf31b4c9f3e7679e06f7330c601fe9c5`, dirty: False.
 
 ## Single-valued fields
 

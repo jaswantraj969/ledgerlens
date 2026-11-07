@@ -7,7 +7,7 @@ Generated from `cord_s3_validation_v1_1.json`. Do not edit by hand.
 - Schema: cord_receipt 1.1.0. Split sha256: `e809a1edf8320960479a1f79e7e2c086aaca4793dbf9c91fc354eaca2c656852`.
 - Predictions sha256: `56adfae768484ce1eccbb32ac012a51b0fb0fe2d5dd8827bada5e098b42900e7`.
 - Intervals: 95% bootstrap, 2000 resamples of documents, seed 20261106.
-- Commit: `47944663bfcb0343b7504d0229d93e20cad4dcea`, dirty: False.
+- Commit: `86cb81e4cf31b4c9f3e7679e06f7330c601fe9c5`, dirty: False.
 
 ## Single-valued fields
 
@@ -58,6 +58,6 @@ Timings are recorded when the call was first made.
 - Warm LLM, load excluded: p50 2.37 s, p95 7.31 s (n=98).
 - Warm total per document: p50 5.26 s, p95 9.91 s (n=98).
 - Cold documents: 2. Model load (s): [69.55, 7.33]. Cold LLM time excluding load (s): [58.07, 4.31].
-- Memory: peak process RSS 0.929 GiB, peak model runner RSS 1.068 GiB, lowest available system RAM 1.086 of 15.638 GiB.
+- Memory: peak process RSS 0.992 GiB, peak model runner RSS 0.024 GiB, lowest available system RAM 1.647 of 15.638 GiB.
 
 Gold values excluded as unparsable: none.

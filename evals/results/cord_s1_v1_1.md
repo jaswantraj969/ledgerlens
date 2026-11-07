@@ -55,9 +55,7 @@ Secondary score, set-based, ignores row alignment.
 Timings are measured in this run.
 
 - OCR: p50 2.56 s, p95 5.39 s (n=100).
-- Warm LLM, load excluded: p50 0.00 s, p95 0.00 s (n=100).
-- Warm total per document: p50 2.57 s, p95 5.39 s (n=100).
-- Cold documents: 0. Model load (s): []. Cold LLM time excluding load (s): [].
-- Peak process RSS: 0.0 GiB. Peak model runner RSS: 0.0 GiB. Lowest available system RAM: 2.564 of 15.638 GiB.
+- Total per document: p50 2.57 s, p95 5.39 s (n=100). No model is used.
+- Memory: peak process RSS 0.0 GiB, peak model runner RSS 0.0 GiB, lowest available system RAM 2.564 of 15.638 GiB.
 
 Gold values excluded as unparsable: none.
