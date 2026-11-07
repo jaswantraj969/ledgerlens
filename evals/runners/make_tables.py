@@ -103,10 +103,25 @@ def set_table(block: dict[str, Any]) -> list[str]:
     return lines
 
 
+def _llm_latency(result: dict[str, Any]) -> list[str]:
+    latency = result["latency_seconds"]
+    if "llm" not in result:
+        return [f"- Total per document: {_seconds(latency['warm_total'])}. No model is used."]
+    cold = latency["cold"]
+    return [
+        f"- Warm LLM, load excluded: {_seconds(latency['warm_llm'])}.",
+        f"- Warm total per document: {_seconds(latency['warm_total'])}.",
+        f"- Cold documents: {cold['documents']}. Model load (s): "
+        f"{[round(x, 2) for x in cold['model_load_seconds']]}. Cold LLM time excluding load (s): "
+        f"{[round(x, 2) for x in cold['cold_llm_seconds_excluding_load']]}.",
+    ]
+
+
 def render_v1_1(result: dict[str, Any], source: str) -> str:
     failures = result["failures"]
     latency = result["latency_seconds"]
-    memory = result["memory"]
+    memory = result.get("memory_live_run", result["memory"])
+    memory_label = "Memory, live run" if "memory_live_run" in result else "Memory"
     lines = [
         f"# {result['system']} on {result['dataset']} {result['split']} (metrics 1.1)",
         "",
@@ -157,15 +172,11 @@ def render_v1_1(result: dict[str, Any], source: str) -> str:
         f"Timings are {latency['source']}.",
         "",
         f"- OCR: {_seconds(latency['ocr'])}.",
-        f"- Warm LLM, load excluded: {_seconds(latency['warm_llm'])}.",
-        f"- Warm total per document: {_seconds(latency['warm_total'])}.",
-        f"- Cold documents: {latency['cold']['documents']}. Model load (s): "
-        f"{[round(x, 2) for x in latency['cold']['model_load_seconds']]}. Cold LLM time "
-        f"excluding load (s): "
-        f"{[round(x, 2) for x in latency['cold']['cold_llm_seconds_excluding_load']]}.",
-        f"- Peak process RSS: {memory['peak_process_rss_gib']} GiB. Peak model runner RSS: "
-        f"{memory['peak_model_runner_rss_gib']} GiB. Lowest available system RAM: "
-        f"{memory['lowest_available_system_ram_gib']} of {memory['total_system_ram_gib']} GiB.",
+        *_llm_latency(result),
+        f"- {memory_label}: peak process RSS {memory['peak_process_rss_gib']} GiB, "
+        f"peak model runner RSS {memory['peak_model_runner_rss_gib']} GiB, lowest available "
+        f"system RAM {memory['lowest_available_system_ram_gib']} of "
+        f"{memory['total_system_ram_gib']} GiB.",
         "",
     ]
     excluded = {k: v for k, v in result["gold_values_excluded_unparsable"].items() if v}

@@ -67,6 +67,13 @@ def test_valid_reply_passes_first_time() -> None:
     assert "line_items[0].unit_price" not in fields
 
 
+@pytest.mark.parametrize("empty", ["null", "NULL", "None", "n/a", "  "])
+def test_words_for_nothing_are_not_values(empty: str) -> None:
+    reply = json.loads(VALID) | {"tax_amount": empty}
+    fields = {r.name: r for r in run(ScriptedProvider(json.dumps(reply))).records}
+    assert fields["tax_amount"].value_raw is None
+
+
 def test_invalid_json_is_retried_with_the_error() -> None:
     provider = ScriptedProvider("not json", VALID)
     result = run(provider)

@@ -45,6 +45,7 @@ _TYPE_HINTS: dict[FieldType, str] = {
     "currency": "currency code or symbol, as printed",
     "amount": "amount, as printed",
 }
+_EMPTY_VALUES = frozenset({"", "null", "none", "n/a", "na"})
 _LINE_ITEM_FIELDS = ("description", "quantity", "unit_price", "amount")
 
 
@@ -169,7 +170,8 @@ class LlmExtractor:
 
 
 def _clean(value: str | None) -> str | None:
-    if value is None or not value.strip():
+    """Treat empty strings, and words the model writes for "nothing", as no value."""
+    if value is None or value.strip().casefold() in _EMPTY_VALUES:
         return None
     return value.strip()
 

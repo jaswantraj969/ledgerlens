@@ -50,19 +50,23 @@ class MemoryLog(threading.Thread):
         self.peak_runner = 0
         self.lowest_available = psutil.virtual_memory().available
 
+    def sample(self) -> None:
+        self.peak_process = max(self.peak_process, psutil.Process().memory_info().rss)
+        self.lowest_available = min(self.lowest_available, psutil.virtual_memory().available)
+        for process in psutil.process_iter(["name", "memory_info"]):
+            name = (process.info.get("name") or "").lower()
+            memory = process.info.get("memory_info")
+            if memory is not None and ("llama-server" in name or "ollama" in name):
+                self.peak_runner = max(self.peak_runner, memory.rss)
+
     def run(self) -> None:
-        own = psutil.Process()
+        self.sample()
         while not self.stop_event.wait(self.interval):
-            self.peak_process = max(self.peak_process, own.memory_info().rss)
-            self.lowest_available = min(self.lowest_available, psutil.virtual_memory().available)
-            for process in psutil.process_iter(["name", "memory_info"]):
-                name = (process.info.get("name") or "").lower()
-                memory = process.info.get("memory_info")
-                if memory is not None and ("llama-server" in name or "ollama" in name):
-                    self.peak_runner = max(self.peak_runner, memory.rss)
+            self.sample()
 
     def report(self) -> dict[str, float | int]:
         self.stop_event.set()
+        self.sample()
         return {
             "peak_process_rss_gib": round(self.peak_process / GIB, 3),
             "peak_model_runner_rss_gib": round(self.peak_runner / GIB, 3),
@@ -249,6 +253,12 @@ def main() -> None:
             "live_calls": provider.live_calls if provider else 0,
             "cache_hits": provider.hits if provider else 0,
         }
+    if arguments.replay and output_path.exists():
+        # Replay exercises no model, so the live run's memory figures stay the reported ones.
+        previous = json.loads(output_path.read_text(encoding="utf-8"))
+        live_memory = previous.get("memory_live_run", previous.get("memory"))
+        if live_memory:
+            result["memory_live_run"] = live_memory
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8", newline="\n")
     print("wrote", output_path)

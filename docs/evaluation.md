@@ -159,9 +159,15 @@ Changes, all from reading validation errors:
 
 Pure OCR misreads such as `590050` for `59,500` were left alone. Patching them would fit noise.
 
+### Round 2, 2026-11-07, validation only
+
+The LLM extractor now treats the literal strings `null`, `none`, `n/a` and `na` as no value. Reading S2 rows showed the model sometimes returns these. Field scores did not change, because such strings never normalised to a value, but verification counts did. No prompt changed, so replies come from the replay cache.
+
 ## Changes after first results
 
-No rule, schema, normalisation or metric change has been made since `evals/results/cord_s1_v1.json`.
+No S1 rule, schema, normalisation or metric definition has changed since `evals/results/cord_s1_v1.json`. Metrics 1.1 added new definitions and left the 1.0 path intact, which the reproduction in `docs/progress/logs/s1-reproduction.txt` confirms.
+
+The `memory` block of `evals/results/cord_s1_v1_1.json` reads 0.0 for process and runner because that run ended before the first sample, and the file is not regenerated. The sampler was fixed afterwards. Its other contents are unaffected.
 
 ## Results
 
