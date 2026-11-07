@@ -5,6 +5,7 @@ S2: LLM pass A, values as returned.
 S3: S2 plus verification: a value is withheld if it does not parse or its independent
     evidence check finds nothing in the document.
 S4: pass A, pass B and rules merged by normalised agreement, then the S3 check.
+S4h: rules when they agree with an LLM pass, else the best-supported verified LLM value.
 """
 
 from collections.abc import Callable
@@ -12,6 +13,7 @@ from dataclasses import dataclass, field
 from typing import Any
 
 from ledgerlens.extraction.deterministic import DeterministicExtractor
+from ledgerlens.extraction.hybrid import hybrid
 from ledgerlens.extraction.llm import ExtractionAttempts, LlmExtractor
 from ledgerlens.extraction.merge import merge_sources
 from ledgerlens.fields import FieldRecord
@@ -20,7 +22,7 @@ from ledgerlens.parsing.model import ParsedDocument
 from ledgerlens.pipeline import PrecomputedExtractor, process
 from ledgerlens.schema import Schema
 
-LLM_SYSTEMS = ("S2", "S3", "S4")
+LLM_SYSTEMS = ("S2", "S3", "S4", "S4h")
 
 
 @dataclass
@@ -99,6 +101,29 @@ def s4(
     return output
 
 
+def s4h(
+    document: ParsedDocument, schema: Schema, pass_a: LlmExtractor, pass_b: LlmExtractor
+) -> SystemOutput:
+    """Each source is checked on its own, then chosen per field. Both passes failing fails."""
+    first, second = pass_a.run(document, schema), pass_b.run(document, schema)
+
+    def checked(records: list[FieldRecord]) -> list[FieldRecord]:
+        return process(document, schema, PrecomputedExtractor(records)) if records else []
+
+    rules = process(document, schema)
+    chosen = hybrid(
+        schema,
+        rules,
+        [] if first.fell_back else checked(first.records),
+        [] if second.fell_back else checked(second.records),
+    )
+    output = SystemOutput(process(document, schema, PrecomputedExtractor(chosen)))
+    output.failed = first.fell_back and second.fell_back
+    _count(output, first)
+    _count(output, second)
+    return output
+
+
 def build_system(
     name: str,
     provider: LLMProvider | None,
@@ -118,4 +143,7 @@ def build_system(
     if name == "S4":
         pass_b = LlmExtractor(provider, model, params, mode="b", prompt=prompt)
         return lambda document, schema: s4(document, schema, pass_a, pass_b)
+    if name == "S4h":
+        pass_b = LlmExtractor(provider, model, params, mode="b", prompt=prompt)
+        return lambda document, schema: s4h(document, schema, pass_a, pass_b)
     raise ValueError(f"unknown system {name}")

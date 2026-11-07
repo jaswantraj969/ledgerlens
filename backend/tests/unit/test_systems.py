@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 from evals.runners.run_cord import latency_report, llm_timing, percentiles
 from evals.scoring import to_prediction
-from evals.systems import SystemOutput, build_system, s2, s3, s4, withhold_unverified
+from evals.systems import SystemOutput, build_system, s2, s3, s4, s4h, withhold_unverified
 
 from ledgerlens.extraction.llm import LlmExtractor
 from ledgerlens.fields import FieldRecord
@@ -111,6 +111,29 @@ def test_s4_with_both_passes_failed_is_a_failed_document() -> None:
     assert output.fallbacks == 2
 
 
+def test_s4h_takes_the_rule_value_when_a_pass_agrees() -> None:
+    output = s4h(document(), SCHEMA, extractor(reply("10,001")), extractor(reply(), mode="b"))
+    total = next(r for r in output.records if r.name == "total_amount")
+    assert total.value_raw == "10,000"
+    assert total.source == "deterministic"
+    assert total.signals["s4h_choice"] == "rules"
+    assert total.signals["agree_rules_llm"] is True
+
+
+def test_s4h_takes_no_value_that_is_not_in_the_document() -> None:
+    output = s4h(
+        document(), SCHEMA, extractor(reply("99,999")), extractor(reply("88,888"), mode="b")
+    )
+    assert value(output, "total_amount") is None
+
+
+def test_s4h_survives_one_failed_pass_and_fails_with_both() -> None:
+    one = s4h(document(), SCHEMA, extractor("x", "y"), extractor(reply(), mode="b"))
+    assert (one.failed, one.fallbacks, value(one, "total_amount")) == (False, 1, "10,000")
+    both = s4h(document(), SCHEMA, extractor("x", "y"), extractor("x", "y", mode="b"))
+    assert both.failed is True
+
+
 def test_pass_b_uses_its_own_prompt_and_cache_key() -> None:
     seen: list[LLMRequest] = []
 
@@ -171,7 +194,7 @@ def run_module(*arguments: str) -> subprocess.CompletedProcess[str]:
     )
 
 
-@pytest.mark.parametrize("system", ["S1", "S2", "S3", "S4"])
+@pytest.mark.parametrize("system", ["S1", "S2", "S3", "S4", "S4h"])
 def test_test_split_needs_final_for_every_system(system: str) -> None:
     completed = run_module("--system", system, "--split", "test")
     assert completed.returncode != 0
