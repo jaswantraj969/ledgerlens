@@ -259,6 +259,10 @@ class Webhook(Base):
     organization_id: Mapped[uuid.UUID] = _fk("organizations.id")
     url: Mapped[str] = mapped_column(String(2000), nullable=False)
     secret_hash: Mapped[str] = mapped_column(String(64), nullable=False)
+    # Needed to sign deliveries. Shown once at creation, never returned or logged afterwards.
+    secret: Mapped[str] = mapped_column(Text, nullable=False, default="")
+    events: Mapped[list[str]] = mapped_column(JSONB, nullable=False, default=list)
+    active: Mapped[bool] = mapped_column(nullable=False, default=True)
     created_at: Mapped[datetime] = _created()
 
 
@@ -270,4 +274,8 @@ class WebhookDelivery(Base):
     event: Mapped[str] = mapped_column(String(80), nullable=False)
     status: Mapped[str] = mapped_column(String(20), nullable=False)
     attempts: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    payload: Mapped[dict[str, Any]] = mapped_column(JSONB, nullable=False, default=dict)
+    response_status: Mapped[int | None] = mapped_column(Integer)
+    last_error: Mapped[str | None] = mapped_column(Text)
+    delivered_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     created_at: Mapped[datetime] = _created()

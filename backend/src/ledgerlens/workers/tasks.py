@@ -52,6 +52,7 @@ from ledgerlens.parsing.ocr import AutoParser
 from ledgerlens.pipeline import Extractor, PrecomputedExtractor, process
 from ledgerlens.schema import Schema, load_schema
 from ledgerlens.storage.local import LocalStorage, StorageBackend
+from ledgerlens.workers import webhooks
 from ledgerlens.workers.queue import enqueue
 
 _log = structlog.get_logger()
@@ -388,8 +389,14 @@ def _finish(context: WorkerContext, job_id: uuid.UUID, run: ExtractionRun) -> st
         job.error_code = None
         job.error_detail = f"degraded: {run.degraded_reason}" if run.degraded_reason else None
         document = session.get(Document, job.document_id)
+        deliveries: list[uuid.UUID] = []
         if document is not None:
             document.status = state
+            deliveries = webhooks.emit(
+                session, document.organization_id, f"job.{state}",
+                {"job_id": str(job_id), "document_id": str(document.id), "state": state},
+            )  # fmt: skip
+    webhooks.enqueue_deliveries(context.redis, context.settings, deliveries)
     return state
 
 
@@ -406,8 +413,17 @@ def _record_failure(
         if final:
             job.dead_lettered_at = utcnow()
         document = session.get(Document, job.document_id)
+        deliveries: list[uuid.UUID] = []
         if document is not None:
             document.status = job.state
+            if final:
+                deliveries = webhooks.emit(
+                    session, document.organization_id, "job.failed",
+                    {"job_id": str(job_id), "document_id": str(document.id), "state": "failed",
+                     "error_code": job.error_code},
+                )  # fmt: skip
+    if deliveries:
+        webhooks.enqueue_deliveries(context.redis, context.settings, deliveries)
 
 
 def run_job(context: WorkerContext, job_id: uuid.UUID, *, final_attempt: bool) -> str:

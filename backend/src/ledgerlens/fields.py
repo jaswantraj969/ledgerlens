@@ -6,7 +6,7 @@ from typing import Literal
 from pydantic import BaseModel
 
 EvidenceStatus = Literal["exact", "fuzzy", "not_found", "self_sourced"]
-Decision = Literal["auto_accepted", "needs_review", "corrected", "rejected"]
+Decision = Literal["auto_accepted", "needs_review", "approved", "corrected", "rejected"]
 SignalValue = float | int | bool | str | None
 
 

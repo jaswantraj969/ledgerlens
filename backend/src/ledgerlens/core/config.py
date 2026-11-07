@@ -33,3 +33,9 @@ class Settings(BaseSettings):
     llm_cache_dir: Path = Path("var/llm-cache")
     job_retry_intervals: list[int] = [10, 60, 300]
     job_timeout_seconds: int = 900
+    # Committed evaluation results served by /evaluation/report; None means the repository's.
+    results_dir: Path | None = None
+    # Webhooks: https only, and no private or loopback addresses, unless this is set (tests).
+    allow_insecure_webhooks: bool = False
+    webhook_retry_intervals: list[int] = [10, 60, 300, 900, 3600]
+    webhook_timeout_seconds: float = 10.0

@@ -12,7 +12,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from ledgerlens import __version__
-from ledgerlens.api import auth, documents, health
+from ledgerlens.api import auth, documents, health, report, review, webhooks
 from ledgerlens.core.config import Settings
 from ledgerlens.core.errors import install_handlers
 from ledgerlens.core.logs import configure_logging
@@ -61,4 +61,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(health.router)
     app.include_router(auth.router)
     app.include_router(documents.router)
+    app.include_router(review.router)
+    app.include_router(report.router)
+    app.include_router(webhooks.router)
     return app
