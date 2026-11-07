@@ -1,0 +1,34 @@
+START 2026-11-07T12:23:00Z timeout=7200s stall=900s cmd: bash /c/Users/jknm6/AppData/Local/Temp/claude/c778d8435e15a14b/9a954629-d813-4388-8578-142035aa385c/scratchpad/validation_once.sh
+== S2'
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+HEARTBEAT 2026-11-07T12:27:03Z elapsed=243s progress=127 idle=30s
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\cord_s2p_validation_v1_1_1.json
+== S3'
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\cord_s3p_validation_v1_1_1.json
+== S4'
+processed 10, failed=0
+HEARTBEAT 2026-11-07T12:31:05Z elapsed=485s progress=733 idle=0s
+processed 20, failed=0
+processed 30, failed=0
+ABORTED: free system RAM 0.368 GiB fell below 0.400 GiB. Recorded in C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\aborted\cord_s4'_validation_aborted_20261107T123254Z.json. No results written.
+END 2026-11-07T12:33:06Z elapsed=606s
+EXIT=3

@@ -1,0 +1,38 @@
+START 2026-11-07T12:34:51Z timeout=7200s stall=900s cmd: bash /c/Users/jknm6/AppData/Local/Temp/claude/c778d8435e15a14b/9a954629-d813-4388-8578-142035aa385c/scratchpad/validation_rest.sh
+== S4' attempt 1
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+ABORTED: free system RAM 0.348 GiB fell below 0.400 GiB. Recorded in C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\aborted\cord_s4p_validation_aborted_20261107T123848Z.json. No results written.
+HEARTBEAT 2026-11-07T12:38:55Z elapsed=244s progress=418 idle=1s
+== S4' attempt 2
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\cord_s4p_validation_v1_1_1.json
+== S4h attempt 1
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\cord_s4h_validation_v1_1_1.json
+END 2026-11-07T12:40:56Z elapsed=365s
+EXIT=0
