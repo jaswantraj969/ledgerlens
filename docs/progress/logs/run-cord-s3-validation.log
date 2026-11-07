@@ -1,0 +1,14 @@
+START 2026-11-07T07:06:10Z timeout=600s stall=200s cmd: backend/.venv/Scripts/python.exe -m evals.runners.run_cord --system S3 --split validation --replay
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\cord_s3_validation_v1_1.json
+END 2026-11-07T07:06:26Z elapsed=16s
+EXIT=0
