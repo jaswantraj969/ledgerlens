@@ -232,11 +232,18 @@ def test_upload_is_audited_with_the_request_id(client: TestClient, admin: Accoun
     assert row.after_hash == document.json()["sha256"]
 
 
-def test_retry_after_a_queue_outage_recovers_the_job(client: TestClient, admin: Account) -> None:
-    good = client.app.state.redis  # type: ignore[attr-defined]
-    client.app.state.redis = redis.Redis(host="127.0.0.1", port=1, socket_connect_timeout=1)  # type: ignore[attr-defined]
-    assert upload(client, admin).status_code == 503
-    client.app.state.redis = good  # type: ignore[attr-defined]
+def test_retry_recovers_an_upload_that_missed_the_queue(
+    client: TestClient, admin: Account, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Redis fails after the rate check but before the enqueue: the document is committed."""
+
+    def fail(*_args: object, **_kwargs: object) -> None:
+        raise redis.ConnectionError("down")
+
+    with monkeypatch.context() as patch:
+        patch.setattr(Queue, "enqueue", fail)
+        assert upload(client, admin).status_code == 503
+    assert count(client, Document) == 1
     retried = upload(client, admin)
     assert retried.status_code == 200
     assert retried.json()["duplicate"] is True
