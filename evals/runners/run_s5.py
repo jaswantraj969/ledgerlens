@@ -66,14 +66,15 @@ def evaluate(
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--base", default="s4h")
+    parser.add_argument("--base", default="s4h", help="predictions prefix: s1, s4h or s4h-qwen")
+    parser.add_argument("--validation-scope", default="validation")
     parser.add_argument("--train-scope", required=True)
     parser.add_argument("--variant", choices=["all", "grouped"], default="all")
     parser.add_argument("--final", action="store_true", help="read the test split, once")
     arguments = parser.parse_args()
 
     train = load(arguments.base, arguments.train_scope, "train")
-    validation = load(arguments.base, "validation", "validation")
+    validation = load(arguments.base, arguments.validation_scope, "validation")
     roles: dict[str, str] = {}
     if arguments.variant == "grouped":
         holdout = json.loads(HOLDOUT.read_text(encoding="utf-8"))["group_roles"]
@@ -93,8 +94,9 @@ def main() -> None:
         thresholds[kind] = {t: choose_threshold(probabilities, correct, t) for t in TARGETS}
 
     suffix = "" if arguments.variant == "all" else "_grouped"
+    base = arguments.base.replace("'", "p")
     result: dict[str, Any] = {
-        "system": "S5",
+        "system": f"S5-{arguments.base.upper().replace('S4H', 'S4h')}",
         "base": arguments.base,
         "variant": arguments.variant,
         "train_scope": arguments.train_scope,
@@ -105,7 +107,7 @@ def main() -> None:
         "environment": environment(),
     }
     if arguments.final:
-        output = RESULTS / f"cord_s5{suffix}_v1_1_1.json"
+        output = RESULTS / f"cord_s5_{base}{suffix}_v1_1_1.json"
         if output.exists():
             sys.exit(f"{output} exists: test is read once per configuration")
         test = load(arguments.base, "test", "test")
@@ -119,7 +121,7 @@ def main() -> None:
         else:
             result["test"] = evaluate(calibrators, thresholds, test)
     else:
-        output = RESULTS / "dev" / f"cord_s5{suffix}_validation_v1_1_1.json"
+        output = RESULTS / "dev" / f"cord_s5_{base}{suffix}_validation_v1_1_1.json"
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8", newline="\n")
     print("wrote", output)
