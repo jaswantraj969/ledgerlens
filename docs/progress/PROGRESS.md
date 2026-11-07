@@ -44,3 +44,13 @@
 - Step 8: SROIE adapter and vendor split on 626 labels from a community mirror. Terms unverified, so research-only.
 - Step 9: `ollama` is not on PATH, so S2-S5 stay BLOCKED.
 - Next: Phase 4 backend.
+
+## 2026-11-07, step 9
+- Ollama 0.40.15 recorded in ENVIRONMENT.md. No model pulled.
+- Added the replay cache, Ollama provider and LLM pass A with retry and marked fallback.
+- Smoke run on 10 seeded CORD validation documents: 10 of 10 valid JSON, 100% GPU, warm p50 2.47 s and p95 6.35 s, cold first document 127.62 s. Log: docs/progress/logs/run-llm-smoke.log.
+- Replay of those 10: 0 live calls, 10 hits, same outputs. Log: docs/progress/logs/run-llm-smoke-replay.log.
+- ADR-0011 chooses llama3.2:3b. ADR-0003 amended. S2-S5 marked IN PROGRESS.
+- The CORD test split was not read by any LLM code.
+- Open: the review defining metrics 1.1, the S1 reproduction check and hygiene was not received, so its steps 1-4 have not started.
+- Next: review steps 1-4 once the text arrives, then S2-S5 on validation, then test once at the end.

@@ -8,6 +8,10 @@ This file grows as limitations are found.
 
 The deterministic extractor copies values from the tokens, so matching them against those tokens proves nothing. Such fields are recorded as `evidence_status: self_sourced` with `evidence_independent: false`, never `exact`, and the feature builder excludes them. Only a value from a different source, such as an LLM pass, gets a real match result. A `self_sourced` field shows where a value was read from, not that it is correct.
 
+## LLM extraction is one pass
+
+Only pass A (field-guided) exists. Pass B (document-guided) and cross-pass agreement are not implemented. JSON validity is enforced by Ollama's schema constraint, so a high validity rate says nothing about whether values are right.
+
 ## The risk score is unfitted
 
 `risk_score` uses hand-picked weights and is not a probability. `calibrated_prob` stays null until a calibrator is fitted.

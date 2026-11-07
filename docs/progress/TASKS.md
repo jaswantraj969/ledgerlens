@@ -16,7 +16,9 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 | 5 | Schema-driven deterministic extractor | VERIFIED | backend/tests/unit/test_deterministic_rules.py, docs/progress/logs/ci-local.txt |
 | 5 | Evidence provenance, feature builder, heuristic risk, routing | VERIFIED | backend/tests/unit/test_features.py, docs/progress/logs/ci-local.txt |
 | 5 | JSON and CSV export functions | VERIFIED | backend/tests/e2e/test_vertical_slice.py |
-| 5 | LLM extractor, replay cache | BLOCKED | Needs a working Ollama |
+| 5 | Replay cache, Ollama provider, LLM pass A with retry and fallback | VERIFIED | backend/tests/unit/test_llm.py, docs/progress/logs/run-llm-smoke.log, docs/progress/logs/run-llm-smoke-replay.log |
+| 5 | LLM pass B, cross-pass agreement | NOT STARTED | Needed by S4 |
+| 5 | Hosted providers through LiteLLM | NOT STARTED | Optional |
 | 5 | Calibrators | NOT STARTED | Needs S2-S5 data |
 | 7 | CORD v2 data, splits, layout groups | VERIFIED | evals/datasets/checksums/cord-v2.sha256, evals/splits/cord_v2/ |
 | 7 | S1 on CORD test | VERIFIED | evals/results/cord_s1_v1.json, evals/results/cord_s1_v1.md, docs/progress/logs/run-cord-s1-test.log |
@@ -24,7 +26,9 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 | 7 | Synthetic held-out evaluation | NOT STARTED | Generator ready, no runner yet |
 | 7 | SROIE adapter and vendor split | VERIFIED | backend/tests/unit/test_sroie_adapter.py, evals/splits/sroie/vendor_groups.json |
 | 7 | SROIE results | BLOCKED | Needs images and confirmed terms |
-| 7 | S2-S5, ablations, degradation | BLOCKED | Needs a working Ollama |
+| 7 | S2-S5 | IN PROGRESS | Smoke run only. Order: review steps 1-4, then validation, then test once at the end. No test split LLM call has been made |
+| 7 | Ablations, degradation | NOT STARTED | Follow S5 |
+| 9 | Ollama recorded, default model chosen | VERIFIED | docs/progress/ENVIRONMENT.md, docs/adr/0011-default-extraction-model.md, evals/results/dev/llm_smoke_llama3.2-3b.json |
 | 4 | Backend | NOT STARTED | Next |
 | 6 | Frontend pages | NOT STARTED | |
 | 8 | Testing and hardening | NOT STARTED | |
@@ -39,7 +43,7 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 |---|---|---|
 | A1 | NOT STARTED | Parsers handle PDF, scan and image; no upload API yet |
 | A2 | VERIFIED | test_ocr_parser.py, test_pdfium_parser.py |
-| A3 | IN PROGRESS | Default and alternative schemas work offline; Ollama path BLOCKED |
+| A3 | IN PROGRESS | Default and alternative schemas work offline; Ollama works with cord_receipt only so far |
 | A4 | IN PROGRESS | True in the pipeline for deterministic fields; not persisted yet |
 | A5 | NOT STARTED | |
 | A6 | IN PROGRESS | Export functions only |
@@ -47,9 +51,9 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 | A8 | NOT STARTED | |
 | A9 | IMPLEMENTED BUT UNVERIFIED (local mirror; GitHub run pending human approval) | docs/progress/logs/ci-local.txt |
 | A10 | NOT STARTED | |
-| A11 | IN PROGRESS | S1 on CORD only; S2-S5 BLOCKED |
+| A11 | IN PROGRESS | S1 on CORD only; S2-S5 IN PROGRESS |
 | A12 | IN PROGRESS | Groups saved; no grouped metric yet |
-| A13 | BLOCKED | Needs Ollama |
+| A13 | NOT STARTED | Follows S5 |
 | A14 | IN PROGRESS | Split hashes and overlap tests exist for CORD and SROIE; documented in docs/evaluation.md |
 | A15 | NOT STARTED | |
 | A16 | IN PROGRESS | No claims published yet |
@@ -59,7 +63,7 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 
 | Blocker | Human action |
 |---|---|
-| Ollama missing, S2-S5 and A13 blocked | Reinstall Ollama from https://ollama.com/download so `ollama --version` works |
+| S2-S5 cannot pass review steps 1-4: the text defining metrics 1.1, the S1 reproduction check and hygiene is not in this repository or the session | Paste that review |
 | SROIE images and terms | Register at https://rrc.cvc.uab.es/?ch=13, read the terms in the download area, and say whether research use is allowed |
 | DocILE, optional | Submit Rossum's access request form, or decide to skip it |
 | CI on GitHub unverified | Approve creating a remote; nothing is pushed until then |

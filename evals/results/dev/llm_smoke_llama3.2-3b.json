@@ -1,0 +1,382 @@
+{
+  "purpose": "development smoke test; not an evaluation result",
+  "split": "validation",
+  "document_ids": [
+    "cord-v2:validation:0",
+    "cord-v2:validation:14",
+    "cord-v2:validation:19",
+    "cord-v2:validation:24",
+    "cord-v2:validation:36",
+    "cord-v2:validation:40",
+    "cord-v2:validation:46",
+    "cord-v2:validation:55",
+    "cord-v2:validation:80",
+    "cord-v2:validation:84"
+  ],
+  "sample_seed": 20261106,
+  "model": "llama3.2:3b",
+  "params": {
+    "temperature": 0,
+    "seed": 20261106,
+    "num_ctx": 4096,
+    "num_predict": 1024
+  },
+  "prompt_version": "a-1.0",
+  "schema": "cord_receipt:1.1.0",
+  "mode": "record",
+  "live_calls": 10,
+  "cache_hits": 0,
+  "json_valid_first_attempt": 1.0,
+  "json_valid_after_retry": 1.0,
+  "fallbacks": 0,
+  "truncated": 0,
+  "llm_latency_seconds": {
+    "scope": "recorded provider time per document, including any retry",
+    "p50": 2.536933199997293,
+    "p95": 73.46441017500462,
+    "max": 127.62025259999791,
+    "first_document": 127.62025259999791,
+    "warm_p50": 2.4746442000032403,
+    "warm_p95": 6.345696860004681,
+    "note": "with n=10, p95 sits close to the slowest document"
+  },
+  "ocr_plus_llm_latency_seconds": {
+    "p50": 6.1289418500091415,
+    "p95": 77.62778143000601
+  },
+  "gpu_memory_used_mib_before": 54,
+  "placement": [
+    {
+      "after_document": 1,
+      "gpu_memory_used_mib": 2590,
+      "loaded": [
+        {
+          "name": "llama3.2:3b",
+          "size": 2561000078,
+          "size_vram": 2561000078,
+          "context_length": 4096
+        }
+      ]
+    },
+    {
+      "after_document": 2,
+      "gpu_memory_used_mib": 2595,
+      "loaded": [
+        {
+          "name": "llama3.2:3b",
+          "size": 2561000078,
+          "size_vram": 2561000078,
+          "context_length": 4096
+        }
+      ]
+    },
+    {
+      "after_document": 3,
+      "gpu_memory_used_mib": 2591,
+      "loaded": [
+        {
+          "name": "llama3.2:3b",
+          "size": 2561000078,
+          "size_vram": 2561000078,
+          "context_length": 4096
+        }
+      ]
+    },
+    {
+      "after_document": 4,
+      "gpu_memory_used_mib": 2591,
+      "loaded": [
+        {
+          "name": "llama3.2:3b",
+          "size": 2561000078,
+          "size_vram": 2561000078,
+          "context_length": 4096
+        }
+      ]
+    },
+    {
+      "after_document": 5,
+      "gpu_memory_used_mib": 2590,
+      "loaded": [
+        {
+          "name": "llama3.2:3b",
+          "size": 2561000078,
+          "size_vram": 2561000078,
+          "context_length": 4096
+        }
+      ]
+    },
+    {
+      "after_document": 6,
+      "gpu_memory_used_mib": 2590,
+      "loaded": [
+        {
+          "name": "llama3.2:3b",
+          "size": 2561000078,
+          "size_vram": 2561000078,
+          "context_length": 4096
+        }
+      ]
+    },
+    {
+      "after_document": 7,
+      "gpu_memory_used_mib": 2592,
+      "loaded": [
+        {
+          "name": "llama3.2:3b",
+          "size": 2561000078,
+          "size_vram": 2561000078,
+          "context_length": 4096
+        }
+      ]
+    },
+    {
+      "after_document": 8,
+      "gpu_memory_used_mib": 2596,
+      "loaded": [
+        {
+          "name": "llama3.2:3b",
+          "size": 2561000078,
+          "size_vram": 2561000078,
+          "context_length": 4096
+        }
+      ]
+    },
+    {
+      "after_document": 9,
+      "gpu_memory_used_mib": 2597,
+      "loaded": [
+        {
+          "name": "llama3.2:3b",
+          "size": 2561000078,
+          "size_vram": 2561000078,
+          "context_length": 4096
+        }
+      ]
+    },
+    {
+      "after_document": 10,
+      "gpu_memory_used_mib": 2597,
+      "loaded": [
+        {
+          "name": "llama3.2:3b",
+          "size": 2561000078,
+          "size_vram": 2561000078,
+          "context_length": 4096
+        }
+      ]
+    }
+  ],
+  "header_correct": 15,
+  "header_labelled": 17,
+  "values_absent_from_document": 3,
+  "values_total": 107,
+  "documents": [
+    {
+      "document_id": "cord-v2:validation:0",
+      "first_attempt_valid": true,
+      "attempts": 1,
+      "fell_back": false,
+      "errors": [],
+      "done_reason": "stop",
+      "cache_hit": false,
+      "extract_seconds": 127.6326688999834,
+      "llm_seconds": 127.62025259999791,
+      "load_seconds": 69.5487653,
+      "prompt_tokens": 182,
+      "completion_tokens": 169,
+      "ocr_seconds": 5.770932400017045,
+      "header_correct": 1,
+      "header_labelled": 1,
+      "values_absent_from_document": 1,
+      "values_total": 15
+    },
+    {
+      "document_id": "cord-v2:validation:14",
+      "first_attempt_valid": true,
+      "attempts": 1,
+      "fell_back": false,
+      "errors": [],
+      "done_reason": "stop",
+      "cache_hit": false,
+      "extract_seconds": 2.3448543999984395,
+      "llm_seconds": 2.3382378999958746,
+      "load_seconds": 0.0114881,
+      "prompt_tokens": 200,
+      "completion_tokens": 108,
+      "ocr_seconds": 2.518281600001501,
+      "header_correct": 3,
+      "header_labelled": 3,
+      "values_absent_from_document": 0,
+      "values_total": 9
+    },
+    {
+      "document_id": "cord-v2:validation:19",
+      "first_attempt_valid": true,
+      "attempts": 1,
+      "fell_back": false,
+      "errors": [],
+      "done_reason": "stop",
+      "cache_hit": false,
+      "extract_seconds": 2.603497400006745,
+      "llm_seconds": 2.5992221999913454,
+      "load_seconds": 0.0044461,
+      "prompt_tokens": 193,
+      "completion_tokens": 124,
+      "ocr_seconds": 2.670164000010118,
+      "header_correct": 0,
+      "header_labelled": 1,
+      "values_absent_from_document": 0,
+      "values_total": 6
+    },
+    {
+      "document_id": "cord-v2:validation:24",
+      "first_attempt_valid": true,
+      "attempts": 1,
+      "fell_back": false,
+      "errors": [],
+      "done_reason": "stop",
+      "cache_hit": false,
+      "extract_seconds": 4.957791399996495,
+      "llm_seconds": 4.953337999992073,
+      "load_seconds": 0.0073048,
+      "prompt_tokens": 235,
+      "completion_tokens": 238,
+      "ocr_seconds": 3.818071499990765,
+      "header_correct": 0,
+      "header_labelled": 1,
+      "values_absent_from_document": 2,
+      "values_total": 19
+    },
+    {
+      "document_id": "cord-v2:validation:36",
+      "first_attempt_valid": true,
+      "attempts": 1,
+      "fell_back": false,
+      "errors": [],
+      "done_reason": "stop",
+      "cache_hit": false,
+      "extract_seconds": 7.278835300006904,
+      "llm_seconds": 7.273936100013088,
+      "load_seconds": 0.0076093,
+      "prompt_tokens": 195,
+      "completion_tokens": 349,
+      "ocr_seconds": 2.1985742999822833,
+      "header_correct": 3,
+      "header_labelled": 3,
+      "values_absent_from_document": 0,
+      "values_total": 21
+    },
+    {
+      "document_id": "cord-v2:validation:40",
+      "first_attempt_valid": true,
+      "attempts": 1,
+      "fell_back": false,
+      "errors": [],
+      "done_reason": "stop",
+      "cache_hit": false,
+      "extract_seconds": 4.090502799983369,
+      "llm_seconds": 4.0868503999954555,
+      "load_seconds": 0.0094597,
+      "prompt_tokens": 207,
+      "completion_tokens": 191,
+      "ocr_seconds": 3.3074141000106465,
+      "header_correct": 3,
+      "header_labelled": 3,
+      "values_absent_from_document": 0,
+      "values_total": 15
+    },
+    {
+      "document_id": "cord-v2:validation:46",
+      "first_attempt_valid": true,
+      "attempts": 1,
+      "fell_back": false,
+      "errors": [],
+      "done_reason": "stop",
+      "cache_hit": false,
+      "extract_seconds": 1.4007810000039171,
+      "llm_seconds": 1.3959733999799937,
+      "load_seconds": 0.0073019,
+      "prompt_tokens": 165,
+      "completion_tokens": 64,
+      "ocr_seconds": 2.1270381000067573,
+      "header_correct": 1,
+      "header_labelled": 1,
+      "values_absent_from_document": 0,
+      "values_total": 5
+    },
+    {
+      "document_id": "cord-v2:validation:55",
+      "first_attempt_valid": true,
+      "attempts": 1,
+      "fell_back": false,
+      "errors": [],
+      "done_reason": "stop",
+      "cache_hit": false,
+      "extract_seconds": 2.0697507000004407,
+      "llm_seconds": 2.052631900005508,
+      "load_seconds": 0.0056177,
+      "prompt_tokens": 183,
+      "completion_tokens": 86,
+      "ocr_seconds": 2.6409583000058774,
+      "header_correct": 1,
+      "header_labelled": 1,
+      "values_absent_from_document": 0,
+      "values_total": 7
+    },
+    {
+      "document_id": "cord-v2:validation:80",
+      "first_attempt_valid": true,
+      "attempts": 1,
+      "fell_back": false,
+      "errors": [],
+      "done_reason": "stop",
+      "cache_hit": false,
+      "extract_seconds": 1.3695444000186399,
+      "llm_seconds": 1.3658384000009391,
+      "load_seconds": 0.0064857,
+      "prompt_tokens": 163,
+      "completion_tokens": 60,
+      "ocr_seconds": 2.8357574999972712,
+      "header_correct": 1,
+      "header_labelled": 1,
+      "values_absent_from_document": 0,
+      "values_total": 2
+    },
+    {
+      "document_id": "cord-v2:validation:84",
+      "first_attempt_valid": true,
+      "attempts": 1,
+      "fell_back": false,
+      "errors": [],
+      "done_reason": "stop",
+      "cache_hit": false,
+      "extract_seconds": 2.479717399983201,
+      "llm_seconds": 2.4746442000032403,
+      "load_seconds": 0.0089984,
+      "prompt_tokens": 210,
+      "completion_tokens": 117,
+      "ocr_seconds": 4.513853300013579,
+      "header_correct": 2,
+      "header_labelled": 2,
+      "values_absent_from_document": 0,
+      "values_total": 8
+    }
+  ],
+  "environment": {
+    "git_commit": "9d4bec5603f56d8c236b555ceba3c1751c4a4741",
+    "git_dirty": false,
+    "python": "3.12.13",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "cpu_count": 12,
+    "packages": {
+      "rapidocr": "3.10.0",
+      "onnxruntime": "1.31.1",
+      "numpy": "2.5.4",
+      "pypdfium2": "5.14.0",
+      "rapidfuzz": "3.14.6"
+    },
+    "ocr_execution": "CPU, onnxruntime defaults"
+  }
+}

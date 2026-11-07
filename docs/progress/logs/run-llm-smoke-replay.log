@@ -1,0 +1,14 @@
+START 2026-11-07T06:38:47Z timeout=300s stall=120s cmd: backend/.venv/Scripts/python.exe -m evals.runners.llm_smoke --replay
+1/10 0.02s valid=True
+2/10 0.00s valid=True
+3/10 0.00s valid=True
+4/10 0.00s valid=True
+5/10 0.00s valid=True
+6/10 0.00s valid=True
+7/10 0.00s valid=True
+8/10 0.00s valid=True
+9/10 0.00s valid=True
+10/10 0.00s valid=True
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\llm_smoke_llama3.2-3b_replay.json
+END 2026-11-07T06:39:03Z elapsed=16s
+EXIT=0

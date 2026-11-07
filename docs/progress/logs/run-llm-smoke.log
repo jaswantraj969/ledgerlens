@@ -1,0 +1,14 @@
+START 2026-11-07T06:35:42Z timeout=1500s stall=300s cmd: backend/.venv/Scripts/python.exe -m evals.runners.llm_smoke
+1/10 127.63s valid=True
+2/10 2.34s valid=True
+3/10 2.60s valid=True
+4/10 4.96s valid=True
+5/10 7.28s valid=True
+6/10 4.09s valid=True
+7/10 1.40s valid=True
+8/10 2.07s valid=True
+9/10 1.37s valid=True
+10/10 2.48s valid=True
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\llm_smoke_llama3.2-3b.json
+END 2026-11-07T06:38:29Z elapsed=167s
+EXIT=0
