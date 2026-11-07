@@ -44,9 +44,11 @@ k=12 was set in advance and is not tuned. Assignments are in `evals/splits/cord_
 
 A label holding only `-` counts as absent. vendor_name, invoice_number, invoice_date and currency are not evaluated on CORD.
 
-## Metrics (version 1.1)
+## Metrics (version 1.1.1)
 
-Metrics 1.1 replaces 1.0 for all new results, and every results file records its version. Normalisation stays at 1.0. `evals/results/cord_s1_v1.json` is kept for history under 1.0 definitions.
+Metrics 1.1.1 is current. It is metrics 1.1 with one change in presentation: for single-valued fields, `exact_match` is numerically equal to `recall` (shown below), so it is dropped from tables. It stays in results files, beside `exact_match_redundant`, which says so. No count, rate or interval changes. Results under 1.1 were rescored to 1.1.1 from their saved predictions, with no pipeline rerun, by `evals/runners/rescore.py`, which checks the predictions hash and that every number matches the 1.1 file. The 1.1 files are kept.
+
+Metrics 1.1 replaced 1.0 for all new results, and every results file records its version. Normalisation stays at 1.0. `evals/results/cord_s1_v1.json` is kept for history under 1.0 definitions.
 
 Below, `pred` and `gold` are normalised values for one document, and `D` is the set of documents. A gold value that does not normalise counts as absent, and is reported in `gold_values_excluded_unparsable`.
 

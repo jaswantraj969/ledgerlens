@@ -56,7 +56,7 @@ def test_correct_rule_based_values_earn_no_credit_after_a_fallback() -> None:
 
 def test_result_records_versions_and_labels_the_secondary_score() -> None:
     result = scored(to_prediction("d", records(), HEADERS))
-    assert result["metrics_version"] == "1.1"
+    assert result["metrics_version"] == "1.1.1"
     assert result["normalization"]["version"] == "1.0"  # type: ignore[index]
     assert result["line_items_set_based"]["label"] == "set-based, ignores row alignment"  # type: ignore[index]
 

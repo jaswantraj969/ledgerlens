@@ -47,6 +47,7 @@ case "${1:-}" in
   tables)
     "$python" -m evals.runners.make_tables evals/results/cord_s1_v1.json evals/results/cord_s1_v1_1.json
     "$python" -m evals.runners.make_tables evals/results/dev/cord_s*_validation_v1_1.json
+    "$python" -m evals.runners.make_tables evals/results/cord_s1_v1_1_1.json evals/results/dev/cord_s*_validation_v1_1_1.json
     "$python" -m evals.runners.make_synthetic_table evals/results/synthetic_s1_v1_1.json
     ;;
   reproduce)

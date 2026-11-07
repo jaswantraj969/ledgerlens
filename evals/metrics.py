@@ -1,7 +1,9 @@
 """Field metrics with document-level bootstrap intervals. Formulas: docs/evaluation.md.
 
-Metrics 1.1 is current. `Outcome`, `header_outcome` and `summarize` are metrics 1.0: they stay
-for reproducing old results, and `multiset_outcome` remains as the secondary set-based score.
+Metrics 1.1.1 is current. It differs from 1.1 only in marking `exact_match` as redundant for
+single-valued fields, where it equals recall; no number changes. `Outcome`, `header_outcome`
+and `summarize` are metrics 1.0: they stay for reproducing old results, and `multiset_outcome`
+remains as the secondary set-based score.
 """
 
 from collections import Counter
@@ -11,7 +13,8 @@ from dataclasses import dataclass
 import numpy as np
 from scipy.optimize import linear_sum_assignment
 
-METRICS_VERSION = "1.1"
+METRICS_VERSION = "1.1.1"
+EXACT_MATCH_NOTE = "redundant: equals recall for single-valued fields (TP / n_present)"
 BOOTSTRAP_RESAMPLES = 2000
 BOOTSTRAP_SEED = 20261106
 SET_BASED_LABEL = "set-based, ignores row alignment"
@@ -61,7 +64,9 @@ def _prf(tp: float, fp: float, fn: float) -> tuple[float | None, float | None, f
     return precision, recall, f1
 
 
-def _rates(counts: np.ndarray) -> tuple[float | None, float | None, float | None, float]:
+def _rates(
+    counts: np.ndarray,
+) -> tuple[float | None, float | None, float | None, float]:
     tp, fp, fn, agrees, documents = counts
     return (*_prf(tp, fp, fn), agrees / documents)
 
@@ -165,6 +170,7 @@ def summarize_single(outcomes: Sequence[SingleOutcome]) -> dict[str, object]:
         "recall": recall,
         "f1": f1,
         "exact_match": exact,
+        "exact_match_redundant": EXACT_MATCH_NOTE,
         "false_fill_rate": false_fill,
         "precision_ci95": intervals[0],
         "recall_ci95": intervals[1],

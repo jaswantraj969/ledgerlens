@@ -12,7 +12,7 @@ from evals.metrics import (
 
 
 def test_version() -> None:
-    assert METRICS_VERSION == "1.1"
+    assert METRICS_VERSION == "1.1.1"
 
 
 @pytest.mark.parametrize(

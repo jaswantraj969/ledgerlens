@@ -63,17 +63,20 @@ def render_v1(result: dict[str, Any], source: str) -> str:
     return "\n".join(lines)
 
 
-def field_table(fields: dict[str, Any]) -> list[str]:
+def field_table(fields: dict[str, Any], *, exact_match: bool = False) -> list[str]:
+    """`exact_match` adds the redundant column, as metrics 1.1 tables showed it."""
+    exact_header = " Exact match |" if exact_match else ""
     lines = [
-        "| Field | n present | n absent | Precision | Recall | F1 | Exact match "
-        "| False fill rate |",
-        "|---|---|---|---|---|---|---|---|",
+        f"| Field | n present | n absent | Precision | Recall | F1 |{exact_header} "
+        "False fill rate |",
+        "|---|---|---|---|---|---|" + ("---|" if exact_match else "") + "---|",
     ]
     for name, row in fields.items():
+        exact = f" {_cell(row, 'exact_match')} |" if exact_match else ""
         lines.append(
             f"| {name} | {row['n_present']} | {row['n_absent']} | {_cell(row, 'precision')} "
-            f"| {_cell(row, 'recall')} | {_cell(row, 'f1')} | {_cell(row, 'exact_match')} "
-            f"| {_cell(row, 'false_fill_rate')} |"
+            f"| {_cell(row, 'recall')} | {_cell(row, 'f1')} |{exact} "
+            f"{_cell(row, 'false_fill_rate')} |"
         )
     return lines
 
@@ -122,8 +125,26 @@ def render_v1_1(result: dict[str, Any], source: str) -> str:
     latency = result["latency_seconds"]
     memory = result.get("memory_live_run", result["memory"])
     memory_label = "Memory, live run" if "memory_live_run" in result else "Memory"
+    version = result["metrics_version"]
+    legacy = version == "1.1"
+    exact_note = (
+        "`exact_match` equals `recall` by definition under metrics 1.1; see docs/evaluation.md."
+        if legacy
+        else "Exact match is not shown: for single-valued fields it equals recall. It stays in "
+        "the JSON, flagged redundant. See docs/evaluation.md."
+    )
+    rescored = result.get("rescored_from")
+    provenance = (
+        [
+            f"- Rescored from saved predictions of `{rescored['results_file']}`, with no rerun. "
+            f"Rescored at commit `{rescored['environment']['git_commit']}`, "
+            f"dirty: {rescored['environment']['git_dirty']}."
+        ]
+        if rescored
+        else []
+    )
     lines = [
-        f"# {result['system']} on {result['dataset']} {result['split']} (metrics 1.1)",
+        f"# {result['system']} on {result['dataset']} {result['split']} (metrics {version})",
         "",
         f"Generated from `{source}`. Do not edit by hand.",
         "",
@@ -137,12 +158,13 @@ def render_v1_1(result: dict[str, Any], source: str) -> str:
         f"seed {result['bootstrap']['seed']}.",
         f"- Commit: `{result['environment']['git_commit']}`, "
         f"dirty: {result['environment']['git_dirty']}.",
+        *provenance,
         "",
         "## Single-valued fields",
         "",
-        "`exact_match` equals `recall` by definition under metrics 1.1; see docs/evaluation.md.",
+        exact_note,
         "",
-        *field_table(result["fields"]),
+        *field_table(result["fields"], exact_match=legacy),
         "",
         "## Line items, row level (primary)",
         "",
