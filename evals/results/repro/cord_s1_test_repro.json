@@ -222,14 +222,14 @@
   },
   "latency_seconds": {
     "scope": "OCR plus extraction, per document",
-    "p50": 1.9973553000018,
-    "p95": 4.019321255007526,
-    "extraction_only_p50": 0.0008751000132178888
+    "p50": 1.9972882999863941,
+    "p95": 4.018805805007287,
+    "extraction_only_p50": 0.0006337499944493175
   },
   "cost_per_document_usd": 0,
   "environment": {
-    "git_commit": "ba38d42b01d6c14248f5e6de08fcfe5cf11f09f3",
-    "git_dirty": true,
+    "git_commit": "ed7f1bd4be6ed9c86f1f20590e7e7f6bcbc99b71",
+    "git_dirty": false,
     "python": "3.12.13",
     "platform": "Windows-11-10.0.26300-SP0",
     "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",

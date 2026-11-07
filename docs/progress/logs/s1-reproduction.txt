@@ -9,3 +9,15 @@ latency p95: 5.3878 s -> 4.0193 s (timing, not compared)
 latency extraction_only_p50: 0.0012 s -> 0.0009 s (timing, not compared)
 RESULT: IDENTICAL
 STAGE1_EXIT=0
+
+=== Stage 2: same fresh OCR, old metrics, clean HEAD after the metrics refactor
+original commit      1b53a77461f85c0351fffd01092e7f5852f71968
+reproduction commit  ed7f1bd4be6ed9c86f1f20590e7e7f6bcbc99b71
+reproduction dirty   False
+values compared      140
+values different     0
+latency p50: 2.5665 s -> 1.9973 s (timing, not compared)
+latency p95: 5.3878 s -> 4.0188 s (timing, not compared)
+latency extraction_only_p50: 0.0012 s -> 0.0006 s (timing, not compared)
+RESULT: IDENTICAL
+STAGE2_EXIT=0

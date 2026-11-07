@@ -14,7 +14,18 @@ def _interval(values: list[float] | None) -> str:
     return "n/a" if values is None else f"[{values[0]:.3f}, {values[1]:.3f}]"
 
 
-def render(result: dict[str, Any], source: str) -> str:
+def _cell(row: dict[str, Any], name: str) -> str:
+    return f"{_rate(row[name])} {_interval(row[f'{name}_ci95'])}"
+
+
+def _seconds(block: dict[str, Any]) -> str:
+    if not block["n"]:
+        return "n/a"
+    return f"p50 {block['p50']:.2f} s, p95 {block['p95']:.2f} s (n={block['n']})"
+
+
+def render_v1(result: dict[str, Any], source: str) -> str:
+    """Metrics 1.0 layout, kept so old tables regenerate unchanged."""
     latency = result["latency_seconds"]
     failures = result["failures"]
     lines = [
@@ -52,12 +63,128 @@ def render(result: dict[str, Any], source: str) -> str:
     return "\n".join(lines)
 
 
+def field_table(fields: dict[str, Any]) -> list[str]:
+    lines = [
+        "| Field | n present | n absent | Precision | Recall | F1 | Exact match | False fill rate |",
+        "|---|---|---|---|---|---|---|---|",
+    ]
+    for name, row in fields.items():
+        lines.append(
+            f"| {name} | {row['n_present']} | {row['n_absent']} | {_cell(row, 'precision')} "
+            f"| {_cell(row, 'recall')} | {_cell(row, 'f1')} | {_cell(row, 'exact_match')} "
+            f"| {_cell(row, 'false_fill_rate')} |"
+        )
+    return lines
+
+
+def row_table(row: dict[str, Any]) -> list[str]:
+    return [
+        "| Rows correct | Rows predicted | Rows gold | Precision | Recall | F1 "
+        "| Documents with all rows correct |",
+        "|---|---|---|---|---|---|---|",
+        f"| {row['rows_correct']} | {row['rows_predicted']} | {row['rows_gold']} "
+        f"| {_cell(row, 'precision')} | {_cell(row, 'recall')} | {_cell(row, 'f1')} "
+        f"| {_cell(row, 'documents_all_rows_correct')} |",
+    ]
+
+
+def set_table(block: dict[str, Any]) -> list[str]:
+    lines = [
+        f"Secondary score, {block['label']}.",
+        "",
+        "| Cell | Precision | Recall | F1 |",
+        "|---|---|---|---|",
+    ]
+    for name, row in block["fields"].items():
+        lines.append(
+            f"| {name} | {_cell(row, 'precision')} | {_cell(row, 'recall')} | {_cell(row, 'f1')} |"
+        )
+    return lines
+
+
+def render_v1_1(result: dict[str, Any], source: str) -> str:
+    failures = result["failures"]
+    latency = result["latency_seconds"]
+    memory = result["memory"]
+    lines = [
+        f"# {result['system']} on {result['dataset']} {result['split']} (metrics 1.1)",
+        "",
+        f"Generated from `{source}`. Do not edit by hand.",
+        "",
+        f"- Documents: {result['n_documents']}. Workers: {result['workers']}.",
+        f"- Metrics {result['metrics_version']}, normalisation "
+        f"{result['normalization']['version']} (sha256 `{result['normalization']['sha256']}`).",
+        f"- Schema: {result['schema']} {result['schema_version']}. "
+        f"Split sha256: `{result['split_sha256']}`.",
+        f"- Predictions sha256: `{result['predictions_sha256']}`.",
+        f"- Intervals: 95% bootstrap, {result['bootstrap']['resamples']} resamples of documents, "
+        f"seed {result['bootstrap']['seed']}.",
+        f"- Commit: `{result['environment']['git_commit']}`, "
+        f"dirty: {result['environment']['git_dirty']}.",
+        "",
+        "## Single-valued fields",
+        "",
+        "`exact_match` equals `recall` by definition under metrics 1.1; see docs/evaluation.md.",
+        "",
+        *field_table(result["fields"]),
+        "",
+        "## Line items, row level (primary)",
+        "",
+        *row_table(result["line_items_row_level"]),
+        "",
+        "## Line items, set-based (secondary)",
+        "",
+        *set_table(result["line_items_set_based"]),
+        "",
+        "## Failures",
+        "",
+        f"- Crashes: {failures['crashes']}.",
+        f"- Failed extractions (scored as empty): {failures['failed_extractions']}.",
+        f"- Documents with a fallback: {failures['documents_with_a_fallback']}. "
+        f"Pass fallbacks: {failures['pass_fallbacks']}.",
+        f"- Retries: {failures['retries']}. Truncated replies: {failures['truncated_replies']}.",
+        "",
+        "## Verification",
+        "",
+        f"- Values output: {result['verification']['values_output']}.",
+        f"- Not found in the document: {result['verification']['values_not_found_in_document']}.",
+        f"- Withheld: {result['verification']['values_withheld']}.",
+        f"- Rule failures: {result['verification']['rule_failures']}.",
+        "",
+        "## Latency and memory",
+        "",
+        f"Timings are {latency['source']}.",
+        "",
+        f"- OCR: {_seconds(latency['ocr'])}.",
+        f"- Warm LLM, load excluded: {_seconds(latency['warm_llm'])}.",
+        f"- Warm total per document: {_seconds(latency['warm_total'])}.",
+        f"- Cold documents: {latency['cold']['documents']}. Model load (s): "
+        f"{[round(x, 2) for x in latency['cold']['model_load_seconds']]}. Cold LLM time "
+        f"excluding load (s): "
+        f"{[round(x, 2) for x in latency['cold']['cold_llm_seconds_excluding_load']]}.",
+        f"- Peak process RSS: {memory['peak_process_rss_gib']} GiB. Peak model runner RSS: "
+        f"{memory['peak_model_runner_rss_gib']} GiB. Lowest available system RAM: "
+        f"{memory['lowest_available_system_ram_gib']} of {memory['total_system_ram_gib']} GiB.",
+        "",
+    ]
+    excluded = {k: v for k, v in result["gold_values_excluded_unparsable"].items() if v}
+    lines += [f"Gold values excluded as unparsable: {excluded or 'none'}.", ""]
+    return "\n".join(lines)
+
+
+def render(result: dict[str, Any], source: str) -> str:
+    if "metrics_version" in result:
+        return render_v1_1(result, source)
+    return render_v1(result, source)
+
+
 def main() -> None:
-    source = Path(sys.argv[1])
-    result = json.loads(source.read_text(encoding="utf-8"))
-    output = source.with_suffix(".md")
-    output.write_text(render(result, source.name), encoding="utf-8", newline="\n")
-    print("wrote", output)
+    for argument in sys.argv[1:]:
+        source = Path(argument)
+        result = json.loads(source.read_text(encoding="utf-8"))
+        output = source.with_suffix(".md")
+        output.write_text(render(result, source.name), encoding="utf-8", newline="\n")
+        print("wrote", output)
 
 
 if __name__ == "__main__":
