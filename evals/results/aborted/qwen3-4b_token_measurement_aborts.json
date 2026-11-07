@@ -1,0 +1,19 @@
+{
+  "aborted": true,
+  "model": "qwen3:4b",
+  "runs": [
+    {
+      "run": "evals.runners.measure_prompt_tokens --prompt 2.2 --model qwen3:4b",
+      "reason": "free system RAM 0.321 GiB fell below 0.400 GiB",
+      "log": "docs/progress/logs/run-qwen-smoke-attempt1.log",
+      "context": "Docker Desktop running"
+    },
+    {
+      "run": "evals.runners.measure_prompt_tokens --prompt 2.2 --model qwen3:4b",
+      "reason": "free system RAM 0.304 GiB fell below 0.400 GiB",
+      "log": "docs/progress/logs/run-qwen-smoke.log",
+      "context": "Docker Desktop stopped; 3.69 GiB free before the run"
+    }
+  ],
+  "note": "The measurement tool exits on the memory guard without writing its own record; this record is copied from the two logs. With qwen3:4b loaded at num_ctx 4096 and 100% on GPU, the runner (llama-server) held 2,929 MB of RAM (process list, 2026-11-08), against 0.70-0.91 GiB for llama3.2:3b at num_ctx 2304 (evals/results/dev/memory_measurement.json)."
+}

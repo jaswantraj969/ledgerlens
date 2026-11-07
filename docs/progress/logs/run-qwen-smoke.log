@@ -1,0 +1,8 @@
+START 2026-11-07T21:07:53Z timeout=2400s stall=600s cmd: bash /c/Users/jknm6/AppData/Local/Temp/claude/c778d8435e15a14b/9a954629-d813-4388-8578-142035aa385c/scratchpad/qwen_steps.sh smoke
+# qwen3:4b as pulled, 2026-11-08T02:07:53+05:00
+NAME                       ID              SIZE      MODIFIED       
+qwen3:4b                   359d7dd4bcda    2.5 GB    13 minutes ago    
+== measure num_ctx with the qwen3 tokenizer
+ABORTED: free system RAM 0.304 GiB fell below 0.400 GiB
+END 2026-11-07T21:09:56Z elapsed=123s
+EXIT=1
