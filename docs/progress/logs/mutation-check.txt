@@ -22,3 +22,5 @@ sed: -e expression #1, char 37: unknown option to `s'
 NOOP exact match counts empty documents: pattern did not match
 SURVIVED rows match by best partial only
 EXIT=0
+CAUGHT exact match counts empty documents
+CAUGHT rows match by best partial only

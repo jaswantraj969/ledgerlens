@@ -58,3 +58,15 @@
 - The CORD test split was not read by any LLM code.
 - Open: the review defining metrics 1.1, the S1 reproduction check and hygiene was not received, so its steps 1-4 have not started.
 - Next: review steps 1-4 once the text arrives, then S2-S5 on validation, then test once at the end.
+
+## 2026-11-07, review steps 1-4 and items 5-7
+- Metrics 1.1 with row-level matching. `exact_match` equals `recall` by definition.
+- S1 reproduced: 140 values, 0 different, with fresh OCR and again at clean HEAD. Log: docs/progress/logs/s1-reproduction.txt.
+- S1 under 1.1: total F1 0.793, row-level F1 0.365, against 0.762 set-based on amounts.
+- Synthetic: dev about 1.000, held-out 0.000 on six of seven header fields. Line items held.
+- Hooks installed. Task runner added. SROIE blocked. A12 check on CORD layout groups.
+- S2, S3 and S4 on validation, with 0 failed extractions and 0 fallbacks. Row-level F1: S1 0.377, S2 0.058, S3 0.055, S4 0.055.
+- Phase 4 API, migrations and tests. The worker is not built, so jobs stay queued.
+- Mutation check: 22 of 22 caught. Log: docs/progress/logs/mutation-check.txt.
+- A commit went in with one test failing (a2d4c67), fixed in 3f5d7de. The hook checks lint and types, not tests, so commit commands must gate on pytest.
+- Next: RQ worker and persisted pipeline, then S5 on train and validation.

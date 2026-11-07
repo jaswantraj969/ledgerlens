@@ -5,35 +5,42 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 | Phase | Task | Status | Evidence |
 |---|---|---|---|
 | 1 | Environment inspection | VERIFIED | docs/progress/logs/environment.txt |
-| 2 | Tasks, criteria, ADRs, architecture | VERIFIED | docs/adr/ (10 files), docs/acceptance-criteria.md, docs/architecture.md |
-| 3 | Backend scaffold, lockfile, Compose services | VERIFIED | docs/progress/logs/phase3-checks.txt |
-| 3 | Frontend scaffold and first test | VERIFIED | docs/progress/logs/phase3-frontend.txt |
-| 3 | pre-commit hooks | VERIFIED | docs/progress/logs/phase3-precommit.txt |
+| 2 | Tasks, criteria, ADRs, architecture | VERIFIED | docs/adr/ (11 files), docs/acceptance-criteria.md, docs/architecture.md |
+| 3 | Backend and frontend scaffold, lockfile, Compose services | VERIFIED | docs/progress/logs/phase3-checks.txt, docs/progress/logs/phase3-frontend.txt |
+| 3 | pre-commit hooks installed and run on commit | VERIFIED | docs/progress/logs/ci-local.txt |
 | 3 | CI workflow | IMPLEMENTED BUT UNVERIFIED (local mirror; GitHub run pending human approval) | docs/progress/logs/ci-local.txt |
-| R | Run wrapper: timeout, stall detector, heartbeat, EXIT line | VERIFIED | docs/progress/logs/run-logged-tests.txt |
-| 5 | Normalisation 1.0, frozen with hash lock | VERIFIED | evals/normalization.lock, backend/tests/unit/test_eval_normalization.py |
-| 5 | Parsers: pdfium, RapidOCR, AutoParser | VERIFIED | backend/tests/unit/test_ocr_parser.py, docs/progress/logs/ci-local.txt |
-| 5 | Schema-driven deterministic extractor | VERIFIED | backend/tests/unit/test_deterministic_rules.py, docs/progress/logs/ci-local.txt |
-| 5 | Evidence provenance, feature builder, heuristic risk, routing | VERIFIED | backend/tests/unit/test_features.py, docs/progress/logs/ci-local.txt |
-| 5 | JSON and CSV export functions | VERIFIED | backend/tests/e2e/test_vertical_slice.py |
-| 5 | Replay cache, Ollama provider, LLM pass A with retry and fallback | VERIFIED | backend/tests/unit/test_llm.py, docs/progress/logs/run-llm-smoke.log, docs/progress/logs/run-llm-smoke-replay.log |
-| 5 | LLM pass B, cross-pass agreement | NOT STARTED | Needed by S4 |
-| 5 | Hosted providers through LiteLLM | NOT STARTED | Optional |
-| 5 | Calibrators | NOT STARTED | Needs S2-S5 data |
-| 7 | CORD v2 data, splits, layout groups | VERIFIED | evals/datasets/checksums/cord-v2.sha256, evals/splits/cord_v2/ |
-| 7 | S1 on CORD test | VERIFIED | evals/results/cord_s1_v1.json, evals/results/cord_s1_v1.md, docs/progress/logs/run-cord-s1-test.log |
-| 7 | Synthetic generator, five layouts, one held out | VERIFIED | backend/tests/unit/test_synthetic_layouts.py |
-| 7 | Synthetic held-out evaluation | NOT STARTED | Generator ready, no runner yet |
-| 7 | SROIE adapter and vendor split | VERIFIED | backend/tests/unit/test_sroie_adapter.py, evals/splits/sroie/vendor_groups.json |
-| 7 | SROIE results | BLOCKED | Needs images and confirmed terms |
-| 7 | S2-S5 | IN PROGRESS | Smoke run only. Order: review steps 1-4, then validation, then test once at the end. No test split LLM call has been made |
+| R | Run wrapper | VERIFIED | docs/progress/logs/run-logged-tests.txt |
+| R | Task runner, Windows equivalents of make | VERIFIED | docs/progress/logs/tasks-check.txt |
+| R | GNU make route | IMPLEMENTED BUT UNVERIFIED | make is not installed here; each target only calls scripts/tasks.sh |
+| R | Mutation check, 22 of 22 caught | VERIFIED | docs/progress/logs/mutation-check.txt |
+| 4 | Schema and Alembic migration, 17 tables | VERIFIED | backend/alembic/versions/0001_initial_schema.py, backend/tests/api |
+| 4 | Auth, roles, API keys, org scoping, rate limits, audit, problem responses | VERIFIED | backend/tests/api/test_auth.py, backend/tests/api/test_documents.py |
+| 4 | Upload, validation, dedup, storage, batch, list, get, delete, job status | VERIFIED | backend/tests/api/test_documents.py |
+| 4 | Health, readiness, metrics, log redaction | VERIFIED | backend/tests/api/test_health.py |
+| 4 | RQ worker and persisted pipeline | NOT STARTED | Upload enqueues `ledgerlens.workers.tasks.process_document`, which does not exist yet, so jobs stay `queued` |
+| 4 | Webhooks | NOT STARTED | Tables exist only |
+| 5 | Normalisation 1.0, frozen | VERIFIED | evals/normalization.lock |
+| 5 | Parsers, deterministic extractor, evidence, features, heuristic risk, export | VERIFIED | backend/tests/unit |
+| 5 | Replay cache, Ollama provider, LLM passes A and B, cross-pass merge | VERIFIED | backend/tests/unit/test_llm.py, backend/tests/unit/test_merge.py, backend/tests/unit/test_systems.py |
+| 5 | Hosted providers | NOT STARTED | Not to be built now, per review. The provider interface allows a later LiteLLM provider |
+| 5 | Calibrators | NOT STARTED | Later, on train and validation only |
+| 7 | CORD v2 data, splits, layout groups | VERIFIED | evals/splits/cord_v2/ |
+| 7 | Metrics 1.1 with row-level matching | VERIFIED | backend/tests/unit/test_metrics_v1_1.py, docs/evaluation.md |
+| 7 | S1 reproduction under 1.0 | VERIFIED | docs/progress/logs/s1-reproduction.txt |
+| 7 | S1 on CORD test under 1.1 | VERIFIED | evals/results/cord_s1_v1_1.md |
+| 7 | S1 synthetic, dev versus held-out | VERIFIED | evals/results/synthetic_s1_v1_1.md |
+| 7 | A12 check on CORD layout groups | VERIFIED | evals/results/cord_s1_v1_1_layout_groups.md |
+| 7 | S2 on validation | IN PROGRESS | evals/results/dev/cord_s2_validation_v1_1.md. Test read is pending |
+| 7 | S3 on validation | IN PROGRESS | evals/results/dev/cord_s3_validation_v1_1.md. Test read is pending |
+| 7 | S4 on validation | IN PROGRESS | evals/results/dev/cord_s4_validation_v1_1.md. Test read is pending |
+| 7 | S5 | NOT STARTED | Needs features on train, then calibration |
+| 7 | Final S1-S5 test read, once, from a clean commit | NOT STARTED | Last step |
 | 7 | Ablations, degradation | NOT STARTED | Follow S5 |
-| 9 | Ollama recorded, default model chosen | VERIFIED | docs/progress/ENVIRONMENT.md, docs/adr/0011-default-extraction-model.md, evals/results/dev/llm_smoke_llama3.2-3b.json |
-| 4 | Backend | NOT STARTED | Next |
+| 7 | SROIE results | BLOCKED | Official access is unavailable, and unofficial image mirrors are not used |
 | 6 | Frontend pages | NOT STARTED | |
 | 8 | Testing and hardening | NOT STARTED | |
 | 9 | Deployment | NOT STARTED | |
-| 10 | Documentation | NOT STARTED | |
+| 10 | Documentation | IN PROGRESS | Minimal README only |
 | 11 | Portfolio and publication preparation | NOT STARTED | |
 | 12 | Final verification and report | NOT STARTED | |
 
@@ -41,29 +48,28 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 
 | Id | Status | Note |
 |---|---|---|
-| A1 | NOT STARTED | Parsers handle PDF, scan and image; no upload API yet |
+| A1 | IN PROGRESS | Upload, batch, rejection and dedup work; no processing behind them yet |
 | A2 | VERIFIED | test_ocr_parser.py, test_pdfium_parser.py |
-| A3 | IN PROGRESS | Default and alternative schemas work offline; Ollama works with cord_receipt only so far |
-| A4 | IN PROGRESS | True in the pipeline for deterministic fields; not persisted yet |
+| A3 | IN PROGRESS | Default and alternative schemas work offline; Ollama used with cord_receipt only |
+| A4 | IN PROGRESS | True in the in-process pipeline; not persisted yet |
 | A5 | NOT STARTED | |
-| A6 | IN PROGRESS | Export functions only |
-| A7 | NOT STARTED | |
-| A8 | NOT STARTED | |
+| A6 | IN PROGRESS | Export functions and OpenAPI exist; no export endpoints or webhooks |
+| A7 | VERIFIED | backend/tests/api, docs/progress/logs/mutation-check.txt |
+| A8 | IN PROGRESS | Health and fallback verified; the worker crash test needs the worker |
 | A9 | IMPLEMENTED BUT UNVERIFIED (local mirror; GitHub run pending human approval) | docs/progress/logs/ci-local.txt |
 | A10 | NOT STARTED | |
-| A11 | IN PROGRESS | S1 on CORD only; S2-S5 IN PROGRESS |
-| A12 | IN PROGRESS | Groups saved; no grouped metric yet |
+| A11 | IN PROGRESS | S1 on CORD test; S2-S4 on validation only; S5 not started |
+| A12 | IN PROGRESS | CORD layout groups for S1. No real vendor-grouped split was possible |
 | A13 | NOT STARTED | Follows S5 |
-| A14 | IN PROGRESS | Split hashes and overlap tests exist for CORD and SROIE; documented in docs/evaluation.md |
+| A14 | IN PROGRESS | Split hashes and overlap tests exist, documented in docs/evaluation.md |
 | A15 | NOT STARTED | |
 | A16 | IN PROGRESS | No claims published yet |
-| A17 | IN PROGRESS | Full-history scan clean, no trailers, nothing pushed; licence options not drafted |
+| A17 | IN PROGRESS | Scan clean, no trailers, nothing pushed; licence options not drafted |
 
 ## Blockers
 
 | Blocker | Human action |
 |---|---|
-| S2-S5 cannot pass review steps 1-4: the text defining metrics 1.1, the S1 reproduction check and hygiene is not in this repository or the session | Paste that review |
-| SROIE images and terms | Register at https://rrc.cvc.uab.es/?ch=13, read the terms in the download area, and say whether research use is allowed |
-| DocILE, optional | Submit Rossum's access request form, or decide to skip it |
+| SROIE results | None required. Blocked by decision; reopen only if official access appears |
 | CI on GitHub unverified | Approve creating a remote; nothing is pushed until then |
+| LLM line items are poor on validation (row F1 0.058) | Decide whether to tune prompts on validation, or approve a larger model. Proposed name, size and speed would need checking first |
