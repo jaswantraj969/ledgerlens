@@ -61,11 +61,11 @@ def llm_timing(output: SystemOutput) -> tuple[float, float]:
     return max(total - load, 0.0), load
 
 
-def latency_report(rows: list[dict[str, Any]], *, replayed: bool) -> dict[str, Any]:
+def latency_report(rows: list[dict[str, Any]], *, source: str) -> dict[str, Any]:
     cold = [row for row in rows if row["load_seconds"] > LOAD_THRESHOLD_SECONDS]
     warm = [row for row in rows if row["load_seconds"] <= LOAD_THRESHOLD_SECONDS]
     return {
-        "source": "recorded when the call was first made" if replayed else "measured in this run",
+        "source": source,
         "ocr": percentiles([row["ocr_seconds"] for row in rows]),
         "extraction_excluding_llm": percentiles([row["local_seconds"] for row in rows]),
         "warm_llm": percentiles([row["llm_seconds"] for row in warm]),
@@ -149,7 +149,14 @@ def main() -> None:
     rows: list[dict[str, Any]] = []
     crashes: list[str] = []
 
-    for document in iter_documents(arguments.split, DEFAULT_RAW_DIR):
+    # OCR is cached for every CORD split; images are loaded only if some document lacks it.
+    with_images = any(
+        not (OCR_CACHE / f"{hashlib.sha256(d.encode()).hexdigest()}.json").exists()
+        for d in (
+            wanted or json.loads(SPLIT_FILE.read_text(encoding="utf-8"))[arguments.split]["ids"]
+        )
+    )
+    for document in iter_documents(arguments.split, DEFAULT_RAW_DIR, with_images=with_images):
         if wanted is not None and document.document_id not in wanted:
             continue
         stop_if_low_memory(memory, label, arguments.split, len(predictions))
@@ -249,6 +256,15 @@ def main() -> None:
         records_path.write_text(json.dumps(saved_records), encoding="utf-8", newline="\n")
 
     replayed = provider is not None and provider.live_calls == 0
+    if provider is None or provider.hits == 0:
+        timing_source = "measured in this run"
+    elif replayed:
+        timing_source = "recorded when the call was first made"
+    else:
+        timing_source = (
+            f"mixed: {provider.live_calls} calls measured in this run, {provider.hits} recorded "
+            "earlier (an aborted run or an earlier system) and replayed"
+        )
     result = score(predictions, gold_headers, gold_rows, tuple(HEADER_FIELDS), tuple(ROW_FIELDS))
     result |= {
         "system": label,
@@ -280,7 +296,7 @@ def main() -> None:
             "label_supported": sum(row["label_supported"] for row in rows),
             "label_unsupported": sum(row["label_unsupported"] for row in rows),
         },
-        "latency_seconds": latency_report(rows, replayed=replayed),
+        "latency_seconds": latency_report(rows, source=timing_source),
         "memory": memory.report(),
         "workers": 1,
         "cost_per_document_usd": 0,

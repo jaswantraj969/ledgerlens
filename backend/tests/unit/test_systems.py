@@ -167,7 +167,9 @@ def row(load: float, llm: float) -> dict[str, float]:
 
 
 def test_cold_documents_are_reported_apart_from_warm_ones() -> None:
-    report = latency_report([row(70.0, 50.0), row(0.0, 2.0), row(0.0, 4.0)], replayed=False)
+    report = latency_report(
+        [row(70.0, 50.0), row(0.0, 2.0), row(0.0, 4.0)], source="measured in this run"
+    )
     assert report["warm_llm"]["n"] == 2
     assert report["warm_llm"]["p50"] == 3.0
     assert report["cold"]["documents"] == 1
