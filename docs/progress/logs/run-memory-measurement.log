@@ -1,0 +1,8 @@
+START 2026-11-07T19:14:43Z timeout=600s stall=240s cmd: uv run --project backend --no-sync python -u -m evals.runners.measure_memory
+{'samples': 8, 'psutil_available_min_gib': 3.57, 'psutil_available_mean_gib': 3.575, 'runner_rss_max_gib': 0.047, 'windows_free_physical_gib_after': 3.556, 'phase': 'no model loaded, idle 10 s', 'seconds': 10.5}
+{'samples': 17, 'psutil_available_min_gib': 2.962, 'psutil_available_mean_gib': 2.969, 'runner_rss_max_gib': 0.699, 'windows_free_physical_gib_after': 2.944, 'phase': 'model loaded, idle 20 s', 'seconds': 20.5}
+{'samples': 31, 'psutil_available_min_gib': 2.753, 'psutil_available_mean_gib': 2.865, 'runner_rss_max_gib': 0.906, 'windows_free_physical_gib_after': 2.754, 'phase': "one live S4' document (passes A and B)", 'seconds': 38.7}
+{'samples': 8, 'psutil_available_min_gib': 2.768, 'psutil_available_mean_gib': 2.774, 'runner_rss_max_gib': 0.906, 'windows_free_physical_gib_after': 2.76, 'phase': 'model loaded, idle 10 s after', 'seconds': 10.5}
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\memory_measurement.json
+END 2026-11-07T19:16:29Z elapsed=106s
+EXIT=0

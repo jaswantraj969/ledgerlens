@@ -51,6 +51,23 @@ Low-RAM settings, from the 2026-11-07 review:
 - Every evaluation run aborts cleanly when free system RAM falls below 0.4 GiB, records the abort under `evals/results/aborted/`, and writes no results (`evals/memory_guard.py`). The S2 and S4 validation runs of 2026-11-07 reached 0.27 and 0.25 GiB free, so under this rule they would have aborted.
 - `num_ctx` for round-two prompts is measured per prompt by `evals/runners/measure_prompt_tokens.py`.
 
+### Memory measurement, 2026-11-08
+
+Method: `evals/runners/measure_memory.py` samples every 0.5 s psutil `available` (the value the abort guard uses), the model runner's RSS, and Windows `FreePhysicalMemory` (the value ad-hoc PowerShell checks read). Phases: no model loaded; `llama3.2:3b` loaded and idle at `num_ctx` 2304; one live S4' document (passes A and B, prompt 2.2, a train document outside the prompt subset); idle again. Result: `evals/results/dev/memory_measurement.json`, log `docs/progress/logs/run-memory-measurement.log`.
+
+| Phase | psutil available, lowest | Windows free physical | Runner RSS |
+|---|---|---|---|
+| No model loaded | 3.57 GiB | 3.56 GiB | 0.05 GiB |
+| Model loaded, idle | 2.96 GiB | 2.94 GiB | 0.70 GiB |
+| During one S4' document | 2.75 GiB | 2.75 GiB | 0.91 GiB |
+
+The two free-RAM measures agree within 0.02 GiB, so the gap between the "about 3.3 GiB" and "0.3 to 0.4 GiB" figures reported on 2026-11-07 is not a difference of definition. Explanation:
+
+- The model itself costs about 0.6 to 0.9 GiB of system RAM at `num_ctx` 2304; its weights sit in VRAM.
+- The 0.25 to 0.4 GiB lows were in runs with more memory in use: `num_ctx` 4096 or 8192 (runner RSS 2.8 to 3.5 GiB in those runs), every image loaded into the evaluation process (1.7 to 2.2 GiB, fixed in `9d1e4eb`), or train OCR running at the same time.
+- The completed prompt-2.2 validation runs used `num_ctx` 2304 with no images, and their lowest free RAM was about 3.3 GiB.
+- Two S4' attempts aborted at 0.35 and 0.37 GiB under that same lean configuration. Something outside the run took about 3 GiB for a while. It was not identified; candidates are other applications on this machine (VS Code, browsers, Defender). The statement "about 0.3 to 0.4 GiB with the model loaded" in the 2026-11-07 report was too general and is corrected here.
+
 ## Decision
 
 Docker-first for services (`postgres:16-alpine`, `redis:7-alpine`, both pulled), native Python and

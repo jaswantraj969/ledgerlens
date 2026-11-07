@@ -1,0 +1,66 @@
+{
+  "document_id": "cord-v2:train:0",
+  "model": "llama3.2:3b",
+  "params": {
+    "temperature": 0,
+    "seed": 20261106,
+    "num_ctx": 2304,
+    "num_predict": 1024
+  },
+  "live_calls": 2,
+  "total_ram_gib": 15.638,
+  "phases": [
+    {
+      "samples": 8,
+      "psutil_available_min_gib": 3.57,
+      "psutil_available_mean_gib": 3.575,
+      "runner_rss_max_gib": 0.047,
+      "windows_free_physical_gib_after": 3.556,
+      "phase": "no model loaded, idle 10 s",
+      "seconds": 10.5
+    },
+    {
+      "samples": 17,
+      "psutil_available_min_gib": 2.962,
+      "psutil_available_mean_gib": 2.969,
+      "runner_rss_max_gib": 0.699,
+      "windows_free_physical_gib_after": 2.944,
+      "phase": "model loaded, idle 20 s",
+      "seconds": 20.5
+    },
+    {
+      "samples": 31,
+      "psutil_available_min_gib": 2.753,
+      "psutil_available_mean_gib": 2.865,
+      "runner_rss_max_gib": 0.906,
+      "windows_free_physical_gib_after": 2.754,
+      "phase": "one live S4' document (passes A and B)",
+      "seconds": 38.7
+    },
+    {
+      "samples": 8,
+      "psutil_available_min_gib": 2.768,
+      "psutil_available_mean_gib": 2.774,
+      "runner_rss_max_gib": 0.906,
+      "windows_free_physical_gib_after": 2.76,
+      "phase": "model loaded, idle 10 s after",
+      "seconds": 10.5
+    }
+  ],
+  "environment": {
+    "git_commit": "a5874a4cf0a75d78594d977fe02c0529f6db0012",
+    "git_dirty": false,
+    "python": "3.12.13",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "cpu_count": 12,
+    "packages": {
+      "rapidocr": "3.10.0",
+      "onnxruntime": "1.31.1",
+      "numpy": "2.5.4",
+      "pypdfium2": "5.14.0",
+      "rapidfuzz": "3.14.6"
+    },
+    "ocr_execution": "CPU, onnxruntime defaults"
+  }
+}
