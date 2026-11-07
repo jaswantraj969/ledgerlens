@@ -46,8 +46,10 @@ def _route(name: str, route: dict[str, Any], dev: list[str], held: list[str]) ->
 def main() -> None:
     source = Path(sys.argv[1])
     result = json.loads(source.read_text(encoding="utf-8"))
+    first_route = next(iter(result["routes"].values()))
+    version = next(iter(first_route["layouts"].values()))["metrics_version"]
     lines = [
-        "# S1 on synthetic invoices (metrics 1.1)",
+        f"# {result['system']} on synthetic invoices (metrics {version})",
         "",
         f"Generated from `{source.name}`. Do not edit by hand. {result['note']}",
         "",

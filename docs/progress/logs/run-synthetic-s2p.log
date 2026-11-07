@@ -1,0 +1,27 @@
+START 2026-11-07T12:41:30Z timeout=7200s stall=900s cmd: bash /c/Users/jknm6/AppData/Local/Temp/claude/c778d8435e15a14b/9a954629-d813-4388-8578-142035aa385c/scratchpad/synthetic_s2.sh
+== synthetic S2' attempt 1
+classic: 40 documents, 0 failed
+HEARTBEAT 2026-11-07T12:45:33Z elapsed=243s progress=60 idle=0s
+modern: 40 documents, 0 failed
+HEARTBEAT 2026-11-07T12:49:34Z elapsed=484s progress=92 idle=15s
+HEARTBEAT 2026-11-07T12:53:37Z elapsed=727s progress=92 idle=258s
+receipt: 40 documents, 0 failed
+ABORTED in statement at 38: free system RAM 0.400 GiB fell below 0.400 GiB. No results.
+HEARTBEAT 2026-11-07T12:57:40Z elapsed=970s progress=214 idle=0s
+== synthetic S2' attempt 2
+classic: 40 documents, 0 failed
+modern: 40 documents, 0 failed
+receipt: 40 documents, 0 failed
+statement: 40 documents, 0 failed
+HEARTBEAT 2026-11-07T13:01:43Z elapsed=1213s progress=374 idle=167s
+ledger: 40 documents, 0 failed
+classic: 20 documents, 0 failed
+modern: 20 documents, 0 failed
+HEARTBEAT 2026-11-07T13:05:48Z elapsed=1458s progress=471 idle=46s
+receipt: 20 documents, 0 failed
+statement: 20 documents, 0 failed
+HEARTBEAT 2026-11-07T13:09:52Z elapsed=1702s progress=539 idle=107s
+ledger: 20 documents, 0 failed
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\synthetic_s2p_v1_1_1.json
+END 2026-11-07T13:11:08Z elapsed=1778s
+EXIT=0
