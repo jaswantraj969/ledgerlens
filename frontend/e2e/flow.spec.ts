@@ -33,8 +33,11 @@ test('upload, review and export one invoice', async ({ page, request }) => {
   await total.getByRole('button', { name: 'Save' }).click()
   await expect(total).toContainText('Corrected')
 
-  const pending = page.locator('[data-testid^="field-"]', { hasText: 'Needs review' }).first()
-  if (await pending.count()) {
+  // Pin the field by its test id: a "first pending field" locator moves once it is approved.
+  const firstPending = page.locator('[data-testid^="field-"]', { hasText: 'Needs review' }).first()
+  if (await firstPending.count()) {
+    const testId = await firstPending.getAttribute('data-testid')
+    const pending = page.getByTestId(testId!)
     await pending.getByRole('button', { name: 'Approve' }).click()
     await expect(pending).toContainText('Approved')
   }

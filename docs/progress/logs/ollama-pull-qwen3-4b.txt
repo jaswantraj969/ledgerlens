@@ -1,0 +1,20 @@
+# ollama pull qwen3:4b, approved by the owner on 2026-11-08. Raw progress output (9 MB of redraws) condensed to its outcome.
+Started about 2026-11-07T19:18Z; finished about 2026-11-07T21:00Z; resumed by Ollama on its own after slow periods (500-700 KB/s).
+EXIT=0
+success 
+verifying sha256 digest 
+verifying sha256 digest ⠇ pulling manifest 
+verifying sha256 digest ⠋ pulling manifest 
+verifying sha256 digest ⠏ pulling manifest 
+verifying sha256 digest ⠙ pulling manifest 
+verifying sha256 digest ⠦ pulling manifest 
+verifying sha256 digest ⠧ pulling manifest 
+verifying sha256 digest ⠴ pulling manifest 
+verifying sha256 digest ⠸ pulling manifest 
+verifying sha256 digest ⠹ pulling manifest 
+verifying sha256 digest ⠼ pulling manifest 
+writing manifest 
+writing manifest ⠋ pulling manifest 
+ollama list:
+NAME                       ID              SIZE      MODIFIED       
+qwen3:4b                   359d7dd4bcda    2.5 GB    11 minutes ago    

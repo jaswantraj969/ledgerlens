@@ -1,0 +1,72 @@
+START 2026-11-07T21:04:04Z timeout=900s stall=300s cmd: bash scripts/e2e_local.sh
+ Container ledgerlens-postgres-1 Running 
+ Container ledgerlens-redis-1 Running 
+ Container ledgerlens-postgres-1 Waiting 
+ Container ledgerlens-redis-1 Waiting 
+ Container ledgerlens-redis-1 Healthy 
+ Container ledgerlens-postgres-1 Healthy 
+02:04:11 Worker ed0a66c7e0ce45c5a81daf5762a7d25e: started with PID 11408, version 3.0.0
+02:04:11 Worker ed0a66c7e0ce45c5a81daf5762a7d25e: subscribing to channel rq:pubsub:ed0a66c7e0ce45c5a81daf5762a7d25e
+02:04:11 *** Listening on ledgerlens...
+02:04:11 Worker ed0a66c7e0ce45c5a81daf5762a7d25e: cleaning registries for queue: ledgerlens
+INFO:     Started server process [22116]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+
+  [32m[1mVITE[22m v8.3.6[39m  [2mready in [0m[1m819[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m5173[22m/[39m
+{"method": "GET", "path": "/health/ready", "status": 200, "seconds": 0.0942, "event": "request", "request_id": "d17ed9f4e35e4dfa8f7010e073611ea0", "level": "info", "timestamp": "2026-11-07T21:04:12.702405Z"}
+INFO:     127.0.0.1:50218 - "GET /health/ready HTTP/1.1" 200 OK
+local dev stack ready (API, worker, Vite)
+
+Running 1 test using 1 worker
+
+{"method": "POST", "path": "/auth/register", "status": 201, "seconds": 0.1646, "event": "request", "request_id": "4297e16bbf104e0a8a269047b40348f6", "level": "info", "timestamp": "2026-11-07T21:04:21.596712Z"}
+INFO:     127.0.0.1:55215 - "POST /auth/register HTTP/1.1" 201 Created
+{"method": "POST", "path": "/auth/login", "status": 200, "seconds": 0.14, "event": "request", "request_id": "760d75bb2a5a449198057876346a1422", "level": "info", "timestamp": "2026-11-07T21:04:22.517599Z"}
+INFO:     127.0.0.1:55690 - "POST /auth/login HTTP/1.1" 200 OK
+{"method": "GET", "path": "/documents", "status": 200, "seconds": 0.0555, "event": "request", "request_id": "c43f8ac3e8614320a771b3a3fa26a394", "level": "info", "timestamp": "2026-11-07T21:04:22.613723Z"}
+INFO:     127.0.0.1:56643 - "GET /documents?limit=50&offset=0 HTTP/1.1" 200 OK
+{"method": "POST", "path": "/documents", "status": 201, "seconds": 0.0671, "event": "request", "request_id": "8938f0c053254d1bb700e3f7adbd7333", "level": "info", "timestamp": "2026-11-07T21:04:22.678594Z"}
+INFO:     127.0.0.1:56644 - "POST /documents HTTP/1.1" 201 Created
+02:04:22 Worker ed0a66c7e0ce45c5a81daf5762a7d25e: ledgerlens: ledgerlens.workers.tasks.process_document('d703e938-e873-4033-922e-7a6cd9fe62ba') (d703e938-e873-4033-922e-7a6cd9fe62ba)
+{"method": "GET", "path": "/documents", "status": 200, "seconds": 0.0171, "event": "request", "request_id": "b9639b98271c4b94b0c2b2bd24146dad", "level": "info", "timestamp": "2026-11-07T21:04:22.694824Z"}
+INFO:     127.0.0.1:56645 - "GET /documents?limit=50&offset=0 HTTP/1.1" 200 OK
+{"method": "GET", "path": "/documents", "status": 200, "seconds": 0.0128, "event": "request", "request_id": "33ec1a7a0481482e946a3b1fcfed0d89", "level": "info", "timestamp": "2026-11-07T21:04:22.716349Z"}
+INFO:     127.0.0.1:56646 - "GET /documents?limit=50&offset=0 HTTP/1.1" 200 OK
+{"job_id": "d703e938-e873-4033-922e-7a6cd9fe62ba", "attempt": 1, "event": "job.start", "level": "info", "timestamp": "2026-11-07T21:04:22.780738Z"}
+{"job_id": "d703e938-e873-4033-922e-7a6cd9fe62ba", "state": "ready_for_review", "event": "job.done", "level": "info", "timestamp": "2026-11-07T21:04:23.082452Z"}
+02:04:23 Successfully completed ledgerlens.workers.tasks.process_document('d703e938-e873-4033-922e-7a6cd9fe62ba') job in 0:00:00.382983s on worker ed0a66c7e0ce45c5a81daf5762a7d25e
+02:04:23 Worker ed0a66c7e0ce45c5a81daf5762a7d25e: ledgerlens: Job OK (d703e938-e873-4033-922e-7a6cd9fe62ba)
+02:04:23 Worker ed0a66c7e0ce45c5a81daf5762a7d25e: job d703e938-e873-4033-922e-7a6cd9fe62ba result is kept for 500 seconds
+{"method": "GET", "path": "/documents/66e9b25b-05df-43e9-805f-04699418ddff", "status": 200, "seconds": 0.0188, "event": "request", "request_id": "1823805ab3ee4681929619be28b46eff", "level": "info", "timestamp": "2026-11-07T21:04:25.772267Z"}
+INFO:     127.0.0.1:56648 - "GET /documents/66e9b25b-05df-43e9-805f-04699418ddff HTTP/1.1" 200 OK
+{"method": "GET", "path": "/jobs/d703e938-e873-4033-922e-7a6cd9fe62ba", "status": 200, "seconds": 0.0169, "event": "request", "request_id": "903606cbb58a42e0b1b6f1a473b9aa34", "level": "info", "timestamp": "2026-11-07T21:04:25.799195Z"}
+INFO:     127.0.0.1:50900 - "GET /jobs/d703e938-e873-4033-922e-7a6cd9fe62ba HTTP/1.1" 200 OK
+{"method": "GET", "path": "/documents/66e9b25b-05df-43e9-805f-04699418ddff/fields", "status": 200, "seconds": 0.0724, "event": "request", "request_id": "c3bf9d8c1f3c4c14ae46af27f4ca6fa9", "level": "info", "timestamp": "2026-11-07T21:04:26.808774Z"}
+INFO:     127.0.0.1:49672 - "GET /documents/66e9b25b-05df-43e9-805f-04699418ddff/fields HTTP/1.1" 200 OK
+{"method": "GET", "path": "/documents/66e9b25b-05df-43e9-805f-04699418ddff/fields", "status": 200, "seconds": 0.0302, "event": "request", "request_id": "0ed3346e0a4142129ca69d783d6b8432", "level": "info", "timestamp": "2026-11-07T21:04:26.844167Z"}
+INFO:     127.0.0.1:54694 - "GET /documents/66e9b25b-05df-43e9-805f-04699418ddff/fields HTTP/1.1" 200 OK
+{"method": "GET", "path": "/documents/66e9b25b-05df-43e9-805f-04699418ddff/pages/1/image", "status": 200, "seconds": 0.1041, "event": "request", "request_id": "d48da0bf59d34d3c9fa538ca80d99ac4", "level": "info", "timestamp": "2026-11-07T21:04:26.966343Z"}
+INFO:     127.0.0.1:50653 - "GET /documents/66e9b25b-05df-43e9-805f-04699418ddff/pages/1/image HTTP/1.1" 200 OK
+{"method": "GET", "path": "/documents/66e9b25b-05df-43e9-805f-04699418ddff/pages/1/image", "status": 200, "seconds": 0.0812, "event": "request", "request_id": "7331d6fcb78744c08d165ccf2da15dec", "level": "info", "timestamp": "2026-11-07T21:04:27.057958Z"}
+INFO:     127.0.0.1:61104 - "GET /documents/66e9b25b-05df-43e9-805f-04699418ddff/pages/1/image HTTP/1.1" 200 OK
+{"method": "GET", "path": "/documents/66e9b25b-05df-43e9-805f-04699418ddff/pages/1/image", "status": 401, "seconds": 0.0094, "event": "request", "request_id": "05ab1a6a14ec4e90a31c1d3d2e14f942", "level": "info", "timestamp": "2026-11-07T21:04:27.074092Z"}
+INFO:     127.0.0.1:58684 - "GET /documents/66e9b25b-05df-43e9-805f-04699418ddff/pages/1/image HTTP/1.1" 401 Unauthorized
+{"method": "GET", "path": "/documents/66e9b25b-05df-43e9-805f-04699418ddff/pages/1/image", "status": 401, "seconds": 0.0028, "event": "request", "request_id": "402af706bf2142149c4a693bb152df51", "level": "info", "timestamp": "2026-11-07T21:04:27.087795Z"}
+INFO:     127.0.0.1:63419 - "GET /documents/66e9b25b-05df-43e9-805f-04699418ddff/pages/1/image HTTP/1.1" 401 Unauthorized
+{"method": "POST", "path": "/fields/828f1d45-d293-496c-b43f-321adc921333/review", "status": 200, "seconds": 0.078, "event": "request", "request_id": "3c4ad0e281e5426d8001e14c701fa403", "level": "info", "timestamp": "2026-11-07T21:04:27.145716Z"}
+INFO:     127.0.0.1:58685 - "POST /fields/828f1d45-d293-496c-b43f-321adc921333/review HTTP/1.1" 200 OK
+{"method": "POST", "path": "/fields/ad53a48c-f8b6-4ef6-a327-6865699fc901/review", "status": 200, "seconds": 0.0522, "event": "request", "request_id": "1590de0d4189418cbcf2b927d13a8876", "level": "info", "timestamp": "2026-11-07T21:04:27.337216Z"}
+INFO:     127.0.0.1:61960 - "POST /fields/ad53a48c-f8b6-4ef6-a327-6865699fc901/review HTTP/1.1" 200 OK
+{"method": "GET", "path": "/documents/66e9b25b-05df-43e9-805f-04699418ddff/export", "status": 200, "seconds": 0.0357, "event": "request", "request_id": "aae10292db8b449b858386579f88b24e", "level": "info", "timestamp": "2026-11-07T21:04:27.494575Z"}
+INFO:     127.0.0.1:52097 - "GET /documents/66e9b25b-05df-43e9-805f-04699418ddff/export?format=json HTTP/1.1" 200 OK
+{"method": "GET", "path": "/documents/66e9b25b-05df-43e9-805f-04699418ddff/export", "status": 401, "seconds": 0.0028, "event": "request", "request_id": "9f02f98f2e7a4975b1920dfab39c634a", "level": "info", "timestamp": "2026-11-07T21:04:27.514583Z"}
+INFO:     127.0.0.1:62678 - "GET /documents/66e9b25b-05df-43e9-805f-04699418ddff/export?format=json HTTP/1.1" 401 Unauthorized
+  ok 1 e2e\flow.spec.ts:7:1 › upload, review and export one invoice (6.6s)
+
+  1 passed (10.2s)
+END 2026-11-07T21:04:35Z elapsed=31s
+EXIT=0
