@@ -39,8 +39,10 @@ _CELL = re.compile(r"^line_items\[\d+\]\.(\w+)$")
 _TEXT_FIELDS = {"line_items.description"}
 
 
-def cached_parse(document_id: str, image: bytes, parser: RapidOcrParser) -> dict[str, Any]:
-    path = OCR_CACHE / f"{hashlib.sha256(document_id.encode()).hexdigest()}.json"
+def cached_parse(
+    document_id: str, image: bytes, parser: RapidOcrParser, ocr_cache: Path = OCR_CACHE
+) -> dict[str, Any]:
+    path = ocr_cache / f"{hashlib.sha256(document_id.encode()).hexdigest()}.json"
     if path.exists():
         return dict(json.loads(path.read_text(encoding="utf-8")))
     started = time.perf_counter()
@@ -117,7 +119,7 @@ def environment() -> dict[str, Any]:
     }
 
 
-def run(split: str, output: Path) -> dict[str, Any]:
+def run(split: str, output: Path, ocr_cache: Path = OCR_CACHE) -> dict[str, Any]:
     parser = RapidOcrParser()
     schema = load_schema(SCHEMA)
     outcomes: dict[str, list[Outcome]] = {field: [] for field in EVALUABLE_FIELDS}
@@ -131,7 +133,7 @@ def run(split: str, output: Path) -> dict[str, Any]:
     for document in iter_documents(split, DEFAULT_RAW_DIR):  # type: ignore[arg-type]
         documents += 1
         try:
-            entry = cached_parse(document.document_id, document.image or b"", parser)
+            entry = cached_parse(document.document_id, document.image or b"", parser, ocr_cache)
             parsed = ParsedDocument.model_validate(entry["parsed"])
             started = time.perf_counter()
             records = process(parsed, schema)
@@ -193,7 +195,20 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--split", choices=["validation", "test"], required=True)
     parser.add_argument("--final", action="store_true", help="required to read the test split")
+    parser.add_argument(
+        "--reproduce",
+        action="store_true",
+        help="rerun with fresh OCR into evals/results/repro; never replaces a result",
+    )
     arguments = parser.parse_args()
+
+    if arguments.reproduce:
+        output = RESULTS / "repro" / f"cord_s1_{arguments.split}_repro.json"
+        result = run(arguments.split, output, OCR_CACHE.parent / "ocr-repro")
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+        print("wrote", output)
+        return
 
     if arguments.split == "test":
         if not arguments.final:
