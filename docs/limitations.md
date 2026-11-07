@@ -8,9 +8,9 @@ This file grows as limitations are found.
 
 The deterministic extractor copies values from the tokens, so matching them against those tokens proves nothing. Such fields are recorded as `evidence_status: self_sourced` with `evidence_independent: false`, never `exact`, and the feature builder excludes them. Only a value from a different source, such as an LLM pass, gets a real match result. A `self_sourced` field shows where a value was read from, not that it is correct.
 
-## LLM extraction is one pass
+## LLM extraction quality on validation
 
-Only pass A (field-guided) exists. Pass B (document-guided) and cross-pass agreement are not implemented. JSON validity is enforced by Ollama's schema constraint, so a high validity rate says nothing about whether values are right.
+With `llama3.2:3b` and prompts `a-1.0` and `b-1.0`, line items are poor: row-level F1 0.058 for S2, against 0.377 for rules. The model often omits quantity, lists summary lines such as `TOTAL` as items, and confuses columns. It also fills fields that are not printed, with false fill rates of about 0.7 to 0.8 on subtotal and tax. The evidence check cannot catch that, because the number it copies does appear in the document, in a different role. JSON validity is enforced by Ollama's schema constraint, so a high validity rate says nothing about whether values are right.
 
 ## SROIE is blocked, so no real vendor-grouped result exists
 

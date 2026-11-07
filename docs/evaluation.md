@@ -171,7 +171,16 @@ The `memory` block of `evals/results/cord_s1_v1_1.json` reads 0.0 for process an
 
 ## Results
 
-[S1 on CORD test](../evals/results/cord_s1_v1.md). The test split was read once, at commit `1b53a77`.
+Reported test result: [S1 on CORD test, metrics 1.1](../evals/results/cord_s1_v1_1.md). History: [metrics 1.0](../evals/results/cord_s1_v1.md).
+
+The test split has been read for S1 only: once at commit `1b53a77`, and again for the reproduction check and metrics 1.1, as the 2026-11-07 review directed, with no rule change. S2 to S5 have not read it.
+
+- Reproduction log: `docs/progress/logs/s1-reproduction.txt`. 140 values, 0 different, with fresh OCR, and again at clean HEAD.
+- Layout groups: [S1 by layout group](../evals/results/cord_s1_v1_1_layout_groups.md).
+- Synthetic: [S1 per layout, dev versus held-out](../evals/results/synthetic_s1_v1_1.md).
+- Validation, for development only: [S1](../evals/results/dev/cord_s1_validation_v1_1.md), [S2](../evals/results/dev/cord_s2_validation_v1_1.md), [S3](../evals/results/dev/cord_s3_validation_v1_1.md), [S4](../evals/results/dev/cord_s4_validation_v1_1.md).
+
+The S1 latency differed between runs (p50 2.57 s, then 2.00 s). Timings are not reproducible in the way scores are.
 
 `n` counts usable labels. Tax has n=41 on test: 43 documents hold the key, but two contain only `-`, which this protocol defines as absent.
 

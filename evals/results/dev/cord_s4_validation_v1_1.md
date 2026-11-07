@@ -7,7 +7,7 @@ Generated from `cord_s4_validation_v1_1.json`. Do not edit by hand.
 - Schema: cord_receipt 1.1.0. Split sha256: `e809a1edf8320960479a1f79e7e2c086aaca4793dbf9c91fc354eaca2c656852`.
 - Predictions sha256: `76ef47e2beac9cfe9e18aa15a829506c9abd910490707e2ee1eaeb5faa1cea90`.
 - Intervals: 95% bootstrap, 2000 resamples of documents, seed 20261106.
-- Commit: `aa70b6a6dadd6ce01ed2730c7b7bdbb0ded1736f`, dirty: False.
+- Commit: `1c1f7655d09aa4309fe163fd8dce637b9877db09`, dirty: False.
 
 ## Single-valued fields
 
@@ -47,17 +47,17 @@ Secondary score, set-based, ignores row alignment.
 
 - Values output: 1040.
 - Not found in the document: 0.
-- Withheld: 43.
-- Rule failures: 408.
+- Withheld: 37.
+- Rule failures: 422.
 
 ## Latency and memory
 
-Timings are measured in this run.
+Timings are recorded when the call was first made.
 
 - OCR: p50 2.55 s, p95 4.71 s (n=100).
 - Warm LLM, load excluded: p50 4.73 s, p95 11.20 s (n=98).
-- Warm total per document: p50 7.55 s, p95 14.84 s (n=98).
+- Warm total per document: p50 7.43 s, p95 14.79 s (n=98).
 - Cold documents: 2. Model load (s): [69.6, 7.44]. Cold LLM time excluding load (s): [63.46, 8.12].
-- Peak process RSS: 0.971 GiB. Peak model runner RSS: 2.664 GiB. Lowest available system RAM: 0.253 of 15.638 GiB.
+- Memory, live run: peak process RSS 0.971 GiB, peak model runner RSS 2.664 GiB, lowest available system RAM 0.253 of 15.638 GiB.
 
 Gold values excluded as unparsable: none.

@@ -5,9 +5,9 @@ Generated from `cord_s2_validation_v1_1.json`. Do not edit by hand.
 - Documents: 100. Workers: 1.
 - Metrics 1.1, normalisation 1.0 (sha256 `aa5cf4994ce5fd1b12b2aaf843fa3568f15bffe515b9cefd4dc1bb200760dee1`).
 - Schema: cord_receipt 1.1.0. Split sha256: `e809a1edf8320960479a1f79e7e2c086aaca4793dbf9c91fc354eaca2c656852`.
-- Predictions sha256: `6537370725cf59762407408107f8765f811632a83522c261d66aa37170b1e44d`.
+- Predictions sha256: `7626291638eea48de28bf545ba67090e318b2a04ab41c3a37f7bd706587d95e8`.
 - Intervals: 95% bootstrap, 2000 resamples of documents, seed 20261106.
-- Commit: `a3514c2e69cd45d30cddd871061fcbfcdade5e24`, dirty: False.
+- Commit: `1c1f7655d09aa4309fe163fd8dce637b9877db09`, dirty: False.
 
 ## Single-valued fields
 
@@ -45,19 +45,19 @@ Secondary score, set-based, ignores row alignment.
 
 ## Verification
 
-- Values output: 1084.
-- Not found in the document: 43.
+- Values output: 1072.
+- Not found in the document: 31.
 - Withheld: 0.
-- Rule failures: 398.
+- Rule failures: 412.
 
 ## Latency and memory
 
-Timings are measured in this run.
+Timings are recorded when the call was first made.
 
 - OCR: p50 2.55 s, p95 4.71 s (n=100).
 - Warm LLM, load excluded: p50 2.37 s, p95 7.31 s (n=98).
-- Warm total per document: p50 5.30 s, p95 9.94 s (n=98).
+- Warm total per document: p50 5.26 s, p95 9.91 s (n=98).
 - Cold documents: 2. Model load (s): [69.55, 7.33]. Cold LLM time excluding load (s): [58.07, 4.31].
-- Peak process RSS: 0.98 GiB. Peak model runner RSS: 1.888 GiB. Lowest available system RAM: 0.265 of 15.638 GiB.
+- Memory, live run: peak process RSS 0.98 GiB, peak model runner RSS 1.888 GiB, lowest available system RAM 0.265 of 15.638 GiB.
 
 Gold values excluded as unparsable: none.

@@ -278,11 +278,11 @@
   "verification": {
     "values_output": 1040,
     "values_not_found_in_document": 0,
-    "values_withheld": 43,
-    "rule_failures": 408
+    "values_withheld": 37,
+    "rule_failures": 422
   },
   "latency_seconds": {
-    "source": "measured in this run",
+    "source": "recorded when the call was first made",
     "ocr": {
       "n": 100,
       "p50": 2.5504033000033814,
@@ -290,8 +290,8 @@
     },
     "extraction_excluding_llm": {
       "n": 100,
-      "p50": 0.14458919999015052,
-      "p95": 0.30599788501131103
+      "p50": 0.00606195000000298,
+      "p95": 0.012234075008018404
     },
     "warm_llm": {
       "n": 98,
@@ -300,8 +300,8 @@
     },
     "warm_total": {
       "n": 98,
-      "p50": 7.554002249982278,
-      "p95": 14.84260713998037
+      "p50": 7.429901850007428,
+      "p95": 14.793602724989885
     },
     "cold": {
       "documents": 2,
@@ -316,16 +316,16 @@
     }
   },
   "memory": {
-    "peak_process_rss_gib": 0.971,
-    "peak_model_runner_rss_gib": 2.664,
-    "lowest_available_system_ram_gib": 0.253,
+    "peak_process_rss_gib": 0.939,
+    "peak_model_runner_rss_gib": 1.117,
+    "lowest_available_system_ram_gib": 1.173,
     "total_system_ram_gib": 15.638
   },
   "workers": 1,
   "cost_per_document_usd": 0,
   "output_file": "evals/results/dev/cord_s4_validation_v1_1.json",
   "environment": {
-    "git_commit": "aa70b6a6dadd6ce01ed2730c7b7bdbb0ded1736f",
+    "git_commit": "1c1f7655d09aa4309fe163fd8dce637b9877db09",
     "git_dirty": false,
     "python": "3.12.13",
     "platform": "Windows-11-10.0.26300-SP0",
@@ -352,8 +352,14 @@
       "a": "a-1.0",
       "b": "b-1.0"
     },
-    "mode": "record",
-    "live_calls": 100,
-    "cache_hits": 101
+    "mode": "replay",
+    "live_calls": 0,
+    "cache_hits": 201
+  },
+  "memory_live_run": {
+    "peak_process_rss_gib": 0.971,
+    "peak_model_runner_rss_gib": 2.664,
+    "lowest_available_system_ram_gib": 0.253,
+    "total_system_ram_gib": 15.638
   }
 }

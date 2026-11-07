@@ -265,7 +265,7 @@
     "seed": 20261106,
     "unit": "document"
   },
-  "predictions_sha256": "6537370725cf59762407408107f8765f811632a83522c261d66aa37170b1e44d",
+  "predictions_sha256": "7626291638eea48de28bf545ba67090e318b2a04ab41c3a37f7bd706587d95e8",
   "failures": {
     "crashes": 0,
     "crash_detail": [],
@@ -276,13 +276,13 @@
     "truncated_replies": 0
   },
   "verification": {
-    "values_output": 1084,
-    "values_not_found_in_document": 43,
+    "values_output": 1072,
+    "values_not_found_in_document": 31,
     "values_withheld": 0,
-    "rule_failures": 398
+    "rule_failures": 412
   },
   "latency_seconds": {
-    "source": "measured in this run",
+    "source": "recorded when the call was first made",
     "ocr": {
       "n": 100,
       "p50": 2.5504033000033814,
@@ -290,8 +290,8 @@
     },
     "extraction_excluding_llm": {
       "n": 100,
-      "p50": 0.03178565000416711,
-      "p95": 0.17025177499162963
+      "p50": 0.005208350004977547,
+      "p95": 0.008900664997054261
     },
     "warm_llm": {
       "n": 98,
@@ -300,8 +300,8 @@
     },
     "warm_total": {
       "n": 98,
-      "p50": 5.29970490000445,
-      "p95": 9.94156337501536
+      "p50": 5.260188250013563,
+      "p95": 9.911758240005842
     },
     "cold": {
       "documents": 2,
@@ -316,16 +316,16 @@
     }
   },
   "memory": {
-    "peak_process_rss_gib": 0.98,
-    "peak_model_runner_rss_gib": 1.888,
-    "lowest_available_system_ram_gib": 0.265,
+    "peak_process_rss_gib": 0.965,
+    "peak_model_runner_rss_gib": 1.117,
+    "lowest_available_system_ram_gib": 0.785,
     "total_system_ram_gib": 15.638
   },
   "workers": 1,
   "cost_per_document_usd": 0,
   "output_file": "evals/results/dev/cord_s2_validation_v1_1.json",
   "environment": {
-    "git_commit": "a3514c2e69cd45d30cddd871061fcbfcdade5e24",
+    "git_commit": "1c1f7655d09aa4309fe163fd8dce637b9877db09",
     "git_dirty": false,
     "python": "3.12.13",
     "platform": "Windows-11-10.0.26300-SP0",
@@ -352,8 +352,14 @@
       "a": "a-1.0",
       "b": "b-1.0"
     },
-    "mode": "record",
-    "live_calls": 89,
-    "cache_hits": 11
+    "mode": "replay",
+    "live_calls": 0,
+    "cache_hits": 100
+  },
+  "memory_live_run": {
+    "peak_process_rss_gib": 0.98,
+    "peak_model_runner_rss_gib": 1.888,
+    "lowest_available_system_ram_gib": 0.265,
+    "total_system_ram_gib": 15.638
   }
 }

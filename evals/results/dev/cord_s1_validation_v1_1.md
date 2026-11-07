@@ -7,7 +7,7 @@ Generated from `cord_s1_validation_v1_1.json`. Do not edit by hand.
 - Schema: cord_receipt 1.1.0. Split sha256: `e809a1edf8320960479a1f79e7e2c086aaca4793dbf9c91fc354eaca2c656852`.
 - Predictions sha256: `d4b2385e1529fa38f4ec4c63ebc669a4a4bebed7247ef3b0eb35187bcd507b18`.
 - Intervals: 95% bootstrap, 2000 resamples of documents, seed 20261106.
-- Commit: `2ebea874cf18ad6a45289e4828e6238785faff67`, dirty: False.
+- Commit: `1c1f7655d09aa4309fe163fd8dce637b9877db09`, dirty: False.
 
 ## Single-valued fields
 
@@ -55,9 +55,7 @@ Secondary score, set-based, ignores row alignment.
 Timings are measured in this run.
 
 - OCR: p50 2.55 s, p95 4.71 s (n=100).
-- Warm LLM, load excluded: p50 0.00 s, p95 0.00 s (n=100).
-- Warm total per document: p50 2.55 s, p95 4.71 s (n=100).
-- Cold documents: 0. Model load (s): []. Cold LLM time excluding load (s): [].
-- Peak process RSS: 0.0 GiB. Peak model runner RSS: 0.0 GiB. Lowest available system RAM: 2.587 of 15.638 GiB.
+- Total per document: p50 2.55 s, p95 4.71 s (n=100). No model is used.
+- Memory: peak process RSS 0.976 GiB, peak model runner RSS 1.558 GiB, lowest available system RAM 0.228 of 15.638 GiB.
 
 Gold values excluded as unparsable: none.

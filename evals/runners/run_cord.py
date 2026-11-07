@@ -256,7 +256,10 @@ def main() -> None:
     if arguments.replay and output_path.exists():
         # Replay exercises no model, so the live run's memory figures stay the reported ones.
         previous = json.loads(output_path.read_text(encoding="utf-8"))
-        live_memory = previous.get("memory_live_run", previous.get("memory"))
+        recorded_live = previous.get("llm", {}).get("mode") == "record"
+        live_memory = previous.get("memory_live_run") or (
+            previous["memory"] if recorded_live else None
+        )
         if live_memory:
             result["memory_live_run"] = live_memory
     output_path.parent.mkdir(parents=True, exist_ok=True)
