@@ -1,0 +1,15 @@
+# Keep data, caches, secrets and local environments out of every build context.
+.git
+.env
+data/
+evals/cache/
+**/node_modules
+**/.venv
+**/__pycache__
+**/.mypy_cache
+**/.ruff_cache
+**/.pytest_cache
+**/dist
+backend/var/
+var/
+docs/progress/logs/

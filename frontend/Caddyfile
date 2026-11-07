@@ -1,0 +1,16 @@
+:8080 {
+	# The API, with the /api prefix removed, as in the Vite dev proxy.
+	handle_path /api/* {
+		reverse_proxy api:8000
+	}
+	handle {
+		root * /srv
+		try_files {path} /index.html
+		file_server
+	}
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy no-referrer
+		X-Frame-Options DENY
+	}
+}

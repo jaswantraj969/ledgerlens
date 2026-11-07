@@ -1,5 +1,15 @@
-# Skeleton: api, worker and frontend services are added in Phases 4, 6 and 9.
+# Full local stack: PostgreSQL, Redis, API, worker and web. Run from the repository root:
+#   docker compose -f infra/docker-compose.yml --env-file .env up -d --build --wait
+# Ports are bound to 127.0.0.1 only. The worker defaults to rules (no model); to use a local
+# Ollama on the host, set LEDGERLENS_EXTRACTION_MODE=llm or llm_or_rules in .env.
 name: ledgerlens
+
+x-backend-env: &backend-env
+  LEDGERLENS_DATABASE_URL: postgresql+psycopg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+  LEDGERLENS_REDIS_URL: redis://redis:6379/0
+  LEDGERLENS_JWT_SECRET: ${LEDGERLENS_JWT_SECRET:?set in .env}
+  LEDGERLENS_EXTRACTION_MODE: ${LEDGERLENS_EXTRACTION_MODE:-rules}
+  LEDGERLENS_OLLAMA_URL: ${LEDGERLENS_OLLAMA_URL:-http://host.docker.internal:11434}
 
 services:
   postgres:
@@ -28,5 +38,60 @@ services:
       timeout: 3s
       retries: 10
 
+  api:
+    build:
+      context: ..
+      dockerfile: backend/Dockerfile
+    image: ledgerlens-backend:local
+    environment: *backend-env
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - storage-data:/data/storage
+    depends_on:
+      postgres: { condition: service_healthy }
+      redis: { condition: service_healthy }
+    healthcheck:
+      # Readiness checks the database, Redis, storage and that a worker is registered.
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/health/ready', timeout=3).status == 200 else 1)"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
+
+  worker:
+    image: ledgerlens-backend:local
+    command: ["python", "-m", "ledgerlens.workers.run"]
+    environment: *backend-env
+    volumes:
+      - storage-data:/data/storage
+      - llm-cache:/data/llm-cache
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      api: { condition: service_started }
+    healthcheck:
+      test: ["CMD", "python", "-c", "import os,sys,redis,rq; sys.exit(0 if rq.Worker.count(connection=redis.Redis.from_url(os.environ['LEDGERLENS_REDIS_URL'])) > 0 else 1)"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 15s
+
+  web:
+    build:
+      context: ../frontend
+    image: ledgerlens-web:local
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      api: { condition: service_started }
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/"]
+      interval: 10s
+      timeout: 3s
+      retries: 6
+
 volumes:
   postgres-data:
+  storage-data:
+  llm-cache:
