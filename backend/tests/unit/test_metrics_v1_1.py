@@ -171,3 +171,13 @@ def test_row_summary_with_no_predictions() -> None:
     summary = summarize_rows([RowOutcome(0, 0, 3)])
     assert summary["precision"] is None
     assert summary["recall"] == 0
+
+
+def test_correct_rows_flags_the_rows_match_rows_counts() -> None:
+    from evals.metrics import correct_rows
+
+    gold = [{"description": "tea", "amount": 5}, {"description": "rice", "amount": 9}]
+    predicted = [{"description": "rice", "amount": 9}, {"description": "tea", "amount": 6}]
+    assert correct_rows(predicted, gold) == [True, False]
+    assert match_rows(predicted, gold).correct == sum(correct_rows(predicted, gold))
+    assert correct_rows([], gold) == []

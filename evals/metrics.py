@@ -200,11 +200,11 @@ def row_score(predicted: Row, gold: Row) -> tuple[bool, float]:
     return matches == len(fields), matches / len(fields)
 
 
-def match_rows(predicted: Sequence[Row], gold: Sequence[Row]) -> RowOutcome:
-    """One-to-one Hungarian assignment. Gold rows with no labelled field are not scored."""
-    gold_rows = [row for row in gold if _scored_fields(row)]
+def _assign(predicted: Sequence[Row], gold_rows: Sequence[Row]) -> list[bool]:
+    """Per predicted row: fully correct under the one-to-one Hungarian assignment."""
+    correct = [False] * len(predicted)
     if not predicted or not gold_rows:
-        return RowOutcome(0, len(predicted), len(gold_rows))
+        return correct
     weights = np.zeros((len(predicted), len(gold_rows)))
     full = np.zeros_like(weights, dtype=bool)
     for i, candidate in enumerate(predicted):
@@ -212,8 +212,20 @@ def match_rows(predicted: Sequence[Row], gold: Sequence[Row]) -> RowOutcome:
             all_match, share = row_score(candidate, reference)
             full[i, j] = all_match
             weights[i, j] = share + (_FULL_MATCH_WEIGHT if all_match else 0.0)
-    assigned = linear_sum_assignment(weights, maximize=True)
-    return RowOutcome(int(full[assigned].sum()), len(predicted), len(gold_rows))
+    for i, j in zip(*linear_sum_assignment(weights, maximize=True), strict=True):
+        correct[i] = bool(full[i, j])
+    return correct
+
+
+def match_rows(predicted: Sequence[Row], gold: Sequence[Row]) -> RowOutcome:
+    """One-to-one Hungarian assignment. Gold rows with no labelled field are not scored."""
+    gold_rows = [row for row in gold if _scored_fields(row)]
+    return RowOutcome(sum(_assign(predicted, gold_rows)), len(predicted), len(gold_rows))
+
+
+def correct_rows(predicted: Sequence[Row], gold: Sequence[Row]) -> list[bool]:
+    """Which predicted rows `match_rows` counts as correct. Used to label S5 row units."""
+    return _assign(predicted, [row for row in gold if _scored_fields(row)])
 
 
 def _row_rates(counts: np.ndarray) -> tuple[float | None, ...]:
