@@ -53,23 +53,72 @@ No SROIE metric has been computed. Images are not downloaded.
 
 A label holding only `-` counts as absent. vendor_name, invoice_number, invoice_date and currency are not evaluated on CORD.
 
-## Metrics
+## Metrics (version 1.1)
 
-Header fields, per document:
+Metrics 1.1 replaces 1.0 for all new results, and every results file records its version. Normalisation stays at 1.0. `evals/results/cord_s1_v1.json` is kept for history under 1.0 definitions.
 
-- Prediction and gold both present and equal: TP.
-- Both present and different: FP and FN.
-- Prediction with no gold: FP.
-- Gold with no prediction: FN.
-- Both absent: no count, but it agrees for exact match.
+Below, `pred` and `gold` are normalised values for one document, and `D` is the set of documents. A gold value that does not normalise counts as absent, and is reported in `gold_values_excluded_unparsable`.
 
-`exact_match` is the share of all documents where prediction and gold agree, including both absent. `n` is the count of documents with a gold value for the field.
+### Single-valued fields
 
-Line items: per document, predicted and gold values are compared as multisets. TP is the size of the intersection, FP and FN are the remainders, and totals are pooled across documents. `exact_match` is the share of documents whose multisets are equal. Row alignment is not checked.
+Per document:
 
-Confidence intervals: 95% percentile bootstrap, 2000 resamples of **documents**, seed 20261106.
+| Case | Condition | Counts as |
+|---|---|---|
+| Correct | gold present, `pred == gold` | TP |
+| Wrong | gold present, pred present, `pred != gold` | FP and FN |
+| Missed | gold present, pred absent | FN |
+| False fill | gold absent, pred present | FP |
+| Correctly empty | gold absent, pred absent | nothing |
 
-Latency: wall time per document on the recorded hardware, covering OCR and extraction, reported as p50 and p95. Failures count crashes and documents with no OCR tokens.
+- `n_present = |{d in D : gold present}|`, and `n_absent = |D| - n_present`
+- `precision = TP / (TP + FP)`, null if the denominator is 0
+- `recall = TP / (TP + FN)`, null if the denominator is 0
+- `F1 = 2TP / (2TP + FP + FN)`, null if the denominator is 0
+- `exact_match = TP / n_present`, null if `n_present = 0`
+- `false_fill_rate = false fills / n_absent`, null if `n_absent = 0`
+
+Every gold-present document is TP or FN, so `TP + FN = n_present`, which makes `exact_match` numerically equal to `recall` here. Both are kept because they are read differently. Under 1.0, exact match also counted correctly-empty documents, which is why values under the two versions are not comparable.
+
+### Line items: row level (primary)
+
+Each row has cells `description`, `quantity`, `unit_price` and `amount`. For gold row `g` and predicted row `p`:
+
+- `L(g)` is the set of cells `g` labels. Gold rows with empty `L(g)` are not scored. Predicted cells outside `L(g)` are ignored, because CORD leaves `unit_price` unlabelled on most rows.
+- `share(p, g) = |{c in L(g) : p[c] == g[c]}| / |L(g)|`
+- `full(p, g)` holds when `share(p, g) = 1`
+- `weight(p, g) = share(p, g) + 1000 * full(p, g)`
+
+Rows are matched one to one per document by the Hungarian algorithm, maximising total weight. The factor of 1000 means full matches are maximised first. Then, pooled over documents:
+
+- `C` = assigned pairs with `full(p, g)`
+- `row_precision = C / predicted rows`, null if there are none
+- `row_recall = C / gold rows`, null if there are none
+- `row_F1 = 2C / (predicted rows + gold rows)`, null if both are 0
+- `documents_all_rows_correct` = share of documents with gold rows where `C = predicted rows = gold rows`
+
+### Line items: set-based (secondary)
+
+Labelled "set-based, ignores row alignment". Per document and per cell type, predicted and gold values are compared as multisets, under the 1.0 formulas: TP is the size of the multiset intersection, and FP and FN are the remainders, pooled over documents. Its `exact_match` is the share of all documents with equal multisets. Correct values on the wrong row score full marks, so this must not be read as row accuracy.
+
+### Failed extractions
+
+For S2 to S5, a document where the model failed and the rule-based fallback ran is a failed extraction. Its predictions are empty, so its gold values count as FN and it earns no credit. Fallback counts are reported separately. `evals/scoring.py` enforces this, with a test.
+
+### Intervals
+
+95% percentile bootstrap, 2000 resamples of **documents**, seed 20261106. A rate undefined on a resample is skipped for that resample.
+
+### Latency
+
+Cold start and warm running are reported separately.
+
+- **Model load:** Ollama's `load_duration`, a number of its own.
+- **Cold document:** the first document of a run that loaded the model, as measured.
+- **Warm per-document latency:** LLM time with load time subtracted, over the remaining documents, as p50 and p95.
+- Replayed runs report recorded times and say so.
+
+Runs use one worker and no parallel model calls. Each run logs peak process memory and lowest free system RAM.
 
 ## S1 system
 

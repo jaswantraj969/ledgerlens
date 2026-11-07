@@ -23,6 +23,7 @@ LINE_ITEM_FIELDS = {
     "line_items.unit_price": "unitprice",
 }
 EVALUABLE_FIELDS = (*HEADER_FIELDS, *LINE_ITEM_FIELDS)
+ROW_FIELDS = {"description": "nm", "quantity": "cnt", "unit_price": "unitprice", "amount": "price"}
 _ABSENT = {"", "-"}
 
 
@@ -32,6 +33,7 @@ class CordDocument:
     split: Split
     image: bytes | None
     gold: dict[str, Any]
+    gold_rows: list[dict[str, str | None]]
     word_boxes: list[tuple[float, float]]
     width: int
     height: int
@@ -57,6 +59,19 @@ def map_gold(parse: dict[str, Any]) -> dict[str, Any]:
     for name, key in LINE_ITEM_FIELDS.items():
         gold[name] = [value for row in _rows(parse.get("menu")) for value in _values(row, key)]
     return gold
+
+
+def map_gold_rows(parse: dict[str, Any]) -> list[dict[str, str | None]]:
+    """Menu rows with cells kept together. A list-valued cell uses its last value."""
+    rows = []
+    for row in _rows(parse.get("menu")):
+        cells: dict[str, str | None] = {}
+        for name, key in ROW_FIELDS.items():
+            values = _values(row, key)
+            cells[name] = values[-1] if values else None
+        if any(cells.values()):
+            rows.append(cells)
+    return rows
 
 
 def _word_centers(lines: list[dict[str, Any]]) -> list[tuple[float, float]]:
@@ -89,6 +104,7 @@ def iter_documents(
                     split=split,
                     image=images[index]["bytes"] if images is not None else None,
                     gold=map_gold(record["gt_parse"]),
+                    gold_rows=map_gold_rows(record["gt_parse"]),
                     word_boxes=_word_centers(record.get("valid_line", [])),
                     width=size["width"],
                     height=size["height"],

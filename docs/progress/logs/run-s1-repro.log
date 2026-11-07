@@ -1,0 +1,14 @@
+START 2026-11-07T06:46:02Z timeout=1800s stall=600s cmd: backend/.venv/Scripts/python.exe -m evals.runners.run_cord_s1 --split test --reproduce
+processed 10 documents, crashes=0
+processed 20 documents, crashes=0
+processed 30 documents, crashes=0
+processed 40 documents, crashes=0
+processed 50 documents, crashes=0
+processed 60 documents, crashes=0
+processed 70 documents, crashes=0
+processed 80 documents, crashes=0
+processed 90 documents, crashes=0
+processed 100 documents, crashes=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\repro\cord_s1_test_repro.json
+END 2026-11-07T06:49:51Z elapsed=230s
+EXIT=0

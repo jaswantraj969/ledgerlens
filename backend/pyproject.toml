@@ -32,7 +32,7 @@ dependencies = [
 ocr = ["onnxruntime>=1.18", "rapidocr>=3.0"]
 docling = ["docling>=2.5"]
 llm = ["litellm>=1.48"]
-eval = ["faker>=28", "matplotlib>=3.9", "pandas>=2.2", "pyarrow>=17", "reportlab>=4.2"]
+eval = ["faker>=28", "matplotlib>=3.9", "pandas>=2.2", "psutil>=6.0", "pyarrow>=17", "reportlab>=4.2"]
 
 [dependency-groups]
 dev = [
@@ -83,5 +83,5 @@ mypy_path = "src"
 packages = ["ledgerlens"]
 
 [[tool.mypy.overrides]]
-module = ["pypdfium2.*", "rapidocr.*", "sklearn.*", "pyarrow.*"]
+module = ["pypdfium2.*", "rapidocr.*", "sklearn.*", "pyarrow.*", "scipy.*"]
 ignore_missing_imports = true
