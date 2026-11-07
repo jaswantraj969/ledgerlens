@@ -39,4 +39,7 @@ def build_features(record: FieldRecord) -> Features:
         "label_supported": record.signals.get("label_supported"),
         # Deterministic rules and an LLM pass are independent sources (S4h).
         "agree_rules_llm": record.signals.get("agree_rules_llm"),
+        # Prompt 2.1 and later: the line the model quoted, checked against the document.
+        "llm_evidence_found": record.signals.get("llm_evidence_found"),
+        "llm_value_in_evidence": record.signals.get("llm_value_in_evidence"),
     }

@@ -1,0 +1,3 @@
+# Prompt 1.0 cache-key check after adding prompt versions, 2026-11-07T16:12:53+05:00, uncommitted code on e62bdd8
+S2 validation replay: predictions sha256 7626291638eea48de28bf545ba67090e318b2a04ab41c3a37f7bd706587d95e8 before and after (identical); live calls 0; cache hits 100; failed 0.
+The replayed results file was restored to the committed version; this log is the record.

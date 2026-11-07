@@ -90,3 +90,16 @@ def test_line_amounts_compare_as_numbers() -> None:
 @pytest.mark.parametrize("name", ["subtotal", "tax_amount", "total_amount"])
 def test_missing_prediction_defaults_to_none(name: str) -> None:
     assert run_cord_s1.predictions([])[name] is None
+
+
+def test_train_is_read_only_through_a_fixed_subset() -> None:
+    completed = subprocess.run(
+        [sys.executable, "-m", "evals.runners.run_cord", "--system", "S1", "--split", "train"],
+        capture_output=True,
+        text=True,
+        cwd=ROOT,
+        env={"PYTHONPATH": str(ROOT), "SYSTEMROOT": "C:\Windows", "PATH": ""},
+        check=False,
+    )
+    assert completed.returncode != 0
+    assert "--subset" in completed.stderr

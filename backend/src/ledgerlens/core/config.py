@@ -27,6 +27,7 @@ class Settings(BaseSettings):
     extraction_mode: Literal["rules", "llm", "llm_or_rules"] = "rules"
     schema_name: str = "default"
     llm_model: str = "llama3.2:3b"
+    llm_prompt: str = "1.0"
     ollama_url: str = "http://127.0.0.1:11434"
     llm_timeout_seconds: float = 300.0
     llm_cache_dir: Path = Path("var/llm-cache")

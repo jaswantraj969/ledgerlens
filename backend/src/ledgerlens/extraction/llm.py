@@ -12,6 +12,7 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, ValidationError, create_model
 
+from ledgerlens.extraction import prompts
 from ledgerlens.extraction.deterministic import DeterministicExtractor
 from ledgerlens.extraction.layout import build_lines
 from ledgerlens.fields import FieldRecord
@@ -58,8 +59,12 @@ class _LineItem(BaseModel):
     amount: str | None = None
 
 
-def _output_model(schema: Schema) -> type[BaseModel]:
-    fields: dict[str, Any] = {spec.name: (str | None, None) for spec in schema.fields}
+def _output_model(schema: Schema, evidence: bool = False) -> type[BaseModel]:
+    fields: dict[str, Any] = {}
+    for spec in schema.fields:
+        fields[spec.name] = (str | None, None)
+        if evidence:
+            fields[f"{spec.name}_evidence"] = (str | None, None)
     if schema.line_items is not None:
         fields["line_items"] = (list[_LineItem], [])
     return create_model("ExtractionOutput", __config__=ConfigDict(extra="forbid"), **fields)
@@ -109,20 +114,33 @@ class LlmExtractor:
         params: dict[str, Any] | None = None,
         fallback: DeterministicExtractor | None = None,
         mode: Literal["a", "b"] = "a",
+        prompt: str = "1.0",
     ) -> None:
+        if prompt != "1.0" and prompt not in prompts.CANDIDATES:
+            raise ValueError(f"unknown prompt version {prompt}")
         self._provider = provider
         self._model = model
         self._params = DEFAULT_PARAMS if params is None else params
         self._fallback = fallback or DeterministicExtractor()
         self._mode = mode
         self._source = SOURCE_PASS_A if mode == "a" else SOURCE_PASS_B
+        self._prompt = prompt
+        self.prompt_version = f"{mode}-{prompt}"
+        self._evidence = prompt in prompts.EVIDENCE_PROMPTS
+
+    def _build_prompt(self, document: ParsedDocument, schema: Schema) -> str:
+        if self._prompt == "1.0":
+            return (_prompt if self._mode == "a" else _prompt_b)(document, schema)
+        build = prompts.prompt_a if self._mode == "a" else prompts.prompt_b
+        return build(document, schema, self._prompt)
 
     def extract(self, document: ParsedDocument, schema: Schema) -> list[FieldRecord]:
         return self.run(document, schema).records
 
     def run(self, document: ParsedDocument, schema: Schema) -> ExtractionAttempts:
-        output_model = _output_model(schema)
-        base_prompt = (_prompt if self._mode == "a" else _prompt_b)(document, schema)
+        output_model = _output_model(schema, self._evidence)
+        base_prompt = self._build_prompt(document, schema)
+        system = SYSTEM_PROMPT if self._prompt == "1.0" else prompts.SYSTEM_PROMPT_2
         errors: list[str] = []
         responses: list[LLMResponse] = []
         prompt = base_prompt
@@ -130,9 +148,9 @@ class LlmExtractor:
             request = LLMRequest(
                 model=self._model,
                 prompt=prompt,
-                system=SYSTEM_PROMPT,
+                system=system,
                 json_schema=output_model.model_json_schema(),
-                schema_version=f"{schema.name}:{schema.version}:{PROMPT_VERSIONS[self._mode]}",
+                schema_version=f"{schema.name}:{schema.version}:{self.prompt_version}",
                 params=self._params,
             )
             try:
@@ -177,15 +195,17 @@ def _clean(value: str | None) -> str | None:
 
 
 def _records(output: dict[str, Any], schema: Schema, source: str) -> list[FieldRecord]:
-    records = [
-        FieldRecord(
+    records = []
+    for spec in schema.fields:
+        record = FieldRecord(
             name=spec.name,
             value_raw=_clean(output.get(spec.name)),
             value_normalized=None,
             source=source,
         )
-        for spec in schema.fields
-    ]
+        if f"{spec.name}_evidence" in output:
+            record.signals["llm_evidence"] = _clean(output.get(f"{spec.name}_evidence"))
+        records.append(record)
     for row, item in enumerate(output.get("line_items", [])):
         for name in _LINE_ITEM_FIELDS:
             value = _clean(item.get(name))

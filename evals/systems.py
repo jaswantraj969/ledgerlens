@@ -100,18 +100,22 @@ def s4(
 
 
 def build_system(
-    name: str, provider: LLMProvider | None, model: str, params: dict[str, Any] | None = None
+    name: str,
+    provider: LLMProvider | None,
+    model: str,
+    params: dict[str, Any] | None = None,
+    prompt: str = "1.0",
 ) -> Callable[[ParsedDocument, Schema], SystemOutput]:
     if name == "S1":
         return s1
     if provider is None:
         raise ValueError(f"{name} needs a provider")
-    pass_a = LlmExtractor(provider, model, params)
+    pass_a = LlmExtractor(provider, model, params, prompt=prompt)
     if name == "S2":
         return lambda document, schema: s2(document, schema, pass_a)
     if name == "S3":
         return lambda document, schema: s3(document, schema, pass_a)
     if name == "S4":
-        pass_b = LlmExtractor(provider, model, params, mode="b")
+        pass_b = LlmExtractor(provider, model, params, mode="b", prompt=prompt)
         return lambda document, schema: s4(document, schema, pass_a, pass_b)
     raise ValueError(f"unknown system {name}")

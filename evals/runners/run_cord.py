@@ -20,10 +20,11 @@ import numpy as np
 
 from evals.datasets.cord import DEFAULT_RAW_DIR, HEADER_FIELDS, ROW_FIELDS, iter_documents
 from evals.memory_guard import MemoryLog, abort_run
+from evals.metrics import METRICS_VERSION
 from evals.runners.run_cord_s1 import OCR_CACHE, SPLIT_FILE, cached_parse, environment
 from evals.scoring import DocumentPrediction, score, to_prediction
 from evals.systems import LLM_SYSTEMS, SystemOutput, build_system
-from ledgerlens.extraction.llm import DEFAULT_PARAMS, PROMPT_VERSIONS
+from ledgerlens.extraction.llm import DEFAULT_PARAMS
 from ledgerlens.llm.cache import CachingProvider, ReplayCache
 from ledgerlens.llm.ollama import OllamaProvider
 from ledgerlens.parsing.model import ParsedDocument
@@ -92,26 +93,45 @@ def stop_if_low_memory(memory: MemoryLog, system: str, split: str, processed: in
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--system", choices=["S1", *LLM_SYSTEMS], required=True)
-    parser.add_argument("--split", choices=["validation", "test"], required=True)
+    parser.add_argument("--split", choices=["train", "validation", "test"], required=True)
+    parser.add_argument("--subset", type=Path, help="ID file; required for train")
     parser.add_argument("--final", action="store_true", help="required to read the test split")
     parser.add_argument("--replay", action="store_true", help="never call a model")
     parser.add_argument("--model", default=DEFAULT_MODEL)
+    parser.add_argument("--prompt", default="1.0", help="prompt version for passes A and B")
+    parser.add_argument("--num-ctx", type=int, help="context length; default from DEFAULT_PARAMS")
+    parser.add_argument("--label", help="reported system name, e.g. S2' for the round-2 prompt")
     arguments = parser.parse_args()
 
-    name = arguments.system.lower()
-    if arguments.split == "test":
+    label = arguments.label or arguments.system
+    name = label.lower().replace("'", "p")
+    suffix = "v" + METRICS_VERSION.replace(".", "_")
+    wanted: set[str] | None = None
+    if arguments.split == "train":
+        if arguments.subset is None:
+            sys.exit("train is read only through a fixed subset file (--subset)")
+        subset = json.loads(arguments.subset.read_text(encoding="utf-8"))
+        wanted = set(subset["ids"])
+        output_path = (
+            RESULTS / "dev" / "prompt_round"
+            / f"cord_{name}_{arguments.subset.stem}_p{arguments.prompt}_{suffix}.json"
+        )  # fmt: skip
+    elif arguments.split == "test":
         if not arguments.final:
             sys.exit("the test split needs --final: it is read once per configuration")
-        output_path = RESULTS / f"cord_{name}_v1_1.json"
+        output_path = RESULTS / f"cord_{name}_{suffix}.json"
         if output_path.exists():
             sys.exit(f"{output_path} exists: a new configuration needs a new version")
     else:
-        output_path = RESULTS / "dev" / f"cord_{name}_validation_v1_1.json"
+        output_path = RESULTS / "dev" / f"cord_{name}_validation_{suffix}.json"
 
+    params = dict(DEFAULT_PARAMS)
+    if arguments.num_ctx:
+        params["num_ctx"] = arguments.num_ctx
     uses_llm = arguments.system in LLM_SYSTEMS
     live = OllamaProvider() if uses_llm and not arguments.replay else None
     provider = CachingProvider(ReplayCache(CACHE_DIR), live) if uses_llm else None
-    system = build_system(arguments.system, provider, arguments.model)
+    system = build_system(arguments.system, provider, arguments.model, params, arguments.prompt)
     schema = load_schema(SCHEMA)
     ocr = RapidOcrParser()
     memory = MemoryLog()
@@ -124,7 +144,9 @@ def main() -> None:
     crashes: list[str] = []
 
     for document in iter_documents(arguments.split, DEFAULT_RAW_DIR):
-        stop_if_low_memory(memory, arguments.system, arguments.split, len(predictions))
+        if wanted is not None and document.document_id not in wanted:
+            continue
+        stop_if_low_memory(memory, label, arguments.split, len(predictions))
         gold_headers[document.document_id] = {f: document.gold[f] for f in HEADER_FIELDS}
         gold_rows[document.document_id] = document.gold_rows
         try:
@@ -189,22 +211,29 @@ def main() -> None:
                 flush=True,
             )
 
-    stop_if_low_memory(memory, arguments.system, arguments.split, len(predictions))
-    split_info = json.loads(SPLIT_FILE.read_text(encoding="utf-8"))[arguments.split]
+    stop_if_low_memory(memory, label, arguments.split, len(predictions))
+    if wanted is None:
+        split_info = json.loads(SPLIT_FILE.read_text(encoding="utf-8"))[arguments.split]
+    else:
+        split_info = {"n": subset["n"], "sha256": subset["sha256"]}
     if len(predictions) != split_info["n"]:
         sys.exit(f"expected {split_info['n']} documents, saw {len(predictions)}")
 
     PREDICTIONS.mkdir(parents=True, exist_ok=True)
     dump = json.dumps([asdict(p) for p in predictions], sort_keys=True, indent=0)
-    prediction_path = PREDICTIONS / f"{name}_{arguments.split}.json"
+    scope = arguments.split if wanted is None else f"{arguments.subset.stem}_p{arguments.prompt}"
+    prediction_path = PREDICTIONS / f"{name}_{scope}.json"
     prediction_path.write_text(dump, encoding="utf-8", newline="\n")
 
     replayed = provider is not None and provider.live_calls == 0
     result = score(predictions, gold_headers, gold_rows, tuple(HEADER_FIELDS), tuple(ROW_FIELDS))
     result |= {
-        "system": arguments.system,
+        "system": label,
+        "system_definition": arguments.system,
         "dataset": "cord-v2",
-        "split": arguments.split,
+        "split": arguments.split
+        if wanted is None
+        else f"{arguments.split} ({arguments.subset.stem})",
         "n_documents": len(predictions),
         "schema": SCHEMA,
         "schema_version": schema.version,
@@ -238,8 +267,8 @@ def main() -> None:
     if uses_llm:
         result["llm"] = {
             "model": arguments.model,
-            "params": DEFAULT_PARAMS,
-            "prompt_versions": PROMPT_VERSIONS,
+            "params": params,
+            "prompt_versions": {"a": f"a-{arguments.prompt}", "b": f"b-{arguments.prompt}"},
             "mode": "replay" if arguments.replay else "record",
             "live_calls": provider.live_calls if provider else 0,
             "cache_hits": provider.hits if provider else 0,

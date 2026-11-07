@@ -73,3 +73,24 @@ def _windows(lines: list[Line]) -> list[str]:
             for end in range(start + 1, min(start + _MAX_WINDOW, len(texts)) + 1):
                 windows.append(" ".join(texts[start:end]))
     return windows
+
+
+def assess_llm_snippet(record: FieldRecord, lines: list[Line]) -> None:
+    """Check the evidence line a model quoted: is it in the document, and does it hold the value?
+
+    Signals only. A quoted line that is not in the document is a sign the model is unreliable.
+    """
+    if "llm_evidence" not in record.signals:
+        return
+    snippet = record.signals["llm_evidence"]
+    if not isinstance(snippet, str) or record.value_raw is None:
+        record.signals.update(llm_evidence_found=None, llm_value_in_evidence=None)
+        return
+    texts = {normalize_text(line.text) for line in lines}
+    found = normalize_text(snippet) in texts or (
+        match_evidence(snippet, lines, is_amount=False).status != "not_found"
+    )
+    record.signals.update(
+        llm_evidence_found=found,
+        llm_value_in_evidence=normalize_text(record.value_raw) in normalize_text(snippet),
+    )

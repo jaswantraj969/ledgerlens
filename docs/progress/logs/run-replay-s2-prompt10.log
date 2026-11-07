@@ -1,0 +1,14 @@
+START 2026-11-07T11:12:25Z timeout=900s stall=300s cmd: uv run --project backend --no-sync python -m evals.runners.run_cord --system S2 --split validation --replay
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\cord_s2_validation_v1_1_1.json
+END 2026-11-07T11:12:41Z elapsed=16s
+EXIT=0

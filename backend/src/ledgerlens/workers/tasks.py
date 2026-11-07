@@ -43,7 +43,7 @@ from ledgerlens.db.models import (
 )
 from ledgerlens.db.models import Page as PageRow
 from ledgerlens.extraction.deterministic import DeterministicExtractor
-from ledgerlens.extraction.llm import FALLBACK_SOURCE, PROMPT_VERSIONS, LlmExtractor
+from ledgerlens.extraction.llm import FALLBACK_SOURCE, LlmExtractor
 from ledgerlens.fields import FieldRecord
 from ledgerlens.llm.cache import CachingProvider, ReplayCache
 from ledgerlens.llm.ollama import OllamaProvider
@@ -125,7 +125,7 @@ def _llm_extractor(settings: Settings) -> LlmExtractor:
         ReplayCache(settings.llm_cache_dir),
         OllamaProvider(settings.ollama_url, timeout=settings.llm_timeout_seconds),
     )
-    return LlmExtractor(provider, settings.llm_model)
+    return LlmExtractor(provider, settings.llm_model, prompt=settings.llm_prompt)
 
 
 def lock_key(job_id: uuid.UUID) -> int:
@@ -266,15 +266,16 @@ def extract(context: WorkerContext, document: ParsedDocument, schema: Schema) ->
     settings = context.settings
     if settings.extraction_mode == "rules" or context.llm is None:
         return _rules(document, schema, None)
-    result = context.llm().run(document, schema)
+    extractor = context.llm()
+    result = extractor.run(document, schema)
     if not result.fell_back:
         responses = result.responses
         return ExtractionOutcome(
             result.records,
-            f"llm:{settings.llm_model}:{PROMPT_VERSIONS['a']}:{schema.name}:{schema.version}",
+            f"llm:{settings.llm_model}:{extractor.prompt_version}:{schema.name}:{schema.version}",
             "ollama",
             settings.llm_model,
-            PROMPT_VERSIONS["a"],
+            extractor.prompt_version,
             latency_seconds=sum(r.latency_seconds or 0 for r in responses),
             cache_hit=all(r.cache_hit for r in responses) if responses else None,
         )
