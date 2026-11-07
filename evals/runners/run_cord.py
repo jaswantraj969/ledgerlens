@@ -179,6 +179,7 @@ def main() -> None:
                 {
                     "name": r.name,
                     "value_normalized": None if output.failed else r.value_normalized,
+                    "value_present": r.value_raw is not None and not output.failed,
                     "source": r.source,
                     "decision": r.decision,
                     "risk_score": r.risk_score,
