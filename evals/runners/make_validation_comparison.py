@@ -22,6 +22,16 @@ def _cell(row: dict[str, Any], name: str) -> str:
     return f"{value:.3f} [{interval[0]:.3f}, {interval[1]:.3f}]" if interval else f"{value:.3f}"
 
 
+def _power(result: dict[str, Any]) -> str:
+    power = result.get("power")
+    if not power:
+        return "not recorded"
+    if power["label"] == "battery-affected":
+        total = power["timings_ac"] + power["timings_battery"] + power["timings_unknown"]
+        return f"**battery-affected** ({power['timings_battery']} of {total} timings)"
+    return power["label"]
+
+
 def _seconds(block: dict[str, Any]) -> str:
     return "n/a" if not block["n"] else f"{block['p50']:.2f} / {block['p95']:.2f}"
 
@@ -58,6 +68,7 @@ def _summary(loaded: dict[str, dict[str, Any]]) -> dict[str, Any]:
                     "warm_total": latency["warm_total"],
                     "cold": latency.get("cold"),
                 },
+                "power": result.get("power"),
                 "lowest_available_system_ram_gib": result.get("memory_live_run", result["memory"])[
                     "lowest_available_system_ram_gib"
                 ],
@@ -103,8 +114,8 @@ def main() -> None:
         "",
         "| System | Rows correct / predicted / gold | Row F1 [95% CI] | Failed | Pass fallbacks "
         "| Retries | Truncated | Withheld | Warm LLM p50 / p95 s | Warm total p50 / p95 s "
-        "| Cold docs: load s; cold LLM s excl. load | Lowest free RAM GiB | Timings |",
-        "|---|---|---|---|---|---|---|---|---|---|---|---|---|",
+        "| Cold docs: load s; cold LLM s excl. load | Lowest free RAM GiB | Timings | Power |",
+        "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|",
     ]
     for result in loaded.values():
         rows = result["line_items_row_level"]
@@ -129,7 +140,8 @@ def main() -> None:
             f"| {failures['pass_fallbacks']} | {failures['retries']} "
             f"| {failures['truncated_replies']} | {result['verification']['values_withheld']} "
             f"| {warm_llm} | {_seconds(latency['warm_total'])} | {cold_text} "
-            f"| {memory['lowest_available_system_ram_gib']} | {latency['source']} |"
+            f"| {memory['lowest_available_system_ram_gib']} | {latency['source']} "
+            f"| {_power(result)} |"
         )
     lines.append("")
     OUTPUT.write_text("\n".join(lines), encoding="utf-8", newline="\n")

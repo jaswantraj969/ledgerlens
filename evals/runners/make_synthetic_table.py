@@ -5,6 +5,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from evals.runners.make_tables import power_note
+
 
 def _rate(value: float | None) -> str:
     return "n/a" if value is None else f"{value:.3f}"
@@ -55,6 +57,8 @@ def main() -> None:
         "",
         f"Commit `{result['environment']['git_commit']}`, "
         f"dirty: {result['environment']['git_dirty']}.",
+        "",
+        power_note(result),
         "",
     ]
     for name, route in result["routes"].items():

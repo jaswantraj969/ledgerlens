@@ -45,8 +45,8 @@ def main() -> None:
         "Validation was not read for this choice.",
         "",
         "| Prompt | Role | Total F1 | Subtotal F1 | Tax F1 | Row F1 | Mean | Failed | Truncated "
-        "| num_ctx | Warm LLM p50 / p95 s |",
-        "|---|---|---|---|---|---|---|---|---|---|---|",
+        "| num_ctx | Warm LLM p50 / p95 s | Power |",
+        "|---|---|---|---|---|---|---|---|---|---|---|---|",
     ]
     for prompt, result in loaded.items():
         s = table[prompt]
@@ -62,7 +62,8 @@ def main() -> None:
             f"| {s['tax_amount']:.3f} | {s['rows']:.3f} | {s['mean']:.3f} "
             f"| {result['failures']['failed_extractions']} "
             f"| {result['failures']['truncated_replies']} "
-            f"| {result['llm']['params']['num_ctx']} | {latency} |"
+            f"| {result['llm']['params']['num_ctx']} | {latency} "
+            f"| {(result.get('power') or {}).get('label', 'not recorded')} |"
         )
     lines += [
         "",

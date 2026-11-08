@@ -6,6 +6,20 @@ from pathlib import Path
 from typing import Any
 
 
+def power_note(result: dict[str, Any]) -> str:
+    """One line on the power state of a result's timings, from its `power` block."""
+    power = result.get("power")
+    if not power:
+        return "Power state of timings: not recorded."
+    label = power["label"]
+    flag = "**battery-affected**" if label == "battery-affected" else label
+    return (
+        f"Power state of timings: {flag} ({power['timings_ac']} on AC, "
+        f"{power['timings_battery']} on battery, {power['timings_unknown']} unknown; "
+        f"{power['method']})."
+    )
+
+
 def _rate(value: float | None) -> str:
     return "n/a" if value is None else f"{value:.3f}"
 
@@ -202,6 +216,8 @@ def render_v1_1(result: dict[str, Any], source: str) -> str:
         "## Latency and memory",
         "",
         f"Timings are {latency['source']}.",
+        "",
+        power_note(result),
         "",
         f"- OCR: {_seconds(latency['ocr'])}.",
         *_llm_latency(result),
