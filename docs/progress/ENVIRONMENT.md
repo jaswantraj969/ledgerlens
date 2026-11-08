@@ -80,8 +80,12 @@ Latency per LLM call (generation time, load excluded), split by when each reply 
 
 | Segment | Calls | p50 s | p95 s | Completion tokens p50 | Tokens/s median | Truncated |
 |---|---|---|---|---|---|---|
-| Before sleep, 21:11 to 21:40 UTC | 51 | 29.1 | 55.53 | 191 | 6.7 | 0 |
-| After restart, from 05:44 UTC (at the time of writing) | 308 | 3.88 | 9.65 | 180 | 47.9 | 10 |
+| Before sleep, 11-07 21:11 to 21:40 UTC, battery | 51 | 29.1 | 55.53 | 191 | 6.7 | 0 |
+| 11-08 05:44 to 06:31:24 UTC, AC | 505 | 3.95 | 11.3 | see JSON | 48.1 | 14 |
+| 11-08 06:31:24 to 06:49:24 UTC, battery | 52 | 14.86 | 28.34 | see JSON | 13.6 | 0 |
+| 11-08 06:49:24 UTC to the end (07:56:52), AC | 744 | 4.04 | 8.69 | see JSON | 47.7 | 11 |
+
+Correction: an earlier version of this table had one "after restart, AC" row (308 calls, p50 3.88 s, p95 9.65 s). The power audit later found that AC was lost again from 06:31:24 to 06:49:24 UTC on 11-08 (Kernel-Power event 105), so that row mixed AC and battery calls. The rows above are split at the logged power changes. The run's results file is labelled `battery-affected` (103 of 2,421 timings on battery).
 
 Replies were about the same length, but generation ran about 7 times slower before the sleep. Evidence:
 
@@ -89,6 +93,8 @@ Replies were about the same length, but generation ran about 7 times slower befo
 - Windows System log, Kernel-Power event 105: AC power went offline at 20:52:04 UTC (`AcOnline` false, battery 43,324 of 43,762) and came back at 05:42:29 UTC (`AcOnline` true, 4,446 of 43,762). Event 524 "Critical Battery Trigger Met" at 21:40:46 UTC was followed by sleep (event 42).
 
 Explanation: the pre-sleep segment ran on battery, where the laptop GPU runs at a lower power limit, until the battery reached its critical level and the machine slept. The restart ran on AC. From the restart on, `ollama ps`, free RAM, pagefile use and GPU clocks are logged every 10 documents in `docs/progress/logs/s4h-train-all-monitor.txt`. The qwen3:4b token-measurement aborts (about 21:05 UTC) also happened on battery; they were memory aborts, so this does not change ADR-0012. Long runs need AC power.
+
+Monitor data for the rest of the run (68 snapshots, 06:10 to 07:57 UTC on 11-08, `docs/progress/logs/s4h-train-all-monitor.txt`). Whenever the model was loaded (54 snapshots), `ollama ps` showed `100% GPU`; it never split onto the CPU. Free RAM ranged from 0.261 to 6.148 GiB, and pagefile use from 1,136 to 2,121 MB. In the 5 snapshots taken during the 06:31 to 06:49 battery interval with the model loaded, GPU clock had a median of 277 MHz and 5.6 W, against 1,432 MHz and 43.1 W in the 49 AC snapshots. These are instantaneous samples, and 5 is few, but they agree with the throughput drop. Conclusion, from this run's data: the slowdown is explained by battery power, not by CPU offload or paging. The run's 9 memory aborts (attempts 1 to 9; attempt 10 completed at 07:56:52 UTC) were all recorded on AC (the first at 06:49:30 UTC, 6 seconds after AC returned). They are a separate, memory-related issue, not caused by battery. The keep-awake request was released after the run: "keep-awake released: stopped 1 process(es)" in `run-s4h-train-all-direct.log` and in the monitor log.
 
 ## Decision
 
