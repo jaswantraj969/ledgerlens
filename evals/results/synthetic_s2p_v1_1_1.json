@@ -4078,5 +4078,13 @@
       "rapidfuzz": "3.14.6"
     },
     "ocr_execution": "CPU, onnxruntime defaults"
+  },
+  "power": {
+    "label": "ac",
+    "timings_ac": 2,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "run window from run-synthetic-s2p.log"
   }
 }

@@ -1,0 +1,218 @@
+{
+  "cord_s1_v1.json": {
+    "label": "ac",
+    "timings_ac": 100,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
+  },
+  "cord_s1_v1_1.json": {
+    "label": "ac",
+    "timings_ac": 100,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
+  },
+  "cord_s1_v1_1_1.json": {
+    "label": "ac",
+    "timings_ac": 100,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
+  },
+  "dev/cord_s1_validation.json": {
+    "label": "ac",
+    "timings_ac": 100,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
+  },
+  "dev/cord_s1_validation_v1_1.json": {
+    "label": "ac",
+    "timings_ac": 100,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
+  },
+  "dev/cord_s1_validation_v1_1_1.json": {
+    "label": "ac",
+    "timings_ac": 100,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
+  },
+  "dev/cord_s2_validation_v1_1.json": {
+    "label": "ac",
+    "timings_ac": 200,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
+  },
+  "dev/cord_s2_validation_v1_1_1.json": {
+    "label": "ac",
+    "timings_ac": 200,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
+  },
+  "dev/cord_s2p_validation_v1_1_1.json": {
+    "label": "ac",
+    "timings_ac": 200,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
+  },
+  "dev/cord_s3_validation_v1_1.json": {
+    "label": "ac",
+    "timings_ac": 200,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
+  },
+  "dev/cord_s3_validation_v1_1_1.json": {
+    "label": "ac",
+    "timings_ac": 200,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
+  },
+  "dev/cord_s3p_validation_v1_1_1.json": {
+    "label": "ac",
+    "timings_ac": 200,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
+  },
+  "dev/cord_s4_validation_v1_1.json": {
+    "label": "ac",
+    "timings_ac": 301,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
+  },
+  "dev/cord_s4_validation_v1_1_1.json": {
+    "label": "ac",
+    "timings_ac": 301,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
+  },
+  "dev/cord_s4h_validation_v1_1_1.json": {
+    "label": "ac",
+    "timings_ac": 301,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
+  },
+  "dev/cord_s4p_validation_v1_1_1.json": {
+    "label": "ac",
+    "timings_ac": 301,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
+  },
+  "dev/llm_smoke_llama3.2-3b.json": {
+    "label": "ac",
+    "timings_ac": 2,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "run window from run-llm-smoke.log"
+  },
+  "dev/memory_measurement.json": {
+    "label": "ac",
+    "timings_ac": 2,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "run window from run-memory-measurement.log"
+  },
+  "dev/prompt_round/cord_s1_train_all_p1.0_v1_1_1.json": {
+    "label": "ac",
+    "timings_ac": 800,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
+  },
+  "dev/prompt_round/cord_s2_prompt_dev_train100_p1.0_v1_1_1.json": {
+    "label": "ac",
+    "timings_ac": 202,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
+  },
+  "dev/prompt_round/cord_s2_prompt_dev_train100_p2.0_v1_1_1.json": {
+    "label": "ac",
+    "timings_ac": 201,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
+  },
+  "dev/prompt_round/cord_s2_prompt_dev_train100_p2.1_v1_1_1.json": {
+    "label": "ac",
+    "timings_ac": 202,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
+  },
+  "dev/prompt_round/cord_s2_prompt_dev_train100_p2.2_v1_1_1.json": {
+    "label": "ac",
+    "timings_ac": 202,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
+  },
+  "dev/prompt_round/cord_s4h_prompt_dev_train100_p2.2_v1_1_1.json": {
+    "label": "ac",
+    "timings_ac": 304,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
+  },
+  "dev/prompt_round/cord_s4h_train_all_p2.2_v1_1_1.json": {
+    "label": "battery-affected",
+    "timings_ac": 2318,
+    "timings_battery": 103,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
+  },
+  "repro/cord_s1_test_repro.json": {
+    "label": "ac",
+    "timings_ac": 100,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
+  },
+  "synthetic_s2p_v1_1_1.json": {
+    "label": "ac",
+    "timings_ac": 2,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "run window from run-synthetic-s2p.log"
+  }
+}

@@ -48,11 +48,13 @@ Secondary score, set-based, ignores row alignment.
 - Values output: 752.
 - Not found in the document: 0.
 - Withheld: 0.
-- Rule failures: 111.
+- Rule failures (arithmetic): 111.
 
 ## Latency and memory
 
 Timings are measured in this run.
+
+Power state of timings: ac (100 on AC, 0 on battery, 0 unknown; cache file modification time per recorded timing (audit replay)).
 
 - OCR: p50 2.55 s, p95 4.71 s (n=100).
 - Total per document: p50 2.55 s, p95 4.71 s (n=100). No model is used.

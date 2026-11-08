@@ -134,6 +134,14 @@
           "cold_llm_seconds_excluding_load": []
         }
       },
+      "power": {
+        "label": "ac",
+        "timings_ac": 100,
+        "timings_battery": 0,
+        "timings_unknown": 0,
+        "source": "Windows Kernel-Power event 105",
+        "method": "cache file modification time per recorded timing (audit replay)"
+      },
       "lowest_available_system_ram_gib": 1.622
     },
     {
@@ -276,6 +284,14 @@
             4.314486800008768
           ]
         }
+      },
+      "power": {
+        "label": "ac",
+        "timings_ac": 200,
+        "timings_battery": 0,
+        "timings_unknown": 0,
+        "source": "Windows Kernel-Power event 105",
+        "method": "cache file modification time per recorded timing (audit replay)"
       },
       "lowest_available_system_ram_gib": 0.265
     },
@@ -420,6 +436,14 @@
           ]
         }
       },
+      "power": {
+        "label": "ac",
+        "timings_ac": 200,
+        "timings_battery": 0,
+        "timings_unknown": 0,
+        "source": "Windows Kernel-Power event 105",
+        "method": "cache file modification time per recorded timing (audit replay)"
+      },
       "lowest_available_system_ram_gib": 1.647
     },
     {
@@ -563,6 +587,14 @@
           ]
         }
       },
+      "power": {
+        "label": "ac",
+        "timings_ac": 301,
+        "timings_battery": 0,
+        "timings_unknown": 0,
+        "source": "Windows Kernel-Power event 105",
+        "method": "cache file modification time per recorded timing (audit replay)"
+      },
       "lowest_available_system_ram_gib": 0.253
     },
     {
@@ -704,6 +736,14 @@
           ]
         }
       },
+      "power": {
+        "label": "ac",
+        "timings_ac": 200,
+        "timings_battery": 0,
+        "timings_unknown": 0,
+        "source": "Windows Kernel-Power event 105",
+        "method": "cache file modification time per recorded timing (audit replay)"
+      },
       "lowest_available_system_ram_gib": 2.994
     },
     {
@@ -844,6 +884,14 @@
             5.6672831999917435
           ]
         }
+      },
+      "power": {
+        "label": "ac",
+        "timings_ac": 200,
+        "timings_battery": 0,
+        "timings_unknown": 0,
+        "source": "Windows Kernel-Power event 105",
+        "method": "cache file modification time per recorded timing (audit replay)"
       },
       "lowest_available_system_ram_gib": 3.31
     },
@@ -990,6 +1038,14 @@
           ]
         }
       },
+      "power": {
+        "label": "ac",
+        "timings_ac": 301,
+        "timings_battery": 0,
+        "timings_unknown": 0,
+        "source": "Windows Kernel-Power event 105",
+        "method": "cache file modification time per recorded timing (audit replay)"
+      },
       "lowest_available_system_ram_gib": 3.289
     },
     {
@@ -1134,6 +1190,14 @@
             9.192992300005438
           ]
         }
+      },
+      "power": {
+        "label": "ac",
+        "timings_ac": 301,
+        "timings_battery": 0,
+        "timings_unknown": 0,
+        "source": "Windows Kernel-Power event 105",
+        "method": "cache file modification time per recorded timing (audit replay)"
       },
       "lowest_available_system_ram_gib": 3.285
     }

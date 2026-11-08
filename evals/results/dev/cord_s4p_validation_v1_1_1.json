@@ -364,5 +364,13 @@
     "mode": "record",
     "live_calls": 14,
     "cache_hits": 187
+  },
+  "power": {
+    "label": "ac",
+    "timings_ac": 301,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
   }
 }

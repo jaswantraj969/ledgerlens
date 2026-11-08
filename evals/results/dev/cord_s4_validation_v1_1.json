@@ -361,5 +361,13 @@
     "peak_model_runner_rss_gib": 2.664,
     "lowest_available_system_ram_gib": 0.253,
     "total_system_ram_gib": 15.638
+  },
+  "power": {
+    "label": "ac",
+    "timings_ac": 301,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
   }
 }

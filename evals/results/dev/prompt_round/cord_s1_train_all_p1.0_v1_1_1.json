@@ -340,5 +340,13 @@
       "rapidfuzz": "3.14.6"
     },
     "ocr_execution": "CPU, onnxruntime defaults"
+  },
+  "power": {
+    "label": "ac",
+    "timings_ac": 800,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing (audit replay)"
   }
 }

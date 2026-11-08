@@ -55,6 +55,8 @@ Secondary score, set-based, ignores row alignment.
 
 Timings are recorded when the call was first made.
 
+Power state of timings: ac (301 on AC, 0 on battery, 0 unknown; cache file modification time per recorded timing (audit replay)).
+
 - OCR: p50 2.55 s, p95 4.71 s (n=100).
 - Warm LLM, load excluded: p50 4.73 s, p95 11.20 s (n=98).
 - Warm total per document: p50 7.43 s, p95 14.79 s (n=98).

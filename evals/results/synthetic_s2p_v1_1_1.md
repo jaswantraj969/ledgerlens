@@ -4,6 +4,8 @@ Generated from `synthetic_s2p_v1_1_1.json`. Do not edit by hand. Synthetic resul
 
 Commit `29dfc5e71eb72328584af7a4f591c2d366d0d9e5`, dirty: False.
 
+Power state of timings: ac (2 on AC, 0 on battery, 0 unknown; run window from run-synthetic-s2p.log).
+
 ## Route: native_pdf, 40 documents per layout
 
 ### Dev versus held-out, F1 pooled over documents

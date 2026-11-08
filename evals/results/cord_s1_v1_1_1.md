@@ -55,6 +55,8 @@ Secondary score, set-based, ignores row alignment.
 
 Timings are measured in this run.
 
+Power state of timings: ac (100 on AC, 0 on battery, 0 unknown; cache file modification time per recorded timing (audit replay)).
+
 - OCR: p50 2.56 s, p95 5.39 s (n=100).
 - Total per document: p50 2.57 s, p95 5.39 s (n=100). No model is used.
 - Memory: peak process RSS 0.0 GiB, peak model runner RSS 0.0 GiB, lowest available system RAM 2.564 of 15.638 GiB.
