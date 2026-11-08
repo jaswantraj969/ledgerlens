@@ -21,6 +21,7 @@ import numpy as np
 from evals.datasets.cord import DEFAULT_RAW_DIR, HEADER_FIELDS, ROW_FIELDS, iter_documents
 from evals.memory_guard import MemoryLog, abort_run
 from evals.metrics import METRICS_VERSION
+from evals.power import ac_online_now, timings_power
 from evals.runners.run_cord_s1 import OCR_CACHE, SPLIT_FILE, cached_parse, environment
 from evals.scoring import DocumentPrediction, score, to_prediction
 from evals.systems import LLM_SYSTEMS, SystemOutput, build_system
@@ -132,6 +133,8 @@ def main() -> None:
         output_path = RESULTS / f"cord_{name}_{suffix}.json"
         if output_path.exists():
             sys.exit(f"{output_path} exists: a new configuration needs a new version")
+        if ac_online_now() is not True:
+            sys.exit("the test split is read on AC power only, so its timings are AC-only")
     else:
         output_path = RESULTS / "dev" / f"cord_{name}_validation_{suffix}.json"
 
@@ -165,6 +168,10 @@ def main() -> None:
         if wanted is not None and document.document_id not in wanted:
             continue
         stop_if_low_memory(memory, label, arguments.split, len(predictions))
+        if arguments.split == "test" and ac_online_now() is not True:
+            abort_run(memory, ABORTED, f"cord_{name}_test_on_battery",
+                      {"reason_detail": "AC power lost during a test read",
+                       "documents_processed": len(predictions)})  # fmt: skip
         gold_headers[document.document_id] = {f: document.gold[f] for f in HEADER_FIELDS}
         gold_rows[document.document_id] = document.gold_rows
         try:
@@ -302,6 +309,13 @@ def main() -> None:
             "label_unsupported": sum(row["label_unsupported"] for row in rows),
         },
         "latency_seconds": latency_report(rows, source=timing_source),
+        "power": timings_power(
+            [
+                OCR_CACHE / f"{hashlib.sha256(p.document_id.encode()).hexdigest()}.json"
+                for p in predictions
+            ]
+            + ([provider.cache.path_for(k) for k in provider.keys_used] if provider else [])
+        ),
         "memory": memory.report(),
         "workers": 1,
         "cost_per_document_usd": 0,

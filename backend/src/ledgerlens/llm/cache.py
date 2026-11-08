@@ -14,6 +14,9 @@ class ReplayCache:
     def __init__(self, directory: Path) -> None:
         self.directory = directory
 
+    def path_for(self, key: str) -> Path:
+        return self._path(key)
+
     def _path(self, key: str) -> Path:
         return self.directory / key[:2] / f"{key}.json"
 
@@ -46,8 +49,11 @@ class CachingProvider:
         self.provider = provider
         self.hits = 0
         self.live_calls = 0
+        # Keys of every reply used, so a run can say when each of its timings was recorded.
+        self.keys_used: list[str] = []
 
     def complete(self, request: LLMRequest) -> LLMResponse:
+        self.keys_used.append(request.cache_key())
         cached = self.cache.get(request)
         if cached is not None:
             self.hits += 1
