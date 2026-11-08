@@ -1,0 +1,523 @@
+START 2026-11-08T08:06:33Z commit 00e2f86
+ Image ledgerlens-backend:local Pulling 
+ Image ledgerlens-backend:local Error pull access denied for ledgerlens-backend, repository does not exist or may require 'docker login'
+ Image ledgerlens-backend:local Building 
+ Image ledgerlens-web:local Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.05kB done
+#1 DONE 0.0s
+
+#2 [api internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.26kB 0.0s done
+#2 DONE 0.1s
+
+#3 [web internal] load build definition from Dockerfile
+#3 transferring dockerfile: 404B 0.0s done
+#3 DONE 0.1s
+
+#4 [web internal] load metadata for docker.io/library/caddy:2.8-alpine
+#4 DONE 0.1s
+
+#5 [web internal] load metadata for docker.io/library/node:22-slim
+#5 DONE 0.1s
+
+#6 [web internal] load .dockerignore
+#6 transferring context: 58B done
+#6 DONE 0.0s
+
+#7 [web internal] load build context
+#7 DONE 0.0s
+
+#8 [web build 1/6] FROM docker.io/library/node:22-slim@sha256:4b150b48b4116e2a22f2c39cc27025fbf4f153e2078fd3b14d159fdb5c7279da
+#8 resolve docker.io/library/node:22-slim@sha256:4b150b48b4116e2a22f2c39cc27025fbf4f153e2078fd3b14d159fdb5c7279da 0.1s done
+#8 DONE 0.1s
+
+#9 [web stage-1 1/3] FROM docker.io/library/caddy:2.8-alpine@sha256:af32e97399febea808609119bb21544d0265c58a02836576e32a2d082c262c17
+#9 resolve docker.io/library/caddy:2.8-alpine@sha256:af32e97399febea808609119bb21544d0265c58a02836576e32a2d082c262c17 0.1s done
+#9 DONE 0.1s
+
+#7 [web internal] load build context
+#7 transferring context: 6.27kB 0.0s done
+#7 DONE 0.1s
+
+#10 [api internal] load metadata for docker.io/library/python:3.12-slim
+#10 ...
+
+#11 [web build 2/6] WORKDIR /app
+#11 CACHED
+
+#12 [web stage-1 2/3] COPY Caddyfile /etc/caddy/Caddyfile
+#12 CACHED
+
+#13 [web build 3/6] COPY package.json package-lock.json ./
+#13 CACHED
+
+#14 [web build 4/6] RUN npm ci --no-audit --no-fund
+#14 ...
+
+#10 [api internal] load metadata for docker.io/library/python:3.12-slim
+#10 DONE 14.7s
+
+#15 [api internal] load .dockerignore
+#15 transferring context: 284B done
+#15 DONE 0.0s
+
+#16 [api internal] load build context
+#16 DONE 0.0s
+
+#17 [api 1/9] FROM docker.io/library/python:3.12-slim@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b
+#17 resolve docker.io/library/python:3.12-slim@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b 0.1s done
+#17 ...
+
+#16 [api internal] load build context
+#16 transferring context: 474.19kB 0.1s done
+#16 DONE 0.2s
+
+#17 [api 1/9] FROM docker.io/library/python:3.12-slim@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b
+#17 sha256:05e0eee5572e9c9f50408a2132590133b830a668a1cf2ff2b150f19c57707e2b 0B / 248B 0.2s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 0B / 12.12MB 0.2s
+#17 sha256:68bced9e0afa4479df17c3646e27c7c7e9ce9ba70c0e6c73b6826487b89037d9 0B / 1.29MB 0.2s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 0B / 29.86MB 0.2s
+#17 sha256:05e0eee5572e9c9f50408a2132590133b830a668a1cf2ff2b150f19c57707e2b 248B / 248B 0.5s done
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 0B / 12.12MB 5.3s
+#17 sha256:68bced9e0afa4479df17c3646e27c7c7e9ce9ba70c0e6c73b6826487b89037d9 0B / 1.29MB 5.3s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 0B / 29.86MB 5.3s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 0B / 12.12MB 10.3s
+#17 sha256:68bced9e0afa4479df17c3646e27c7c7e9ce9ba70c0e6c73b6826487b89037d9 0B / 1.29MB 10.3s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 0B / 29.86MB 10.3s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 0B / 12.12MB 15.5s
+#17 sha256:68bced9e0afa4479df17c3646e27c7c7e9ce9ba70c0e6c73b6826487b89037d9 0B / 1.29MB 15.4s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 0B / 29.86MB 15.4s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 0B / 12.12MB 20.5s
+#17 sha256:68bced9e0afa4479df17c3646e27c7c7e9ce9ba70c0e6c73b6826487b89037d9 0B / 1.29MB 20.5s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 0B / 29.86MB 20.5s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 0B / 12.12MB 25.6s
+#17 sha256:68bced9e0afa4479df17c3646e27c7c7e9ce9ba70c0e6c73b6826487b89037d9 0B / 1.29MB 25.6s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 0B / 29.86MB 25.6s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 0B / 12.12MB 30.7s
+#17 sha256:68bced9e0afa4479df17c3646e27c7c7e9ce9ba70c0e6c73b6826487b89037d9 0B / 1.29MB 30.7s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 0B / 29.86MB 30.7s
+#17 sha256:68bced9e0afa4479df17c3646e27c7c7e9ce9ba70c0e6c73b6826487b89037d9 1.05MB / 1.29MB 33.7s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 1.05MB / 12.12MB 35.4s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 0B / 29.86MB 35.8s
+#17 sha256:68bced9e0afa4479df17c3646e27c7c7e9ce9ba70c0e6c73b6826487b89037d9 1.05MB / 1.29MB 38.8s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 1.05MB / 12.12MB 40.5s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 0B / 29.86MB 40.9s
+#17 sha256:68bced9e0afa4479df17c3646e27c7c7e9ce9ba70c0e6c73b6826487b89037d9 1.29MB / 1.29MB 41.8s done
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 1.05MB / 12.12MB 45.6s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 0B / 29.86MB 46.0s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 1.05MB / 12.12MB 50.7s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 1.05MB / 29.86MB 51.1s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 2.10MB / 12.12MB 52.5s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 1.05MB / 29.86MB 56.2s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 2.10MB / 12.12MB 57.6s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 1.05MB / 29.86MB 61.3s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 2.10MB / 12.12MB 62.7s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 1.05MB / 29.86MB 66.4s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 2.10MB / 12.12MB 67.8s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 1.05MB / 29.86MB 71.5s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 2.10MB / 12.12MB 72.9s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 1.05MB / 29.86MB 76.6s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 2.10MB / 12.12MB 78.0s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 1.05MB / 29.86MB 81.7s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 2.10MB / 12.12MB 83.1s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 1.05MB / 29.86MB 86.8s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 2.10MB / 12.12MB 88.2s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 1.05MB / 29.86MB 91.9s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 3.15MB / 12.12MB 92.7s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 2.10MB / 29.86MB 97.0s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 3.15MB / 12.12MB 97.8s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 2.10MB / 29.86MB 102.1s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 3.15MB / 12.12MB 102.9s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 4.19MB / 12.12MB 104.5s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 2.10MB / 29.86MB 107.2s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 4.19MB / 12.12MB 109.6s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 2.10MB / 29.86MB 112.3s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 4.19MB / 12.12MB 114.7s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 5.24MB / 12.12MB 115.0s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 3.15MB / 29.86MB 117.4s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 5.24MB / 12.12MB 120.1s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 3.15MB / 29.86MB 122.5s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 5.24MB / 12.12MB 125.2s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 6.29MB / 12.12MB 126.4s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 4.19MB / 29.86MB 127.6s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 6.29MB / 12.12MB 131.5s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 4.19MB / 29.86MB 132.7s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 7.34MB / 12.12MB 135.1s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 4.19MB / 29.86MB 137.8s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 7.34MB / 12.12MB 140.2s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 5.24MB / 29.86MB 142.9s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 8.39MB / 12.12MB 143.2s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 5.24MB / 29.86MB 148.0s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 8.39MB / 12.12MB 148.3s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 9.44MB / 12.12MB 151.5s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 5.24MB / 29.86MB 153.1s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 9.44MB / 12.12MB 156.6s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 5.24MB / 29.86MB 158.2s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 10.49MB / 12.12MB 160.5s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 6.29MB / 29.86MB 163.3s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 10.49MB / 12.12MB 165.6s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 6.29MB / 29.86MB 168.4s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 11.53MB / 12.12MB 169.2s
+#17 sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 12.12MB / 12.12MB 171.9s done
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 6.29MB / 29.86MB 173.5s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 6.29MB / 29.86MB 178.6s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 7.34MB / 29.86MB 183.7s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 7.34MB / 29.86MB 188.8s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 7.34MB / 29.86MB 193.9s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 8.39MB / 29.86MB 199.0s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 8.39MB / 29.86MB 204.1s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 8.39MB / 29.86MB 209.2s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 9.44MB / 29.86MB 214.3s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 9.44MB / 29.86MB 219.4s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 10.49MB / 29.86MB 224.5s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 10.49MB / 29.86MB 229.6s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 10.49MB / 29.86MB 234.7s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 11.53MB / 29.86MB 239.8s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 11.53MB / 29.86MB 244.9s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 12.58MB / 29.86MB 250.0s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 12.58MB / 29.86MB 255.1s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 13.63MB / 29.86MB 260.2s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 13.63MB / 29.86MB 265.3s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 14.68MB / 29.86MB 270.4s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 15.73MB / 29.86MB 275.5s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 15.73MB / 29.86MB 280.6s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 17.83MB / 29.86MB 283.8s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 19.92MB / 29.86MB 286.8s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 22.02MB / 29.86MB 290.2s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 24.12MB / 29.86MB 293.4s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 26.21MB / 29.86MB 296.5s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 28.31MB / 29.86MB 299.5s
+#17 sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 29.86MB / 29.86MB 301.7s done
+#17 extracting sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41
+#17 extracting sha256:37fb86c2a767b88d500c6872195f88078f64765fe0d2f9cc375cc2efbd4c0a41 0.7s done
+#17 DONE 302.8s
+
+#14 [web build 4/6] RUN npm ci --no-audit --no-fund
+#14 ...
+
+#17 [api 1/9] FROM docker.io/library/python:3.12-slim@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b
+#17 extracting sha256:68bced9e0afa4479df17c3646e27c7c7e9ce9ba70c0e6c73b6826487b89037d9 0.1s done
+#17 DONE 303.0s
+
+#17 [api 1/9] FROM docker.io/library/python:3.12-slim@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b
+#17 extracting sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085
+#17 extracting sha256:2dc99d2d0a39fce31e37615eb4c932e16dcc4c2b0ce9993714280081b5dbe085 0.5s done
+#17 DONE 303.5s
+
+#14 [web build 4/6] RUN npm ci --no-audit --no-fund
+#14 ...
+
+#17 [api 1/9] FROM docker.io/library/python:3.12-slim@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b
+#17 extracting sha256:05e0eee5572e9c9f50408a2132590133b830a668a1cf2ff2b150f19c57707e2b 0.0s done
+#17 DONE 303.5s
+
+#18 [api 2/9] RUN pip install --no-cache-dir uv==0.11.29
+#18 2.971 Collecting uv==0.11.29
+#18 3.431   Downloading uv-0.11.29-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (11 kB)
+#18 3.780 Downloading uv-0.11.29-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (26.9 MB)
+#18 178.9    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 26.9/26.9 MB 177.8 kB/s eta 0:00:00
+#18 178.9 Installing collected packages: uv
+#18 179.3 Successfully installed uv-0.11.29
+#18 179.3 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#18 179.9 
+#18 179.9 [notice] A new release of pip is available: 25.0.1 -> 26.3
+#18 179.9 [notice] To update, run: pip install --upgrade pip
+#18 DONE 180.3s
+
+#14 [web build 4/6] RUN npm ci --no-audit --no-fund
+#14 ...
+
+#19 [api 3/9] WORKDIR /app/backend
+#19 DONE 0.1s
+
+#20 [api 4/9] COPY backend/pyproject.toml backend/uv.lock ./
+#20 DONE 0.2s
+
+#14 [web build 4/6] RUN npm ci --no-audit --no-fund
+#14 ...
+
+#21 [api 5/9] RUN uv sync --frozen --no-dev --extra ocr --no-install-project
+#21 0.525 Using CPython 3.12.16 interpreter at: /usr/local/bin/python3
+#21 0.525 Creating virtual environment at: .venv
+#21 2.191 Downloading onnxruntime (22.7MiB)
+#21 2.191 Downloading rapidocr (26.0MiB)
+#21 2.191 Downloading scikit-learn (8.7MiB)
+#21 2.203 Downloading pypdfium2 (3.6MiB)
+#21 2.217 Downloading pillow (6.8MiB)
+#21 2.260 Downloading sqlalchemy (4.5MiB)
+#21 2.260 Downloading pydantic-core (2.2MiB)
+#21 2.261 Downloading uvloop (4.3MiB)
+#21 2.262 Downloading psycopg-binary (5.0MiB)
+#21 2.266 Downloading opencv-python-headless (58.4MiB)
+#21 2.267 Downloading rapidfuzz (3.0MiB)
+#21 2.267 Downloading scipy (33.7MiB)
+#21 2.268 Downloading numpy (16.0MiB)
+#21 2.285 Downloading shapely (2.2MiB)
+#21 203.6  Downloaded pydantic-core
+#21 205.8  Downloaded shapely
+#21 241.4  Downloaded rapidfuzz
+#21 261.8  Downloaded pypdfium2
+#21 273.7  Downloaded uvloop
+#21 280.9  Downloaded sqlalchemy
+#21 293.8  Downloaded psycopg-binary
+#21 ...
+
+#14 [web build 4/6] RUN npm ci --no-audit --no-fund
+#14 800.0 
+#14 800.0 added 130 packages in 13m
+#14 800.0 npm notice
+#14 800.0 npm notice New major version of npm available! 10.9.9 -> 12.2.2
+#14 800.0 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+#14 800.0 npm notice To update run: npm install -g npm@12.2.2
+#14 800.0 npm notice
+#14 DONE 800.3s
+
+#21 [api 5/9] RUN uv sync --frozen --no-dev --extra ocr --no-install-project
+#21 ...
+
+#22 [web build 5/6] COPY . .
+#22 DONE 0.2s
+
+#21 [api 5/9] RUN uv sync --frozen --no-dev --extra ocr --no-install-project
+#21 ...
+
+#23 [web build 6/6] RUN npm run build
+#23 0.394 
+#23 0.394 > ledgerlens-frontend@0.1.0 build
+#23 0.394 > tsc -b && vite build
+#23 0.394 
+#23 1.111 vite v8.3.6 building client environment for production...
+#23 1.134 transforming...
+#23 1.258 ✓ 126 modules transformed.
+#23 1.317 rendering chunks...
+#23 1.366 computing gzip size...
+#23 1.371 dist/index.html                   0.46 kB │ gzip:  0.29 kB
+#23 1.371 dist/assets/index-DzSX4uv9.css   11.85 kB │ gzip:  3.21 kB
+#23 1.371 dist/assets/index-BYMwusPo.js   330.13 kB │ gzip: 99.95 kB
+#23 1.371 
+#23 1.372 ✓ built in 257ms
+#23 DONE 1.5s
+
+#24 [web stage-1 3/3] COPY --from=build /app/dist /srv
+#24 DONE 0.2s
+
+#21 [api 5/9] RUN uv sync --frozen --no-dev --extra ocr --no-install-project
+#21 ...
+
+#25 [web] exporting to image
+#25 exporting layers
+#25 exporting layers 0.4s done
+#25 exporting manifest sha256:add45f77e1dcbf335a8561b1982e68cffb131eea096efb26e4054fdedbdd4afe 0.0s done
+#25 exporting config sha256:d68a243474e84a7a549c5c3e68538c7021f5b945de82696dd2f6d01f41dd58a3 0.0s done
+#25 exporting attestation manifest sha256:90310a3f945aa89e0576c56ba9328b40ca9d20efe5290ee35be7b9018863583c
+#25 exporting attestation manifest sha256:90310a3f945aa89e0576c56ba9328b40ca9d20efe5290ee35be7b9018863583c 0.1s done
+#25 exporting manifest list sha256:b2304a323538d9cfa7d6533bf722ea27641f872751d7b90b447237c3cdd52537 0.0s done
+#25 naming to docker.io/library/ledgerlens-web:local done
+#25 unpacking to docker.io/library/ledgerlens-web:local
+#25 unpacking to docker.io/library/ledgerlens-web:local 0.1s done
+#25 DONE 0.8s
+
+#21 [api 5/9] RUN uv sync --frozen --no-dev --extra ocr --no-install-project
+#21 ...
+
+#26 [web] resolving provenance for metadata file
+#26 DONE 0.1s
+
+#21 [api 5/9] RUN uv sync --frozen --no-dev --extra ocr --no-install-project
+#21 334.1  Downloaded pillow
+#21 367.5  Downloaded scikit-learn
+#21 484.2  Downloaded numpy
+#21 638.7  Downloaded onnxruntime
+#21 784.0  Downloaded rapidocr
+#21 852.6  Downloaded scipy
+#21 942.3  Downloaded opencv-python-headless
+#21 942.3 Prepared 68 packages in 15m 41s
+#21 943.1 Installed 68 packages in 818ms
+#21 947.7 Bytecode compiled 4613 files in 4.53s
+#21 947.7  + alembic==1.20.1
+#21 947.7  + annotated-doc==0.0.5
+#21 947.7  + annotated-types==0.8.0
+#21 947.7  + anyio==4.16.0
+#21 947.7  + argon2-cffi==25.1.0
+#21 947.7  + argon2-cffi-bindings==26.1.0
+#21 947.7  + certifi==2026.10.23
+#21 947.7  + cffi==2.1.1
+#21 947.7  + charset-normalizer==3.5.2
+#21 947.7  + click==8.5.0
+#21 947.7  + cloudpickle==3.1.2
+#21 947.7  + colorlog==6.12.0
+#21 947.7  + croniter==6.2.4
+#21 947.7  + fastapi==0.162.0
+#21 947.7  + flatbuffers==25.12.19
+#21 947.7  + h11==0.16.0
+#21 947.7  + httpcore==1.0.9
+#21 947.7  + httptools==0.9.0
+#21 947.7  + httpx==0.28.1
+#21 947.7  + idna==3.20
+#21 947.7  + joblib==1.6.0
+#21 947.7  + mako==1.4.3
+#21 947.7  + markupsafe==3.0.4
+#21 947.7  + narwhals==2.28.0
+#21 947.7  + numpy==2.5.4
+#21 947.7  + omegaconf==2.4.0
+#21 947.7  + onnxruntime==1.31.1
+#21 947.7  + opencv-python-headless==5.0.0.93
+#21 947.7  + opentelemetry-api==1.45.2
+#21 947.7  + packaging==26.3
+#21 947.7  + pillow==13.0.0
+#21 947.7  + prometheus-client==0.26.0
+#21 947.7  + protobuf==7.36.2
+#21 947.7  + psycopg==3.3.8
+#21 947.7  + psycopg-binary==3.3.8
+#21 947.7  + pyclipper==1.4.0
+#21 947.7  + pycparser==3.12
+#21 947.7  + pydantic==2.14.3
+#21 947.7  + pydantic-core==2.50.4
+#21 947.7  + pydantic-settings==2.16.2
+#21 947.7  + pyjwt==2.15.1
+#21 947.7  + pypdfium2==5.14.0
+#21 947.7  + python-dateutil==4.0.0
+#21 947.7  + python-dotenv==1.2.4
+#21 947.7  + python-multipart==0.0.33
+#21 947.7  + pyyaml==6.0.3
+#21 947.7  + rapidfuzz==3.14.6
+#21 947.7  + rapidocr==3.10.0
+#21 947.7  + redis==8.1.0
+#21 947.7  + requests==2.34.2
+#21 947.7  + rq==3.0.0
+#21 947.7  + scikit-learn==1.9.1
+#21 947.7  + scipy==1.18.1
+#21 947.7  + shapely==2.2.0
+#21 947.7  + six==1.17.0
+#21 947.7  + sqlalchemy==2.1.8
+#21 947.7  + starlette==1.10.0
+#21 947.7  + structlog==26.1.0
+#21 947.7  + threadpoolctl==3.8.0
+#21 947.7  + tqdm==4.70.1
+#21 947.7  + typing-extensions==4.16.0
+#21 947.7  + typing-inspection==0.4.5
+#21 947.7  + tzdata==2026.6
+#21 947.7  + urllib3==2.8.0
+#21 947.7  + uvicorn==0.54.0
+#21 947.7  + uvloop==0.23.0
+#21 947.7  + watchfiles==1.3.0
+#21 947.7  + websockets==17.4
+#21 DONE 949.9s
+
+#27 [api 6/9] COPY backend/ ./
+#27 DONE 0.3s
+
+#28 [api 7/9] RUN uv sync --frozen --no-dev --extra ocr
+#28 0.471    Building ledgerlens @ file:///app/backend
+#28 3.995       Built ledgerlens @ file:///app/backend
+#28 3.999 Prepared 1 package in 3.52s
+#28 4.002 Installed 1 package in 2ms
+#28 4.677 Bytecode compiled 4613 files in 674ms
+#28 4.677  + ledgerlens==0.1.0 (from file:///app/backend)
+#28 DONE 4.8s
+
+#29 [api 8/9] COPY evals/results /app/evals/results
+#29 DONE 0.2s
+
+#30 [api 9/9] RUN useradd --uid 10001 --create-home app     && mkdir -p /data/storage /data/llm-cache     && chown -R app /data
+#30 DONE 0.5s
+
+#31 [api] exporting to image
+#31 exporting layers
+#31 exporting layers 40.7s done
+#31 exporting manifest sha256:2e3f9e24285bfc3f74f205ee5d34c902e35fd38a8a7d0106ad259db3b0ca11b5 0.0s done
+#31 exporting config sha256:ec9aa01d3cafdd8d04dc26512b4b3cce0e4b767e5d280361ddde60f02ab359d4 0.0s done
+#31 exporting attestation manifest sha256:a627d8404fc8cf96d43dd9adf25c21740dc609dc431daa1f0e772230527acc3d
+#31 exporting attestation manifest sha256:a627d8404fc8cf96d43dd9adf25c21740dc609dc431daa1f0e772230527acc3d 0.0s done
+#31 exporting manifest list sha256:d45212bb8c6ec370bc4a356122ea67147cb76ee88e71e80f49770cce183f8f5f 0.0s done
+#31 naming to docker.io/library/ledgerlens-backend:local done
+#31 unpacking to docker.io/library/ledgerlens-backend:local
+#31 unpacking to docker.io/library/ledgerlens-backend:local 9.8s done
+#31 DONE 50.8s
+
+#32 [api] resolving provenance for metadata file
+#32 DONE 0.0s
+ Image ledgerlens-backend:local Built 
+ Image ledgerlens-web:local Built 
+ Container ledgerlens-postgres-1 Running 
+ Container ledgerlens-redis-1 Running 
+ Volume ledgerlens_llm-cache Creating 
+ Volume ledgerlens_storage-data Creating 
+ Volume ledgerlens_storage-data Creating 
+ Volume ledgerlens_llm-cache Creating 
+ Volume ledgerlens_storage-data Created 
+ Volume ledgerlens_storage-data Created 
+ Container ledgerlens-api-1 Creating 
+ Volume ledgerlens_llm-cache Created 
+ Volume ledgerlens_llm-cache Created 
+ Container ledgerlens-api-1 Created 
+ Container ledgerlens-web-1 Creating 
+ Container ledgerlens-worker-1 Creating 
+ Container ledgerlens-web-1 Created 
+ Container ledgerlens-worker-1 Created 
+ Container ledgerlens-redis-1 Waiting 
+ Container ledgerlens-postgres-1 Waiting 
+ Container ledgerlens-redis-1 Healthy 
+ Container ledgerlens-postgres-1 Healthy 
+ Container ledgerlens-api-1 Starting 
+ Container ledgerlens-api-1 Started 
+ Container ledgerlens-web-1 Starting 
+ Container ledgerlens-worker-1 Starting 
+ Container ledgerlens-worker-1 Started 
+Error response from daemon: ports are not available: exposing port TCP 127.0.0.1:8080 -> 127.0.0.1:0: listen tcp4 127.0.0.1:8080: bind: An attempt was made to access a socket in a way forbidden by its access permissions.
+EXIT=1 END 2026-11-08T08:31:47Z
+== retry START 2026-11-08T08:32:04Z (8080 not in an excluded range, no listener)
+ Container ledgerlens-postgres-1 Running 
+ Container ledgerlens-redis-1 Running 
+ Container ledgerlens-api-1 Running 
+ Container ledgerlens-worker-1 Running 
+ Container ledgerlens-redis-1 Waiting 
+ Container ledgerlens-postgres-1 Waiting 
+ Container ledgerlens-postgres-1 Healthy 
+ Container ledgerlens-redis-1 Healthy 
+ Container ledgerlens-web-1 Starting 
+Error response from daemon: ports are not available: exposing port TCP 127.0.0.1:8080 -> 127.0.0.1:0: listen tcp4 127.0.0.1:8080: bind: An attempt was made to access a socket in a way forbidden by its access permissions.
+EXIT=1 END 2026-11-08T08:32:06Z
+ledgerlens-api-1 Up 20 seconds (healthy)
+ledgerlens-postgres-1 Up 32 minutes (healthy)
+ledgerlens-redis-1 Up 32 minutes (healthy)
+ledgerlens-worker-1 Up 20 seconds (healthy)
+== retry 2 START 2026-11-08T08:32:48Z: 127.0.0.1:8080 is held by an unrelated httpd process (PID 5752); web host port set to 8081 via LEDGERLENS_WEB_PORT for this run
+ Container ledgerlens-postgres-1 Running 
+ Container ledgerlens-redis-1 Running 
+ Container ledgerlens-api-1 Running 
+ Container ledgerlens-worker-1 Running 
+ Container ledgerlens-web-1 Recreate 
+ Container ledgerlens-web-1 Recreated 
+ Container ledgerlens-postgres-1 Waiting 
+ Container ledgerlens-redis-1 Waiting 
+ Container ledgerlens-redis-1 Healthy 
+ Container ledgerlens-postgres-1 Healthy 
+ Container ledgerlens-web-1 Starting 
+ Container ledgerlens-web-1 Started 
+ Container ledgerlens-web-1 Waiting 
+ Container ledgerlens-postgres-1 Waiting 
+ Container ledgerlens-redis-1 Waiting 
+ Container ledgerlens-api-1 Waiting 
+ Container ledgerlens-worker-1 Waiting 
+ Container ledgerlens-api-1 Healthy 
+ Container ledgerlens-worker-1 Healthy 
+ Container ledgerlens-postgres-1 Healthy 
+ Container ledgerlens-redis-1 Healthy 
+ Container ledgerlens-web-1 Healthy 
+EXIT=0 END 2026-11-08T08:33:02Z
+ledgerlens-api-1 Up About a minute (healthy) 127.0.0.1:8000->8000/tcp
+ledgerlens-postgres-1 Up 33 minutes (healthy) 127.0.0.1:5433->5432/tcp
+ledgerlens-redis-1 Up 33 minutes (healthy) 127.0.0.1:6380->6379/tcp
+ledgerlens-web-1 Up 12 seconds (healthy) 127.0.0.1:8081->8080/tcp
+ledgerlens-worker-1 Up About a minute (healthy) 8000/tcp
+== host checks 2026-11-08T08:33:11Z
+api /health/ready: 200 {"status":"ready","checks":{"database":true,"redis":true,"storage":true,"worker":true}}
+web /: 200
+web /api/health/ready (proxied): 200
+/ledgerlens-api-1 health=healthy
+/ledgerlens-worker-1 health=healthy
+/ledgerlens-web-1 health=healthy
+/ledgerlens-postgres-1 health=healthy
+/ledgerlens-redis-1 health=healthy
