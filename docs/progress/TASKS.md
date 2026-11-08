@@ -18,7 +18,7 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 | 4 | Upload, validation, dedup, storage, batch, list, get, delete, job status | VERIFIED | backend/tests/api/test_documents.py |
 | 4 | Health, readiness, metrics, log redaction | VERIFIED | backend/tests/api/test_health.py |
 | 4 | RQ worker and persisted pipeline: idempotent steps, retries with backoff, dead-letter, crash recovery | VERIFIED | backend/tests/api/test_worker.py (9 tests), docs/progress/logs/run-worker-tests.log |
-| 4 | Worker service in Compose | IMPLEMENTED BUT UNVERIFIED | infra/docker-compose.yml; images not built yet (bandwidth during the model pull) |
+| 4 | Worker service in Compose | VERIFIED | docs/progress/logs/run-docker-compose-up.log (worker healthy; API readiness reports worker true) |
 | 4 | Webhooks: HMAC-signed, retries with backoff, URL safety | VERIFIED | backend/tests/api/test_webhooks.py (10 tests) |
 | 4 | Review, queue, page image, export and evaluation report endpoints | VERIFIED | backend/tests/api/test_review.py (13 tests) |
 | 5 | Normalisation 1.0, frozen | VERIFIED | evals/normalization.lock |
@@ -49,15 +49,18 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 | 7 | llama S4h baseline on the train subset | VERIFIED | evals/results/dev/prompt_round/cord_s4h_prompt_dev_train100_p2.2_v1_1_1.json (mean F1 0.578, warm p95 19.73 s, 3 aborts) |
 | 7 | S5 code (units, calibrator, thresholds, grouped variant) | VERIFIED | backend/tests/unit/test_s5.py; run on real predictions for S5-S1 |
 | 7 | S5-S1 on validation (calibrator fitted on train) | VERIFIED | evals/results/dev/cord_s5_validation_comparison_v1_1_1.md. Test not read |
-| 7 | S5-S4h on validation | IN PROGRESS | S4h with llama3.2:3b on all 800 train documents is running |
+| 7 | S4h llama3.2:3b on all 800 train documents | VERIFIED | evals/results/dev/prompt_round/cord_s4h_train_all_p2.2_v1_1_1.json; 10 attempts (9 memory aborts, resumed from the replay cache); latency battery-affected |
+| 7 | S5-S4h on validation (calibrator fitted on train) | VERIFIED | evals/results/dev/cord_s5_validation_comparison_v1_1_1.md; docs/progress/logs/run-s5-s4h-*.log. Test not read |
+| 7 | Power state per timed run; audit of existing latency figures | VERIFIED | evals/power.py, evals/runners/audit_power.py, docs/progress/logs/power-audit.json; only S4h train_all is battery-affected. Test split refuses to run off AC |
 | 7 | Final S1-S5 test read, once, from a clean commit | NOT STARTED | Last step |
 | 7 | Ablations, degradation | NOT STARTED | Follow S5 |
 | 7 | SROIE | BLOCKED | Removed: official access unavailable; mirror terms unverified. Labels and vendor groups deleted; adapter kept with fictional fixtures |
 | 6 | Frontend: upload and batch, job status, review with boxes, approve/reject/correct, queue, export, evaluation page | VERIFIED | frontend/src (36 Vitest tests), npm run build |
 | 6 | Playwright upload, review, export flow | VERIFIED (local dev stack, not Docker) | docs/progress/logs/run-e2e-local.log |
 | 8 | Testing and hardening | NOT STARTED | |
-| 9 | Dockerfiles and full compose stack | IMPLEMENTED BUT UNVERIFIED | backend/Dockerfile, frontend/Dockerfile, infra/docker-compose.yml; build and healthy up still to run |
-| 10 | Documentation | IN PROGRESS | Minimal README only |
+| 9 | Dockerfiles and full compose stack | VERIFIED | docs/progress/logs/run-docker-compose-up.log: all five services healthy. Web published on 8081 for this run because an unrelated httpd holds 8080 here (LEDGERLENS_WEB_PORT) |
+| 9 | Playwright flow against the Compose stack | VERIFIED | docs/progress/logs/run-e2e-docker.log (1 passed) |
+| 10 | Documentation | IN PROGRESS | README has status, commands and the S5 header/row automation table; portfolio write-up not started |
 | 11 | Portfolio and publication preparation | NOT STARTED | |
 | 12 | Final verification and report | NOT STARTED | |
 
@@ -65,7 +68,7 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 
 | Id | Status | Note |
 |---|---|---|
-| A1 | IN PROGRESS | Upload, batch, rejection, dedup, processing and the frontend work; Docker deployment unverified |
+| A1 | IN PROGRESS | Upload, batch, rejection, dedup, processing, frontend and the Docker stack work (e2e passes on Compose); hardening (Phase 8) not started |
 | A2 | VERIFIED | test_ocr_parser.py, test_pdfium_parser.py |
 | A3 | IN PROGRESS | Default and alternative schemas work offline; Ollama used with cord_receipt only |
 | A4 | VERIFIED | Fields, evidence, validations and review decisions persist; backend/tests/api/test_review.py |
@@ -75,7 +78,7 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 | A8 | VERIFIED | Worker crash, retry, dead-letter, model-unavailable and webhook retry tests pass |
 | A9 | IMPLEMENTED BUT UNVERIFIED (local mirror; GitHub run pending human approval) | docs/progress/logs/ci-local.txt |
 | A10 | NOT STARTED | |
-| A11 | IN PROGRESS | S1 on CORD test; S2-S4 on validation only; S5 not started |
+| A11 | IN PROGRESS | S1 on CORD test; S2-S4h and S5-S1, S5-S4h on validation only; final S1-S5 test read pending |
 | A12 | IN PROGRESS | CORD layout groups for S1. No real vendor-grouped split was possible |
 | A13 | NOT STARTED | Follows S5 |
 | A14 | IN PROGRESS | Split hashes and overlap tests exist, documented in docs/evaluation.md |

@@ -82,3 +82,13 @@
 - S2' on synthetic: transfers to the held-out layout for most header fields; subtotal does not.
 - Local CI: all steps exit 0; 378 backend tests, 96% coverage, gitleaks 69 commits, no leaks.
 - Next: model decision, then S4h on all train documents and S5.
+
+## 2026-11-08, review 4 and notes A to C
+- Memory: the two free-RAM measures agree within 0.02 GiB; llama3.2:3b at num_ctx 2304 costs about 0.8 GiB of system RAM. Recorded in ENVIRONMENT.md.
+- qwen3:4b: thinking-off implemented and tested; pulled; two memory aborts during setup, before any quality result. Not adopted for lack of RAM, no quality judgement made (ADR-0012). llama3.2:3b stays.
+- S1 and S4h (llama3.2:3b, prompt 2.2) on all 800 train documents. S4h took 10 attempts: 9 memory aborts, resumed from the replay cache.
+- S5-S1 and S5-S4h on validation only, calibrators fitted on train. Header automation 0.237 and 0.197; row automation 0.013 and 0.003 at a 0.98 precision target. Test not read.
+- Power: every timed result now carries an AC/battery label from the Windows power log. Only S4h train_all is battery-affected (103 of 2,421 timings). Battery explains the 48 s against 10 s per document; split latency is in ENVIRONMENT.md. The test split refuses to run off AC.
+- Product: webhooks (HMAC, retries), review/export API, frontend (36 Vitest tests), Dockerfiles. All five Compose services healthy; Playwright upload-review-export passes on the local dev stack and on the Compose stack.
+- Backend: 412 tests pass.
+- Next: final S1-S5 test read, once, on AC, from a clean commit, when the supervisor approves.
