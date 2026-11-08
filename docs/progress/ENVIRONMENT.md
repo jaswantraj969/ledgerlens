@@ -74,6 +74,22 @@ Recorded as measured and not rerun: mean F1 0.578 (total, subtotal, tax, row-lev
 
 Why p95 is higher than S4' on validation (14.05 s): the medians are close (7.95 s against 7.68 s), so the shift is in the tail. On the train subset, 6 replies were truncated (generation ran to `num_predict` 1024) and 4 calls were retried, each a full extra call, against 1 and 1 on validation. With about 96 warm documents, p95 is set by the five or so slowest, which are those cases. The document sets also differ (train subset against validation). Nothing points to the machine running slower. Most timings in both files were recorded when each call was first made, some in runs that later aborted (labelled "mixed").
 
+### S4h train run: 48 s against 10 s per document, explained, 2026-11-08
+
+Latency per LLM call (generation time, load excluded), split by when each reply was recorded, never pooled (`evals/runners/segment_latency.py`, output `docs/progress/logs/s4h-train-all-segments.json`):
+
+| Segment | Calls | p50 s | p95 s | Completion tokens p50 | Tokens/s median | Truncated |
+|---|---|---|---|---|---|---|
+| Before sleep, 21:11 to 21:40 UTC | 51 | 29.1 | 55.53 | 191 | 6.7 | 0 |
+| After restart, from 05:44 UTC (at the time of writing) | 308 | 3.88 | 9.65 | 180 | 47.9 | 10 |
+
+Replies were about the same length, but generation ran about 7 times slower before the sleep. Evidence:
+
+- Ollama's server log for the 21:11 UTC load: `offloaded 29/29 layers to GPU`, and 2,916 MiB of VRAM left free. The model was fully on the GPU, so CPU offload is ruled out.
+- Windows System log, Kernel-Power event 105: AC power went offline at 20:52:04 UTC (`AcOnline` false, battery 43,324 of 43,762) and came back at 05:42:29 UTC (`AcOnline` true, 4,446 of 43,762). Event 524 "Critical Battery Trigger Met" at 21:40:46 UTC was followed by sleep (event 42).
+
+Explanation: the pre-sleep segment ran on battery, where the laptop GPU runs at a lower power limit, until the battery reached its critical level and the machine slept. The restart ran on AC. From the restart on, `ollama ps`, free RAM, pagefile use and GPU clocks are logged every 10 documents in `docs/progress/logs/s4h-train-all-monitor.txt`. The qwen3:4b token-measurement aborts (about 21:05 UTC) also happened on battery; they were memory aborts, so this does not change ADR-0012. Long runs need AC power.
+
 ## Decision
 
 Docker-first for services (`postgres:16-alpine`, `redis:7-alpine`, both pulled), native Python and
