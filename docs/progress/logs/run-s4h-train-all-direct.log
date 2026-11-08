@@ -1,0 +1,33 @@
+START 2026-11-08T06:38:35Z
+== attempt 1 2026-11-08T06:38:35Z
+processed 350, failed=1
+ABORTED: free system RAM 0.019 GiB fell below 0.400 GiB. Recorded in C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\aborted\cord_s4h_train_aborted_20261108T064930Z.json. No results written.
+== attempt 2 2026-11-08T06:50:02Z
+processed 410, failed=1
+ABORTED: free system RAM 0.277 GiB fell below 0.400 GiB. Recorded in C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\aborted\cord_s4h_train_aborted_20261108T065625Z.json. No results written.
+== attempt 3 2026-11-08T06:56:56Z
+processed 460, failed=1
+ABORTED: free system RAM 0.392 GiB fell below 0.400 GiB. Recorded in C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\aborted\cord_s4h_train_aborted_20261108T070455Z.json. No results written.
+== attempt 4 2026-11-08T07:05:27Z
+processed 510, failed=1
+ABORTED: free system RAM 0.003 GiB fell below 0.400 GiB. Recorded in C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\aborted\cord_s4h_train_aborted_20261108T071211Z.json. No results written.
+== attempt 5 2026-11-08T07:12:43Z
+processed 560, failed=1
+ABORTED: free system RAM 0.381 GiB fell below 0.400 GiB. Recorded in C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\aborted\cord_s4h_train_aborted_20261108T071940Z.json. No results written.
+== attempt 6 2026-11-08T07:20:13Z
+processed 600, failed=1
+ABORTED: free system RAM 0.388 GiB fell below 0.400 GiB. Recorded in C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\aborted\cord_s4h_train_aborted_20261108T072606Z.json. No results written.
+== attempt 7 2026-11-08T07:26:38Z
+processed 640, failed=1
+ABORTED: free system RAM 0.370 GiB fell below 0.400 GiB. Recorded in C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\aborted\cord_s4h_train_aborted_20261108T073238Z.json. No results written.
+== attempt 8 2026-11-08T07:33:10Z
+processed 710, failed=1
+ABORTED: free system RAM 0.361 GiB fell below 0.400 GiB. Recorded in C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\aborted\cord_s4h_train_aborted_20261108T074104Z.json. No results written.
+== attempt 9 2026-11-08T07:41:36Z
+processed 760, failed=1
+ABORTED: free system RAM 0.399 GiB fell below 0.400 GiB. Recorded in C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\aborted\cord_s4h_train_aborted_20261108T075030Z.json. No results written.
+== attempt 10 2026-11-08T07:51:02Z
+processed 800, failed=1
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\prompt_round\cord_s4h_train_all_p2.2_v1_1_1.json
+EXIT=0 2026-11-08T07:56:52Z
+keep-awake released: stopped 1 process(es)

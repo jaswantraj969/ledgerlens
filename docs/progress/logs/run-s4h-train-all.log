@@ -1,2 +1,93 @@
-START 2026-11-07T21:11:02Z timeout=21600s stall=1200s cmd: bash /c/Users/jknm6/AppData/Local/Temp/claude/c778d8435e15a14b/9a954629-d813-4388-8578-142035aa385c/scratchpad/s4h_train_all.sh
+START 2026-11-08T05:44:12Z timeout=28800s stall=1500s cmd: bash /c/Users/jknm6/AppData/Local/Temp/claude/c778d8435e15a14b/9a954629-d813-4388-8578-142035aa385c/scratchpad/s4h_train_all.sh
 == S4h train_all attempt 1
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+ABORTED: free system RAM 0.399 GiB fell below 0.400 GiB. Recorded in C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\aborted\cord_s4h_train_aborted_20261108T054731Z.json. No results written.
+== S4h train_all attempt 2
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+HEARTBEAT 2026-11-08T05:48:13Z elapsed=241s progress=450 idle=0s
+processed 50, failed=1
+processed 60, failed=1
+processed 70, failed=1
+HEARTBEAT 2026-11-08T05:52:15Z elapsed=483s progress=522 idle=45s
+processed 80, failed=1
+processed 90, failed=1
+ABORTED: free system RAM 0.385 GiB fell below 0.400 GiB. Recorded in C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\aborted\cord_s4h_train_aborted_20261108T055533Z.json. No results written.
+== S4h train_all attempt 3
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=1
+processed 60, failed=1
+processed 70, failed=1
+processed 80, failed=1
+processed 90, failed=1
+HEARTBEAT 2026-11-08T05:56:18Z elapsed=726s progress=1017 idle=0s
+processed 100, failed=1
+processed 110, failed=1
+processed 120, failed=1
+HEARTBEAT 2026-11-08T06:00:21Z elapsed=969s progress=1092 idle=61s
+processed 130, failed=1
+processed 140, failed=1
+processed 150, failed=1
+ABORTED: free system RAM 0.193 GiB fell below 0.400 GiB. Recorded in C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\aborted\cord_s4h_train_aborted_20261108T060411Z.json. No results written.
+HEARTBEAT 2026-11-08T06:04:23Z elapsed=1211s progress=1371 idle=0s
+== S4h train_all attempt 4
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=1
+processed 60, failed=1
+processed 70, failed=1
+processed 80, failed=1
+processed 90, failed=1
+processed 100, failed=1
+processed 110, failed=1
+processed 120, failed=1
+processed 130, failed=1
+processed 140, failed=1
+processed 150, failed=1
+processed 160, failed=1
+processed 170, failed=1
+processed 180, failed=1
+HEARTBEAT 2026-11-08T06:08:25Z elapsed=1453s progress=1839 idle=30s
+processed 190, failed=1
+ABORTED: free system RAM 0.386 GiB fell below 0.400 GiB. Recorded in C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\aborted\cord_s4h_train_aborted_20261108T061023Z.json. No results written.
+== S4h train_all attempt 5
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=1
+processed 60, failed=1
+processed 70, failed=1
+processed 80, failed=1
+processed 90, failed=1
+processed 100, failed=1
+processed 110, failed=1
+processed 120, failed=1
+processed 130, failed=1
+processed 140, failed=1
+processed 150, failed=1
+processed 160, failed=1
+processed 170, failed=1
+processed 180, failed=1
+processed 190, failed=1
+processed 200, failed=1
+HEARTBEAT 2026-11-08T06:12:27Z elapsed=1695s progress=2515 idle=0s
+HEARTBEAT 2026-11-08T06:16:28Z elapsed=1936s progress=2515 idle=241s
+HEARTBEAT 2026-11-08T06:20:30Z elapsed=2178s progress=2515 idle=483s
+HEARTBEAT 2026-11-08T06:24:33Z elapsed=2421s progress=2515 idle=726s
+HEARTBEAT 2026-11-08T06:28:35Z elapsed=2663s progress=2515 idle=968s
+HEARTBEAT 2026-11-08T06:32:39Z elapsed=2908s progress=2515 idle=1213s
+HEARTBEAT 2026-11-08T06:36:47Z elapsed=3155s progress=2515 idle=1460s
+STALLED 2026-11-08T06:37:33Z no progress for 1500s
+END 2026-11-08T06:37:33Z elapsed=3201s
+EXIT=125

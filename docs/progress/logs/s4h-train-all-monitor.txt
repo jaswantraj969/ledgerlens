@@ -1,0 +1,333 @@
+# monitor for docs/progress/logs/run-s4h-train-all.log, started 2026-11-08T06:10:31Z
+== 2026-11-08T06:10:31Z start
+NAME    ID    SIZE    PROCESSOR    CONTEXT    RUNNER    UNTIL 
+free_ram_gib=4.863 pagefile_used_mb=1144 pagefile_peak_mb=1921
+gpu: 3 %, 58 MiB, 67.66, 210 MHz, 5.63 W
+== 2026-11-08T06:10:32Z processed 190, failed=1
+NAME    ID    SIZE    PROCESSOR    CONTEXT    RUNNER    UNTIL 
+free_ram_gib=4.855 pagefile_used_mb=1144 pagefile_peak_mb=1921
+gpu: 3 %, 60 MiB, 67.34, 210 MHz, 5.45 W
+== 2026-11-08T06:12:04Z processed 200, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=3.614 pagefile_used_mb=1136 pagefile_peak_mb=1921
+gpu: 92 %, 2414 MiB, 79.94, 1395 MHz, 42.28 W
+== 2026-11-08T06:37:47Z run ended: EXIT=125
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=1.866 pagefile_used_mb=1231 pagefile_peak_mb=2262
+gpu: 3 %, 2397 MiB, 51.59, 210 MHz, 5.39 W
+keep-awake processes stopped: 0
+keep-awake processes left: 0
+== keep-awake release done 2026-11-08T06:37:50Z
+== restart 2026-11-08T06:38:35Z: previous wrapper lost its output after attempt 5; per-attempt logs from here
+# monitor started 2026-11-08T06:38:41Z for docs/progress/logs/run-s4h-train-all-attempt-*.log
+== 2026-11-08T06:38:41Z start
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    3 minutes from now    
+free_ram_gib=2.005 pagefile_used_mb=1231
+gpu: 3 %, 2399 MiB, 49.03, 277 MHz, 5.53 W
+== 2026-11-08T06:38:42Z run-s4h-train-all-attempt-1.log: processed 40, failed=0
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    3 minutes from now    
+free_ram_gib=1.992 pagefile_used_mb=1231
+gpu: 3 %, 2399 MiB, 49.03, 210 MHz, 5.61 W
+== 2026-11-08T06:39:15Z run-s4h-train-all-attempt-1.log: processed 340, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=2.447 pagefile_used_mb=1230
+gpu: 98 %, 2399 MiB, 53.72, 1530 MHz, 19.60 W
+== 2026-11-08T06:42:19Z run-s4h-train-all-attempt-1.log: processed 350, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=1.78 pagefile_used_mb=1186
+gpu: 98 %, 2398 MiB, 58.94, 1740 MHz, 21.61 W
+== 2026-11-08T06:50:19Z run-s4h-train-all-attempt-2.log: processed 350, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=4.783 pagefile_used_mb=1322
+gpu: 93 %, 2387 MiB, 68.41, 1192 MHz, 33.21 W
+== 2026-11-08T06:50:50Z run-s4h-train-all-attempt-2.log: processed 360, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=4.376 pagefile_used_mb=1322
+gpu: 95 %, 2397 MiB, 77.31, 1432 MHz, 42.08 W
+== 2026-11-08T06:51:51Z run-s4h-train-all-attempt-2.log: processed 370, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=2.804 pagefile_used_mb=1303
+gpu: 95 %, 2394 MiB, 79.66, 1297 MHz, 39.88 W
+== 2026-11-08T06:52:53Z run-s4h-train-all-attempt-2.log: processed 380, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=2.259 pagefile_used_mb=1302
+gpu: 93 %, 2389 MiB, 81.81, 1410 MHz, 41.78 W
+== 2026-11-08T06:53:55Z run-s4h-train-all-attempt-2.log: processed 390, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=1.81 pagefile_used_mb=1337
+gpu: 93 %, 2389 MiB, 82.22, 1432 MHz, 43.65 W
+== 2026-11-08T06:55:26Z run-s4h-train-all-attempt-2.log: processed 400, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=0.782 pagefile_used_mb=1501
+gpu: 94 %, 2407 MiB, 84.25, 1387 MHz, 42.49 W
+== 2026-11-08T06:56:28Z run-s4h-train-all-attempt-2.log: processed 410, failed=1
+NAME    ID    SIZE    PROCESSOR    CONTEXT    RUNNER    UNTIL 
+free_ram_gib=5.502 pagefile_used_mb=1527
+gpu: 1 %, 39 MiB, 74.00, 1177 MHz, 12.00 W
+== 2026-11-08T06:56:59Z run-s4h-train-all-attempt-3.log: processed 40, failed=0
+NAME    ID    SIZE    PROCESSOR    CONTEXT    RUNNER    UNTIL 
+free_ram_gib=5.289 pagefile_used_mb=1511
+gpu: 0 %, 55 MiB, 64.84, 1177 MHz, 10.30 W
+== 2026-11-08T06:57:32Z run-s4h-train-all-attempt-3.log: processed 410, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=4.157 pagefile_used_mb=1511
+gpu: 93 %, 2404 MiB, 77.41, 1402 MHz, 39.77 W
+== 2026-11-08T06:59:34Z run-s4h-train-all-attempt-3.log: processed 420, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=3.482 pagefile_used_mb=1307
+gpu: 95 %, 2385 MiB, 85.12, 1342 MHz, 46.04 W
+== 2026-11-08T07:01:06Z run-s4h-train-all-attempt-3.log: processed 430, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=2.655 pagefile_used_mb=1305
+gpu: 94 %, 2389 MiB, 86.47, 1500 MHz, 46.44 W
+== 2026-11-08T07:02:37Z run-s4h-train-all-attempt-3.log: processed 440, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=1.783 pagefile_used_mb=1483
+gpu: 95 %, 2389 MiB, 86.00, 1447 MHz, 45.21 W
+== 2026-11-08T07:03:39Z run-s4h-train-all-attempt-3.log: processed 450, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=1.169 pagefile_used_mb=1513
+gpu: 93 %, 2389 MiB, 85.88, 1455 MHz, 47.95 W
+== 2026-11-08T07:04:41Z run-s4h-train-all-attempt-3.log: processed 460, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=0.437 pagefile_used_mb=1388
+gpu: 91 %, 2389 MiB, 85.75, 1387 MHz, 45.10 W
+== 2026-11-08T07:05:43Z run-s4h-train-all-attempt-4.log: processed 440, failed=1
+NAME    ID    SIZE    PROCESSOR    CONTEXT    RUNNER    UNTIL 
+free_ram_gib=5.881 pagefile_used_mb=1391
+gpu: 0 %, 42 MiB, 63.03, 210 MHz, 5.04 W
+== 2026-11-08T07:06:14Z run-s4h-train-all-attempt-4.log: processed 460, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=4.914 pagefile_used_mb=1391
+gpu: 91 %, 2384 MiB, 77.22, 1252 MHz, 36.07 W
+== 2026-11-08T07:07:16Z run-s4h-train-all-attempt-4.log: processed 470, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=4.019 pagefile_used_mb=1388
+gpu: 24 %, 2391 MiB, 82.44, 1725 MHz, 38.21 W
+== 2026-11-08T07:08:17Z run-s4h-train-all-attempt-4.log: processed 480, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=2.061 pagefile_used_mb=1279
+gpu: 94 %, 2395 MiB, 86.59, 1522 MHz, 46.84 W
+== 2026-11-08T07:09:49Z run-s4h-train-all-attempt-4.log: processed 490, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=1.645 pagefile_used_mb=1286
+gpu: 91 %, 2390 MiB, 85.81, 1357 MHz, 41.94 W
+== 2026-11-08T07:10:51Z run-s4h-train-all-attempt-4.log: processed 500, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=1.209 pagefile_used_mb=1720
+gpu: 94 %, 2403 MiB, 86.72, 1440 MHz, 45.80 W
+== 2026-11-08T07:11:52Z run-s4h-train-all-attempt-4.log: processed 510, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=0.56 pagefile_used_mb=1746
+gpu: 91 %, 2403 MiB, 86.97, 1320 MHz, 42.17 W
+== 2026-11-08T07:12:54Z run-s4h-train-all-attempt-5.log: processed 510, failed=1
+NAME    ID    SIZE    PROCESSOR    CONTEXT    RUNNER    UNTIL 
+free_ram_gib=5.823 pagefile_used_mb=1815
+gpu: 0 %, 0 MiB, 64.31, 1177 MHz, 10.33 W
+== 2026-11-08T07:13:56Z run-s4h-train-all-attempt-5.log: processed 520, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=3.947 pagefile_used_mb=1774
+gpu: 28 %, 2386 MiB, 79.47, 1387 MHz, 32.26 W
+== 2026-11-08T07:14:59Z run-s4h-train-all-attempt-5.log: processed 530, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=3.22 pagefile_used_mb=1769
+gpu: 88 %, 2385 MiB, 84.31, 1462 MHz, 41.02 W
+== 2026-11-08T07:16:31Z run-s4h-train-all-attempt-5.log: processed 540, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=2.158 pagefile_used_mb=1402
+gpu: 90 %, 2381 MiB, 85.62, 1425 MHz, 46.07 W
+== 2026-11-08T07:17:33Z run-s4h-train-all-attempt-5.log: processed 550, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=1.664 pagefile_used_mb=1576
+gpu: 47 %, 2385 MiB, 84.41, 1717 MHz, 41.79 W
+== 2026-11-08T07:19:35Z run-s4h-train-all-attempt-5.log: processed 560, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=0.261 pagefile_used_mb=1487
+gpu: 89 %, 2412 MiB, 86.44, 1417 MHz, 43.04 W
+== 2026-11-08T07:20:38Z run-s4h-train-all-attempt-6.log: processed 560, failed=1
+NAME    ID    SIZE    PROCESSOR    CONTEXT    RUNNER    UNTIL 
+free_ram_gib=4.76 pagefile_used_mb=1511
+gpu: 3 %, 37 MiB, 66.59, 1177 MHz, 11.07 W
+== 2026-11-08T07:22:40Z run-s4h-train-all-attempt-6.log: processed 570, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=3.546 pagefile_used_mb=1499
+gpu: 91 %, 2386 MiB, 86.06, 1455 MHz, 43.78 W
+== 2026-11-08T07:23:12Z run-s4h-train-all-attempt-6.log: processed 580, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=3.268 pagefile_used_mb=1487
+gpu: 92 %, 2385 MiB, 86.78, 1447 MHz, 45.74 W
+== 2026-11-08T07:24:44Z run-s4h-train-all-attempt-6.log: processed 590, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=2.103 pagefile_used_mb=1443
+gpu: 92 %, 2387 MiB, 86.62, 1477 MHz, 43.05 W
+== 2026-11-08T07:26:16Z run-s4h-train-all-attempt-6.log: processed 600, failed=1
+NAME    ID    SIZE    PROCESSOR    CONTEXT    RUNNER    UNTIL 
+free_ram_gib=4.463 pagefile_used_mb=1623
+gpu: 0 %, 35 MiB, 70.06, 210 MHz, 4.77 W
+== 2026-11-08T07:26:48Z run-s4h-train-all-attempt-7.log: processed 190, failed=1
+NAME    ID    SIZE    PROCESSOR    CONTEXT    RUNNER    UNTIL 
+free_ram_gib=3.736 pagefile_used_mb=1497
+gpu: 0 %, 38 MiB, 66.56, 1177 MHz, 11.02 W
+== 2026-11-08T07:27:19Z run-s4h-train-all-attempt-7.log: processed 600, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=3.308 pagefile_used_mb=1496
+gpu: 89 %, 2380 MiB, 77.06, 1357 MHz, 39.89 W
+== 2026-11-08T07:28:20Z run-s4h-train-all-attempt-7.log: processed 610, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=3.075 pagefile_used_mb=1491
+gpu: 90 %, 2384 MiB, 83.44, 1365 MHz, 41.23 W
+== 2026-11-08T07:29:52Z run-s4h-train-all-attempt-7.log: processed 620, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=2.32 pagefile_used_mb=1490
+gpu: 92 %, 2384 MiB, 85.69, 1492 MHz, 45.99 W
+== 2026-11-08T07:30:54Z run-s4h-train-all-attempt-7.log: processed 630, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=1.881 pagefile_used_mb=1490
+gpu: 94 %, 2384 MiB, 86.50, 1477 MHz, 46.06 W
+== 2026-11-08T07:32:25Z run-s4h-train-all-attempt-7.log: processed 640, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=0.411 pagefile_used_mb=1594
+gpu: 93 %, 2384 MiB, 86.69, 1492 MHz, 46.45 W
+== 2026-11-08T07:33:27Z run-s4h-train-all-attempt-8.log: processed 620, failed=1
+NAME    ID    SIZE    PROCESSOR    CONTEXT    RUNNER    UNTIL 
+free_ram_gib=4.543 pagefile_used_mb=1581
+gpu: 0 %, 26 MiB, 61.06, 1177 MHz, 10.02 W
+== 2026-11-08T07:34:01Z run-s4h-train-all-attempt-8.log: processed 640, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=3.884 pagefile_used_mb=1566
+gpu: 89 %, 2400 MiB, 75.22, 1252 MHz, 34.82 W
+== 2026-11-08T07:34:32Z run-s4h-train-all-attempt-8.log: processed 650, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=3.92 pagefile_used_mb=1546
+gpu: 93 %, 2386 MiB, 81.03, 1380 MHz, 39.90 W
+== 2026-11-08T07:35:34Z run-s4h-train-all-attempt-8.log: processed 660, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=3.077 pagefile_used_mb=1487
+gpu: 92 %, 2393 MiB, 84.75, 1440 MHz, 43.09 W
+== 2026-11-08T07:36:35Z run-s4h-train-all-attempt-8.log: processed 670, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=2.437 pagefile_used_mb=1486
+gpu: 91 %, 2397 MiB, 86.16, 1365 MHz, 45.29 W
+== 2026-11-08T07:37:06Z run-s4h-train-all-attempt-8.log: processed 680, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=2.138 pagefile_used_mb=1487
+gpu: 93 %, 2397 MiB, 87.09, 1485 MHz, 46.29 W
+== 2026-11-08T07:38:38Z run-s4h-train-all-attempt-8.log: processed 690, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=1.227 pagefile_used_mb=1678
+gpu: 93 %, 2393 MiB, 86.78, 1492 MHz, 46.37 W
+== 2026-11-08T07:39:39Z run-s4h-train-all-attempt-8.log: processed 700, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=0.883 pagefile_used_mb=1676
+gpu: 99 %, 2388 MiB, 85.94, 1365 MHz, 45.94 W
+== 2026-11-08T07:41:11Z run-s4h-train-all-attempt-8.log: processed 710, failed=1
+NAME    ID    SIZE    PROCESSOR    CONTEXT    RUNNER    UNTIL 
+free_ram_gib=6.148 pagefile_used_mb=1719
+gpu: 0 %, 41 MiB, 72.44, 247 MHz, 11.27 W
+== 2026-11-08T07:41:43Z run-s4h-train-all-attempt-9.log: processed 80, failed=1
+NAME    ID    SIZE    PROCESSOR    CONTEXT    RUNNER    UNTIL 
+free_ram_gib=5.952 pagefile_used_mb=1652
+gpu: 0 %, 0 MiB, 64.22, 1177 MHz, 10.34 W
+== 2026-11-08T07:42:17Z run-s4h-train-all-attempt-9.log: processed 710, failed=1
+NAME    ID    SIZE    PROCESSOR    CONTEXT    RUNNER    UNTIL 
+free_ram_gib=5.078 pagefile_used_mb=1573
+gpu: 26 %, 2337 MiB, 64.91, 1177 MHz, 11.81 W
+== 2026-11-08T07:44:50Z run-s4h-train-all-attempt-9.log: processed 720, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=3.378 pagefile_used_mb=1355
+gpu: 90 %, 2347 MiB, 86.81, 1500 MHz, 45.88 W
+== 2026-11-08T07:45:52Z run-s4h-train-all-attempt-9.log: processed 730, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=2.644 pagefile_used_mb=1355
+gpu: 90 %, 2347 MiB, 86.09, 1500 MHz, 44.04 W
+== 2026-11-08T07:46:54Z run-s4h-train-all-attempt-9.log: processed 740, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=1.998 pagefile_used_mb=1350
+gpu: 89 %, 2347 MiB, 86.06, 1410 MHz, 42.45 W
+== 2026-11-08T07:47:56Z run-s4h-train-all-attempt-9.log: processed 750, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=1.587 pagefile_used_mb=1522
+gpu: 90 %, 2347 MiB, 86.66, 1425 MHz, 44.76 W
+== 2026-11-08T07:50:29Z run-s4h-train-all-attempt-9.log: processed 760, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=0.852 pagefile_used_mb=2121
+gpu: 0 %, 2347 MiB, 79.28, 1717 MHz, 18.77 W
+== 2026-11-08T07:51:31Z run-s4h-train-all-attempt-10.log: processed 750, failed=1
+NAME    ID    SIZE    PROCESSOR    CONTEXT    RUNNER    UNTIL 
+free_ram_gib=5.816 pagefile_used_mb=1593
+gpu: 0 %, 0 MiB, 63.53, 1177 MHz, 10.23 W
+== 2026-11-08T07:52:05Z run-s4h-train-all-attempt-10.log: processed 760, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=4.805 pagefile_used_mb=1593
+gpu: 91 %, 2347 MiB, 78.50, 1417 MHz, 40.86 W
+== 2026-11-08T07:53:07Z run-s4h-train-all-attempt-10.log: processed 770, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=4.067 pagefile_used_mb=1592
+gpu: 89 %, 2347 MiB, 84.59, 1530 MHz, 45.21 W
+== 2026-11-08T07:54:09Z run-s4h-train-all-attempt-10.log: processed 780, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=3.536 pagefile_used_mb=1592
+gpu: 89 %, 2347 MiB, 85.69, 1440 MHz, 42.66 W
+== 2026-11-08T07:55:11Z run-s4h-train-all-attempt-10.log: processed 790, failed=1
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=2.812 pagefile_used_mb=1592
+gpu: 89 %, 2347 MiB, 86.94, 1545 MHz, 47.97 W
+== 2026-11-08T07:57:13Z run ended: EXIT=0 2026-11-08T07:56:52Z
+NAME           ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL              
+llama3.2:3b    a80c4f17acd5    2.4 GB    100% GPU     2304       llamacpp    4 minutes from now    
+free_ram_gib=2.051 pagefile_used_mb=1587
+gpu: 0 %, 2347 MiB, 64.19, 210 MHz, 4.35 W
+keep-awake released: stopped 1 process(es)
