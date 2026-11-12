@@ -23,6 +23,8 @@ _EXTENSIONS = {
 }
 _UNSAFE = re.compile(r"[^\w.\- ]")
 _NAME_LIMIT = 200
+# Images are decoded in full for OCR; refuse very large pixel counts before that happens.
+MAX_IMAGE_PIXELS = 40_000_000
 
 
 @dataclass(frozen=True)
@@ -65,9 +67,12 @@ def _pdf_pages(data: bytes, max_pages: int) -> int:
 def _check_image(data: bytes) -> None:
     try:
         with Image.open(BytesIO(data)) as image:
+            width, height = image.size
             image.verify()
     except (UnidentifiedImageError, OSError, SyntaxError, ValueError) as error:
         raise _reject("The image is damaged or incomplete.", "image_malformed") from error
+    if width * height > MAX_IMAGE_PIXELS:
+        raise _reject(f"The image has more than {MAX_IMAGE_PIXELS} pixels.", "image_too_large", 413)
 
 
 def validate_upload(
