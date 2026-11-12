@@ -94,6 +94,54 @@ describe('Documents', () => {
     withApi(api, <Documents pollMs={20} />)
     await waitFor(() => expect(screen.getByTestId('status-doc-1')).toHaveTextContent('llm_unavailable'), { timeout: 2000 })
   })
+
+  it('exports the selected reviewed documents in one request', async () => {
+    const { api, calls } = client({
+      'GET /documents?limit=50&offset=0': () => json([
+        documentOut({ status: 'completed' }),
+        documentOut({ id: 'doc-2', filename: 'second.pdf', status: 'completed' }),
+        documentOut({ id: 'doc-3', filename: 'third.pdf', status: 'completed' }),
+      ]),
+      'POST /documents/export': () => json({}),
+    })
+    const click = vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(() => {})
+    withApi(api, <Documents />)
+    const exportJson = await screen.findByRole('button', { name: 'Export selected as JSON' })
+    expect(exportJson).toBeDisabled()
+    await userEvent.click(await screen.findByLabelText('Select receipt.pdf'))
+    await userEvent.click(screen.getByLabelText('Select third.pdf'))
+    expect(screen.getByText('2 selected')).toBeInTheDocument()
+    await userEvent.click(screen.getByRole('button', { name: 'Export selected as CSV' }))
+    await waitFor(() => expect(click).toHaveBeenCalledTimes(1))
+    const sent = calls.filter((c) => c.path === '/documents/export')
+    expect(sent.map((c) => [c.method, c.body])).toEqual([['POST', { document_ids: ['doc-1', 'doc-3'], format: 'csv' }]])
+    click.mockRestore()
+  })
+
+  it('lets only reviewed documents be selected for export', async () => {
+    const pendingDocument = documentOut({ id: 'doc-2', filename: 'second.pdf', status: 'ready_for_review', job_id: null })
+    const { api } = client({
+      'GET /documents?limit=50&offset=0': () => json([documentOut({ status: 'completed' }), pendingDocument]),
+      'GET /documents/doc-2': () => json(pendingDocument),
+    })
+    withApi(api, <Documents />)
+    expect(await screen.findByLabelText('Select receipt.pdf')).toBeEnabled()
+    const pending = screen.getByLabelText('Select second.pdf')
+    expect(pending).toBeDisabled()
+    expect(pending).toHaveAttribute('title', 'Only reviewed documents can be exported')
+  })
+
+  it('shows why the API refused a batch export', async () => {
+    const { api } = client({
+      'GET /documents?limit=50&offset=0': () => json([documentOut({ status: 'completed' })]),
+      'POST /documents/export': () => json({ status: 409, title: 'Not reviewed', detail: 'These documents are not reviewed yet: doc-1', code: 'not_reviewed' }, 409),
+    })
+    withApi(api, <Documents />)
+    await userEvent.click(await screen.findByLabelText('Select receipt.pdf'))
+    await userEvent.click(screen.getByRole('button', { name: 'Export selected as JSON' }))
+    expect(await screen.findByRole('alert')).toHaveTextContent('Export refused: These documents are not reviewed yet: doc-1')
+    expect(screen.getByRole('link', { name: 'receipt.pdf' })).toBeInTheDocument()
+  })
 })
 
 describe('Review', () => {
@@ -126,7 +174,7 @@ describe('Review', () => {
     const row = await screen.findByTestId('field-total_amount')
     await userEvent.click(within(row).getByRole('button', { name: 'Approve' }))
     await waitFor(() => expect(row).toHaveTextContent('Approved'))
-    expect(calls.at(-1)?.body).toEqual({ action: 'approve' })
+    expect(calls.filter((c) => c.method === 'POST').at(-1)?.body).toEqual({ action: 'approve' })
   })
 
   it('sends a correction and shows the final value', async () => {
@@ -143,7 +191,7 @@ describe('Review', () => {
     await userEvent.type(input, '12.500')
     await userEvent.click(within(row).getByRole('button', { name: 'Save' }))
     await waitFor(() => expect(row).toHaveTextContent('final 12.500'))
-    expect(calls.at(-1)?.body).toEqual({ action: 'correct', value: '12.500' })
+    expect(calls.filter((c) => c.method === 'POST').at(-1)?.body).toEqual({ action: 'correct', value: '12.500' })
   })
 
   it('refuses an empty correction without calling the API', async () => {
@@ -203,6 +251,65 @@ describe('Review', () => {
     expect(calls.filter((c) => c.path.includes('/export')).map((c) => c.path)).toEqual([
       '/documents/doc-1/export?format=json', '/documents/doc-1/export?format=csv',
     ])
+  })
+
+  const events = [
+    { id: 'e3', created_at: '2026-11-13T10:02:00Z', actor_email: 'rev@example.test', action: 'field.correct', entity: 'field',
+      field_name: 'total_amount', old_value: '10.000', new_value: '12.500' },
+    { id: 'e2', created_at: '2026-11-13T10:01:00Z', actor_email: 'rev@example.test', action: 'field.reject', entity: 'field',
+      field_name: 'line_items[0].description', old_value: 'Tea', new_value: null },
+    { id: 'e1', created_at: '2026-11-13T10:00:00Z', actor_email: 'admin@example.test', action: 'document.upload', entity: 'document',
+      field_name: null, old_value: null, new_value: null },
+  ]
+  const cells = (row: HTMLElement) => Array.from(row.querySelectorAll('td')).map((c) => c.textContent)
+
+  it('shows the audit trail newest first with who, what, when and the old and new values', async () => {
+    const { api } = client({
+      'GET /documents/doc-1/fields': () => json(documentFields(fields)),
+      'GET /documents/doc-1/pages/1/image': image,
+      'GET /documents/doc-1/audit': () => json(events),
+    })
+    withApi(api, <Review documentId="doc-1" canReview />)
+    const panel = await screen.findByRole('region', { name: 'Audit trail' })
+    const rows = await within(panel).findAllByTestId('audit-event')
+    expect(rows).toHaveLength(3)
+    expect(cells(rows[0]).slice(1)).toEqual(['rev@example.test', 'Corrected', 'total amount', '10.000', '12.500'])
+    expect(cells(rows[0])[0]).toBe(new Date('2026-11-13T10:02:00Z').toLocaleString())
+    expect(cells(rows[1]).slice(1)).toEqual(['rev@example.test', 'Rejected', 'Row 1: description', 'Tea', '(none)'])
+    expect(cells(rows[2]).slice(1)).toEqual(['admin@example.test', 'Uploaded', 'document', '', ''])
+  })
+
+  it('reloads the audit trail after a review action', async () => {
+    let audits = 0
+    const { api } = client({
+      'GET /documents/doc-1/fields': () => json(documentFields(fields)),
+      'GET /documents/doc-1/pages/1/image': image,
+      'GET /documents/doc-1/audit': () => json(audits++ ? events : events.slice(2)),
+      'POST /fields/f-total/review': () => json(field({ decision: 'corrected', final_value: '12.500' })),
+    })
+    withApi(api, <Review documentId="doc-1" canReview />)
+    const panel = await screen.findByRole('region', { name: 'Audit trail' })
+    await waitFor(() => expect(within(panel).getAllByTestId('audit-event')).toHaveLength(1))
+    const row = screen.getByTestId('field-total_amount')
+    await userEvent.click(within(row).getByRole('button', { name: 'Correct' }))
+    const input = within(row).getByLabelText('Corrected value')
+    await userEvent.clear(input)
+    await userEvent.type(input, '12.500')
+    await userEvent.click(within(row).getByRole('button', { name: 'Save' }))
+    await waitFor(() => expect(within(panel).getAllByTestId('audit-event')).toHaveLength(3))
+    expect(cells(within(panel).getAllByTestId('audit-event')[0]).slice(4)).toEqual(['10.000', '12.500'])
+  })
+
+  it('keeps the review page usable when the audit trail cannot load', async () => {
+    const { api } = client({
+      'GET /documents/doc-1/fields': () => json(documentFields(fields)),
+      'GET /documents/doc-1/pages/1/image': image,
+      'GET /documents/doc-1/audit': () => json({ status: 500, title: 'Error', detail: 'Server error.' }, 500),
+    })
+    withApi(api, <Review documentId="doc-1" canReview />)
+    const panel = await screen.findByRole('region', { name: 'Audit trail' })
+    expect(await within(panel).findByText(/Audit trail unavailable: Server error/)).toBeInTheDocument()
+    expect(screen.getByTestId('field-total_amount')).toBeInTheDocument()
   })
 
   it('explains when the document is still processing', async () => {

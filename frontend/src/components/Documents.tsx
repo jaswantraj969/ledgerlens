@@ -1,10 +1,13 @@
 import { useCallback, useEffect, useState, type ChangeEvent } from 'react'
 import { errorMessage, useApi } from '../api/context'
 import type { BatchResult, DocumentOut, JobOut } from '../api/schemas'
+import { saveBlob } from '../lib/download'
 import { TERMINAL_STATES } from '../lib/format'
 import { hrefFor } from '../router'
 
 export const POLL_MS = 3000
+/** Only reviewed documents can be exported; the API checks this too. */
+export const EXPORTABLE = 'completed'
 
 export function Documents({ pollMs = POLL_MS }: { pollMs?: number }) {
   const api = useApi()
@@ -12,6 +15,8 @@ export function Documents({ pollMs = POLL_MS }: { pollMs?: number }) {
   const [jobs, setJobs] = useState<Record<string, JobOut>>({})
   const [results, setResults] = useState<BatchResult[]>([])
   const [error, setError] = useState<string | null>(null)
+  const [selected, setSelected] = useState<string[]>([])
+  const [exportError, setExportError] = useState<string | null>(null)
 
   const refresh = useCallback(async () => {
     try {
@@ -74,6 +79,19 @@ export function Documents({ pollMs = POLL_MS }: { pollMs?: number }) {
     }
   }
 
+  function toggle(id: string) {
+    setSelected((current) => (current.includes(id) ? current.filter((i) => i !== id) : [...current, id]))
+  }
+
+  async function exportSelected(format: 'json' | 'csv') {
+    try {
+      saveBlob(await api.exportDocuments(selected, format), `ledgerlens-export.${format}`)
+      setExportError(null)
+    } catch (failure) {
+      setExportError(errorMessage(failure))
+    }
+  }
+
   return (
     <section className="space-y-6">
       <div>
@@ -96,15 +114,31 @@ export function Documents({ pollMs = POLL_MS }: { pollMs?: number }) {
         </ul>
       )}
       {error && <p role="alert" className="text-red-700">{error}</p>}
+      <div className="flex flex-wrap items-center gap-4 text-sm">
+        <span>{selected.length} selected</span>
+        <button type="button" disabled={selected.length === 0} onClick={() => exportSelected('json')}>
+          Export selected as JSON
+        </button>
+        <button type="button" disabled={selected.length === 0} onClick={() => exportSelected('csv')}>
+          Export selected as CSV
+        </button>
+      </div>
+      {exportError && <p role="alert" className="text-red-700">Export refused: {exportError}</p>}
       <table className="w-full text-left text-sm">
         <thead>
-          <tr><th>File</th><th>Status</th><th>Pages</th><th>Uploaded</th></tr>
+          <tr><th>Export</th><th>File</th><th>Status</th><th>Pages</th><th>Uploaded</th></tr>
         </thead>
         <tbody>
           {documents.map((document) => {
             const job = jobs[document.id]
             return (
               <tr key={document.id} className="border-t">
+                <td>
+                  <input type="checkbox" aria-label={`Select ${document.filename}`}
+                    checked={selected.includes(document.id)} onChange={() => toggle(document.id)}
+                    disabled={document.status !== EXPORTABLE && !selected.includes(document.id)}
+                    title={document.status === EXPORTABLE ? undefined : 'Only reviewed documents can be exported'} />
+                </td>
                 <td>
                   <a className="underline" href={hrefFor({ page: 'review', documentId: document.id })}>
                     {document.filename}

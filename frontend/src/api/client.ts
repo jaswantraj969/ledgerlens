@@ -132,6 +132,20 @@ export class ApiClient {
     return response.blob()
   }
 
+  /** Reviewed documents only; the API refuses the whole request if any id is not exportable. */
+  async exportDocuments(documentIds: string[], format: 'json' | 'csv'): Promise<Blob> {
+    const response = await this.raw('/documents/export', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ document_ids: documentIds, format }),
+    })
+    return response.blob()
+  }
+
+  auditTrail(documentId: string): Promise<s.AuditEvent[]> {
+    return this.json(s.auditEvent.array(), `/documents/${encodeURIComponent(documentId)}/audit`)
+  }
+
   report(): Promise<s.Report> {
     return this.json(s.report, '/evaluation/report')
   }

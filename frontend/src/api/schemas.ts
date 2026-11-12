@@ -98,6 +98,18 @@ export const queueItem = z.object({
 })
 export type QueueItem = z.infer<typeof queueItem>
 
+export const auditEvent = z.object({
+  id: z.string(),
+  created_at: z.string(),
+  actor_email: z.string().nullable(),
+  action: z.string(),
+  entity: z.string(),
+  field_name: z.string().nullable(),
+  old_value: z.string().nullable(),
+  new_value: z.string().nullable(),
+})
+export type AuditEvent = z.infer<typeof auditEvent>
+
 const block = z.object({ available: z.boolean(), source: z.string(), data: z.unknown().optional() })
 export const report = z.object({
   test_comparison: block,

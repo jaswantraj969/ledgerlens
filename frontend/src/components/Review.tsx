@@ -3,6 +3,7 @@ import { ApiError } from '../api/client'
 import { errorMessage, useApi } from '../api/context'
 import type { DocumentFields, FieldOut } from '../api/schemas'
 import { saveBlob } from '../lib/download'
+import { AuditTrail } from './AuditTrail'
 import { FieldRow } from './FieldRow'
 import { PageViewer } from './PageViewer'
 
@@ -12,6 +13,7 @@ export function Review({ documentId, canReview }: { documentId: string; canRevie
   const [error, setError] = useState<string | null>(null)
   const [selected, setSelected] = useState<string | null>(null)
   const [onlyPending, setOnlyPending] = useState(false)
+  const [auditVersion, setAuditVersion] = useState(0)
 
   useEffect(() => {
     let alive = true
@@ -33,6 +35,7 @@ export function Review({ documentId, canReview }: { documentId: string; canRevie
     setData((current) =>
       current && { ...current, fields: current.fields.map((f) => (f.id === field.id ? field : f)) },
     )
+    setAuditVersion((version) => version + 1)
   }
 
   async function exportAs(format: 'json' | 'csv') {
@@ -79,6 +82,7 @@ export function Review({ documentId, canReview }: { documentId: string; canRevie
           ))}
         </ul>
       </div>
+      <AuditTrail documentId={documentId} version={auditVersion} />
     </section>
   )
 }

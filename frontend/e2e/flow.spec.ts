@@ -33,6 +33,14 @@ test('upload, review and export one invoice', async ({ page, request }) => {
   await total.getByRole('button', { name: 'Save' }).click()
   await expect(total).toContainText('Corrected')
 
+  // The correction appears in the audit trail: who, what, and the new value.
+  const audit = page.getByRole('region', { name: 'Audit trail' })
+  const correction = audit.getByTestId('audit-event').filter({ hasText: 'Corrected' }).filter({ hasText: 'total amount' })
+  await expect(correction).toHaveCount(1)
+  await expect(correction).toContainText(email)
+  await expect(correction.locator('td').nth(5)).toHaveText('123.45')
+  await expect(audit.getByTestId('audit-event').last()).toContainText('Uploaded')
+
   // Pin the field by its test id: a "first pending field" locator moves once it is approved.
   const firstPending = page.locator('[data-testid^="field-"]', { hasText: 'Needs review' }).first()
   if (await firstPending.count()) {
