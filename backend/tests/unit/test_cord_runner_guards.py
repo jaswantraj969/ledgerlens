@@ -98,7 +98,7 @@ def test_train_is_read_only_through_a_fixed_subset() -> None:
         capture_output=True,
         text=True,
         cwd=ROOT,
-        env={"PYTHONPATH": str(ROOT), "SYSTEMROOT": "C:\Windows", "PATH": ""},
+        env={"PYTHONPATH": str(ROOT), "SYSTEMROOT": r"C:\Windows", "PATH": ""},
         check=False,
     )
     assert completed.returncode != 0
@@ -111,7 +111,7 @@ def run_cord(*arguments: str) -> subprocess.CompletedProcess[str]:
         capture_output=True,
         text=True,
         cwd=ROOT,
-        env={"PYTHONPATH": str(ROOT), "SYSTEMROOT": "C:\Windows", "PATH": ""},
+        env={"PYTHONPATH": str(ROOT), "SYSTEMROOT": r"C:\Windows", "PATH": ""},
         check=False,
     )
 

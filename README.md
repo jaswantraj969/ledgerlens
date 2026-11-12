@@ -19,6 +19,8 @@ Evaluation-driven extraction of invoices and receipts: parse with provenance, ex
 
 Needs Docker with Compose v2, Python 3.10 or later, and Git Bash on Windows (any shell elsewhere). Run from the repository root.
 
+On Windows, clone to a short path such as `C:\src\ledgerlens`, or enable long paths. Some files in the Python environment have names near the 260-character path limit, and a deep clone folder makes `import sklearn` fail. A clone at a 212-character folder depth failed this way in the fresh-clone check.
+
 ```
 python scripts/init_env.py
 bash scripts/tasks.sh up
