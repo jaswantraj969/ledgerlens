@@ -1,0 +1,1630 @@
+{
+  "protocol": "docs/evaluation/final-test-protocol.md",
+  "variant": "all",
+  "families": {
+    "label_proximity": [
+      "label_supported"
+    ],
+    "ab_agreement": [
+      "agree_pass_a_b",
+      "cross_pass_available",
+      "agree_count",
+      "sources_with_value"
+    ],
+    "rule_llm_agreement": [
+      "agree_rules_llm",
+      "agree_pass_a_deterministic",
+      "agree_count",
+      "sources_with_value"
+    ],
+    "ocr_confidence": [
+      "ocr_confidence_mean",
+      "ocr_confidence_min",
+      "ocr_confidence_available"
+    ],
+    "format_validation": [
+      "value_valid",
+      "rules_passed",
+      "rules_failed",
+      "rules_checked"
+    ]
+  },
+  "bases": {
+    "S5-S1": {
+      "train_scope": "train_all_p1.0",
+      "ablations": {
+        "full": {
+          "removed_families": [],
+          "calibrator": "logistic",
+          "feature_columns": {
+            "header": 49,
+            "row": 41
+          },
+          "removed_columns_present_in_train": {
+            "header": [],
+            "row": []
+          },
+          "thresholds": {
+            "header": {
+              "0.98": 0.869,
+              "0.99": 0.878
+            },
+            "row": {
+              "0.98": 0.763,
+              "0.99": 0.763
+            }
+          },
+          "validation": {
+            "header": {
+              "units": 181,
+              "slots": 300,
+              "documents": 100,
+              "ece_10_bins": 0.026893349130136593,
+              "brier": 0.07777501917984281,
+              "roc_auc": 0.8253736192332684,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.869,
+                  "accepted": 71,
+                  "automation_rate": 0.23666666666666666,
+                  "automation_rate_ci95": [
+                    0.17,
+                    0.31
+                  ],
+                  "achieved_precision": 0.9859154929577465,
+                  "achieved_precision_ci95": [
+                    0.9491525423728814,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.878,
+                  "accepted": 70,
+                  "automation_rate": 0.23333333333333334,
+                  "automation_rate_ci95": [
+                    0.16333333333333333,
+                    0.30333333333333334
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            },
+            "row": {
+              "units": 230,
+              "slots": 230,
+              "documents": 100,
+              "ece_10_bins": 0.059661924827937085,
+              "brier": 0.12632954949690536,
+              "roc_auc": 0.857525354969574,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.763,
+                  "accepted": 3,
+                  "automation_rate": 0.013043478260869565,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.030042918454935622
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.763,
+                  "accepted": 3,
+                  "automation_rate": 0.013043478260869565,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.030042918454935622
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            }
+          }
+        },
+        "minus_label_proximity": {
+          "removed_families": [
+            "label_proximity"
+          ],
+          "calibrator": "logistic",
+          "feature_columns": {
+            "header": 47,
+            "row": 41
+          },
+          "removed_columns_present_in_train": {
+            "header": [
+              "label_supported",
+              "label_supported_missing"
+            ],
+            "row": []
+          },
+          "thresholds": {
+            "header": {
+              "0.98": 0.869,
+              "0.99": 0.878
+            },
+            "row": {
+              "0.98": 0.763,
+              "0.99": 0.763
+            }
+          },
+          "validation": {
+            "header": {
+              "units": 181,
+              "slots": 300,
+              "documents": 100,
+              "ece_10_bins": 0.02688460856579135,
+              "brier": 0.07776744570040918,
+              "roc_auc": 0.8253736192332684,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.869,
+                  "accepted": 71,
+                  "automation_rate": 0.23666666666666666,
+                  "automation_rate_ci95": [
+                    0.17,
+                    0.31
+                  ],
+                  "achieved_precision": 0.9859154929577465,
+                  "achieved_precision_ci95": [
+                    0.9491525423728814,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.878,
+                  "accepted": 70,
+                  "automation_rate": 0.23333333333333334,
+                  "automation_rate_ci95": [
+                    0.16333333333333333,
+                    0.30333333333333334
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            },
+            "row": {
+              "units": 230,
+              "slots": 230,
+              "documents": 100,
+              "ece_10_bins": 0.059661924827937085,
+              "brier": 0.12632954949690536,
+              "roc_auc": 0.857525354969574,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.763,
+                  "accepted": 3,
+                  "automation_rate": 0.013043478260869565,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.030042918454935622
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.763,
+                  "accepted": 3,
+                  "automation_rate": 0.013043478260869565,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.030042918454935622
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            }
+          }
+        },
+        "minus_ab_agreement": {
+          "removed_families": [
+            "ab_agreement"
+          ],
+          "calibrator": "logistic",
+          "feature_columns": {
+            "header": 41,
+            "row": 41
+          },
+          "removed_columns_present_in_train": {
+            "header": [
+              "agree_count",
+              "agree_count_missing",
+              "agree_pass_a_b",
+              "agree_pass_a_b_missing",
+              "cross_pass_available",
+              "cross_pass_available_missing",
+              "sources_with_value",
+              "sources_with_value_missing"
+            ],
+            "row": []
+          },
+          "thresholds": {
+            "header": {
+              "0.98": 0.869,
+              "0.99": 0.879
+            },
+            "row": {
+              "0.98": 0.763,
+              "0.99": 0.763
+            }
+          },
+          "validation": {
+            "header": {
+              "units": 181,
+              "slots": 300,
+              "documents": 100,
+              "ece_10_bins": 0.027062602104115107,
+              "brier": 0.07766627544718928,
+              "roc_auc": 0.8269980506822612,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.869,
+                  "accepted": 71,
+                  "automation_rate": 0.23666666666666666,
+                  "automation_rate_ci95": [
+                    0.17,
+                    0.31
+                  ],
+                  "achieved_precision": 0.9859154929577465,
+                  "achieved_precision_ci95": [
+                    0.9491525423728814,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.879,
+                  "accepted": 70,
+                  "automation_rate": 0.23333333333333334,
+                  "automation_rate_ci95": [
+                    0.16333333333333333,
+                    0.30333333333333334
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            },
+            "row": {
+              "units": 230,
+              "slots": 230,
+              "documents": 100,
+              "ece_10_bins": 0.059661924827937085,
+              "brier": 0.12632954949690536,
+              "roc_auc": 0.857525354969574,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.763,
+                  "accepted": 3,
+                  "automation_rate": 0.013043478260869565,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.030042918454935622
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.763,
+                  "accepted": 3,
+                  "automation_rate": 0.013043478260869565,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.030042918454935622
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            }
+          }
+        },
+        "minus_rule_llm_agreement": {
+          "removed_families": [
+            "rule_llm_agreement"
+          ],
+          "calibrator": "logistic",
+          "feature_columns": {
+            "header": 41,
+            "row": 41
+          },
+          "removed_columns_present_in_train": {
+            "header": [
+              "agree_count",
+              "agree_count_missing",
+              "agree_pass_a_deterministic",
+              "agree_pass_a_deterministic_missing",
+              "agree_rules_llm",
+              "agree_rules_llm_missing",
+              "sources_with_value",
+              "sources_with_value_missing"
+            ],
+            "row": []
+          },
+          "thresholds": {
+            "header": {
+              "0.98": 0.869,
+              "0.99": 0.879
+            },
+            "row": {
+              "0.98": 0.763,
+              "0.99": 0.763
+            }
+          },
+          "validation": {
+            "header": {
+              "units": 181,
+              "slots": 300,
+              "documents": 100,
+              "ece_10_bins": 0.027062602104338866,
+              "brier": 0.07766627544718431,
+              "roc_auc": 0.8269980506822612,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.869,
+                  "accepted": 71,
+                  "automation_rate": 0.23666666666666666,
+                  "automation_rate_ci95": [
+                    0.17,
+                    0.31
+                  ],
+                  "achieved_precision": 0.9859154929577465,
+                  "achieved_precision_ci95": [
+                    0.9491525423728814,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.879,
+                  "accepted": 70,
+                  "automation_rate": 0.23333333333333334,
+                  "automation_rate_ci95": [
+                    0.16333333333333333,
+                    0.30333333333333334
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            },
+            "row": {
+              "units": 230,
+              "slots": 230,
+              "documents": 100,
+              "ece_10_bins": 0.059661924827937085,
+              "brier": 0.12632954949690536,
+              "roc_auc": 0.857525354969574,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.763,
+                  "accepted": 3,
+                  "automation_rate": 0.013043478260869565,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.030042918454935622
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.763,
+                  "accepted": 3,
+                  "automation_rate": 0.013043478260869565,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.030042918454935622
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            }
+          }
+        },
+        "minus_ocr_confidence": {
+          "removed_families": [
+            "ocr_confidence"
+          ],
+          "calibrator": "logistic",
+          "feature_columns": {
+            "header": 43,
+            "row": 41
+          },
+          "removed_columns_present_in_train": {
+            "header": [
+              "ocr_confidence_available",
+              "ocr_confidence_available_missing",
+              "ocr_confidence_mean",
+              "ocr_confidence_mean_missing",
+              "ocr_confidence_min",
+              "ocr_confidence_min_missing"
+            ],
+            "row": []
+          },
+          "thresholds": {
+            "header": {
+              "0.98": 0.86,
+              "0.99": 0.88
+            },
+            "row": {
+              "0.98": 0.763,
+              "0.99": 0.763
+            }
+          },
+          "validation": {
+            "header": {
+              "units": 181,
+              "slots": 300,
+              "documents": 100,
+              "ece_10_bins": 0.02005749260863325,
+              "brier": 0.08820096969158363,
+              "roc_auc": 0.7277452891487979,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.86,
+                  "accepted": 71,
+                  "automation_rate": 0.23666666666666666,
+                  "automation_rate_ci95": [
+                    0.17,
+                    0.31
+                  ],
+                  "achieved_precision": 0.9859154929577465,
+                  "achieved_precision_ci95": [
+                    0.9491525423728814,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.88,
+                  "accepted": 65,
+                  "automation_rate": 0.21666666666666667,
+                  "automation_rate_ci95": [
+                    0.15,
+                    0.2866666666666667
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            },
+            "row": {
+              "units": 230,
+              "slots": 230,
+              "documents": 100,
+              "ece_10_bins": 0.059661924827937085,
+              "brier": 0.12632954949690536,
+              "roc_auc": 0.857525354969574,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.763,
+                  "accepted": 3,
+                  "automation_rate": 0.013043478260869565,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.030042918454935622
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.763,
+                  "accepted": 3,
+                  "automation_rate": 0.013043478260869565,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.030042918454935622
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            }
+          }
+        },
+        "minus_format_validation": {
+          "removed_families": [
+            "format_validation"
+          ],
+          "calibrator": "logistic",
+          "feature_columns": {
+            "header": 41,
+            "row": 29
+          },
+          "removed_columns_present_in_train": {
+            "header": [
+              "rules_checked",
+              "rules_checked_missing",
+              "rules_failed",
+              "rules_failed_missing",
+              "rules_passed",
+              "rules_passed_missing",
+              "value_valid",
+              "value_valid_missing"
+            ],
+            "row": [
+              "amount_rules_failed",
+              "amount_rules_failed_missing",
+              "amount_rules_passed",
+              "amount_rules_passed_missing",
+              "description_rules_failed",
+              "description_rules_failed_missing",
+              "description_rules_passed",
+              "description_rules_passed_missing",
+              "quantity_rules_failed",
+              "quantity_rules_failed_missing",
+              "quantity_rules_passed",
+              "quantity_rules_passed_missing"
+            ]
+          },
+          "thresholds": {
+            "header": {
+              "0.98": 0.883,
+              "0.99": 0.902
+            },
+            "row": {
+              "0.98": 0.694,
+              "0.99": 0.694
+            }
+          },
+          "validation": {
+            "header": {
+              "units": 181,
+              "slots": 300,
+              "documents": 100,
+              "ece_10_bins": 0.033954616652778824,
+              "brier": 0.08225402398896094,
+              "roc_auc": 0.76819363222872,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.883,
+                  "accepted": 53,
+                  "automation_rate": 0.17666666666666667,
+                  "automation_rate_ci95": [
+                    0.14666666666666667,
+                    0.20666666666666667
+                  ],
+                  "achieved_precision": 0.9811320754716981,
+                  "achieved_precision_ci95": [
+                    0.9374667553191489,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.902,
+                  "accepted": 47,
+                  "automation_rate": 0.15666666666666668,
+                  "automation_rate_ci95": [
+                    0.12666666666666668,
+                    0.18666666666666668
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            },
+            "row": {
+              "units": 230,
+              "slots": 230,
+              "documents": 100,
+              "ece_10_bins": 0.023444550279707425,
+              "brier": 0.12247740807074083,
+              "roc_auc": 0.8590263691683571,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.694,
+                  "accepted": 3,
+                  "automation_rate": 0.013043478260869565,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.030042918454935622
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.694,
+                  "accepted": 3,
+                  "automation_rate": 0.013043478260869565,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.030042918454935622
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            }
+          }
+        },
+        "isotonic": {
+          "removed_families": [],
+          "calibrator": "isotonic",
+          "feature_columns": {
+            "header": 49,
+            "row": 41
+          },
+          "removed_columns_present_in_train": {
+            "header": [],
+            "row": []
+          },
+          "thresholds": {
+            "header": {
+              "0.98": 0.89,
+              "0.99": 0.907
+            },
+            "row": {
+              "0.98": 0.774,
+              "0.99": 0.774
+            }
+          },
+          "validation": {
+            "header": {
+              "units": 181,
+              "slots": 300,
+              "documents": 100,
+              "ece_10_bins": 0.055447318239138135,
+              "brier": 0.07591139597356181,
+              "roc_auc": 0.8349577647823262,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.89,
+                  "accepted": 110,
+                  "automation_rate": 0.36666666666666664,
+                  "automation_rate_ci95": [
+                    0.3,
+                    0.43666666666666665
+                  ],
+                  "achieved_precision": 0.9818181818181818,
+                  "achieved_precision_ci95": [
+                    0.9519230769230769,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.907,
+                  "accepted": 90,
+                  "automation_rate": 0.3,
+                  "automation_rate_ci95": [
+                    0.23,
+                    0.37
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            },
+            "row": {
+              "units": 230,
+              "slots": 230,
+              "documents": 100,
+              "ece_10_bins": 0.05506567961860145,
+              "brier": 0.12740965568541712,
+              "roc_auc": 0.8575659229208925,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.774,
+                  "accepted": 3,
+                  "automation_rate": 0.013043478260869565,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.030042918454935622
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.774,
+                  "accepted": 3,
+                  "automation_rate": 0.013043478260869565,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.030042918454935622
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "S5-S4h": {
+      "train_scope": "train_all_p2.2",
+      "ablations": {
+        "full": {
+          "removed_families": [],
+          "calibrator": "logistic",
+          "feature_columns": {
+            "header": 53,
+            "row": 45
+          },
+          "removed_columns_present_in_train": {
+            "header": [],
+            "row": []
+          },
+          "thresholds": {
+            "header": {
+              "0.98": 0.966,
+              "0.99": 0.969
+            },
+            "row": {
+              "0.98": 0.826,
+              "0.99": 0.826
+            }
+          },
+          "validation": {
+            "header": {
+              "units": 271,
+              "slots": 300,
+              "documents": 100,
+              "ece_10_bins": 0.05570651272083774,
+              "brier": 0.08284972454829032,
+              "roc_auc": 0.942470238095238,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.966,
+                  "accepted": 59,
+                  "automation_rate": 0.19666666666666666,
+                  "automation_rate_ci95": [
+                    0.14666666666666667,
+                    0.24666666666666667
+                  ],
+                  "achieved_precision": 0.9830508474576272,
+                  "achieved_precision_ci95": [
+                    0.9423076923076923,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.969,
+                  "accepted": 47,
+                  "automation_rate": 0.15666666666666668,
+                  "automation_rate_ci95": [
+                    0.10666666666666667,
+                    0.20666666666666667
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            },
+            "row": {
+              "units": 354,
+              "slots": 354,
+              "documents": 100,
+              "ece_10_bins": 0.04850974109383818,
+              "brier": 0.0813479546413001,
+              "roc_auc": 0.9245149911816579,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.826,
+                  "accepted": 1,
+                  "automation_rate": 0.002824858757062147,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.009036827066574452
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.826,
+                  "accepted": 1,
+                  "automation_rate": 0.002824858757062147,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.009036827066574452
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            }
+          }
+        },
+        "minus_label_proximity": {
+          "removed_families": [
+            "label_proximity"
+          ],
+          "calibrator": "logistic",
+          "feature_columns": {
+            "header": 51,
+            "row": 45
+          },
+          "removed_columns_present_in_train": {
+            "header": [
+              "label_supported",
+              "label_supported_missing"
+            ],
+            "row": []
+          },
+          "thresholds": {
+            "header": {
+              "0.98": 0.966,
+              "0.99": 0.97
+            },
+            "row": {
+              "0.98": 0.826,
+              "0.99": 0.826
+            }
+          },
+          "validation": {
+            "header": {
+              "units": 271,
+              "slots": 300,
+              "documents": 100,
+              "ece_10_bins": 0.05085784793221274,
+              "brier": 0.08230993486073017,
+              "roc_auc": 0.9449702380952382,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.966,
+                  "accepted": 56,
+                  "automation_rate": 0.18666666666666668,
+                  "automation_rate_ci95": [
+                    0.1399166666666667,
+                    0.23666666666666666
+                  ],
+                  "achieved_precision": 0.9821428571428571,
+                  "achieved_precision_ci95": [
+                    0.939378478664193,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.97,
+                  "accepted": 47,
+                  "automation_rate": 0.15666666666666668,
+                  "automation_rate_ci95": [
+                    0.10666666666666667,
+                    0.20666666666666667
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            },
+            "row": {
+              "units": 354,
+              "slots": 354,
+              "documents": 100,
+              "ece_10_bins": 0.04850974109383818,
+              "brier": 0.0813479546413001,
+              "roc_auc": 0.9245149911816579,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.826,
+                  "accepted": 1,
+                  "automation_rate": 0.002824858757062147,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.009036827066574452
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.826,
+                  "accepted": 1,
+                  "automation_rate": 0.002824858757062147,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.009036827066574452
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            }
+          }
+        },
+        "minus_ab_agreement": {
+          "removed_families": [
+            "ab_agreement"
+          ],
+          "calibrator": "logistic",
+          "feature_columns": {
+            "header": 45,
+            "row": 45
+          },
+          "removed_columns_present_in_train": {
+            "header": [
+              "agree_count",
+              "agree_count_missing",
+              "agree_pass_a_b",
+              "agree_pass_a_b_missing",
+              "cross_pass_available",
+              "cross_pass_available_missing",
+              "sources_with_value",
+              "sources_with_value_missing"
+            ],
+            "row": []
+          },
+          "thresholds": {
+            "header": {
+              "0.98": 0.952,
+              "0.99": 0.952
+            },
+            "row": {
+              "0.98": 0.826,
+              "0.99": 0.826
+            }
+          },
+          "validation": {
+            "header": {
+              "units": 271,
+              "slots": 300,
+              "documents": 100,
+              "ece_10_bins": 0.05011819565644641,
+              "brier": 0.08762394201343231,
+              "roc_auc": 0.9410119047619049,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.952,
+                  "accepted": 58,
+                  "automation_rate": 0.19333333333333333,
+                  "automation_rate_ci95": [
+                    0.14333333333333334,
+                    0.24333333333333335
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.952,
+                  "accepted": 58,
+                  "automation_rate": 0.19333333333333333,
+                  "automation_rate_ci95": [
+                    0.14333333333333334,
+                    0.24333333333333335
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            },
+            "row": {
+              "units": 354,
+              "slots": 354,
+              "documents": 100,
+              "ece_10_bins": 0.04850974109383818,
+              "brier": 0.0813479546413001,
+              "roc_auc": 0.9245149911816579,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.826,
+                  "accepted": 1,
+                  "automation_rate": 0.002824858757062147,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.009036827066574452
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.826,
+                  "accepted": 1,
+                  "automation_rate": 0.002824858757062147,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.009036827066574452
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            }
+          }
+        },
+        "minus_rule_llm_agreement": {
+          "removed_families": [
+            "rule_llm_agreement"
+          ],
+          "calibrator": "logistic",
+          "feature_columns": {
+            "header": 45,
+            "row": 45
+          },
+          "removed_columns_present_in_train": {
+            "header": [
+              "agree_count",
+              "agree_count_missing",
+              "agree_pass_a_deterministic",
+              "agree_pass_a_deterministic_missing",
+              "agree_rules_llm",
+              "agree_rules_llm_missing",
+              "sources_with_value",
+              "sources_with_value_missing"
+            ],
+            "row": []
+          },
+          "thresholds": {
+            "header": {
+              "0.98": 0.964,
+              "0.99": 0.969
+            },
+            "row": {
+              "0.98": 0.826,
+              "0.99": 0.826
+            }
+          },
+          "validation": {
+            "header": {
+              "units": 271,
+              "slots": 300,
+              "documents": 100,
+              "ece_10_bins": 0.04584468895315158,
+              "brier": 0.0850891646140858,
+              "roc_auc": 0.943154761904762,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.964,
+                  "accepted": 66,
+                  "automation_rate": 0.22,
+                  "automation_rate_ci95": [
+                    0.17,
+                    0.27
+                  ],
+                  "achieved_precision": 0.9848484848484849,
+                  "achieved_precision_ci95": [
+                    0.949978813559322,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.969,
+                  "accepted": 47,
+                  "automation_rate": 0.15666666666666668,
+                  "automation_rate_ci95": [
+                    0.10666666666666667,
+                    0.20666666666666667
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            },
+            "row": {
+              "units": 354,
+              "slots": 354,
+              "documents": 100,
+              "ece_10_bins": 0.04850974109383818,
+              "brier": 0.0813479546413001,
+              "roc_auc": 0.9245149911816579,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.826,
+                  "accepted": 1,
+                  "automation_rate": 0.002824858757062147,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.009036827066574452
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.826,
+                  "accepted": 1,
+                  "automation_rate": 0.002824858757062147,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.009036827066574452
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            }
+          }
+        },
+        "minus_ocr_confidence": {
+          "removed_families": [
+            "ocr_confidence"
+          ],
+          "calibrator": "logistic",
+          "feature_columns": {
+            "header": 47,
+            "row": 45
+          },
+          "removed_columns_present_in_train": {
+            "header": [
+              "ocr_confidence_available",
+              "ocr_confidence_available_missing",
+              "ocr_confidence_mean",
+              "ocr_confidence_mean_missing",
+              "ocr_confidence_min",
+              "ocr_confidence_min_missing"
+            ],
+            "row": []
+          },
+          "thresholds": {
+            "header": {
+              "0.98": 0.966,
+              "0.99": 0.969
+            },
+            "row": {
+              "0.98": 0.826,
+              "0.99": 0.826
+            }
+          },
+          "validation": {
+            "header": {
+              "units": 271,
+              "slots": 300,
+              "documents": 100,
+              "ece_10_bins": 0.05563050706029724,
+              "brier": 0.08283837137361125,
+              "roc_auc": 0.942470238095238,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.966,
+                  "accepted": 59,
+                  "automation_rate": 0.19666666666666666,
+                  "automation_rate_ci95": [
+                    0.14666666666666667,
+                    0.24666666666666667
+                  ],
+                  "achieved_precision": 0.9830508474576272,
+                  "achieved_precision_ci95": [
+                    0.9423076923076923,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.969,
+                  "accepted": 47,
+                  "automation_rate": 0.15666666666666668,
+                  "automation_rate_ci95": [
+                    0.10666666666666667,
+                    0.20666666666666667
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            },
+            "row": {
+              "units": 354,
+              "slots": 354,
+              "documents": 100,
+              "ece_10_bins": 0.04850974109383818,
+              "brier": 0.0813479546413001,
+              "roc_auc": 0.9245149911816579,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.826,
+                  "accepted": 1,
+                  "automation_rate": 0.002824858757062147,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.009036827066574452
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.826,
+                  "accepted": 1,
+                  "automation_rate": 0.002824858757062147,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.009036827066574452
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            }
+          }
+        },
+        "minus_format_validation": {
+          "removed_families": [
+            "format_validation"
+          ],
+          "calibrator": "logistic",
+          "feature_columns": {
+            "header": 45,
+            "row": 33
+          },
+          "removed_columns_present_in_train": {
+            "header": [
+              "rules_checked",
+              "rules_checked_missing",
+              "rules_failed",
+              "rules_failed_missing",
+              "rules_passed",
+              "rules_passed_missing",
+              "value_valid",
+              "value_valid_missing"
+            ],
+            "row": [
+              "amount_rules_failed",
+              "amount_rules_failed_missing",
+              "amount_rules_passed",
+              "amount_rules_passed_missing",
+              "description_rules_failed",
+              "description_rules_failed_missing",
+              "description_rules_passed",
+              "description_rules_passed_missing",
+              "quantity_rules_failed",
+              "quantity_rules_failed_missing",
+              "quantity_rules_passed",
+              "quantity_rules_passed_missing"
+            ]
+          },
+          "thresholds": {
+            "header": {
+              "0.98": null,
+              "0.99": null
+            },
+            "row": {
+              "0.98": 0.72,
+              "0.99": 0.72
+            }
+          },
+          "validation": {
+            "header": {
+              "units": 271,
+              "slots": 300,
+              "documents": 100,
+              "ece_10_bins": 0.03106679959244661,
+              "brier": 0.08194472466571484,
+              "roc_auc": 0.9388095238095239,
+              "targets": {
+                "0.98": {
+                  "threshold": null,
+                  "accepted": 0,
+                  "automation_rate": 0.0,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.0
+                  ],
+                  "achieved_precision": null,
+                  "achieved_precision_ci95": null,
+                  "target_met": false
+                },
+                "0.99": {
+                  "threshold": null,
+                  "accepted": 0,
+                  "automation_rate": 0.0,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.0
+                  ],
+                  "achieved_precision": null,
+                  "achieved_precision_ci95": null,
+                  "target_met": false
+                }
+              }
+            },
+            "row": {
+              "units": 354,
+              "slots": 354,
+              "documents": 100,
+              "ece_10_bins": 0.03932198173578049,
+              "brier": 0.07783708122547543,
+              "roc_auc": 0.9263888888888888,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.72,
+                  "accepted": 1,
+                  "automation_rate": 0.002824858757062147,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.009036827066574452
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.72,
+                  "accepted": 1,
+                  "automation_rate": 0.002824858757062147,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.009036827066574452
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            }
+          }
+        },
+        "isotonic": {
+          "removed_families": [],
+          "calibrator": "isotonic",
+          "feature_columns": {
+            "header": 53,
+            "row": 45
+          },
+          "removed_columns_present_in_train": {
+            "header": [],
+            "row": []
+          },
+          "thresholds": {
+            "header": {
+              "0.98": 0.95,
+              "0.99": 0.95
+            },
+            "row": {
+              "0.98": 0.817,
+              "0.99": 0.817
+            }
+          },
+          "validation": {
+            "header": {
+              "units": 271,
+              "slots": 300,
+              "documents": 100,
+              "ece_10_bins": 0.048415262202997286,
+              "brier": 0.08089451565298149,
+              "roc_auc": 0.947172619047619,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.95,
+                  "accepted": 57,
+                  "automation_rate": 0.19,
+                  "automation_rate_ci95": [
+                    0.14,
+                    0.24
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.95,
+                  "accepted": 57,
+                  "automation_rate": 0.19,
+                  "automation_rate_ci95": [
+                    0.14,
+                    0.24
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            },
+            "row": {
+              "units": 354,
+              "slots": 354,
+              "documents": 100,
+              "ece_10_bins": 0.04667438668842976,
+              "brier": 0.08149013008047871,
+              "roc_auc": 0.9227513227513228,
+              "targets": {
+                "0.98": {
+                  "threshold": 0.817,
+                  "accepted": 1,
+                  "automation_rate": 0.002824858757062147,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.009036827066574452
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                },
+                "0.99": {
+                  "threshold": 0.817,
+                  "accepted": 1,
+                  "automation_rate": 0.002824858757062147,
+                  "automation_rate_ci95": [
+                    0.0,
+                    0.009036827066574452
+                  ],
+                  "achieved_precision": 1.0,
+                  "achieved_precision_ci95": [
+                    1.0,
+                    1.0
+                  ],
+                  "target_met": true
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "environment": {
+    "git_commit": "5c3f6f3877b008178b858f8ca1590e904ee998fd",
+    "git_dirty": false,
+    "python": "3.12.13",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "cpu_count": 12,
+    "packages": {
+      "rapidocr": "3.10.0",
+      "onnxruntime": "1.31.1",
+      "numpy": "2.5.4",
+      "pypdfium2": "5.14.0",
+      "rapidfuzz": "3.14.6"
+    },
+    "ocr_execution": "CPU, onnxruntime defaults"
+  }
+}

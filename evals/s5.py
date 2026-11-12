@@ -15,8 +15,10 @@ from dataclasses import dataclass
 from typing import Any
 
 import numpy as np
+from sklearn.calibration import CalibratedClassifierCV
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import brier_score_loss, roc_auc_score
+from sklearn.model_selection import GroupKFold
 
 from evals.metrics import BOOTSTRAP_RESAMPLES, BOOTSTRAP_SEED, correct_rows
 from evals.scoring import money_key, row_key
@@ -27,6 +29,27 @@ TARGETS = (0.98, 0.99)
 GRID = np.round(np.arange(0, 1.0005, 0.001), 3)
 _CELL = re.compile(r"^line_items\[(\d+)\]\.(\w+)$")
 _CATEGORICAL = ("s4h_choice", "source")
+ISOTONIC_FOLDS = 5
+# Signal families for the ablations in docs/evaluation/final-test-protocol.md. A feature is in a
+# family if its name equals a listed key or ends with "_" + key (row features carry a cell
+# prefix, such as "amount_rules_passed"). agree_count and sources_with_value count agreement over
+# all sources, so both agreement families remove them.
+SIGNAL_FAMILIES: dict[str, tuple[str, ...]] = {
+    "label_proximity": ("label_supported",),
+    "ab_agreement": ("agree_pass_a_b", "cross_pass_available", "agree_count", "sources_with_value"),
+    "rule_llm_agreement": (
+        "agree_rules_llm",
+        "agree_pass_a_deterministic",
+        "agree_count",
+        "sources_with_value",
+    ),
+    "ocr_confidence": ("ocr_confidence_mean", "ocr_confidence_min", "ocr_confidence_available"),
+    "format_validation": ("value_valid", "rules_passed", "rules_failed", "rules_checked"),
+}
+
+
+def in_family(feature: str, keys: Sequence[str]) -> bool:
+    return any(feature == key or feature.endswith(f"_{key}") for key in keys)
 
 
 @dataclass
@@ -94,12 +117,14 @@ def build_units(
 class Vectorizer:
     """Fixed feature order from training units. None becomes 0 plus a missing indicator."""
 
-    def __init__(self, units: Sequence[Unit]) -> None:
+    def __init__(self, units: Sequence[Unit], drop: Sequence[str] = ()) -> None:
         numeric: set[str] = set()
         categories: dict[str, set[str]] = {key: set() for key in (*_CATEGORICAL, "name")}
         for unit in units:
             categories["name"].add(unit.name)
             for key, value in unit.features.items():
+                if in_family(key, drop):
+                    continue
                 if key in _CATEGORICAL:
                     categories[key].add(str(value))
                 elif value is None or isinstance(value, bool | int | float):
@@ -128,18 +153,29 @@ class Vectorizer:
 @dataclass
 class Calibrator:
     vectorizer: Vectorizer
-    model: LogisticRegression | None
+    model: LogisticRegression | CalibratedClassifierCV | None
     constant: float | None = None  # when train holds only one class
 
     @classmethod
-    def fit(cls, units: Sequence[Unit]) -> "Calibrator":
-        vectorizer = Vectorizer(units)
+    def fit(
+        cls, units: Sequence[Unit], drop: Sequence[str] = (), method: str = "logistic"
+    ) -> "Calibrator":
+        """Logistic regression; or, for "isotonic", the same model's scores mapped by isotonic
+        regression, cross-fitted on train in folds grouped by document."""
+        vectorizer = Vectorizer(units, drop)
         labels = np.array([unit.correct for unit in units], dtype=int)
         if len(set(labels.tolist())) < 2:
             return cls(vectorizer, None, float(labels.mean()) if len(labels) else 0.0)
-        model = LogisticRegression(C=1.0, max_iter=2000)
-        model.fit(vectorizer.transform(units), labels)
-        return cls(vectorizer, model)
+        features = vectorizer.transform(units)
+        base = LogisticRegression(C=1.0, max_iter=2000)
+        if method == "logistic":
+            return cls(vectorizer, base.fit(features, labels))
+        if method != "isotonic":
+            raise ValueError(f"unknown calibrator {method}")
+        groups = [unit.document_id for unit in units]
+        folds = list(GroupKFold(n_splits=ISOTONIC_FOLDS).split(features, labels, groups))
+        model = CalibratedClassifierCV(base, method="isotonic", cv=folds)
+        return cls(vectorizer, model.fit(features, labels))
 
     def predict(self, units: Sequence[Unit]) -> np.ndarray:
         if not units:

@@ -1,0 +1,15 @@
+s1 full done
+s1 minus_label_proximity done
+s1 minus_ab_agreement done
+s1 minus_rule_llm_agreement done
+s1 minus_ocr_confidence done
+s1 minus_format_validation done
+s1 isotonic done
+s4h full done
+s4h minus_label_proximity done
+s4h minus_ab_agreement done
+s4h minus_rule_llm_agreement done
+s4h minus_ocr_confidence done
+s4h minus_format_validation done
+s4h isotonic done
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\cord_s5_ablations_validation_v1_1_1.json

@@ -73,3 +73,47 @@ def test_routing_counts_empty_slots_against_automation_and_reports_unmet_targets
     assert met["achieved_precision"] == 0.5 and met["target_met"] is False
     assert report["targets"]["0.99"]["automation_rate"] == 0.0
     assert report["targets"]["0.99"]["achieved_precision"] is None
+
+
+def _units_with_two_signals(count: int = 120) -> list[Unit]:
+    rng = np.random.default_rng(3)
+    units = []
+    for index in range(count):
+        correct = bool(rng.random() < 0.6)
+        features = {
+            "label_supported": correct if rng.random() < 0.9 else not correct,
+            "amount_rules_passed": int(rng.integers(0, 3)),
+            "ocr_confidence_mean": float(rng.random()),
+        }
+        units.append(Unit(f"d{index // 3}", "header", "total_amount", features, correct))
+    return units
+
+
+def test_dropping_a_family_removes_its_columns_and_row_prefixed_columns() -> None:
+    units = _units_with_two_signals()
+    full = Calibrator.fit(units).vectorizer.columns()
+    assert "label_supported" in full and "amount_rules_passed" in full
+    no_label = Calibrator.fit(units, drop=["label_supported"]).vectorizer.columns()
+    assert "label_supported" not in no_label and "label_supported_missing" not in no_label
+    no_rules = Calibrator.fit(units, drop=["rules_passed"]).vectorizer.columns()
+    assert "amount_rules_passed" not in no_rules and "ocr_confidence_mean" in no_rules
+
+
+def test_signal_families_match_by_name_or_cell_suffix_only() -> None:
+    from evals.s5 import SIGNAL_FAMILIES, in_family
+
+    assert in_family("description_rules_failed", SIGNAL_FAMILIES["format_validation"])
+    assert not in_family("independent_match_exact", SIGNAL_FAMILIES["format_validation"])
+    assert in_family("agree_count", SIGNAL_FAMILIES["ab_agreement"])
+    assert in_family("agree_count", SIGNAL_FAMILIES["rule_llm_agreement"])
+
+
+def test_isotonic_calibrator_gives_probabilities_and_keeps_the_ranking_signal() -> None:
+    units = _units_with_two_signals(300)
+    calibrator = Calibrator.fit(units, method="isotonic")
+    probabilities = calibrator.predict(units)
+    assert ((probabilities >= 0) & (probabilities <= 1)).all()
+    supported = np.array([u.features["label_supported"] for u in units], dtype=bool)
+    assert probabilities[supported].mean() > probabilities[~supported].mean()
+    with pytest.raises(ValueError):
+        Calibrator.fit(units, method="beta")
