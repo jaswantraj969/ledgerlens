@@ -1,4 +1,6 @@
-"""S1 on synthetic invoices, per layout, under metrics 1.1. Reported apart from real data.
+"""S1 or S2 on synthetic invoices, per layout, under the current metrics version. Reported apart
+from real data. The output name carries the metrics version, so an older result is never
+overwritten.
 
 Two routes: native PDF text, and OCR on rendered pages. Development layouts and the held-out
 layout are scored separately, and the gap between them is reported. Seeds are fixed in advance.
@@ -6,12 +8,16 @@ layout are scored separately, and the gap between them is reported. Seeds are fi
 
 import argparse
 import json
+import time
 from collections.abc import Callable
 from decimal import Decimal
 from pathlib import Path
 from typing import Any
 
+from evals.atomic import write_text_atomic
 from evals.memory_guard import MemoryLog
+from evals.metrics import METRICS_VERSION
+from evals.power import PowerLog
 from evals.runners.run_cord_s1 import environment
 from evals.scoring import DocumentPrediction, row_key, score, to_prediction
 from evals.synthetic.generate import (
@@ -171,6 +177,7 @@ def main() -> None:
     label = arguments.label or arguments.system
     memory = MemoryLog()
     memory.start()
+    started = time.time()
 
     routes: dict[str, Any] = {}
     if arguments.smoke:
@@ -180,7 +187,10 @@ def main() -> None:
         routes["native_pdf"] = run_route(PdfiumParser(), NATIVE_PER_LAYOUT, system, memory)
         routes["ocr"] = run_route(RapidOcrParser(), OCR_PER_LAYOUT, system, memory)
         name = label.lower().replace("'", "p")
-        output = OUTPUT if label == "S1" else OUTPUT.with_name(f"synthetic_{name}_v1_1_1.json")
+        suffix = "v" + METRICS_VERSION.replace(".", "_")
+        output = OUTPUT.with_name(f"synthetic_{name}_{suffix}.json")
+        if output.exists():
+            raise SystemExit(f"{output} exists: a new run needs a new metrics version")
     if provider is not None:
         llm |= {"live_calls": provider.live_calls, "cache_hits": provider.hits}
     result = {
@@ -194,11 +204,10 @@ def main() -> None:
         "seed_base": SEED_BASE,
         "routes": routes,
         "environment": environment(),
+        "power": PowerLog.load(refresh=True).summarize([started, time.time()])
+        | {"method": "run window (start and end of this run)"},
     }
-    output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(
-        json.dumps(result, indent=2, default=_plain) + "\n", encoding="utf-8", newline="\n"
-    )
+    write_text_atomic(output, json.dumps(result, indent=2, default=_plain) + "\n")
     print("wrote", output)
 
 
