@@ -1,9 +1,15 @@
 name: ci
 
+# Needs no secrets, no CORD data and no Ollama. Network is used only to install packages and the
+# pinned tools below. Every action is pinned to a full commit SHA (the tag is in the comment).
+
 on:
   push:
     branches: [main]
   pull_request:
+
+permissions:
+  contents: read
 
 jobs:
   backend:
@@ -22,19 +28,27 @@ jobs:
       redis:
         image: redis:7-alpine
         ports: ["6379:6379"]
-    defaults:
-      run:
-        working-directory: backend
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s --health-timeout 3s --health-retries 10
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
-      - run: uv sync --python 3.12 --extra eval --extra ocr
-      - run: uv run --project backend pre-commit run --all-files
-        working-directory: .
-      - run: uv run pytest -q --cov=ledgerlens --cov-report=term
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5.4.2
+      - name: Install backend dependencies
+        run: uv sync --python 3.12 --extra eval --extra ocr
+        working-directory: backend
+      - name: Lint and format check (ruff)
+        run: bash scripts/tasks.sh lint
+      - name: Type check (mypy, backend and evals)
+        run: bash scripts/tasks.sh typecheck
+      - name: Backend tests (PostgreSQL and Redis service containers)
+        run: uv run --no-sync pytest -q
+        working-directory: backend
         env:
           LEDGERLENS_TEST_POSTGRES: postgresql://ledgerlens:ci-only@127.0.0.1:5432
           LEDGERLENS_TEST_REDIS: redis://127.0.0.1:6379
+      - name: Offline smoke evaluation (no model, no network, no dataset)
+        run: bash scripts/tasks.sh eval-smoke
 
   frontend:
     runs-on: ubuntu-latest
@@ -42,8 +56,8 @@ jobs:
       run:
         working-directory: frontend
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22
       - run: npm ci
@@ -54,9 +68,16 @@ jobs:
   secrets:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
-      - uses: gitleaks/gitleaks-action@v2
+      - name: gitleaks over the full history (pinned release, checksum verified)
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: 8.18.4
+          SHA256: ba6dbb656933921c775ee5a2d1c13a91046e7952e9d919f9bac4cec61d628e7d
+        run: |
+          curl -sSfL -o gitleaks.tar.gz \
+            "https://github.com/gitleaks/gitleaks/releases/download/v${VERSION}/gitleaks_${VERSION}_linux_x64.tar.gz"
+          echo "${SHA256}  gitleaks.tar.gz" | sha256sum -c -
+          tar -xzf gitleaks.tar.gz gitleaks
+          ./gitleaks detect --source . --no-banner --redact --log-opts=--all
