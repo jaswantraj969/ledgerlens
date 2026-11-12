@@ -1,0 +1,22 @@
+  power S1 records rerun: ac (ac 100, battery 0, unknown 0)
+  power S2': ac (ac 201, battery 0, unknown 0)
+  power S3': ac (ac 201, battery 0, unknown 0)
+  power S4': ac (ac 301, battery 0, unknown 0)
+  power S4h: ac (ac 301, battery 0, unknown 0)
+  power S1 blur-1.5: ac (ac 100, battery 0, unknown 0)
+  power S4h blur-1.5: ac (ac 303, battery 0, unknown 0)
+  power S1 blur-3.0: ac (ac 100, battery 0, unknown 0)
+  power S4h blur-3.0: ac (ac 300, battery 0, unknown 0)
+  power S1 jpeg-30: ac (ac 100, battery 0, unknown 0)
+  power S4h jpeg-30: ac (ac 303, battery 0, unknown 0)
+  power S1 jpeg-10: ac (ac 100, battery 0, unknown 0)
+  power S4h jpeg-10: ac (ac 300, battery 0, unknown 0)
+PASS S1 records rerun predictions 8b3fccde4d46 vs recorded 8b3fccde4d46: match
+PASS done-markers: 18 for 18 steps; hash mismatches none
+PASS recovered markers: none
+PASS timed results not AC-only: none
+PASS aborts: 8 (metadata 8), memory only True, each aborted step then completed with its one fixed command True: {"S4'": 1, "S1 blur-1.5": 1, "S4h blur-1.5": 1, "S4h blur-3.0": 1, "S4h jpeg-30": 2, "S4h jpeg-10": 2}
+PASS code commit and dirty flag across results: [('475c048', False)]
+PASS LLM results off the fixed settings: none
+PASS S5 test thresholds differ from validation-chosen: none
+EXIT=0
