@@ -1,0 +1,28 @@
+# Final test pre-flight 2026-11-12T07:11:22Z, commit 2550b14aaffe16796cca7d953fe0983b29920c1b
+git status --porcelain: '?? docs/progress/logs/final-preflight.txt'
+last_boot_utc=2026-11-12T06:44:20Z
+uptime_minutes=27
+free_ram_gib=1.974
+total_ram_gib=15.638
+ac_online_now= True
+docker=not running
+wsl:  NAME STATE VERSION * Ubuntu Stopped 2 docker-desktop Stopped 2 
+process Code x15 ws_mib=2848
+process CodeSetup-stable-dcd3ad6e368fbe19d03f37054a40dbaf40d676f4 x1 ws_mib=13
+process CodeSetup-stable-dcd3ad6e368fbe19d03f37054a40dbaf40d676f4.tmp x1 ws_mib=47
+process codex x1 ws_mib=57
+ollama version: {"version":"0.40.15"}
+OLLAMA_MAX_LOADED_MODELS=1
+re-measured: 2026-11-12T07:11:56Z free_ram_gib=1.511 codesetup=2
+re-measured: 2026-11-12T07:12:21Z free_ram_gib=1.67 codesetup=2
+re-measured: 2026-11-12T07:13:00Z free_ram_gib=1.708 codesetup=2
+
+Checklist:
+- fresh reboot: PASS (boot 2026-11-12T06:44:20Z, 27 min before the check)
+- AC power: PASS (GetSystemPowerStatus AC online)
+- Docker stopped: PASS (daemon not running; docker-desktop and Ubuntu WSL distributions stopped)
+- free RAM >= 2 GiB: FAIL (1.974 GiB at the check, then 1.511 to 1.708 GiB). A VS Code update (CodeSetup-stable, 2 processes) was running, and VS Code held about 2.8 GiB.
+- model warmed: not done, because the checklist had already failed
+- keep-awake: not started, for the same reason
+
+Verdict: pre-flight FAILED. The test split was not read. No step of docs/evaluation/final-test-protocol.md has run.
