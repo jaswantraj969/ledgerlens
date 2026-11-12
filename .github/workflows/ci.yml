@@ -41,8 +41,8 @@ jobs:
         run: bash scripts/tasks.sh lint
       - name: Type check (mypy, backend and evals)
         run: bash scripts/tasks.sh typecheck
-      - name: Backend tests (PostgreSQL and Redis service containers)
-        run: uv run --no-sync pytest -q
+      - name: Backend tests with core coverage (PostgreSQL and Redis service containers)
+        run: uv run --no-sync pytest -q --cov=ledgerlens --cov-report=term
         working-directory: backend
         env:
           LEDGERLENS_TEST_POSTGRES: postgresql://ledgerlens:ci-only@127.0.0.1:5432

@@ -19,10 +19,14 @@ step() {
 PY=backend/.venv/Scripts/python.exe
 [ -x "$PY" ] || PY=backend/.venv/bin/python
 PY=$root/$PY
-step pre-commit-all-files "$PY" -m pre_commit run --all-files
-
+# Same steps as the workflow's backend job, in the same order, plus the pre-commit hooks.
+step lint bash scripts/tasks.sh lint
+step typecheck bash scripts/tasks.sh typecheck
 cd "$root/backend" || exit 2
 step pytest-coverage "$PY" -m pytest -q --cov=ledgerlens --cov-report=term
+cd "$root" || exit 2
+step eval-smoke bash scripts/tasks.sh eval-smoke
+step pre-commit-all-files "$PY" -m pre_commit run --all-files
 
 cd "$root/frontend" || exit 2
 step npm-lint npm run lint
