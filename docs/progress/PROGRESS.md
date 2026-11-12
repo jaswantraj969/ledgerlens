@@ -92,3 +92,13 @@
 - Product: webhooks (HMAC, retries), review/export API, frontend (36 Vitest tests), Dockerfiles. All five Compose services healthy; Playwright upload-review-export passes on the local dev stack and on the Compose stack.
 - Backend: 412 tests pass.
 - Next: final S1-S5 test read, once, on AC, from a clean commit, when the supervisor approves.
+
+## 2026-11-12, final test read
+- Prompt-rule timing confirmed: rule in eb5c68f (09:48:38 UTC on 11-07), before the first prompt-round run (11:50 UTC).
+- Final test protocol committed before any test access: 2550b14. Entry script with pre-flight, atomic outputs and done-markers: 4273082, e3a506a.
+- First pre-flight failed on free RAM (1.5 to 1.97 GiB with VS Code open); test was not read (1d3ba07).
+- Final run, 2026-11-12 07:35 to 08:56 UTC, from 475c048 with VS Code closed: pre-flight passed (6.05 GiB free, booted 3.7 min before), EXIT=0, 18/18 steps, 8 memory aborts, each resumed from cache with the same command. All timed results are AC-only.
+- Integrity: S1 rerun reproduced predictions 8b3fccde exactly; 18 done-markers match, none recovered; S5 test thresholds equal the validation-chosen ones (docs/progress/logs/final-integrity.txt).
+- make reproduce: validation metrics reproduce exactly; final tables and figure generated.
+- Results: S4h does not beat S1 on CORD test except total F1 (0.827 against 0.793, intervals overlap). S5 header precision on test fell short of the 0.98 and 0.99 targets; line items are effectively routed to human review.
+- Next: Phase 8 hardening, Phases 10 to 12, GitHub CI (needs a remote created by the human).

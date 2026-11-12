@@ -52,15 +52,15 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 | 7 | S4h llama3.2:3b on all 800 train documents | VERIFIED | evals/results/dev/prompt_round/cord_s4h_train_all_p2.2_v1_1_1.json; 10 attempts (9 memory aborts, resumed from the replay cache); latency battery-affected |
 | 7 | S5-S4h on validation (calibrator fitted on train) | VERIFIED | evals/results/dev/cord_s5_validation_comparison_v1_1_1.md; docs/progress/logs/run-s5-s4h-*.log. Test not read |
 | 7 | Power state per timed run; audit of existing latency figures | VERIFIED | evals/power.py, evals/runners/audit_power.py, docs/progress/logs/power-audit.json; only S4h train_all is battery-affected. Test split refuses to run off AC |
-| 7 | Final S1-S5 test read, once, from a clean commit | NOT STARTED | Last step |
-| 7 | Ablations, degradation | NOT STARTED | Follow S5 |
+| 7 | Final S1-S5 test read, once, from a clean commit | VERIFIED | Protocol 2550b14; run log docs/progress/logs/final-run-20261112T073516Z.log (EXIT=0, 18/18 steps, 8 memory aborts resumed); integrity checks docs/progress/logs/final-integrity.txt (all pass); tables evals/results/final/ |
+| 7 | Ablations, degradation | VERIFIED | evals/results/final/cord_s5_ablations_test_v1_1_1.md, cord_degradation_test_v1_1_1.{md,png} |
 | 7 | SROIE | BLOCKED | Removed: official access unavailable; mirror terms unverified. Labels and vendor groups deleted; adapter kept with fictional fixtures |
 | 6 | Frontend: upload and batch, job status, review with boxes, approve/reject/correct, queue, export, evaluation page | VERIFIED | frontend/src (36 Vitest tests), npm run build |
 | 6 | Playwright upload, review, export flow | VERIFIED (local dev stack, not Docker) | docs/progress/logs/run-e2e-local.log |
 | 8 | Testing and hardening | NOT STARTED | |
 | 9 | Dockerfiles and full compose stack | VERIFIED | docs/progress/logs/run-docker-compose-up.log: all five services healthy. Web published on 8081 for this run because an unrelated httpd holds 8080 here (LEDGERLENS_WEB_PORT) |
 | 9 | Playwright flow against the Compose stack | VERIFIED | docs/progress/logs/run-e2e-docker.log (1 passed) |
-| 10 | Documentation | IN PROGRESS | README has status, commands and the S5 header/row automation table; portfolio write-up not started |
+| 10 | Documentation | IN PROGRESS | README results section from the final test files; limitations updated. Some older limitations entries are stale (OCR now exists; S5 calibrators exist in evals but not in the product risk score) |
 | 11 | Portfolio and publication preparation | NOT STARTED | |
 | 12 | Final verification and report | NOT STARTED | |
 
@@ -78,9 +78,9 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 | A8 | VERIFIED | Worker crash, retry, dead-letter, model-unavailable and webhook retry tests pass |
 | A9 | IMPLEMENTED BUT UNVERIFIED (local mirror; GitHub run pending human approval) | docs/progress/logs/ci-local.txt |
 | A10 | NOT STARTED | |
-| A11 | IN PROGRESS | S1 on CORD test; S2-S4h and S5-S1, S5-S4h on validation only; final S1-S5 test read pending |
+| A11 | IN PROGRESS | CORD test done for S1-S4h and S5 (evals/results/final/). Synthetic covers S1 and S2' only, not S3-S5; review workload not reported as its own metric |
 | A12 | IN PROGRESS | CORD layout groups for S1. No real vendor-grouped split was possible |
-| A13 | NOT STARTED | Follows S5 |
+| A13 | IN PROGRESS | Ablations and degradation done; final tables and figure regenerate via make reproduce from saved result files (docs/progress/logs/run-reproduce-final.log). make reproduce does not replay the test runs themselves from the caches |
 | A14 | IN PROGRESS | Split hashes and overlap tests exist, documented in docs/evaluation.md |
 | A15 | NOT STARTED | |
 | A16 | IN PROGRESS | No claims published yet |
