@@ -36,3 +36,6 @@ test-results/
 var/
 .DS_Store
 Thumbs.db
+
+# Portfolio screenshots show CORD receipts (CC BY 4.0); kept local, never committed (R10)
+docs/portfolio/screenshots/
