@@ -59,6 +59,10 @@ case "${1:-}" in
       "$python" -m evals.runners.run_cord --system "$system" --split validation "${flags[@]}" || exit $?
     done
     "$0" tables
+    "$python" -m evals.runners.make_validation_comparison || exit $?
+    "$python" -m evals.runners.make_s5_table s1 s4h || exit $?
+    # Final test tables and figure, from saved result files only (no test data is read).
+    "$python" -m evals.runners.make_final_tables || exit $?
     ;;
   *) usage; exit 2 ;;
 esac

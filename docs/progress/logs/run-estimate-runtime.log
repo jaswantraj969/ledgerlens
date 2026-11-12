@@ -1,0 +1,13 @@
+{
+  "ac_calls_used": 1651,
+  "seconds_per_call_mean": 4.73,
+  "seconds_per_call_p95": 9.22,
+  "tokens_per_second_median": 47.8,
+  "calls_per_document_s4h_validation": 2.01,
+  "document_runs": {
+    "clean test": 100,
+    "degradation, S4h": 400
+  },
+  "expected_llm_hours": 1.32,
+  "worst_case_llm_hours_every_reply_truncated": 5.98
+}
