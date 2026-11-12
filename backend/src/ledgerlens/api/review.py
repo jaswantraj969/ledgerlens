@@ -1,14 +1,16 @@
-"""Review: a document's extracted fields with evidence, review actions, the queue, pages, export.
+"""Review: a document's extracted fields with evidence, review actions, the queue, pages, export
+(single and batch) and the document's audit trail.
 
 Every query is scoped to the caller's organization. Field values are never logged; the audit
-log stores a hash of a corrected value, not the value.
+log stores a hash of a corrected value, not the value. The audit trail route joins each review
+event to its review decision to show the old and new value to the document's own organization.
 """
 
 import hashlib
 import uuid
 from datetime import datetime
 from io import BytesIO
-from typing import Annotated, Any, Literal
+from typing import Annotated, Literal
 
 import pypdfium2 as pdfium
 from fastapi import APIRouter, Depends, Query, Request, Response
@@ -20,6 +22,7 @@ from sqlalchemy.orm import Session
 from ledgerlens.api.deps import Principal, PrincipalDep, SessionDep, require_role
 from ledgerlens.core.errors import Problem
 from ledgerlens.db.models import (
+    AuditLog,
     Document,
     ExtractionRun,
     Field,
@@ -27,6 +30,7 @@ from ledgerlens.db.models import (
     Job,
     Page,
     ReviewDecision,
+    User,
     Validation,
 )
 from ledgerlens.db.repositories import DocumentRepository, audit
@@ -41,6 +45,8 @@ router = APIRouter(tags=["review"])
 ReviewerDep = Annotated[Principal, Depends(require_role("admin", "reviewer"))]
 PENDING = "needs_review"
 RENDER_SCALE = 2.0
+MAX_EXPORT_DOCUMENTS = 50
+REVIEWED = "completed"
 _no_document = Problem(404, "Not found", "No such document.", "not_found")
 _no_field = Problem(404, "Not found", "No such field.", "not_found")
 _no_results = Problem(409, "Not ready", "This document has no extraction yet.", "not_ready")
@@ -98,6 +104,22 @@ class DocumentFields(BaseModel):
 class ReviewIn(BaseModel):
     action: Literal["approve", "reject", "correct"]
     value: str | None = PydanticField(default=None, max_length=2000)
+
+
+class AuditEventOut(BaseModel):
+    id: uuid.UUID
+    created_at: datetime
+    actor_email: str | None
+    action: str
+    entity: str
+    field_name: str | None
+    old_value: str | None
+    new_value: str | None
+
+
+class BatchExportIn(BaseModel):
+    document_ids: list[uuid.UUID] = PydanticField(min_length=1)
+    format: Literal["json", "csv"] = "json"
 
 
 class QueueItem(BaseModel):
@@ -364,20 +386,13 @@ def page_image(
     return Response(buffer.getvalue(), media_type="image/png", headers={"Cache-Control": "private"})
 
 
-@router.get("/documents/{document_id}/export")
-def export_document(
-    document_id: uuid.UUID,
-    session: SessionDep,
-    principal: PrincipalDep,
-    format: Annotated[Literal["json", "csv"], Query()] = "json",
-) -> Response:
+def _export_records(session: Session, document: Document) -> list[FieldRecord]:
     """Final values only: corrections, approvals and auto-accepted values. Others export empty."""
-    document = _document(session, principal, document_id)
     run = _latest_run(session, document.id)
     if run is None:
         raise _no_results
     schema = load_schema(run.schema_version.split(":", 1)[0])
-    records = [
+    return [
         FieldRecord(
             name=f.name,
             value_raw=f.final_value,
@@ -390,10 +405,141 @@ def export_document(
         )
         for f in _fields_out(session, run)
     ]
-    payload: dict[str, Any] = {str(document.id): records}
+
+
+def _export_response(payload: dict[str, list[FieldRecord]], format: str, name: str) -> Response:
     if format == "csv":
-        disposition = f'attachment; filename="{document.id}.csv"'
+        disposition = f'attachment; filename="{name}.csv"'
         return Response(
             to_csv(payload), media_type="text/csv", headers={"Content-Disposition": disposition}
         )
     return Response(to_json(payload), media_type="application/json")
+
+
+@router.get("/documents/{document_id}/export")
+def export_document(
+    document_id: uuid.UUID,
+    session: SessionDep,
+    principal: PrincipalDep,
+    format: Annotated[Literal["json", "csv"], Query()] = "json",
+) -> Response:
+    """Final values only: corrections, approvals and auto-accepted values. Others export empty."""
+    document = _document(session, principal, document_id)
+    payload = {str(document.id): _export_records(session, document)}
+    return _export_response(payload, format, str(document.id))
+
+
+@router.post("/documents/export")
+def export_documents(body: BatchExportIn, session: SessionDep, principal: PrincipalDep) -> Response:
+    """Several reviewed documents in one file, in the same format as the single export.
+
+    All or nothing: if any document is not the caller's organization's, or is not reviewed
+    (status "completed"), nothing is exported and the error lists the refused ids.
+    """
+    ids = list(dict.fromkeys(body.document_ids))
+    if len(ids) > MAX_EXPORT_DOCUMENTS:
+        raise Problem(
+            413, "Too many documents",
+            f"At most {MAX_EXPORT_DOCUMENTS} documents per export.", "batch_too_large",
+        )  # fmt: skip
+    owned = {
+        d.id: d
+        for d in session.scalars(
+            select(Document).where(
+                Document.id.in_(ids), Document.organization_id == principal.organization_id
+            )
+        )
+    }
+    missing = [str(i) for i in ids if i not in owned]
+    if missing:
+        raise Problem(404, "Not found", "No such documents: " + ", ".join(missing), "not_found")
+    unreviewed = [str(i) for i in ids if owned[i].status != REVIEWED]
+    if unreviewed:
+        raise Problem(
+            409, "Not reviewed",
+            "These documents are not reviewed yet: " + ", ".join(unreviewed), "not_reviewed",
+        )  # fmt: skip
+    payload = {str(i): _export_records(session, owned[i]) for i in ids}
+    return _export_response(payload, body.format, "ledgerlens-export")
+
+
+def _value_after(decision: str, value_raw: str | None, correction: str | None) -> str | None:
+    if decision == "corrected":
+        return correction
+    if decision == "approved":
+        return value_raw
+    return None
+
+
+@router.get("/documents/{document_id}/audit")
+def document_audit(
+    document_id: uuid.UUID, session: SessionDep, principal: PrincipalDep
+) -> list[AuditEventOut]:
+    """Read-only audit trail of one document and its fields, newest first.
+
+    Old value: the value under review (the extracted value, or the previous correction).
+    New value: the correction, the approved value, or none for a rejection.
+    """
+    document = _document(session, principal, document_id)
+    fields = {
+        str(f.id): f
+        for f in session.scalars(
+            select(Field)
+            .join(ExtractionRun, Field.run_id == ExtractionRun.id)
+            .where(ExtractionRun.document_id == document.id)
+        )
+    }
+    events = session.execute(
+        select(AuditLog, User.email)
+        .outerjoin(
+            User,
+            (User.id == AuditLog.actor_id) & (User.organization_id == AuditLog.organization_id),
+        )
+        .where(
+            AuditLog.organization_id == principal.organization_id,
+            ((AuditLog.entity == "document") & (AuditLog.entity_id == str(document.id)))
+            | ((AuditLog.entity == "field") & AuditLog.entity_id.in_(list(fields))),
+        )
+        .order_by(AuditLog.created_at, AuditLog.id)
+    ).all()
+    decisions: dict[str, list[ReviewDecision]] = {}
+    for decision in session.scalars(
+        select(ReviewDecision)
+        .where(ReviewDecision.field_id.in_([f.id for f in fields.values()]))
+        .order_by(ReviewDecision.created_at, ReviewDecision.id)
+    ):
+        decisions.setdefault(str(decision.field_id), []).append(decision)
+    # One review request writes one decision and one audit entry for its field, so the n-th
+    # review event of a field belongs to its n-th decision.
+    seen: dict[str, int] = {}
+    current: dict[str, str | None] = {k: f.value_raw for k, f in fields.items()}
+    out: list[AuditEventOut] = []
+    for entry, email in events:
+        field = fields.get(entry.entity_id or "") if entry.entity == "field" else None
+        old_value = new_value = None
+        if field is not None:
+            key = str(field.id)
+            index = seen.get(key, 0)
+            seen[key] = index + 1
+            matched = decisions.get(key, [])
+            if index < len(matched):
+                decision = matched[index]
+                old_value = current[key]
+                new_value = _value_after(
+                    decision.decision, field.value_raw, decision.corrected_value
+                )
+                if decision.decision == "corrected":
+                    current[key] = decision.corrected_value
+        out.append(
+            AuditEventOut(
+                id=entry.id,
+                created_at=entry.created_at,
+                actor_email=email,
+                action=entry.action,
+                entity=entry.entity,
+                field_name=field.name if field is not None else None,
+                old_value=old_value,
+                new_value=new_value,
+            )
+        )
+    return out[::-1]
