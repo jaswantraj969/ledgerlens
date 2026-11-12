@@ -1,0 +1,13 @@
+START 2026-11-12T16:18:12Z
+== verify mode on data/cord-v2/raw
+ok       test-00000-of-00001-9c204eb3f4e11791.parquet
+ok       train-00000-of-00004-b4aaeceff1d90ecb.parquet
+ok       train-00001-of-00004-7dbbe248962764c5.parquet
+ok       train-00002-of-00004-688fe1305a55e5cc.parquet
+ok       train-00003-of-00004-2d0cd200555ed7fd.parquet
+ok       validation-00000-of-00001-cc3c5779fe22e8ca.parquet
+all six files verified
+verify EXIT=0
+== live download of one file (test split, 234 MB) into a scratch folder, then checksum
+bytes 234202795 sha256 matches committed checksum: True
+download EXIT=0 END 2026-11-12T16:25:09Z
