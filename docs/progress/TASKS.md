@@ -57,7 +57,7 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 | 7 | SROIE | BLOCKED | Removed: official access unavailable; mirror terms unverified. Labels and vendor groups deleted; adapter kept with fictional fixtures |
 | 6 | Frontend: upload and batch, job status, review with boxes, approve/reject/correct, queue, export, evaluation page | VERIFIED | frontend/src (36 Vitest tests), npm run build |
 | 6 | Playwright upload, review, export flow | VERIFIED (local dev stack, not Docker) | docs/progress/logs/run-e2e-local.log |
-| 8 | Testing and hardening | NOT STARTED | |
+| 8 | Testing and hardening | IN PROGRESS | Baseline 2026-11-12: backend 458 passed (docs/progress/logs/phase8-backend-pytest.log); Vitest 36 passed, oxlint 0 errors and 1 warning, tsc and vite build pass (phase8-checks.log); Playwright 1 passed on Compose (phase8-e2e-docker.log). mypy on evals/ is not configured: 22 errors, none from today's code apart from a missing psutil stub |
 | 9 | Dockerfiles and full compose stack | VERIFIED | docs/progress/logs/run-docker-compose-up.log: all five services healthy. Web published on 8081 for this run because an unrelated httpd holds 8080 here (LEDGERLENS_WEB_PORT) |
 | 9 | Playwright flow against the Compose stack | VERIFIED | docs/progress/logs/run-e2e-docker.log (1 passed) |
 | 10 | Documentation | IN PROGRESS | README results section from the final test files; limitations updated. Some older limitations entries are stale (OCR now exists; S5 calibrators exist in evals but not in the product risk score) |

@@ -102,3 +102,11 @@
 - make reproduce: validation metrics reproduce exactly; final tables and figure generated.
 - Results: S4h does not beat S1 on CORD test except total F1 (0.827 against 0.793, intervals overlap). S5 header precision on test fell short of the 0.98 and 0.99 targets; line items are effectively routed to human review.
 - Next: Phase 8 hardening, Phases 10 to 12, GitHub CI (needs a remote created by the human).
+
+## 2026-11-12, supervisor review of the final read, and Phase 8 start
+- Synthetic S1 rerun under metrics 1.1.1, rules only: all 375 precision, recall and F1 values equal the 1.1 run.
+- CORD has near-duplicates across its official splits: 7 test documents share OCR token text with a train or validation document. Found while labelling replayed timings; recorded in limitations and the README. No result was changed.
+- Replayed test timings labelled with their original recording time and power: all on AC.
+- S5: exact Clopper-Pearson intervals where fewer than 30 values were accepted; review workload per document with bootstrap intervals.
+- README corrected (synthetic under 1.1.1, S1 rerun hash, header precision wording, small samples, workload, degradation exceptions, risk score). ADR-0013 narrows A11 on synthetic data to S1 and S2'. Limitations updated (OCR parsing; risk score unfitted, S5 evaluation-only).
+- Phase 8 baseline: backend 458 passed, Vitest 36 passed, Playwright 1 passed on Compose, ruff and backend mypy clean, oxlint 1 warning.
