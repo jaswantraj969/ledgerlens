@@ -1,0 +1,8 @@
+START 2026-11-12T17:37:46Z commit a68bc37 target=docker compose web on http://127.0.0.1:8081, worker in rules mode; inputs: SYNTHETIC invoices only (evals/synthetic/generate.py, seeds 910000-910002, layouts classic, modern, statement); no CORD data
+
+Running 1 test using 1 worker
+
+  ok 1 e2e\screenshots.spec.ts:14:1 › portfolio screenshots (9.8s)
+
+  1 passed (15.2s)
+EXIT=0 END 2026-11-12T17:38:11Z
