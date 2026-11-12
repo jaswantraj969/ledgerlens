@@ -47,3 +47,11 @@ The synthetic evaluation covers five single-page layouts. Rotated, low-DPI and m
 ## Native-text PDFs only
 
 The working parser reads embedded text. Scanned PDFs and images yield no tokens until OCR is added.
+
+## LLM mode inside Docker: not tested
+
+The Compose stack was verified with the worker in its default rules mode: all five services were healthy, and the upload, review and export flow passed against it (`docs/progress/logs/run-docker-compose-up.log`, `run-e2e-docker.log`). The `llm` and `llm_or_rules` modes, which reach Ollama on the host from inside the container, were not tested in Docker.
+
+## S5 header precision targets were not met on test
+
+On CORD test, the thresholds chosen on validation gave header precision below target. At the 0.98 target, S5-S1 reached 0.966 [0.906, 1.000] and S5-S4h 0.959 [0.891, 1.000]. At the 0.99 target, S5-S1 reached 0.966 and S5-S4h 0.976. Row units met their targets only for S5-S1, which accepted 3 of 253 rows; S5-S4h accepted no rows. Thresholds set on 100 validation documents do not hold their precision on new documents, and the intervals are wide (`evals/results/final/cord_s5_test_v1_1_1.md`).
