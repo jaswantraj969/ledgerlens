@@ -24,9 +24,9 @@ With `llama3.2:3b` loaded, free RAM on this machine drops to about 0.3 to 0.4 Gi
 
 The SROIE labels and vendor groups were deleted, and no SROIE metric exists. CORD has no vendor label, so no real vendor-grouped split was possible on any dataset. The A12 check uses derived CORD layout groups, which approximate layouts, not vendors.
 
-## The risk score is unfitted
+## The application's risk score is unfitted; S5 exists only in the evaluation code
 
-`risk_score` uses hand-picked weights and is not a probability. `calibrated_prob` stays null until a calibrator is fitted.
+In the application (API, worker, review UI, export), `risk_score` is the hand-weighted heuristic in `backend/src/ledgerlens/confidence/risk.py`. It is not a probability, and routing uses it with a fixed threshold of 0.2. `calibrated_prob` is never set by the application and is always null. The S5 calibrators (logistic regression fitted on CORD train, thresholds set on validation) exist only in the evaluation code (`evals/s5.py`) and are not used by the application.
 
 ## Amount parsing
 
@@ -44,9 +44,9 @@ The currency scan fills a value on layouts that print no currency: F1 0.000 on t
 
 The synthetic evaluation covers five single-page layouts. Rotated, low-DPI and multi-page variants exist in the generator but are outside this run.
 
-## Native-text PDFs only
+## Parsing: native PDF text, with CPU OCR for images and scanned pages
 
-The working parser reads embedded text. Scanned PDFs and images yield no tokens until OCR is added.
+The worker uses `AutoParser` (`backend/src/ledgerlens/parsing/ocr.py`). It reads embedded text from PDF pages that have it, and runs RapidOCR (ONNX Runtime, CPU) on images and on PDF pages without text. OCR quality was measured on CORD receipt photos and on rendered synthetic invoices only. The degradation study shows it falls sharply under strong blur (mean F1 0.681 to 0.446 for S1 at blur radius 3.0). Handwriting, rotated pages and multi-column documents were not evaluated.
 
 ## LLM mode inside Docker: not tested
 
