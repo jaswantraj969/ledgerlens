@@ -1,0 +1,36 @@
+identical token text: 17 groups across splits, 22 within one split only; test documents involved: 7
+  cord-v2:train:133, cord-v2:test:25
+  cord-v2:train:15, cord-v2:validation:35
+  cord-v2:train:234, cord-v2:validation:30
+  cord-v2:train:283, cord-v2:validation:28
+  cord-v2:train:325, cord-v2:validation:45
+  cord-v2:train:420, cord-v2:validation:98
+  cord-v2:train:428, cord-v2:test:44
+  cord-v2:train:44, cord-v2:test:75
+  cord-v2:train:483, cord-v2:validation:97
+  cord-v2:train:489, cord-v2:validation:67
+  cord-v2:train:56, cord-v2:validation:65
+  cord-v2:train:589, cord-v2:test:28
+  cord-v2:train:620, cord-v2:validation:32
+  cord-v2:train:733, cord-v2:validation:89
+  cord-v2:train:785, cord-v2:test:31
+  cord-v2:train:797, cord-v2:test:33
+  cord-v2:validation:59, cord-v2:test:38
+identical full OCR output: 8 groups across splits, 10 within one split only; test documents involved: 4
+  cord-v2:train:234, cord-v2:validation:30
+  cord-v2:train:420, cord-v2:validation:98
+  cord-v2:train:428, cord-v2:test:44
+  cord-v2:train:489, cord-v2:validation:67
+  cord-v2:train:589, cord-v2:test:28
+  cord-v2:train:733, cord-v2:validation:89
+  cord-v2:train:785, cord-v2:test:31
+  cord-v2:validation:59, cord-v2:test:38
+pairs involving test:
+  cord-v2:train:133 / cord-v2:test:25: image bytes different, gold labels identical
+  cord-v2:train:589 / cord-v2:test:28: image bytes different, gold labels identical
+  cord-v2:train:785 / cord-v2:test:31: image bytes different, gold labels identical
+  cord-v2:train:797 / cord-v2:test:33: image bytes different, gold labels different
+  cord-v2:validation:59 / cord-v2:test:38: image bytes different, gold labels identical
+  cord-v2:train:428 / cord-v2:test:44: image bytes different, gold labels different
+  cord-v2:train:44 / cord-v2:test:75: image bytes different, gold labels identical
+EXIT=0

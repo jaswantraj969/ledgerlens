@@ -55,3 +55,7 @@ The Compose stack was verified with the worker in its default rules mode: all fi
 ## S5 header precision targets were not met on test
 
 On CORD test, the thresholds chosen on validation gave header precision below target. At the 0.98 target, S5-S1 reached 0.966 [0.906, 1.000] and S5-S4h 0.959 [0.891, 1.000]. At the 0.99 target, S5-S1 reached 0.966 and S5-S4h 0.976. Row units met their targets only for S5-S1, which accepted 3 of 253 rows; S5-S4h accepted no rows. Thresholds set on 100 validation documents do not hold their precision on new documents, and the intervals are wide (`evals/results/final/cord_s5_test_v1_1_1.md`).
+
+## CORD v2 has near-duplicate documents across its official splits
+
+Seven of the 100 test documents have identical OCR token text to a train or validation document: test 25, 28, 31, 33, 38, 44 and 75 (`docs/progress/logs/cord-cross-split-duplicates.txt`). The image bytes always differ. The gold labels are identical in 5 of the 7 pairs. Across all splits there are 17 such cross-split groups. The split checks compared document IDs only, so this was found after the final test read: 8 S2′ test replies were replayed from replies recorded for the train or validation twins. The test numbers are reported as read. They include these documents, so CORD test is not fully unseen data for the S5 calibrators (fitted on train) or the S1 rules (tuned on validation).
