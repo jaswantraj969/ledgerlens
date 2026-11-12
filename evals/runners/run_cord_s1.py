@@ -89,24 +89,27 @@ def compare(field: str, predicted: Any, gold: Any) -> tuple[Outcome, int]:
     return multiset_outcome(predicted_keys, usable), len(gold_keys) - len(usable)
 
 
+def _git(*arguments: str) -> str | None:
+    """Output of a git command, or None where git or the repository is unavailable (for example
+    a source archive in a container); the run is then recorded with an unknown commit."""
+    try:
+        return subprocess.run(  # noqa: S603 (fixed git commands)
+            ["git", *arguments],  # noqa: S607
+            capture_output=True,
+            text=True,
+            cwd=ROOT,
+            check=True,
+        ).stdout.strip()
+    except (OSError, subprocess.CalledProcessError):
+        return None
+
+
 def environment() -> dict[str, Any]:
-    commit = subprocess.run(
-        ["git", "rev-parse", "HEAD"],  # noqa: S607
-        capture_output=True,
-        text=True,
-        cwd=ROOT,
-        check=True,
-    ).stdout.strip()
-    dirty = subprocess.run(
-        ["git", "status", "--porcelain", "--", "backend/src", "evals/datasets", "evals/metrics.py"],  # noqa: S607
-        capture_output=True,
-        text=True,
-        cwd=ROOT,
-        check=True,
-    ).stdout.strip()
+    commit = _git("rev-parse", "HEAD")
+    dirty = _git("status", "--porcelain", "--", "backend/src", "evals/datasets", "evals/metrics.py")
     return {
         "git_commit": commit,
-        "git_dirty": bool(dirty),
+        "git_dirty": None if dirty is None else bool(dirty),
         "python": platform.python_version(),
         "platform": platform.platform(),
         "processor": platform.processor(),

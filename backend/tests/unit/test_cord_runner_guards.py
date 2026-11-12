@@ -135,3 +135,20 @@ def test_perturbation_and_records_rerun_do_not_combine() -> None:
     )
     assert completed.returncode != 0
     assert "do not combine" in completed.stderr
+
+
+def test_environment_records_an_unknown_commit_where_git_is_missing(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def no_git(*_: object, **__: object) -> None:
+        raise FileNotFoundError("git")
+
+    monkeypatch.setattr(run_cord_s1.subprocess, "run", no_git)
+    info = run_cord_s1.environment()
+    assert info["git_commit"] is None and info["git_dirty"] is None
+
+
+def test_environment_records_the_commit_in_a_repository() -> None:
+    info = run_cord_s1.environment()
+    assert info["git_commit"] and len(info["git_commit"]) == 40
+    assert info["git_dirty"] in (True, False)
