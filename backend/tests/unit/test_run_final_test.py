@@ -1,3 +1,5 @@
+import hashlib
+import json
 import subprocess
 from pathlib import Path
 from typing import Any
@@ -79,6 +81,8 @@ class FakeRun:
         self.calls += 1
         for name in records:
             (self.aborted / name).write_text("{}", encoding="utf-8")
+        if code == 0:  # a successful attempt leaves a complete output
+            (self.aborted.parent / "out.json").write_text('{"ok": 1}', encoding="utf-8")
         return subprocess.CompletedProcess(command, code, "", "")
 
 
@@ -136,3 +140,90 @@ def test_exit_3_without_an_abort_record_is_not_treated_as_a_memory_abort(
     monkeypatch.setattr(final.subprocess, "run", FakeRun(sandbox, [(3, [])]))
     with (tmp_path / "log.txt").open("a") as log_file:
         assert final.run_step(_step(), log_file, lambda _: None) == "failed"
+
+
+class WritingRun:
+    """A step attempt that writes `text` to the step's output, then exits with `code`."""
+
+    def __init__(self, output: Path, text: str | None, code: int) -> None:
+        self.output, self.text, self.code, self.calls = output, text, code, 0
+
+    def __call__(self, command: list[str], **_: Any) -> subprocess.CompletedProcess[str]:
+        self.calls += 1
+        if self.text is not None:
+            self.output.write_text(self.text, encoding="utf-8")
+        return subprocess.CompletedProcess(command, self.code, "", "")
+
+
+def _run(step: final.Step, tmp_path: Path) -> str:
+    with (tmp_path / "log.txt").open("a") as log_file:
+        return final.run_step(step, log_file, lambda _: None)
+
+
+def test_done_marker_is_written_only_after_exit_0_with_a_complete_output(
+    sandbox: Path, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    monkeypatch.setattr(final.subprocess, "run", WritingRun(tmp_path / "out.json", '{"ok": 1}', 0))
+    step = _step()
+    assert _run(step, tmp_path) == "done"
+    marker = json.loads(final.marker_path(step).read_text(encoding="utf-8"))
+    expected = hashlib.sha256((tmp_path / "out.json").read_bytes()).hexdigest()
+    assert marker["output_sha256"] == expected
+    assert marker["recovered_without_marker"] is False
+
+
+def test_a_crash_mid_write_is_never_skipped_on_resume(
+    sandbox: Path, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    # A non-atomic writer killed mid-file: truncated JSON, non-zero exit, no marker.
+    monkeypatch.setattr(final.subprocess, "run", WritingRun(tmp_path / "out.json", '{"trunc', 1))
+    step = _step()
+    assert _run(step, tmp_path) == "failed"
+    assert not final.marker_path(step).exists()
+    resumed = _step()
+    rerun = WritingRun(tmp_path / "out.json", None, 0)
+    monkeypatch.setattr(final.subprocess, "run", rerun)
+    assert _run(resumed, tmp_path) == "failed"
+    assert "not valid JSON" in resumed.status
+    assert rerun.calls == 0, "an incomplete output is neither skipped nor overwritten"
+
+
+def test_exit_0_without_a_complete_output_is_a_failure_not_done(
+    sandbox: Path, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    monkeypatch.setattr(final.subprocess, "run", WritingRun(tmp_path / "out.json", None, 0))
+    step = _step()
+    assert _run(step, tmp_path) == "failed"
+    assert not final.marker_path(step).exists()
+
+
+def test_a_matching_marker_skips_and_a_stale_marker_stops(
+    sandbox: Path, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    monkeypatch.setattr(final.subprocess, "run", WritingRun(tmp_path / "out.json", '{"ok": 1}', 0))
+    assert _run(_step(), tmp_path) == "done"
+    never = WritingRun(tmp_path / "out.json", None, 0)
+    monkeypatch.setattr(final.subprocess, "run", never)
+    assert _run(_step(), tmp_path) == "skipped"
+    (tmp_path / "out.json").write_text('{"changed": 1}', encoding="utf-8")
+    stale = _step()
+    assert _run(stale, tmp_path) == "failed"
+    assert "does not match" in stale.status
+    assert never.calls == 0
+
+
+def test_a_complete_output_without_marker_is_recovered_not_rerun(
+    sandbox: Path, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    (tmp_path / "out.json").write_text('{"ok": 1}', encoding="utf-8")
+    never = WritingRun(tmp_path / "out.json", None, 0)
+    monkeypatch.setattr(final.subprocess, "run", never)
+    step = _step()
+    assert _run(step, tmp_path) == "skipped"
+    marker = json.loads(final.marker_path(step).read_text(encoding="utf-8"))
+    assert marker["recovered_without_marker"] is True
+    assert never.calls == 0
+
+
+def test_interrupted_exit_code_is_12() -> None:
+    assert (final.PREFLIGHT_FAILED, final.STEP_FAILED, final.INTERRUPTED) == (10, 11, 12)

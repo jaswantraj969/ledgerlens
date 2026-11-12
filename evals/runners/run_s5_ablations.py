@@ -15,6 +15,7 @@ from typing import Any
 
 import numpy as np
 
+from evals.atomic import write_text_atomic
 from evals.runners.run_cord_s1 import environment
 from evals.runners.run_s5 import RESULTS, evaluate, load
 from evals.s5 import SIGNAL_FAMILIES, TARGETS, Calibrator, choose_threshold
@@ -94,7 +95,7 @@ def main() -> None:
             "ablations": entries,
         }
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8", newline="\n")
+    write_text_atomic(output, json.dumps(result, indent=2) + "\n")
     print("wrote", output)
 
 

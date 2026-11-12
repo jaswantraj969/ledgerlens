@@ -16,6 +16,7 @@ from typing import Any
 
 import numpy as np
 
+from evals.atomic import write_text_atomic
 from evals.datasets.cord import DEFAULT_RAW_DIR, HEADER_FIELDS, iter_documents
 from evals.runners.run_cord_s1 import environment
 from evals.s5 import TARGETS, Calibrator, Unit, build_units, choose_threshold, routing_report
@@ -123,7 +124,7 @@ def main() -> None:
     else:
         output = RESULTS / "dev" / f"cord_s5_{base}{suffix}_validation_v1_1_1.json"
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8", newline="\n")
+    write_text_atomic(output, json.dumps(result, indent=2) + "\n")
     print("wrote", output)
 
 

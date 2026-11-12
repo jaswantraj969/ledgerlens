@@ -12,9 +12,17 @@ Order:
    not reproduce the recorded predictions, S5-S1 is "not evaluated" and its steps are skipped.
 4. Keep-awake is released, a summary is printed, and the metadata is saved.
 
-A step whose output file already exists is skipped, so after an interruption the same command
-resumes where it stopped. This script runs the existing runners only; it changes no code, config,
-prompt, threshold or result file of its own accord, and it writes no README text.
+Every runner writes its outputs atomically (evals/atomic.py). After a step exits 0 with a complete
+output, a done-marker holding the output's sha256 is written (evals/results/final/done/). On a
+rerun, a step is skipped only if its marker matches its output; an output without a marker is
+trusted only if it parses as a whole JSON object, and anything inconsistent stops the run. So
+after an interruption the same command resumes where it stopped.
+
+This script runs the existing runners only; it changes no code, config, prompt, threshold or
+result file of its own accord, and it writes no README text.
+
+Exit codes: 0 done; 10 pre-flight failed (test not read); 11 a step failed or AC power was lost;
+12 interrupted (Ctrl+C or the console closed), after which the same command resumes.
 
 --check-only runs the pre-flight (including starting and releasing keep-awake), checks that each
 runner accepts the flags the protocol uses, and lists the steps. It does not warm the model and
@@ -22,6 +30,7 @@ never reads test.
 """
 
 import argparse
+import hashlib
 import json
 import os
 import subprocess
@@ -35,11 +44,14 @@ from typing import Any
 
 import psutil
 
+from evals.atomic import write_text_atomic
+
 ROOT = Path(__file__).resolve().parents[2]
 RESULTS = ROOT / "evals" / "results"
 FINAL = RESULTS / "final"
 LOGS = ROOT / "docs" / "progress" / "logs"
 ABORTED = RESULTS / "aborted"
+DONE_DIR = Path("evals") / "results" / "final" / "done"
 PROTOCOL = "docs/evaluation/final-test-protocol.md"
 PROTOCOL_COMMIT = "2550b14"
 MODEL = "llama3.2:3b"
@@ -52,7 +64,7 @@ MAX_ATTEMPTS = 20
 RETRY_PAUSE_SECONDS = 30
 KEEP_AWAKE_MINUTES = 600
 ABORT_EXIT = 3
-PREFLIGHT_FAILED, STEP_FAILED = 10, 11
+PREFLIGHT_FAILED, STEP_FAILED, INTERRUPTED = 10, 11, 12  # 12: Ctrl+C or console close
 DOCKER_PROCESSES = ("docker desktop.exe", "com.docker.backend.exe", "com.docker.build.exe")
 PERTURBATIONS = ("blur-1.5", "blur-3.0", "jpeg-30", "jpeg-10")
 TEST = ["evals.runners.run_cord", "--split", "test", "--final"]
@@ -242,12 +254,60 @@ def _new_aborts(before: set[str]) -> list[str]:
     return sorted({p.name for p in ABORTED.glob("*.json")} - before)
 
 
+def marker_path(step: Step) -> Path:
+    """Done-marker of a step: written only after the step exited 0 and its output is complete."""
+    slug = "".join(c if c.isalnum() else "-" for c in step.name.lower())
+    return ROOT / DONE_DIR / f"{slug}.json"
+
+
+def _sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _complete_json(path: Path) -> bool:
+    try:
+        return isinstance(json.loads(path.read_text(encoding="utf-8")), dict)
+    except (OSError, ValueError):
+        return False
+
+
+def _write_marker(step: Step, output: Path, recovered: bool) -> None:
+    marker = {"step": step.name, "output": step.output, "output_sha256": _sha256(output),
+              "completed_utc": now(), "recovered_without_marker": recovered}  # fmt: skip
+    write_text_atomic(marker_path(step), json.dumps(marker, indent=2) + "\n")
+
+
+def already_done(step: Step, log: Any) -> str | None:
+    """'skipped' if the step is verifiably complete, 'failed' if its state is inconsistent, None
+    if it still has to run. A step is never skipped on the output's existence alone."""
+    output, marker = ROOT / step.output, marker_path(step)
+    if marker.exists():
+        recorded = json.loads(marker.read_text(encoding="utf-8"))["output_sha256"]
+        if output.exists() and _sha256(output) == recorded:
+            step.status = "skipped: done-marker present and output hash matches"
+            log(f"{step.name}: {step.status}")
+            return "skipped"
+        step.status = "failed: done-marker does not match the output; not skipped"
+        log(f"{step.name}: {step.status}")
+        return "failed"
+    if output.exists():
+        # Runners write outputs atomically, so a file here is complete unless something else
+        # wrote it. It is trusted only if it parses as a whole JSON object; otherwise stop.
+        if _complete_json(output):
+            _write_marker(step, output, recovered=True)
+            step.status = "skipped: complete output without done-marker; marker recovered"
+            log(f"{step.name}: {step.status}")
+            return "skipped"
+        step.status = "failed: output exists, has no done-marker and is not valid JSON"
+        log(f"{step.name}: {step.status}; not skipped, not overwritten")
+        return "failed"
+    return None
+
+
 def run_step(step: Step, log_file: Any, log: Any) -> str:
-    """'done', 'skipped' (output existed), 'failed' or 'power' (AC lost)."""
-    if (ROOT / step.output).exists():
-        step.status = "skipped: output already exists"
-        log(f"{step.name}: output exists, skipped")
-        return "skipped"
+    """'done', 'skipped' (verifiably complete), 'failed' or 'power' (AC lost)."""
+    if (state := already_done(step, log)) is not None:
+        return state
     for attempt in range(1, MAX_ATTEMPTS + 1):
         before = {p.name for p in ABORTED.glob("*.json")} if ABORTED.exists() else set()
         started = now()
@@ -263,6 +323,11 @@ def run_step(step: Step, log_file: Any, log: Any) -> str:
         step.attempts.append(record)
         log(f"{step.name}: attempt {attempt} exit {completed.returncode} aborts {aborts}")
         if completed.returncode == 0:
+            output = ROOT / step.output
+            if not _complete_json(output):
+                step.status = "failed: exit 0 but the output is missing or not valid JSON"
+                return "failed"
+            _write_marker(step, output, recovered=False)
             step.status = "done"
             return "done"
         if completed.returncode == ABORT_EXIT and any("on_battery" in a for a in aborts):
@@ -344,7 +409,7 @@ def main(argv: list[str] | None = None) -> int:
             return exit_code
         except KeyboardInterrupt:
             log("INTERRUPTED; rerun the same command to resume")
-            exit_code = 12
+            exit_code = INTERRUPTED
             return exit_code
         finally:
             log(keep_awake.release())
@@ -357,8 +422,7 @@ def main(argv: list[str] | None = None) -> int:
             metadata["ended_utc"] = now()
             metadata["exit_code"] = exit_code
             target = (FINAL if kind == "run" else LOGS) / f"final-{kind}-metadata-{stamp}.json"
-            target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_text(json.dumps(metadata, indent=2) + "\n", encoding="utf-8")
+            write_text_atomic(target, json.dumps(metadata, indent=2) + "\n")
             log("SUMMARY")
             for step in steps:
                 log(f"  {step.name}: {step.status}, attempts {len(step.attempts)}")

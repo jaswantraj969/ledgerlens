@@ -24,6 +24,7 @@ from typing import Any
 
 import numpy as np
 
+from evals.atomic import write_text_atomic
 from evals.datasets.cord import DEFAULT_RAW_DIR, HEADER_FIELDS, ROW_FIELDS, iter_documents
 from evals.memory_guard import MemoryLog, abort_run
 from evals.metrics import METRICS_VERSION
@@ -304,13 +305,11 @@ def main() -> None:
         actual = hashlib.sha256(dump.encode()).hexdigest()
         if actual != reference_sha:
             mismatch = PREDICTIONS / f"{name}_{scope}_records_rerun_mismatch.json"
-            mismatch.write_text(dump, encoding="utf-8", newline="\n")
+            write_text_atomic(mismatch, dump)
             sys.exit(f"records rerun predictions {actual} differ from recorded {reference_sha}")
-    prediction_path.write_text(dump, encoding="utf-8", newline="\n")
+    write_text_atomic(prediction_path, dump)
     if arguments.save_records:
-        records_path = RECORDS / f"{name}_{scope}.json"
-        records_path.parent.mkdir(parents=True, exist_ok=True)
-        records_path.write_text(json.dumps(saved_records), encoding="utf-8", newline="\n")
+        write_text_atomic(RECORDS / f"{name}_{scope}.json", json.dumps(saved_records))
 
     replayed = provider is not None and provider.live_calls == 0
     if provider is None or provider.hits == 0:
@@ -391,7 +390,7 @@ def main() -> None:
         if live_memory:
             result["memory_live_run"] = live_memory
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8", newline="\n")
+    write_text_atomic(output_path, json.dumps(result, indent=2) + "\n")
     print("wrote", output_path)
 
 
