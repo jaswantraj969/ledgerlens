@@ -22,7 +22,17 @@ case "${1:-}" in
   up) "${compose[@]}" up -d --build --wait --wait-timeout 300 ;;
   down) "${compose[@]}" down ;;
   test)
-    (cd backend && ../"$python" -m pytest -q) && npm --prefix frontend test
+    # The backend summary line is printed, and logged to var/test-summary.txt (gitignored),
+    # before Vitest starts, so callers that keep only the tail still see both results.
+    mkdir -p var
+    output=$(mktemp)
+    (cd backend && ../"$python" -m pytest -q) 2>&1 | tee "$output"
+    code=${PIPESTATUS[0]}
+    summary=$(grep -E "^[0-9]+ (passed|failed)|^=+ .*(passed|failed|error)" "$output" | tail -1)
+    rm -f "$output"
+    echo "BACKEND PYTEST SUMMARY: ${summary:-no summary line} (exit $code)" | tee -a var/test-summary.txt
+    [ "$code" -eq 0 ] || exit "$code"
+    npm --prefix frontend test
     ;;
   lint)
     (cd backend &&
