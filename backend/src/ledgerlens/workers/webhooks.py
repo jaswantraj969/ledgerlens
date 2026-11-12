@@ -1,8 +1,11 @@
 """Webhook events and signed delivery with retries.
 
 Signature: `X-LedgerLens-Signature: sha256=<hex>`, the HMAC-SHA256 of `<timestamp>.<body>` with the
-webhook's secret, where `<timestamp>` is `X-LedgerLens-Timestamp` (Unix seconds). Receivers should
-reject old timestamps. Payloads carry ids and states only, never field values or document text.
+webhook's secret, where `<timestamp>` is `X-LedgerLens-Timestamp` (Unix seconds). Receivers verify
+with `verify()`: a constant-time comparison, and a replay window that rejects timestamps more than
+`REPLAY_WINDOW_SECONDS` from the receiver's clock. Receivers should also drop repeated
+`X-LedgerLens-Delivery` ids. Payloads carry ids and states only, never field values or document
+text.
 
 Delivery runs on the RQ queue with backoff (`webhook_retry_intervals`). A non-2xx reply or a
 network error is retried; after the last attempt the delivery is marked failed.
@@ -32,6 +35,7 @@ from ledgerlens.workers.queue import queue_for
 _log = structlog.get_logger()
 EVENTS = ("job.completed", "job.ready_for_review", "job.failed", "document.reviewed")
 DELIVER_TASK = "ledgerlens.workers.webhooks.deliver"
+REPLAY_WINDOW_SECONDS = 300
 
 
 class UnsafeWebhookUrl(ValueError):
@@ -41,6 +45,34 @@ class UnsafeWebhookUrl(ValueError):
 def sign(secret: str, timestamp: int, body: bytes) -> str:
     message = str(timestamp).encode() + b"." + body
     return "sha256=" + hmac.new(secret.encode(), message, hashlib.sha256).hexdigest()
+
+
+def verify(
+    secret: str,
+    timestamp: str,
+    signature: str,
+    body: bytes,
+    *,
+    now: float | None = None,
+    window_seconds: int = REPLAY_WINDOW_SECONDS,
+) -> bool:
+    """Receiver-side check of a delivery: the signature matches and the timestamp is fresh."""
+    try:
+        sent = int(timestamp)
+    except ValueError:
+        return False
+    current = time.time() if now is None else now
+    if abs(current - sent) > window_seconds:
+        return False
+    return hmac.compare_digest(sign(secret, sent, body), signature)
+
+
+def _public(address: str) -> bool:
+    """Only globally routable unicast addresses; IPv4 inside IPv6 is unwrapped first."""
+    ip = ipaddress.ip_address(address.split("%")[0])
+    if isinstance(ip, ipaddress.IPv6Address) and ip.ipv4_mapped is not None:
+        ip = ip.ipv4_mapped
+    return ip.is_global and not ip.is_multicast
 
 
 def check_url(url: str, *, allow_insecure: bool) -> None:
@@ -56,10 +88,11 @@ def check_url(url: str, *, allow_insecure: bool) -> None:
         addresses = {info[4][0] for info in socket.getaddrinfo(parts.hostname, parts.port or 443)}
     except OSError as error:
         raise UnsafeWebhookUrl("the host does not resolve") from error
+    # Every resolved address must be public: private, loopback, link-local (cloud metadata),
+    # shared (100.64/10), reserved, multicast and unspecified addresses are all refused.
     for address in addresses:
-        ip = ipaddress.ip_address(str(address).split("%")[0])
-        if ip.is_private or ip.is_loopback or ip.is_link_local or ip.is_reserved:
-            raise UnsafeWebhookUrl("the host resolves to a private address")
+        if not _public(str(address)):
+            raise UnsafeWebhookUrl("the host resolves to a non-public address")
 
 
 def emit(
