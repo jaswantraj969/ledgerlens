@@ -1,0 +1,13 @@
+START 2026-11-12T16:37:39Z commit 563426a target=docker compose web on http://127.0.0.1:8081 (images rebuilt at this commit), worker in rules mode; inputs: CORD v2 train documents 0, 1, 2 (CC BY 4.0)
+
+Running 1 test using 1 worker
+
+  ok 1 e2e\screenshots.spec.ts:14:1 › portfolio screenshots (20.1s)
+
+  1 passed (23.9s)
+EXIT=0 END 2026-11-12T16:38:08Z
+total 460
+-rw-r--r-- 1 ~JR 197609  26208 Nov 12 21:38 1-documents.png
+-rw-r--r-- 1 ~JR 197609 268561 Nov 12 21:38 2-review.png
+-rw-r--r-- 1 ~JR 197609  53440 Nov 12 21:38 3-queue.png
+-rw-r--r-- 1 ~JR 197609 111910 Nov 12 21:38 4-report.png
