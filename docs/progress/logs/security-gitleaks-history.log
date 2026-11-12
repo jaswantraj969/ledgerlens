@@ -1,0 +1,6 @@
+START 2026-11-12T15:42:46Z commit 0708fb3 commits in history: 136
+version is set by build process
+[90m8:42PM[0m [32mINF[0m 136 commits scanned.
+[90m8:42PM[0m [32mINF[0m scan completed in 607ms
+[90m8:42PM[0m [32mINF[0m no leaks found
+EXIT=0 END 2026-11-12T15:42:47Z

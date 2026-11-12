@@ -1,0 +1,109 @@
+START 2026-11-12T15:42:57Z commit 0708fb3; requirements from 'uv export --frozen --all-extras' (backend/uv.lock)
+Downloading pip (1.9MiB)
+ Downloaded pip
+Installed 28 packages in 1.02s
+pip-audit 2.10.1
+WARNING:pip_audit._cli:--no-deps is supported, but users are encouraged to fully hash their pinned dependencies
+WARNING:pip_audit._cli:Consider using a tool like `pip-compile`: https://pip-tools.readthedocs.io/en/latest/#using-hashes
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+WARNING:cachecontrol.controller:Cache entry deserialization failed, entry ignored
+Found 1 known vulnerability in 1 package
+Name    Version ID              Fix Versions
+------- ------- --------------- ------------------------------------------
+litellm 1.97.0  CVE-2026-114612 1.100.4,1.101.3,1.102.2,1.103.1,1.104.0rc2
+EXIT=1 END 2026-11-12T15:45:07Z
+
+== rerun after removing the unused 'llm' extra (litellm)
+START 2026-11-12T15:57:54Z
+WARNING:pip_audit._cli:--no-deps is supported, but users are encouraged to fully hash their pinned dependencies
+WARNING:pip_audit._cli:Consider using a tool like `pip-compile`: https://pip-tools.readthedocs.io/en/latest/#using-hashes
+No known vulnerabilities found
+EXIT=0 END 2026-11-12T15:58:51Z

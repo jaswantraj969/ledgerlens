@@ -1,0 +1,18 @@
+START 2026-11-12T15:49:08Z commit 0708fb3 plus uncommitted security fixes
+ Container ledgerlens-postgres-1 Healthy 
+ Container ledgerlens-worker-1 Healthy 
+ Container ledgerlens-web-1 Healthy 
+ Container ledgerlens-api-1 Healthy 
+compose EXIT=0
+user in api: uid=10001(app) gid=10001(app) groups=10001(app)
+user in worker: uid=10001(app) gid=10001(app) groups=10001(app)
+user in web: uid=10002(web) gid=10002(web) groups=10002(web)
+web /api/metrics (proxy): 404
+web /api/health/ready (proxy): 200
+web / : 200
+api /metrics direct (127.0.0.1 only): 200
+api /documents without credentials: 401
+END 2026-11-12T15:57:44Z
+== 2026-11-12T15:59:59Z server process users (name uid), excluding the inspecting shell
+postgres: postgres 70
+redis: redis-server 999
