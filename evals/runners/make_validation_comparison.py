@@ -46,7 +46,7 @@ def _power(result: dict[str, Any]) -> str:
     if power["label"] == "battery-affected":
         total = power["timings_ac"] + power["timings_battery"] + power["timings_unknown"]
         return f"**battery-affected** ({power['timings_battery']} of {total} timings)"
-    return power["label"]
+    return str(power["label"])
 
 
 def _timings(result: dict[str, Any]) -> str:
@@ -58,7 +58,7 @@ def _timings(result: dict[str, Any]) -> str:
     if not replayed or not replayed["replayed"]:
         return text
     states = replayed["replayed_power_at_recording"]
-    return (
+    return str(
         f"{text}. Replayed calls ({replayed['replayed']}) recorded "
         f"{replayed['replayed_recorded_first_utc']} to {replayed['replayed_recorded_last_utc']}, "
         f"{replayed['replayed_recorded_before_this_run']} of them before this run; power at "

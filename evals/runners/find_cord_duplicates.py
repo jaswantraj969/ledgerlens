@@ -13,7 +13,7 @@ import json
 from collections import defaultdict
 from collections.abc import Callable
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 from evals.datasets.cord import DEFAULT_RAW_DIR, iter_documents
 from evals.runners.run_cord import ocr_path
@@ -58,12 +58,13 @@ def main() -> None:
         for group in cross:
             print("  " + ", ".join(document for _, document in group))
             documents = [document for _, document in group]
-            test = [d for d in documents if ":test:" in d]
-            test_pairs |= {(other, t) for t in test for other in documents if other != t}
+            in_test = [d for d in documents if ":test:" in d]
+            test_pairs |= {(other, t) for t in in_test for other in documents if other != t}
     wanted = {document for pair in test_pairs for document in pair}
     seen: dict[str, tuple[str, str]] = {}
-    for split in ("train", "validation", "test"):
-        for document in iter_documents(split, DEFAULT_RAW_DIR, with_images=True):  # type: ignore[arg-type]
+    splits: tuple[Literal["train", "validation", "test"], ...] = ("train", "validation", "test")
+    for split in splits:
+        for document in iter_documents(split, DEFAULT_RAW_DIR, with_images=True):
             if document.document_id in wanted:
                 gold = json.dumps([document.gold, document.gold_rows], sort_keys=True, default=str)
                 seen[document.document_id] = (
