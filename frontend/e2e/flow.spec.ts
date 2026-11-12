@@ -24,7 +24,7 @@ test('upload, review and export one invoice', async ({ page, request }) => {
   await expect(status).toHaveText(/ready_for_review|completed/, { timeout: 90_000 })
 
   await page.getByRole('link', { name: 'invoice.pdf' }).click()
-  await expect(page.getByRole('img', { name: 'Page 1' })).toBeVisible()
+  await expect(page.getByRole('img', { name: 'Page 1', exact: true })).toBeVisible()
   expect(await page.getByTestId('evidence-box').count()).toBeGreaterThan(0)
 
   const total = page.getByTestId('field-total_amount')

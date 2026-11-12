@@ -35,7 +35,7 @@ test('portfolio screenshots', async ({ page, request }) => {
   await page.screenshot({ path: join(OUT!, '1-documents.png') })
 
   await page.locator('a[href^="#/documents/"]').first().click()
-  await expect(page.getByRole('img', { name: 'Page 1' }).first()).toBeVisible()
+  await expect(page.getByRole('img', { name: 'Page 1', exact: true })).toBeVisible()
   await page.waitForTimeout(500)
   await page.screenshot({ path: join(OUT!, '2-review.png'), fullPage: true })
 
