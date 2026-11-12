@@ -7,7 +7,7 @@ Generated from `cord_s1_validation_v1_1_1.json`. Do not edit by hand.
 - Schema: cord_receipt 1.1.0. Split sha256: `e809a1edf8320960479a1f79e7e2c086aaca4793dbf9c91fc354eaca2c656852`.
 - Predictions sha256: `d4b2385e1529fa38f4ec4c63ebc669a4a4bebed7247ef3b0eb35187bcd507b18`.
 - Intervals: 95% bootstrap, 2000 resamples of documents, seed 20261106.
-- Commit: `6edbc06b704e264567dcfd1ee1241c5aa5153209`, dirty: False.
+- Commit: `cd5a82dd110fc7de48f048a4004ff3b0b22f4b74`, dirty: False.
 
 ## Single-valued fields
 
@@ -59,6 +59,6 @@ Power state of timings: ac (100 on AC, 0 on battery, 0 unknown; cache file modif
 
 - OCR: p50 2.55 s, p95 4.71 s (n=100).
 - Total per document: p50 2.55 s, p95 4.71 s (n=100). No model is used.
-- Memory: peak process RSS 0.108 GiB, peak model runner RSS 1.674 GiB, lowest available system RAM 1.382 of 15.638 GiB.
+- Memory: peak process RSS 0.108 GiB, peak model runner RSS 0.042 GiB, lowest available system RAM 4.015 of 15.638 GiB.
 
 Gold values excluded as unparsable: none.

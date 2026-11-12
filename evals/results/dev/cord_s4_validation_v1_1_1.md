@@ -7,7 +7,7 @@ Generated from `cord_s4_validation_v1_1_1.json`. Do not edit by hand.
 - Schema: cord_receipt 1.1.0. Split sha256: `e809a1edf8320960479a1f79e7e2c086aaca4793dbf9c91fc354eaca2c656852`.
 - Predictions sha256: `76ef47e2beac9cfe9e18aa15a829506c9abd910490707e2ee1eaeb5faa1cea90`.
 - Intervals: 95% bootstrap, 2000 resamples of documents, seed 20261106.
-- Commit: `6edbc06b704e264567dcfd1ee1241c5aa5153209`, dirty: False.
+- Commit: `cd5a82dd110fc7de48f048a4004ff3b0b22f4b74`, dirty: False.
 
 ## Single-valued fields
 
@@ -59,7 +59,7 @@ Power state of timings: ac (301 on AC, 0 on battery, 0 unknown; cache file modif
 
 - OCR: p50 2.55 s, p95 4.71 s (n=100).
 - Warm LLM, load excluded: p50 4.73 s, p95 11.20 s (n=98).
-- Warm total per document: p50 7.45 s, p95 14.81 s (n=98).
+- Warm total per document: p50 7.43 s, p95 14.80 s (n=98).
 - Cold documents: 2. Model load (s): [69.6, 7.44]. Cold LLM time excluding load (s): [63.46, 8.12].
 - Memory, live run: peak process RSS 0.971 GiB, peak model runner RSS 2.664 GiB, lowest available system RAM 0.253 of 15.638 GiB.
 

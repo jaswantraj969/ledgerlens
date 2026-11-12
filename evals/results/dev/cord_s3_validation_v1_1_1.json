@@ -298,8 +298,8 @@
     },
     "extraction_excluding_llm": {
       "n": 100,
-      "p50": 0.0034333499997956096,
-      "p95": 0.007231104999527815
+      "p50": 0.0048164499999074906,
+      "p95": 0.00953136999964954
     },
     "warm_llm": {
       "n": 98,
@@ -308,8 +308,8 @@
     },
     "warm_total": {
       "n": 98,
-      "p50": 5.259452550014068,
-      "p95": 9.911614325017856
+      "p50": 5.259223350013691,
+      "p95": 9.91212518501798
     },
     "cold": {
       "documents": 2,
@@ -333,8 +333,8 @@
   },
   "memory": {
     "peak_process_rss_gib": 0.109,
-    "peak_model_runner_rss_gib": 0.044,
-    "lowest_available_system_ram_gib": 2.616,
+    "peak_model_runner_rss_gib": 0.042,
+    "lowest_available_system_ram_gib": 4.009,
     "total_system_ram_gib": 15.638,
     "abort_below_gib": 0.4
   },
@@ -342,7 +342,7 @@
   "cost_per_document_usd": 0,
   "output_file": "evals/results/dev/cord_s3_validation_v1_1_1.json",
   "environment": {
-    "git_commit": "6edbc06b704e264567dcfd1ee1241c5aa5153209",
+    "git_commit": "cd5a82dd110fc7de48f048a4004ff3b0b22f4b74",
     "git_dirty": false,
     "python": "3.12.13",
     "platform": "Windows-11-10.0.26300-SP0",

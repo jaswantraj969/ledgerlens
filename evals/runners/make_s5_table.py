@@ -55,6 +55,37 @@ def rows(name: str, variant: str, block: dict[str, Any]) -> list[str]:
     return lines
 
 
+def records(name: str, variant: str, block: dict[str, Any], source: Path) -> list[dict[str, Any]]:
+    """The table's rows as JSON, with full precision and the source file of each."""
+    out = []
+    for kind in ("header", "row"):
+        report = block[kind]
+        for target, values in report["targets"].items():
+            out.append(
+                {
+                    "system": name,
+                    "variant": variant,
+                    "units": kind,
+                    "target_precision": float(target),
+                    "threshold": values["threshold"],
+                    "accepted": values["accepted"],
+                    "slots": report["slots"],
+                    "automation_rate": values["automation_rate"],
+                    "automation_rate_ci95": values["automation_rate_ci95"],
+                    "achieved_precision": values["achieved_precision"],
+                    "achieved_precision_ci95": values["achieved_precision_ci95"],
+                    "target_met": values["target_met"],
+                    "ece_10_bins": report["ece_10_bins"],
+                    "brier": report["brier"],
+                    "roc_auc": report["roc_auc"],
+                    "units_scored": report["units"],
+                    "documents": report["documents"],
+                    "source": source.relative_to(ROOT).as_posix(),
+                }
+            )
+    return out
+
+
 def final(bases: list[str]) -> None:
     lines = [
         "# S5 on test: S5-S1 next to S5-S4h (metrics 1.1.1, final read)",
@@ -68,6 +99,7 @@ def final(bases: list[str]) -> None:
         "| ROC-AUC | Units scored |",
         "|---|---|---|---|---|---|---|---|---|---|---|---|---|",
     ]
+    summary: list[dict[str, Any]] = []
     for base in bases:
         for variant, suffix in (("all", ""), ("grouped", "_grouped")):
             path = RESULTS / f"cord_s5_{base}{suffix}_v1_1_1.json"
@@ -76,6 +108,7 @@ def final(bases: list[str]) -> None:
             result = json.loads(path.read_text(encoding="utf-8"))
             for key, label in TEST_BLOCKS[variant]:
                 lines += rows(result["system"], label, result[key])
+                summary += records(result["system"], label, result[key], path)
     lines += [
         "",
         "Slots: header slots are 3 per document, filled or not; row slots are predicted rows. "
@@ -85,7 +118,12 @@ def final(bases: list[str]) -> None:
     ]
     FINAL_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     FINAL_OUTPUT.write_text("\n".join(lines), encoding="utf-8", newline="\n")
-    print("wrote", FINAL_OUTPUT)
+    FINAL_OUTPUT.with_suffix(".json").write_text(
+        json.dumps({"metrics_version": "1.1.1", "split": "test", "rows": summary}, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
+    print("wrote", FINAL_OUTPUT, "and its JSON")
 
 
 def main(argv: list[str] | None = None) -> None:

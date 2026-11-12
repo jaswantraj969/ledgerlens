@@ -125,8 +125,8 @@
         "warm_llm": null,
         "warm_total": {
           "n": 100,
-          "p50": 2.5514053000033527,
-          "p95": 4.708131830011689
+          "p50": 2.5515782000029503,
+          "p95": 4.708304315010627
         },
         "cold": {
           "documents": 0,
@@ -142,7 +142,7 @@
         "source": "Windows Kernel-Power event 105",
         "method": "cache file modification time per recorded timing"
       },
-      "lowest_available_system_ram_gib": 1.382
+      "lowest_available_system_ram_gib": 4.015
     },
     {
       "system": "S2",
@@ -270,8 +270,8 @@
         },
         "warm_total": {
           "n": 98,
-          "p50": 5.27893895000768,
-          "p95": 9.920485995017092
+          "p50": 5.261009750014274,
+          "p95": 9.91209402501768
         },
         "cold": {
           "documents": 2,
@@ -421,8 +421,8 @@
         },
         "warm_total": {
           "n": 98,
-          "p50": 5.259452550014068,
-          "p95": 9.911614325017856
+          "p50": 5.259223350013691,
+          "p95": 9.91212518501798
         },
         "cold": {
           "documents": 2,
@@ -444,7 +444,7 @@
         "source": "Windows Kernel-Power event 105",
         "method": "cache file modification time per recorded timing"
       },
-      "lowest_available_system_ram_gib": 2.616
+      "lowest_available_system_ram_gib": 4.009
     },
     {
       "system": "S4",
@@ -572,8 +572,8 @@
         },
         "warm_total": {
           "n": 98,
-          "p50": 7.447870349991336,
-          "p95": 14.811928649979972
+          "p50": 7.432485499991418,
+          "p95": 14.80144894997984
         },
         "cold": {
           "documents": 2,
