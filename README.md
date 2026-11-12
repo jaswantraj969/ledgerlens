@@ -2,7 +2,7 @@
 
 Evaluation-driven extraction of invoices and receipts: parse with provenance, extract to a schema, verify every value against the source document, and route uncertain values to a person.
 
-**Status: work in progress.** Research prototype evaluated on public datasets. Not validated for production use. No compliance certification. Licence: not chosen yet. Progress: [docs/progress/TASKS.md](docs/progress/TASKS.md). Limitations: [docs/limitations.md](docs/limitations.md).
+**Status: v1.0.0, research prototype.** Research prototype evaluated on public datasets. Not validated for production use. No compliance certification. Licence: MIT ([LICENSE](LICENSE)). Progress: [docs/progress/TASKS.md](docs/progress/TASKS.md). Limitations: [docs/limitations.md](docs/limitations.md).
 
 ## What it is
 
@@ -162,4 +162,4 @@ Source: [cord_degradation_test_v1_1_1.md](evals/results/final/cord_degradation_t
 
 ## Licence
 
-Not chosen yet.
+MIT, copyright 2026 Jaswant Raj. See [LICENSE](LICENSE). Datasets keep their own licences (see Data and licences above).
