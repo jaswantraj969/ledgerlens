@@ -1,0 +1,118 @@
+2026-11-12T20:10:51Z START release fresh-clone check (same procedure as phase 12); source HEAD c9fd0db3adaa0067b7231f4019de4d243e8d00de
+2026-11-12T20:10:51Z Environment, not README steps: the main working copy's stack is stopped first (same ports);
+2026-11-12T20:10:51Z COMPOSE_PROJECT_NAME=ledgerlens-fresh gives the clone its own containers and volumes;
+2026-11-12T20:10:51Z port 8080 is held by an unrelated httpd on this machine, so the README's --web-port 8081 option is used.
+ Container ledgerlens-web-1 Stopping 
+ Container ledgerlens-worker-1 Stopping 
+ Container ledgerlens-web-1 Stopped 
+ Container ledgerlens-worker-1 Stopped 
+ Container ledgerlens-web-1 Removing 
+ Container ledgerlens-worker-1 Removing 
+ Container ledgerlens-worker-1 Removed 
+ Container ledgerlens-web-1 Removed 
+ Container ledgerlens-api-1 Stopping 
+ Container ledgerlens-api-1 Stopped 
+ Container ledgerlens-api-1 Removing 
+ Container ledgerlens-api-1 Removed 
+ Container ledgerlens-redis-1 Stopping 
+ Container ledgerlens-postgres-1 Stopping 
+ Container ledgerlens-redis-1 Stopped 
+ Container ledgerlens-redis-1 Removing 
+ Container ledgerlens-redis-1 Removed 
+ Container ledgerlens-postgres-1 Stopped 
+ Container ledgerlens-postgres-1 Removing 
+ Container ledgerlens-postgres-1 Removed 
+ Network ledgerlens_default Removing 
+ Network ledgerlens_default Removed 
+2026-11-12T20:10:55Z main stack stopped (volumes kept)
+2026-11-12T20:10:55Z == STEP clone: git clone <working copy> /c/Users/jknm6/AppData/Local/Temp/llc-201051
+2026-11-12T20:10:56Z    clone HEAD c9fd0db3adaa0067b7231f4019de4d243e8d00de; tracked files 770; untracked in clone: '0'
+2026-11-12T20:10:56Z == STEP init_env: python scripts/init_env.py --web-port 8081
+   | wrote .env with new random secrets
+2026-11-12T20:10:57Z    EXIT=0 (init_env)
+2026-11-12T20:10:57Z == STEP tasks.sh up: bash scripts/tasks.sh up
+   |  Container ledgerlens-fresh-web-1 Waiting 
+   |  Container ledgerlens-fresh-postgres-1 Waiting 
+   |  Container ledgerlens-fresh-redis-1 Waiting 
+   |  Container ledgerlens-fresh-postgres-1 Healthy 
+   |  Container ledgerlens-fresh-redis-1 Healthy 
+   |  Container ledgerlens-fresh-worker-1 Healthy 
+   |  Container ledgerlens-fresh-web-1 Healthy 
+   |  Container ledgerlens-fresh-api-1 Healthy 
+2026-11-12T20:18:11Z    EXIT=0 (tasks.sh up)
+2026-11-12T20:18:11Z == STEP web reachable: curl -s -o /dev/null -w web / %{http_code}\n http://127.0.0.1:8081/
+   | web / 200
+2026-11-12T20:18:11Z    EXIT=0 (web reachable)
+2026-11-12T20:18:12Z == STEP uv sync: bash -c cd backend && uv sync --python 3.12 --extra eval --extra ocr && cd ..
+   |  + uvicorn==0.54.0
+   |  + virtualenv==21.15.5
+   |  + watchfiles==1.3.0
+   |  + websockets==17.4
+2026-11-12T20:18:27Z    EXIT=0 (uv sync)
+2026-11-12T20:18:27Z == STEP npm ci: npm --prefix frontend ci
+   | 25 packages are looking for funding
+   |   run `npm fund` for details
+   | 
+   | found 0 vulnerabilities
+2026-11-12T20:18:42Z    EXIT=0 (npm ci)
+2026-11-12T20:18:42Z == STEP tasks.sh test: bash scripts/tasks.sh test
+   | > ledgerlens-frontend@1.0.0 test
+   | > vitest run
+   | 
+   | 
+   |  RUN  v5.1.0 C:/Users/jknm6/AppData/Local/Temp/llc-201051/frontend
+   | 
+   | 
+   |  Test Files  3 passed (3)
+   |       Tests  37 passed (37)
+   |    Start at  01:23:03
+   |    Duration  5.58s (environment 59%, tests 19%, setup 11%, import 6%, transform 4%, worker 1%)
+   | 
+2026-11-12T20:23:08Z    EXIT=0 (tasks.sh test)
+2026-11-12T20:23:09Z    BACKEND PYTEST SUMMARY: 493 passed, 1 warning in 253.20s (0:04:13) (exit 0)
+2026-11-12T20:23:09Z == STEP tasks.sh lint: bash scripts/tasks.sh lint
+   | All checks passed!
+   | 179 files already formatted
+2026-11-12T20:23:09Z    EXIT=0 (tasks.sh lint)
+2026-11-12T20:23:10Z == STEP tasks.sh typecheck: bash scripts/tasks.sh typecheck
+   | Success: no issues found in 107 source files
+2026-11-12T20:23:23Z    EXIT=0 (tasks.sh typecheck)
+2026-11-12T20:23:23Z == STEP tasks.sh eval-smoke: bash scripts/tasks.sh eval-smoke
+   | classic: 3 documents, 0 failed
+   | modern: 3 documents, 0 failed
+   | receipt: 3 documents, 0 failed
+   | statement: 3 documents, 0 failed
+   | ledger: 3 documents, 0 failed
+   | wrote C:\Users\jknm6\AppData\Local\Temp\llc-201051\evals\results\dev\synthetic_smoke.json
+2026-11-12T20:23:29Z    EXIT=0 (tasks.sh eval-smoke)
+2026-11-12T20:23:29Z == STEP e2e: env E2E_BASE_URL=http://127.0.0.1:8081 npm --prefix frontend run e2e
+   | 
+   |     ────────────────────────────────────────────────────────────────────────────────────────────────
+   | 
+   |   1 failed
+   |     e2e\flow.spec.ts:7:1 › upload, review and export one invoice ───────────────────────────────────
+   |   1 skipped
+2026-11-12T20:23:39Z    EXIT=1 (e2e)
+2026-11-12T20:23:39Z == STEP runtime security checks
+2026-11-12T20:23:40Z    user in api: uid=10001(app) gid=10001(app) groups=10001(app)
+2026-11-12T20:23:40Z    user in worker: uid=10001(app) gid=10001(app) groups=10001(app)
+2026-11-12T20:23:40Z    user in web: uid=10002(web) gid=10002(web) groups=10002(web)
+2026-11-12T20:23:40Z    postgres server: postgres 70;
+2026-11-12T20:23:41Z    redis server: redis-server 999;
+2026-11-12T20:23:41Z    web /api/metrics via proxy: 404 (expect 404)
+2026-11-12T20:23:41Z    web /api/health/ready via proxy: 200 (expect 200)
+2026-11-12T20:23:41Z    api /documents without credentials: 401 (expect 401)
+2026-11-12T20:23:41Z    api /metrics direct on 127.0.0.1: 200 (expect 200)
+2026-11-12T20:23:41Z == STEP tasks.sh down: bash scripts/tasks.sh down
+   |  Container ledgerlens-fresh-redis-1 Removed 
+   |  Container ledgerlens-fresh-postgres-1 Stopped 
+   |  Container ledgerlens-fresh-postgres-1 Removing 
+   |  Container ledgerlens-fresh-postgres-1 Removed 
+   |  Network ledgerlens-fresh_default Removing 
+   |  Network ledgerlens-fresh_default Removed 
+2026-11-12T20:23:50Z    EXIT=0 (tasks.sh down)
+2026-11-12T20:23:50Z tracked files modified after the run: none
+2026-11-12T20:23:50Z untracked files after the run: 0 (all should be gitignored outputs; listed below)
+2026-11-12T20:24:13Z clean-up: clone volumes removed; main stack restarted (exit 0)
+2026-11-12T20:24:13Z FAILED_STEPS=1
+2026-11-12T20:24:13Z END
