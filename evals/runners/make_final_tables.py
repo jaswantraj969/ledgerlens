@@ -116,34 +116,41 @@ def degradation_figure(means: dict[str, dict[str, float | None]]) -> None:
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
-    figure, axis = plt.subplots(figsize=(7.2, 4.0), dpi=150)
+    names = dict(CONDITIONS)
+    # One panel per perturbation kind, each from clean through its two severities, on a shared
+    # y-axis: no line runs from one kind to the other.
+    panels = (("Gaussian blur", ("clean", "blur-1.5", "blur-3.0")),
+              ("JPEG compression", ("clean", "jpeg-30", "jpeg-10")))  # fmt: skip
+    figure, axes = plt.subplots(1, 2, figsize=(7.2, 4.0), dpi=150, sharey=True)
     figure.patch.set_facecolor(SURFACE)
-    axis.set_facecolor(SURFACE)
-    positions = list(range(len(CONDITIONS)))
-    for label, values in means.items():
-        points = [(x, values[c]) for x, (c, _) in zip(positions, CONDITIONS, strict=True)]
-        points = [(x, y) for x, y in points if y is not None]
-        if not points:
-            continue
-        xs, ys = zip(*points, strict=True)
-        style = {"color": SERIES_COLORS[label], "marker": SERIES_MARKERS[label]}
-        axis.plot(xs, ys, linewidth=2, markersize=8, markeredgecolor=SURFACE,
-                  markeredgewidth=2, label=label, **style)  # fmt: skip
-        axis.annotate(label, (xs[-1], ys[-1]), xytext=(8, 0), textcoords="offset points",
-                      va="center", color=INK, fontsize=9)  # fmt: skip
-    axis.set_xticks(positions, [name for _, name in CONDITIONS], color=INK_SECONDARY, fontsize=9)
-    axis.set_ylim(0, 1)
-    axis.set_ylabel("Mean of four F1", color=INK_SECONDARY, fontsize=9)
-    axis.tick_params(axis="y", colors=INK_SECONDARY, labelsize=9)
-    axis.tick_params(axis="x", length=0)
-    axis.grid(axis="y", color=GRID, linewidth=0.8)
-    axis.set_axisbelow(True)
-    for side in ("top", "right", "left"):
-        axis.spines[side].set_visible(False)
-    axis.spines["bottom"].set_color(GRID)
-    axis.set_title("Mean F1 on CORD test under image degradation", color=INK, fontsize=11,
-                   loc="left")  # fmt: skip
-    axis.legend(frameon=False, fontsize=9, loc="lower left", labelcolor=INK)
+    for axis, (title, family) in zip(axes, panels, strict=True):
+        axis.set_facecolor(SURFACE)
+        for label, values in means.items():
+            points = [(x, values[c]) for x, c in enumerate(family) if values.get(c) is not None]
+            if not points:
+                continue
+            xs, ys = zip(*points, strict=True)
+            axis.plot(xs, ys, linewidth=2, markersize=8, markeredgecolor=SURFACE,
+                      markeredgewidth=2, label=label, color=SERIES_COLORS[label],
+                      marker=SERIES_MARKERS[label])  # fmt: skip
+            axis.annotate(label, (xs[-1], ys[-1]), xytext=(8, 0), textcoords="offset points",
+                          va="center", color=INK, fontsize=9)  # fmt: skip
+        axis.set_xticks(range(len(family)), [names[c] for c in family], color=INK_SECONDARY,
+                        fontsize=9)  # fmt: skip
+        axis.set_xlim(-0.3, len(family) - 0.5)
+        axis.set_title(title, color=INK, fontsize=10, loc="left")
+        axis.tick_params(axis="y", colors=INK_SECONDARY, labelsize=9)
+        axis.tick_params(axis="x", length=0)
+        axis.grid(axis="y", color=GRID, linewidth=0.8)
+        axis.set_axisbelow(True)
+        for side in ("top", "right", "left"):
+            axis.spines[side].set_visible(False)
+        axis.spines["bottom"].set_color(GRID)
+    axes[0].set_ylim(0, 1)
+    axes[0].set_ylabel("Mean of four F1", color=INK_SECONDARY, fontsize=9)
+    axes[0].legend(frameon=False, fontsize=9, loc="lower left", labelcolor=INK)
+    figure.suptitle("Mean F1 on CORD test under image degradation", color=INK, fontsize=11,
+                    x=0.02, ha="left")  # fmt: skip
     figure.tight_layout()
     figure.savefig(FINAL / "cord_degradation_test_v1_1_1.png", facecolor=SURFACE)
     plt.close(figure)
