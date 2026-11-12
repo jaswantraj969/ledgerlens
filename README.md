@@ -6,7 +6,7 @@ Evaluation-driven extraction of invoices and receipts: parse with provenance, ex
 
 ## What it is
 
-- **Application:** you upload a PDF, JPEG or PNG, and a background worker extracts the total, subtotal, tax and line items. Each value keeps the page region it came from, is checked against the document text and arithmetic rules, and either goes to a review queue or is accepted. Reviewed results export as CSV or JSON, and signed webhooks report job events.
+- **Application:** you upload a PDF, JPEG or PNG, and a background worker extracts the total, subtotal, tax and line items. Each value keeps the page region it came from, is checked against the document text and arithmetic rules, and either goes to a review queue or is accepted. Reviewed results export as CSV or JSON, one document or up to 50 at once; each document's audit trail (who did what and when, with the old and new value) shows on its review page; signed webhooks report job events.
 - **Evaluation:** the same pipeline is measured on the public CORD v2 receipt dataset and on seeded synthetic invoices, under protocols committed before any test data was read. Results are below.
 
 ### Screenshots
