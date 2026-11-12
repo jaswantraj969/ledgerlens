@@ -26,7 +26,7 @@ Source: `evals/results/final/cord_test_comparison_v1_1_1.md`.
 
 - **The LLM did not beat the tuned rules on CORD.** It was slightly ahead on total, with overlapping intervals, and behind on tax and line items.
 - **On an unseen synthetic invoice layout it did transfer where the rules failed** (`evals/results/synthetic_s1_v1_1_1.md`, `evals/results/synthetic_s2p_v1_1_1.md`).
-- **Review routing (S5-S1, target precision 0.98):** 19% of header fields skipped review (0.193), with measured precision 0.966 [0.906, 1.000]. That is below the target point, but the interval contains it. Only 3 of 253 line-item rows were accepted, so a person reviews essentially every line item. Source: `evals/results/final/cord_s5_test_v1_1_1.md`.
+- **Review routing (S5-S1, target precision 0.98):** 19% of header fields skipped review (0.193), with 0.966 measured precision. The target was 0.98: the point estimate is below it, and the 95% interval [0.906, 1.000] contains it. Only 3 of 253 line-item rows were accepted, so a person reviews essentially every line item. Source: `evals/results/final/cord_s5_test_v1_1_1.md`.
 - **Blur:** strong blur cut the mean of four F1 scores for the rules from 0.681 to 0.446. Source: `evals/results/final/cord_degradation_test_v1_1_1.md`.
 
 ## What went wrong, and what I did about it

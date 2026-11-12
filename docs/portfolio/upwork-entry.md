@@ -13,7 +13,7 @@ LedgerLens reads receipts and invoices (PDF, JPEG, PNG) and extracts the total, 
 The focus was honest measurement. The test protocol was committed before the test data was read, and the test split was read once. On the public CORD v2 receipt dataset (100 test receipts):
 - The tuned rules scored total F1 0.793; rules plus a local LLM scored 0.827, with overlapping confidence intervals.
 - The rules stayed ahead on tax (0.763 against 0.508) and on line items (0.365 against 0.253).
-- A calibrated router let 19% of header fields skip review, at 0.966 measured precision. Line items still go to a person.
+- A calibrated router let 19% of header fields skip review, at 0.966 measured precision. The target was 0.98: the point estimate is below it, and the 95% interval [0.906, 1.000] contains it. Line items still go to a person.
 
 Stack: Python, FastAPI, SQLAlchemy, Alembic, PostgreSQL, Redis, RQ, RapidOCR, Ollama (llama3.2:3b, local), scikit-learn, React, TypeScript, Vite, Tailwind, Playwright, Docker Compose, Caddy.
 
@@ -23,4 +23,4 @@ Stack: Python, FastAPI, SQLAlchemy, Alembic, PostgreSQL, Redis, RQ, RapidOCR, Ol
 
 ## Sources for every number
 - 100 test receipts; total F1 0.793 (S1) and 0.827 (S4h); tax 0.763 against 0.508; rows 0.365 against 0.253: `evals/results/final/cord_test_comparison_v1_1_1.md`
-- 19% of header fields (0.193) at 0.966 precision: `evals/results/final/cord_s5_test_v1_1_1.md` (S5-S1, all variant, target 0.98)
+- 19% of header fields (0.193) at 0.966 precision [0.906, 1.000], target 0.98: `evals/results/final/cord_s5_test_v1_1_1.md` (S5-S1, all variant, target 0.98)
