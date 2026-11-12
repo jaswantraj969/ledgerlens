@@ -1,0 +1,87 @@
+# Release pre-push audit, 2026-11-12T20:33:15Z, HEAD f6e62aed2f8333c9eb00470623ade622608bfcb9
+Remotes: '' (none). Nothing has been pushed.
+
+## 1. Identities (172 commits, all refs)
+Authors:
+    172   jaswantraj969 <jaswantraj969@gmail.com>
+Committers:
+    172   jaswantraj969 <jaswantraj969@gmail.com>
+
+## 2. Attribution patterns (case-insensitive; patterns 1-5 are the five strings in the release instructions)
+  pattern 1: 0 commit messages, 0 tracked files
+  pattern 2: 0 commit messages, 0 tracked files
+  pattern 3: 0 commit messages, 0 tracked files
+  pattern 4: 0 commit messages, 0 tracked files
+  pattern 5: 0 commit messages, 0 tracked files
+  trailers present in any commit message: ' '
+  total matches: 0
+
+## 3. gitleaks, full history
+1:33AM INF 172 commits scanned.
+1:33AM INF scan completed in 425ms
+1:33AM INF no leaks found
+
+## 4. Size and contents
+Tracked files over 5 MB: 0
+Largest tracked files:
+  348976 backend/uv.lock
+  130796 docs/images/synthetic-review.png
+  118317 evals/results/synthetic_s2p_v1_1_1.json
+  110538 evals/results/synthetic_s1_v1_1_1.json
+  109152 frontend/package-lock.json
+Tracked total: 3713512 bytes in 772 files; .git: 3.3M
+Images ever added in any commit:
+  docs/images/synthetic-documents.png
+  docs/images/synthetic-queue.png
+  docs/images/synthetic-review.png
+  evals/results/final/cord_degradation_test_v1_1_1.png
+  (the generated degradation figure and the three synthetic README screenshots; no dataset image)
+Parquet, model weights, .env or data/ ever added: 0
+CORD cache files tracked: 0
+.env files tracked: .env.example 
+
+## 5. Licences
+LICENSE: MIT License; Copyright (c) 2026 Jaswant Raj
+backend/pyproject.toml: license = "MIT"; frontend/package.json: "license":"MIT"
+Python dependency licences (pip-licenses over the backend environment):
+  106 packages
+   39 MIT
+   18 BSD-3-Clause
+    9 MIT License
+    9 BSD License
+    8 Apache-2.0
+    4 Apache Software License
+    2 BSD-2-Clause
+    2 Mozilla Public License 2.0 (MPL 2.0)
+    2 Python Software Foundation License
+    2 LGPL-3.0-only
+    1 MIT-0
+    1 MPL-2.0
+    1 BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0
+    1 Apache-2.0 OR BSD-2-Clause
+    1 MIT-CMU
+    1 Apache-2.0 AND BSD-2-Clause
+    1 3-Clause BSD License
+    1 BSD-3-Clause, Apache-2.0, dependency licenses
+    1 MIT OR Apache-2.0
+    1 MPL-2.0 AND MIT
+    1 PSF-2.0
+  copyleft or unknown: certifi 2026.10.23: Mozilla Public License 2.0 (MPL 2.0); hypothesis 6.170.14: MPL-2.0; pathspec 1.1.1: Mozilla Public License 2.0 (MPL 2.0); psycopg 3.3.8: LGPL-3.0-only; psycopg-binary 3.3.8: LGPL-3.0-only; tqdm 4.70.1: MPL-2.0 AND MIT
+npm dependency licences (license-checker 25.0.1):
+  ├─ MIT: 109
+  ├─ Apache-2.0: 9
+  ├─ ISC: 3
+  ├─ MIT-0: 2
+  ├─ BSD-2-Clause: 2
+  ├─ MPL-2.0: 2
+  ├─ BSD-3-Clause: 2
+  ├─ UNLICENSED: 1
+  ├─ BlueOak-1.0.0: 1
+  ├─ CC0-1.0: 1
+  └─ 0BSD: 1
+  
+npm production dependencies:
+  ├─ MIT: 4
+  └─ UNLICENSED: 1
+  
+  (UNLICENSED is ledgerlens-frontend itself: license-checker reports a package with "private": true as UNLICENSED although its package.json says "license": "MIT")
