@@ -49,6 +49,23 @@ def _power(result: dict[str, Any]) -> str:
     return power["label"]
 
 
+def _timings(result: dict[str, Any]) -> str:
+    """The timing source, plus when and on what power any replayed calls were first recorded."""
+    text = str(result["latency_seconds"]["source"])
+    labels_path = RESULTS / "final" / "replayed_timings_v1_1_1.json"
+    labels = json.loads(labels_path.read_text(encoding="utf-8")) if labels_path.exists() else {}
+    replayed = labels.get(result.get("output_file", ""))
+    if not replayed or not replayed["replayed"]:
+        return text
+    states = replayed["replayed_power_at_recording"]
+    return (
+        f"{text}. Replayed calls ({replayed['replayed']}) recorded "
+        f"{replayed['replayed_recorded_first_utc']} to {replayed['replayed_recorded_last_utc']}, "
+        f"{replayed['replayed_recorded_before_this_run']} of them before this run; power at "
+        f"recording: ac {states['ac']}, battery {states['battery']}, unknown {states['unknown']}"
+    )
+
+
 def _seconds(block: dict[str, Any]) -> str:
     return "n/a" if not block["n"] else f"{block['p50']:.2f} / {block['p95']:.2f}"
 
@@ -172,7 +189,7 @@ def main(argv: list[str] | None = None) -> None:
             f"| {failures['pass_fallbacks']} | {failures['retries']} "
             f"| {failures['truncated_replies']} | {result['verification']['values_withheld']} "
             f"| {warm_llm} | {_seconds(latency['warm_total'])} | {cold_text} "
-            f"| {memory['lowest_available_system_ram_gib']} | {latency['source']} "
+            f"| {memory['lowest_available_system_ram_gib']} | {_timings(result)} "
             f"| {_power(result)} |"
         )
     lines.append("")
