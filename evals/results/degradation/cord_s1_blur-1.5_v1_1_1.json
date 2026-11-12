@@ -1,0 +1,358 @@
+{
+  "metrics_version": "1.1.1",
+  "normalization": {
+    "version": "1.0",
+    "sha256": "aa5cf4994ce5fd1b12b2aaf843fa3568f15bffe515b9cefd4dc1bb200760dee1"
+  },
+  "fields": {
+    "total_amount": {
+      "n_documents": 100,
+      "n_present": 95,
+      "n_absent": 5,
+      "tp": 65,
+      "fp": 10,
+      "fn": 30,
+      "false_fills": 1,
+      "precision": 0.8666666666666667,
+      "recall": 0.6842105263157895,
+      "f1": 0.7647058823529411,
+      "exact_match": 0.6842105263157895,
+      "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+      "false_fill_rate": 0.2,
+      "precision_ci95": [
+        0.7837837837837838,
+        0.9358974358974359
+      ],
+      "recall_ci95": [
+        0.5913978494623656,
+        0.7789473684210526
+      ],
+      "f1_ci95": [
+        0.6790123456790124,
+        0.8427135508325435
+      ],
+      "exact_match_ci95": [
+        0.5913978494623656,
+        0.7789473684210526
+      ],
+      "false_fill_rate_ci95": [
+        0.0,
+        0.6666666666666666
+      ]
+    },
+    "subtotal": {
+      "n_documents": 100,
+      "n_present": 65,
+      "n_absent": 35,
+      "tp": 44,
+      "fp": 2,
+      "fn": 21,
+      "false_fills": 2,
+      "precision": 0.9565217391304348,
+      "recall": 0.676923076923077,
+      "f1": 0.7927927927927928,
+      "exact_match": 0.676923076923077,
+      "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+      "false_fill_rate": 0.05714285714285714,
+      "precision_ci95": [
+        0.8867924528301887,
+        1.0
+      ],
+      "recall_ci95": [
+        0.5588235294117647,
+        0.7903225806451613
+      ],
+      "f1_ci95": [
+        0.6981132075471698,
+        0.8704059829059827
+      ],
+      "exact_match_ci95": [
+        0.5588235294117647,
+        0.7903225806451613
+      ],
+      "false_fill_rate_ci95": [
+        0.0,
+        0.14814814814814814
+      ]
+    },
+    "tax_amount": {
+      "n_documents": 100,
+      "n_present": 41,
+      "n_absent": 59,
+      "tp": 29,
+      "fp": 4,
+      "fn": 12,
+      "false_fills": 0,
+      "precision": 0.8787878787878788,
+      "recall": 0.7073170731707317,
+      "f1": 0.7837837837837838,
+      "exact_match": 0.7073170731707317,
+      "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+      "false_fill_rate": 0.0,
+      "precision_ci95": [
+        0.7575552825552826,
+        0.972972972972973
+      ],
+      "recall_ci95": [
+        0.566602564102564,
+        0.8461538461538461
+      ],
+      "f1_ci95": [
+        0.6575244618395303,
+        0.8919022869022868
+      ],
+      "exact_match_ci95": [
+        0.566602564102564,
+        0.8461538461538461
+      ],
+      "false_fill_rate_ci95": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "gold_values_excluded_unparsable": {
+    "total_amount": 0,
+    "subtotal": 0,
+    "tax_amount": 0
+  },
+  "line_items_row_level": {
+    "n_documents": 100,
+    "n_documents_with_rows": 100,
+    "rows_correct": 71,
+    "rows_predicted": 232,
+    "rows_gold": 251,
+    "precision": 0.30603448275862066,
+    "recall": 0.28286852589641437,
+    "f1": 0.2939958592132505,
+    "documents_all_rows_correct": 0.18,
+    "precision_ci95": [
+      0.21237704378721584,
+      0.41146599264705874
+    ],
+    "recall_ci95": [
+      0.1937921980495124,
+      0.38261137949543744
+    ],
+    "f1_ci95": [
+      0.20399977827050997,
+      0.39431575480548503
+    ],
+    "documents_all_rows_correct_ci95": [
+      0.11,
+      0.26
+    ]
+  },
+  "line_items_set_based": {
+    "label": "set-based, ignores row alignment",
+    "fields": {
+      "description": {
+        "n_documents": 100,
+        "n_labelled": 100,
+        "tp": 125,
+        "fp": 107,
+        "fn": 126,
+        "precision": 0.5387931034482759,
+        "recall": 0.49800796812749004,
+        "f1": 0.5175983436853002,
+        "exact_match": 0.29,
+        "precision_ci95": [
+          0.4459890389082462,
+          0.6363636363636364
+        ],
+        "recall_ci95": [
+          0.40269072694580016,
+          0.5885271479092988
+        ],
+        "f1_ci95": [
+          0.4291436633541897,
+          0.6023633905701546
+        ],
+        "exact_match_ci95": [
+          0.2,
+          0.38
+        ]
+      },
+      "quantity": {
+        "n_documents": 100,
+        "n_labelled": 87,
+        "tp": 77,
+        "fp": 4,
+        "fn": 143,
+        "precision": 0.9506172839506173,
+        "recall": 0.35,
+        "f1": 0.5116279069767442,
+        "exact_match": 0.31,
+        "precision_ci95": [
+          0.8904034321842541,
+          0.9902912621359223
+        ],
+        "recall_ci95": [
+          0.24188257188731574,
+          0.4579449069347365
+        ],
+        "f1_ci95": [
+          0.381313692792292,
+          0.6219512195121951
+        ],
+        "exact_match_ci95": [
+          0.22,
+          0.4
+        ]
+      },
+      "unit_price": {
+        "n_documents": 100,
+        "n_labelled": 34,
+        "tp": 2,
+        "fp": 0,
+        "fn": 65,
+        "precision": 1.0,
+        "recall": 0.029850746268656716,
+        "f1": 0.057971014492753624,
+        "exact_match": 0.67,
+        "precision_ci95": [
+          1.0,
+          1.0
+        ],
+        "recall_ci95": [
+          0.0,
+          0.07843688037012554
+        ],
+        "f1_ci95": [
+          0.0,
+          0.14546401515151508
+        ],
+        "exact_match_ci95": [
+          0.57,
+          0.76
+        ]
+      },
+      "amount": {
+        "n_documents": 100,
+        "n_labelled": 99,
+        "tp": 177,
+        "fp": 55,
+        "fn": 69,
+        "precision": 0.7629310344827587,
+        "recall": 0.7195121951219512,
+        "f1": 0.7405857740585774,
+        "exact_match": 0.44,
+        "precision_ci95": [
+          0.6962602034780552,
+          0.8340621415491115
+        ],
+        "recall_ci95": [
+          0.6260147086203686,
+          0.805458351223701
+        ],
+        "f1_ci95": [
+          0.6763412424756006,
+          0.7993478260869564
+        ],
+        "exact_match_ci95": [
+          0.34,
+          0.54
+        ]
+      }
+    }
+  },
+  "system": "S1",
+  "system_definition": "S1",
+  "dataset": "cord-v2",
+  "split": "test",
+  "n_documents": 100,
+  "perturbation": {
+    "name": "blur-1.5",
+    "kind": "gaussian_blur",
+    "severity": 1.5
+  },
+  "records_rerun_of_predictions_sha256": null,
+  "schema": "cord_receipt",
+  "schema_version": "1.1.0",
+  "split_sha256": "b8535d600517fdcf857f79ba0d27d839ae943afab3f4081761a78f29de562049",
+  "bootstrap": {
+    "resamples": 2000,
+    "seed": 20261106,
+    "unit": "document"
+  },
+  "predictions_sha256": "85bd7fff0a5235b2ca6fed537a392acccf6bea75a503eb368084a969fa538d1b",
+  "failures": {
+    "crashes": 0,
+    "crash_detail": [],
+    "failed_extractions": 0,
+    "documents_with_a_fallback": 0,
+    "pass_fallbacks": 0,
+    "retries": 0,
+    "truncated_replies": 0
+  },
+  "verification": {
+    "values_output": 701,
+    "values_not_found_in_document": 0,
+    "values_withheld": 0,
+    "rule_failures": 102,
+    "label_supported": 0,
+    "label_unsupported": 0
+  },
+  "latency_seconds": {
+    "source": "measured in this run",
+    "ocr": {
+      "n": 100,
+      "p50": 1.6402845500000467,
+      "p95": 3.0773300650001136
+    },
+    "extraction_excluding_llm": {
+      "n": 100,
+      "p50": 0.0007127999999738677,
+      "p95": 0.0016649149999125256
+    },
+    "warm_llm": {
+      "n": 100,
+      "p50": 0.0,
+      "p95": 0.0
+    },
+    "warm_total": {
+      "n": 100,
+      "p50": 1.6409751500000311,
+      "p95": 3.0782133850001845
+    },
+    "cold": {
+      "documents": 0,
+      "model_load_seconds": [],
+      "cold_llm_seconds_excluding_load": []
+    }
+  },
+  "power": {
+    "label": "ac",
+    "timings_ac": 100,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing"
+  },
+  "memory": {
+    "peak_process_rss_gib": 1.38,
+    "peak_model_runner_rss_gib": 0.714,
+    "lowest_available_system_ram_gib": 5.493,
+    "total_system_ram_gib": 15.638,
+    "abort_below_gib": 0.4
+  },
+  "workers": 1,
+  "cost_per_document_usd": 0,
+  "output_file": "evals/results/degradation/cord_s1_blur-1.5_v1_1_1.json",
+  "environment": {
+    "git_commit": "475c048bc9e59d11e35a68f414f15e9f285bd85a",
+    "git_dirty": false,
+    "python": "3.12.13",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "cpu_count": 12,
+    "packages": {
+      "rapidocr": "3.10.0",
+      "onnxruntime": "1.31.1",
+      "numpy": "2.5.4",
+      "pypdfium2": "5.14.0",
+      "rapidfuzz": "3.14.6"
+    },
+    "ocr_execution": "CPU, onnxruntime defaults"
+  }
+}

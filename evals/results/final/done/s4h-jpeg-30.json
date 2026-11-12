@@ -1,0 +1,7 @@
+{
+  "step": "S4h jpeg-30",
+  "output": "evals/results/degradation/cord_s4h_jpeg-30_v1_1_1.json",
+  "output_sha256": "d7b3d816d05212d0a031da8066feb98b0b5e5a40a203fbdcc3579dd7bc0f3a84",
+  "completed_utc": "2026-11-12T08:38:04Z",
+  "recovered_without_marker": false
+}

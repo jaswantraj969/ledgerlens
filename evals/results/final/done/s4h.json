@@ -1,0 +1,7 @@
+{
+  "step": "S4h",
+  "output": "evals/results/cord_s4h_v1_1_1.json",
+  "output_sha256": "612976d8d273bfce0f712e89d934ac36a0bbdfceb66d56d04e5e8e0934f8572a",
+  "completed_utc": "2026-11-12T07:50:58Z",
+  "recovered_without_marker": false
+}

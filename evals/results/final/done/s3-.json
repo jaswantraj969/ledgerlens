@@ -1,0 +1,7 @@
+{
+  "step": "S3'",
+  "output": "evals/results/cord_s3p_v1_1_1.json",
+  "output_sha256": "a51b4aab3de74c3b3bb4700fd9d3c9d263a1acc83d931fc84f3de276f6a7cfc4",
+  "completed_utc": "2026-11-12T07:42:11Z",
+  "recovered_without_marker": false
+}

@@ -1,0 +1,7 @@
+{
+  "step": "S4h blur-1.5",
+  "output": "evals/results/degradation/cord_s4h_blur-1.5_v1_1_1.json",
+  "output_sha256": "e60452ddb4d9a7f130395bd1bc7035e7c099b12806a411b8a3e9a6c5662899ff",
+  "completed_utc": "2026-11-12T08:08:49Z",
+  "recovered_without_marker": false
+}

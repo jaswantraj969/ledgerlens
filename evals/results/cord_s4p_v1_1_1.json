@@ -1,0 +1,374 @@
+{
+  "metrics_version": "1.1.1",
+  "normalization": {
+    "version": "1.0",
+    "sha256": "aa5cf4994ce5fd1b12b2aaf843fa3568f15bffe515b9cefd4dc1bb200760dee1"
+  },
+  "fields": {
+    "total_amount": {
+      "n_documents": 100,
+      "n_present": 95,
+      "n_absent": 5,
+      "tp": 78,
+      "fp": 17,
+      "fn": 17,
+      "false_fills": 4,
+      "precision": 0.8210526315789474,
+      "recall": 0.8210526315789474,
+      "f1": 0.8210526315789474,
+      "exact_match": 0.8210526315789474,
+      "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+      "false_fill_rate": 0.8,
+      "precision_ci95": [
+        0.7395833333333334,
+        0.8969072164948454
+      ],
+      "recall_ci95": [
+        0.7473684210526316,
+        0.8947642543859647
+      ],
+      "f1_ci95": [
+        0.7473370602672484,
+        0.8923118279569893
+      ],
+      "exact_match_ci95": [
+        0.7473684210526316,
+        0.8947642543859647
+      ],
+      "false_fill_rate_ci95": [
+        0.3333333333333333,
+        1.0
+      ]
+    },
+    "subtotal": {
+      "n_documents": 100,
+      "n_present": 65,
+      "n_absent": 35,
+      "tp": 55,
+      "fp": 31,
+      "fn": 10,
+      "false_fills": 25,
+      "precision": 0.6395348837209303,
+      "recall": 0.8461538461538461,
+      "f1": 0.7284768211920529,
+      "exact_match": 0.8461538461538461,
+      "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+      "false_fill_rate": 0.7142857142857143,
+      "precision_ci95": [
+        0.5332716049382716,
+        0.740751633986928
+      ],
+      "recall_ci95": [
+        0.7533390410958904,
+        0.9253731343283582
+      ],
+      "f1_ci95": [
+        0.6330750105797714,
+        0.8129032258064516
+      ],
+      "exact_match_ci95": [
+        0.7533390410958904,
+        0.9253731343283582
+      ],
+      "false_fill_rate_ci95": [
+        0.5454545454545454,
+        0.8611111111111112
+      ]
+    },
+    "tax_amount": {
+      "n_documents": 100,
+      "n_present": 41,
+      "n_absent": 59,
+      "tp": 33,
+      "fp": 56,
+      "fn": 8,
+      "false_fills": 49,
+      "precision": 0.3707865168539326,
+      "recall": 0.8048780487804879,
+      "f1": 0.5076923076923077,
+      "exact_match": 0.8048780487804879,
+      "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+      "false_fill_rate": 0.8305084745762712,
+      "precision_ci95": [
+        0.2717391304347826,
+        0.4706051386071669
+      ],
+      "recall_ci95": [
+        0.6744059656218402,
+        0.9210655314757481
+      ],
+      "f1_ci95": [
+        0.39344262295081966,
+        0.609375
+      ],
+      "exact_match_ci95": [
+        0.6744059656218402,
+        0.9210655314757481
+      ],
+      "false_fill_rate_ci95": [
+        0.7230769230769231,
+        0.9193548387096774
+      ]
+    }
+  },
+  "gold_values_excluded_unparsable": {
+    "total_amount": 0,
+    "subtotal": 0,
+    "tax_amount": 0
+  },
+  "line_items_row_level": {
+    "n_documents": 100,
+    "n_documents_with_rows": 100,
+    "rows_correct": 71,
+    "rows_predicted": 463,
+    "rows_gold": 251,
+    "precision": 0.15334773218142547,
+    "recall": 0.28286852589641437,
+    "f1": 0.19887955182072828,
+    "documents_all_rows_correct": 0.09,
+    "precision_ci95": [
+      0.09523021128981393,
+      0.22199463033313846
+    ],
+    "recall_ci95": [
+      0.18257780581590963,
+      0.3916688144329897
+    ],
+    "f1_ci95": [
+      0.12585327241910366,
+      0.2830742164665677
+    ],
+    "documents_all_rows_correct_ci95": [
+      0.04,
+      0.15
+    ]
+  },
+  "line_items_set_based": {
+    "label": "set-based, ignores row alignment",
+    "fields": {
+      "description": {
+        "n_documents": 100,
+        "n_labelled": 100,
+        "tp": 165,
+        "fp": 263,
+        "fn": 86,
+        "precision": 0.3855140186915888,
+        "recall": 0.6573705179282868,
+        "f1": 0.48600883652430044,
+        "exact_match": 0.19,
+        "precision_ci95": [
+          0.31762769305252964,
+          0.45706131600536976
+        ],
+        "recall_ci95": [
+          0.5721881120573931,
+          0.7331020166073546
+        ],
+        "f1_ci95": [
+          0.41078912332325285,
+          0.5587922643991855
+        ],
+        "exact_match_ci95": [
+          0.12,
+          0.27
+        ]
+      },
+      "quantity": {
+        "n_documents": 100,
+        "n_labelled": 87,
+        "tp": 104,
+        "fp": 94,
+        "fn": 116,
+        "precision": 0.5252525252525253,
+        "recall": 0.4727272727272727,
+        "f1": 0.49760765550239233,
+        "exact_match": 0.37,
+        "precision_ci95": [
+          0.4017671130952381,
+          0.6473997702682673
+        ],
+        "recall_ci95": [
+          0.36322817074202557,
+          0.5849106784423925
+        ],
+        "f1_ci95": [
+          0.3941445323060287,
+          0.6036888096687245
+        ],
+        "exact_match_ci95": [
+          0.28,
+          0.46024999999999866
+        ]
+      },
+      "unit_price": {
+        "n_documents": 100,
+        "n_labelled": 34,
+        "tp": 6,
+        "fp": 11,
+        "fn": 61,
+        "precision": 0.35294117647058826,
+        "recall": 0.08955223880597014,
+        "f1": 0.14285714285714285,
+        "exact_match": 0.6,
+        "precision_ci95": [
+          0.0,
+          0.6429621848739491
+        ],
+        "recall_ci95": [
+          0.0,
+          0.2
+        ],
+        "f1_ci95": [
+          0.0,
+          0.2889130434782607
+        ],
+        "exact_match_ci95": [
+          0.5,
+          0.69
+        ]
+      },
+      "amount": {
+        "n_documents": 100,
+        "n_labelled": 99,
+        "tp": 201,
+        "fp": 192,
+        "fn": 45,
+        "precision": 0.5114503816793893,
+        "recall": 0.8170731707317073,
+        "f1": 0.6291079812206573,
+        "exact_match": 0.28,
+        "precision_ci95": [
+          0.4444373942470389,
+          0.584034668119065
+        ],
+        "recall_ci95": [
+          0.7422222222222222,
+          0.8866456299118838
+        ],
+        "f1_ci95": [
+          0.5665431823508899,
+          0.6936982901268616
+        ],
+        "exact_match_ci95": [
+          0.19975000000000004,
+          0.37
+        ]
+      }
+    }
+  },
+  "system": "S4'",
+  "system_definition": "S4",
+  "dataset": "cord-v2",
+  "split": "test",
+  "n_documents": 100,
+  "perturbation": null,
+  "records_rerun_of_predictions_sha256": null,
+  "schema": "cord_receipt",
+  "schema_version": "1.1.0",
+  "split_sha256": "b8535d600517fdcf857f79ba0d27d839ae943afab3f4081761a78f29de562049",
+  "bootstrap": {
+    "resamples": 2000,
+    "seed": 20261106,
+    "unit": "document"
+  },
+  "predictions_sha256": "cb2015f083d1ebaa6bd58f881aa9ca7e3237bb8c0b667ea4f8ae0c00368fdbf9",
+  "failures": {
+    "crashes": 0,
+    "crash_detail": [],
+    "failed_extractions": 0,
+    "documents_with_a_fallback": 0,
+    "pass_fallbacks": 0,
+    "retries": 1,
+    "truncated_replies": 1
+  },
+  "verification": {
+    "values_output": 1306,
+    "values_not_found_in_document": 0,
+    "values_withheld": 95,
+    "rule_failures": 607,
+    "label_supported": 165,
+    "label_unsupported": 127
+  },
+  "latency_seconds": {
+    "source": "mixed: 50 calls measured in this run, 151 recorded earlier (an aborted run or an earlier system) and replayed",
+    "ocr": {
+      "n": 100,
+      "p50": 2.564482300003874,
+      "p95": 5.386673834978137
+    },
+    "extraction_excluding_llm": {
+      "n": 100,
+      "p50": 0.026383099999975457,
+      "p95": 0.1371388000001218
+    },
+    "warm_llm": {
+      "n": 99,
+      "p50": 7.423798499999905,
+      "p95": 16.393639000000075
+    },
+    "warm_total": {
+      "n": 99,
+      "p50": 10.561833499994702,
+      "p95": 20.90957731000049
+    },
+    "cold": {
+      "documents": 1,
+      "model_load_seconds": [
+        7.8123871
+      ],
+      "cold_llm_seconds_excluding_load": [
+        10.225899999999935
+      ]
+    }
+  },
+  "power": {
+    "label": "ac",
+    "timings_ac": 301,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing"
+  },
+  "memory": {
+    "peak_process_rss_gib": 0.112,
+    "peak_model_runner_rss_gib": 5.702,
+    "lowest_available_system_ram_gib": 0.475,
+    "total_system_ram_gib": 15.638,
+    "abort_below_gib": 0.4
+  },
+  "workers": 1,
+  "cost_per_document_usd": 0,
+  "output_file": "evals/results/cord_s4p_v1_1_1.json",
+  "environment": {
+    "git_commit": "475c048bc9e59d11e35a68f414f15e9f285bd85a",
+    "git_dirty": false,
+    "python": "3.12.13",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "cpu_count": 12,
+    "packages": {
+      "rapidocr": "3.10.0",
+      "onnxruntime": "1.31.1",
+      "numpy": "2.5.4",
+      "pypdfium2": "5.14.0",
+      "rapidfuzz": "3.14.6"
+    },
+    "ocr_execution": "CPU, onnxruntime defaults"
+  },
+  "llm": {
+    "model": "llama3.2:3b",
+    "params": {
+      "temperature": 0,
+      "seed": 20261106,
+      "num_ctx": 2304,
+      "num_predict": 1024
+    },
+    "prompt_versions": {
+      "a": "a-2.2",
+      "b": "b-2.2"
+    },
+    "mode": "record",
+    "live_calls": 50,
+    "cache_hits": 151
+  }
+}

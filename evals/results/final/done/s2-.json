@@ -1,0 +1,7 @@
+{
+  "step": "S2'",
+  "output": "evals/results/cord_s2p_v1_1_1.json",
+  "output_sha256": "f6f13755602a939bb77483cda04a03415fabd7ac567b3653ea4478ce7da862a9",
+  "completed_utc": "2026-11-12T07:41:58Z",
+  "recovered_without_marker": false
+}

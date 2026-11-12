@@ -1,0 +1,616 @@
+{
+  "protocol": "docs/evaluation/final-test-protocol.md",
+  "mode": "run",
+  "started_utc": "2026-11-12T07:35:16Z",
+  "log": "docs/progress/logs/final-run-20261112T073516Z.log",
+  "preflight": {
+    "facts": {
+      "measured_utc": "2026-11-12T07:35:15Z",
+      "git_commit": "475c048bc9e59d11e35a68f414f15e9f285bd85a",
+      "git_dirty_files": [],
+      "protocol_commit_is_ancestor": true,
+      "boot_age_minutes": 3.7,
+      "ac_online": true,
+      "docker_daemon_running": false,
+      "docker_processes": [],
+      "free_ram_gib": 6.046,
+      "vscode_running": false,
+      "ollama_max_loaded_models": "1",
+      "ollama_version": "0.40.15",
+      "model_digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72"
+    },
+    "checks": [
+      {
+        "check": "clean commit",
+        "passed": true,
+        "detail": "0 changed or untracked files"
+      },
+      {
+        "check": "protocol commit is in history",
+        "passed": true,
+        "detail": "2550b14"
+      },
+      {
+        "check": "fresh reboot",
+        "passed": true,
+        "detail": "booted 3.7 min ago (limit 60)"
+      },
+      {
+        "check": "AC power",
+        "passed": true,
+        "detail": "ac_online=True"
+      },
+      {
+        "check": "Docker stopped",
+        "passed": true,
+        "detail": "daemon=False processes=[]"
+      },
+      {
+        "check": "free RAM",
+        "passed": true,
+        "detail": "6.046 GiB available (minimum 2.0)"
+      },
+      {
+        "check": "Ollama and model",
+        "passed": true,
+        "detail": "version=0.40.15 digest=a80c4f17acd5"
+      },
+      {
+        "check": "OLLAMA_MAX_LOADED_MODELS=1",
+        "passed": true,
+        "detail": "value=1"
+      },
+      {
+        "check": "keep-awake on",
+        "passed": true,
+        "detail": "scripts/keep_awake.ps1 running"
+      }
+    ]
+  },
+  "model_warm_seconds": 7.17,
+  "keep_awake": "released",
+  "steps": [
+    {
+      "name": "S1 records rerun",
+      "module_args": [
+        "evals.runners.run_cord",
+        "--split",
+        "test",
+        "--final",
+        "--system",
+        "S1",
+        "--records-rerun",
+        "--save-records"
+      ],
+      "output": "evals/results/repro/cord_s1_test_records_rerun_v1_1_1.json",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-11-12T07:35:26Z",
+          "ended_utc": "2026-11-12T07:35:39Z",
+          "exit_code": 0,
+          "abort_records": []
+        }
+      ],
+      "status": "done"
+    },
+    {
+      "name": "S2'",
+      "module_args": [
+        "evals.runners.run_cord",
+        "--split",
+        "test",
+        "--final",
+        "--system",
+        "S2",
+        "--label",
+        "S2'",
+        "--prompt",
+        "2.2",
+        "--num-ctx",
+        "2304"
+      ],
+      "output": "evals/results/cord_s2p_v1_1_1.json",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-11-12T07:35:39Z",
+          "ended_utc": "2026-11-12T07:41:58Z",
+          "exit_code": 0,
+          "abort_records": []
+        }
+      ],
+      "status": "done"
+    },
+    {
+      "name": "S3'",
+      "module_args": [
+        "evals.runners.run_cord",
+        "--split",
+        "test",
+        "--final",
+        "--system",
+        "S3",
+        "--label",
+        "S3'",
+        "--prompt",
+        "2.2",
+        "--num-ctx",
+        "2304"
+      ],
+      "output": "evals/results/cord_s3p_v1_1_1.json",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-11-12T07:41:58Z",
+          "ended_utc": "2026-11-12T07:42:11Z",
+          "exit_code": 0,
+          "abort_records": []
+        }
+      ],
+      "status": "done"
+    },
+    {
+      "name": "S4'",
+      "module_args": [
+        "evals.runners.run_cord",
+        "--split",
+        "test",
+        "--final",
+        "--system",
+        "S4",
+        "--label",
+        "S4'",
+        "--prompt",
+        "2.2",
+        "--num-ctx",
+        "2304"
+      ],
+      "output": "evals/results/cord_s4p_v1_1_1.json",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-11-12T07:42:11Z",
+          "ended_utc": "2026-11-12T07:45:30Z",
+          "exit_code": 3,
+          "abort_records": [
+            "cord_s4p_test_aborted_20261112T074529Z.json"
+          ]
+        },
+        {
+          "attempt": 2,
+          "started_utc": "2026-11-12T07:46:00Z",
+          "ended_utc": "2026-11-12T07:50:46Z",
+          "exit_code": 0,
+          "abort_records": []
+        }
+      ],
+      "status": "done"
+    },
+    {
+      "name": "S4h",
+      "module_args": [
+        "evals.runners.run_cord",
+        "--split",
+        "test",
+        "--final",
+        "--system",
+        "S4h",
+        "--label",
+        "S4h",
+        "--prompt",
+        "2.2",
+        "--num-ctx",
+        "2304",
+        "--save-records"
+      ],
+      "output": "evals/results/cord_s4h_v1_1_1.json",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-11-12T07:50:46Z",
+          "ended_utc": "2026-11-12T07:50:58Z",
+          "exit_code": 0,
+          "abort_records": []
+        }
+      ],
+      "status": "done"
+    },
+    {
+      "name": "S5-S1 all",
+      "module_args": [
+        "evals.runners.run_s5",
+        "--base",
+        "s1",
+        "--train-scope",
+        "train_all_p1.0",
+        "--variant",
+        "all",
+        "--final"
+      ],
+      "output": "evals/results/cord_s5_s1_v1_1_1.json",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-11-12T07:50:58Z",
+          "ended_utc": "2026-11-12T07:51:11Z",
+          "exit_code": 0,
+          "abort_records": []
+        }
+      ],
+      "status": "done"
+    },
+    {
+      "name": "S5-S1 grouped",
+      "module_args": [
+        "evals.runners.run_s5",
+        "--base",
+        "s1",
+        "--train-scope",
+        "train_all_p1.0",
+        "--variant",
+        "grouped",
+        "--final"
+      ],
+      "output": "evals/results/cord_s5_s1_grouped_v1_1_1.json",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-11-12T07:51:11Z",
+          "ended_utc": "2026-11-12T07:51:17Z",
+          "exit_code": 0,
+          "abort_records": []
+        }
+      ],
+      "status": "done"
+    },
+    {
+      "name": "S5-S4h all",
+      "module_args": [
+        "evals.runners.run_s5",
+        "--base",
+        "s4h",
+        "--train-scope",
+        "train_all_p2.2",
+        "--variant",
+        "all",
+        "--final"
+      ],
+      "output": "evals/results/cord_s5_s4h_v1_1_1.json",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-11-12T07:51:17Z",
+          "ended_utc": "2026-11-12T07:51:24Z",
+          "exit_code": 0,
+          "abort_records": []
+        }
+      ],
+      "status": "done"
+    },
+    {
+      "name": "S5-S4h grouped",
+      "module_args": [
+        "evals.runners.run_s5",
+        "--base",
+        "s4h",
+        "--train-scope",
+        "train_all_p2.2",
+        "--variant",
+        "grouped",
+        "--final"
+      ],
+      "output": "evals/results/cord_s5_s4h_grouped_v1_1_1.json",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-11-12T07:51:24Z",
+          "ended_utc": "2026-11-12T07:51:29Z",
+          "exit_code": 0,
+          "abort_records": []
+        }
+      ],
+      "status": "done"
+    },
+    {
+      "name": "S5 ablations",
+      "module_args": [
+        "evals.runners.run_s5_ablations",
+        "--final"
+      ],
+      "output": "evals/results/cord_s5_ablations_v1_1_1.json",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-11-12T07:51:29Z",
+          "ended_utc": "2026-11-12T07:51:42Z",
+          "exit_code": 0,
+          "abort_records": []
+        }
+      ],
+      "status": "done"
+    },
+    {
+      "name": "S1 blur-1.5",
+      "module_args": [
+        "evals.runners.run_cord",
+        "--split",
+        "test",
+        "--final",
+        "--system",
+        "S1",
+        "--perturb",
+        "blur-1.5"
+      ],
+      "output": "evals/results/degradation/cord_s1_blur-1.5_v1_1_1.json",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-11-12T07:51:42Z",
+          "ended_utc": "2026-11-12T07:51:53Z",
+          "exit_code": 3,
+          "abort_records": [
+            "cord_s1_blur-1.5_test_aborted_20261112T075152Z.json"
+          ]
+        },
+        {
+          "attempt": 2,
+          "started_utc": "2026-11-12T07:52:23Z",
+          "ended_utc": "2026-11-12T07:56:06Z",
+          "exit_code": 0,
+          "abort_records": []
+        }
+      ],
+      "status": "done"
+    },
+    {
+      "name": "S4h blur-1.5",
+      "module_args": [
+        "evals.runners.run_cord",
+        "--split",
+        "test",
+        "--final",
+        "--system",
+        "S4h",
+        "--label",
+        "S4h",
+        "--prompt",
+        "2.2",
+        "--num-ctx",
+        "2304",
+        "--perturb",
+        "blur-1.5"
+      ],
+      "output": "evals/results/degradation/cord_s4h_blur-1.5_v1_1_1.json",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-11-12T07:56:06Z",
+          "ended_utc": "2026-11-12T08:03:57Z",
+          "exit_code": 3,
+          "abort_records": [
+            "cord_s4h_blur-1.5_test_aborted_20261112T080356Z.json"
+          ]
+        },
+        {
+          "attempt": 2,
+          "started_utc": "2026-11-12T08:04:27Z",
+          "ended_utc": "2026-11-12T08:08:48Z",
+          "exit_code": 0,
+          "abort_records": []
+        }
+      ],
+      "status": "done"
+    },
+    {
+      "name": "S1 blur-3.0",
+      "module_args": [
+        "evals.runners.run_cord",
+        "--split",
+        "test",
+        "--final",
+        "--system",
+        "S1",
+        "--perturb",
+        "blur-3.0"
+      ],
+      "output": "evals/results/degradation/cord_s1_blur-3.0_v1_1_1.json",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-11-12T08:08:49Z",
+          "ended_utc": "2026-11-12T08:12:11Z",
+          "exit_code": 0,
+          "abort_records": []
+        }
+      ],
+      "status": "done"
+    },
+    {
+      "name": "S4h blur-3.0",
+      "module_args": [
+        "evals.runners.run_cord",
+        "--split",
+        "test",
+        "--final",
+        "--system",
+        "S4h",
+        "--label",
+        "S4h",
+        "--prompt",
+        "2.2",
+        "--num-ctx",
+        "2304",
+        "--perturb",
+        "blur-3.0"
+      ],
+      "output": "evals/results/degradation/cord_s4h_blur-3.0_v1_1_1.json",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-11-12T08:12:11Z",
+          "ended_utc": "2026-11-12T08:15:17Z",
+          "exit_code": 3,
+          "abort_records": [
+            "cord_s4h_blur-3.0_test_aborted_20261112T081517Z.json"
+          ]
+        },
+        {
+          "attempt": 2,
+          "started_utc": "2026-11-12T08:15:47Z",
+          "ended_utc": "2026-11-12T08:20:23Z",
+          "exit_code": 0,
+          "abort_records": []
+        }
+      ],
+      "status": "done"
+    },
+    {
+      "name": "S1 jpeg-30",
+      "module_args": [
+        "evals.runners.run_cord",
+        "--split",
+        "test",
+        "--final",
+        "--system",
+        "S1",
+        "--perturb",
+        "jpeg-30"
+      ],
+      "output": "evals/results/degradation/cord_s1_jpeg-30_v1_1_1.json",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-11-12T08:20:23Z",
+          "ended_utc": "2026-11-12T08:24:05Z",
+          "exit_code": 0,
+          "abort_records": []
+        }
+      ],
+      "status": "done"
+    },
+    {
+      "name": "S4h jpeg-30",
+      "module_args": [
+        "evals.runners.run_cord",
+        "--split",
+        "test",
+        "--final",
+        "--system",
+        "S4h",
+        "--label",
+        "S4h",
+        "--prompt",
+        "2.2",
+        "--num-ctx",
+        "2304",
+        "--perturb",
+        "jpeg-30"
+      ],
+      "output": "evals/results/degradation/cord_s4h_jpeg-30_v1_1_1.json",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-11-12T08:24:05Z",
+          "ended_utc": "2026-11-12T08:25:54Z",
+          "exit_code": 3,
+          "abort_records": [
+            "cord_s4h_jpeg-30_test_aborted_20261112T082554Z.json"
+          ]
+        },
+        {
+          "attempt": 2,
+          "started_utc": "2026-11-12T08:26:25Z",
+          "ended_utc": "2026-11-12T08:34:32Z",
+          "exit_code": 3,
+          "abort_records": [
+            "cord_s4h_jpeg-30_test_aborted_20261112T083431Z.json"
+          ]
+        },
+        {
+          "attempt": 3,
+          "started_utc": "2026-11-12T08:35:02Z",
+          "ended_utc": "2026-11-12T08:38:04Z",
+          "exit_code": 0,
+          "abort_records": []
+        }
+      ],
+      "status": "done"
+    },
+    {
+      "name": "S1 jpeg-10",
+      "module_args": [
+        "evals.runners.run_cord",
+        "--split",
+        "test",
+        "--final",
+        "--system",
+        "S1",
+        "--perturb",
+        "jpeg-10"
+      ],
+      "output": "evals/results/degradation/cord_s1_jpeg-10_v1_1_1.json",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-11-12T08:38:04Z",
+          "ended_utc": "2026-11-12T08:41:34Z",
+          "exit_code": 0,
+          "abort_records": []
+        }
+      ],
+      "status": "done"
+    },
+    {
+      "name": "S4h jpeg-10",
+      "module_args": [
+        "evals.runners.run_cord",
+        "--split",
+        "test",
+        "--final",
+        "--system",
+        "S4h",
+        "--label",
+        "S4h",
+        "--prompt",
+        "2.2",
+        "--num-ctx",
+        "2304",
+        "--perturb",
+        "jpeg-10"
+      ],
+      "output": "evals/results/degradation/cord_s4h_jpeg-10_v1_1_1.json",
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_utc": "2026-11-12T08:41:34Z",
+          "ended_utc": "2026-11-12T08:43:40Z",
+          "exit_code": 3,
+          "abort_records": [
+            "cord_s4h_jpeg-10_test_aborted_20261112T084339Z.json"
+          ]
+        },
+        {
+          "attempt": 2,
+          "started_utc": "2026-11-12T08:44:10Z",
+          "ended_utc": "2026-11-12T08:53:36Z",
+          "exit_code": 3,
+          "abort_records": [
+            "cord_s4h_jpeg-10_test_aborted_20261112T085335Z.json"
+          ]
+        },
+        {
+          "attempt": 3,
+          "started_utc": "2026-11-12T08:54:06Z",
+          "ended_utc": "2026-11-12T08:56:02Z",
+          "exit_code": 0,
+          "abort_records": []
+        }
+      ],
+      "status": "done"
+    }
+  ],
+  "memory_aborts": 8,
+  "ended_utc": "2026-11-12T08:56:02Z",
+  "exit_code": 0
+}

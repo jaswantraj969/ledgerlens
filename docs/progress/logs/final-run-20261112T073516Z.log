@@ -1,0 +1,287 @@
+2026-11-12T07:35:16Z START run, 18 protocol steps
+2026-11-12T07:35:19Z PREFLIGHT PASS clean commit: 0 changed or untracked files
+2026-11-12T07:35:19Z PREFLIGHT PASS protocol commit is in history: 2550b14
+2026-11-12T07:35:19Z PREFLIGHT PASS fresh reboot: booted 3.7 min ago (limit 60)
+2026-11-12T07:35:19Z PREFLIGHT PASS AC power: ac_online=True
+2026-11-12T07:35:19Z PREFLIGHT PASS Docker stopped: daemon=False processes=[]
+2026-11-12T07:35:19Z PREFLIGHT PASS free RAM: 6.046 GiB available (minimum 2.0)
+2026-11-12T07:35:19Z PREFLIGHT PASS Ollama and model: version=0.40.15 digest=a80c4f17acd5
+2026-11-12T07:35:19Z PREFLIGHT PASS OLLAMA_MAX_LOADED_MODELS=1: value=1
+2026-11-12T07:35:19Z PREFLIGHT PASS keep-awake on: scripts/keep_awake.ps1 running
+2026-11-12T07:35:26Z model warmed in 7.17 s
+2026-11-12T07:35:26Z S1 records rerun: attempt 1 started
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\repro\cord_s1_test_records_rerun_v1_1_1.json
+2026-11-12T07:35:39Z S1 records rerun: attempt 1 exit 0 aborts []
+2026-11-12T07:35:39Z S2': attempt 1 started
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\cord_s2p_v1_1_1.json
+2026-11-12T07:41:58Z S2': attempt 1 exit 0 aborts []
+2026-11-12T07:41:58Z S3': attempt 1 started
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\cord_s3p_v1_1_1.json
+2026-11-12T07:42:11Z S3': attempt 1 exit 0 aborts []
+2026-11-12T07:42:11Z S4': attempt 1 started
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+ABORTED: free system RAM 0.395 GiB fell below 0.400 GiB. Recorded in C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\aborted\cord_s4p_test_aborted_20261112T074529Z.json. No results written.
+2026-11-12T07:45:30Z S4': attempt 1 exit 3 aborts ['cord_s4p_test_aborted_20261112T074529Z.json']
+2026-11-12T07:46:00Z S4': attempt 2 started
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\cord_s4p_v1_1_1.json
+2026-11-12T07:50:46Z S4': attempt 2 exit 0 aborts []
+2026-11-12T07:50:46Z S4h: attempt 1 started
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\cord_s4h_v1_1_1.json
+2026-11-12T07:50:58Z S4h: attempt 1 exit 0 aborts []
+2026-11-12T07:50:58Z S5-S1 all: attempt 1 started
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\cord_s5_s1_v1_1_1.json
+2026-11-12T07:51:11Z S5-S1 all: attempt 1 exit 0 aborts []
+2026-11-12T07:51:11Z S5-S1 grouped: attempt 1 started
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\cord_s5_s1_grouped_v1_1_1.json
+2026-11-12T07:51:17Z S5-S1 grouped: attempt 1 exit 0 aborts []
+2026-11-12T07:51:17Z S5-S4h all: attempt 1 started
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\cord_s5_s4h_v1_1_1.json
+2026-11-12T07:51:24Z S5-S4h all: attempt 1 exit 0 aborts []
+2026-11-12T07:51:24Z S5-S4h grouped: attempt 1 started
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\cord_s5_s4h_grouped_v1_1_1.json
+2026-11-12T07:51:29Z S5-S4h grouped: attempt 1 exit 0 aborts []
+2026-11-12T07:51:29Z S5 ablations: attempt 1 started
+s1 full done
+s1 minus_label_proximity done
+s1 minus_ab_agreement done
+s1 minus_rule_llm_agreement done
+s1 minus_ocr_confidence done
+s1 minus_format_validation done
+s1 isotonic done
+s4h full done
+s4h minus_label_proximity done
+s4h minus_ab_agreement done
+s4h minus_rule_llm_agreement done
+s4h minus_ocr_confidence done
+s4h minus_format_validation done
+s4h isotonic done
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\cord_s5_ablations_v1_1_1.json
+2026-11-12T07:51:42Z S5 ablations: attempt 1 exit 0 aborts []
+2026-11-12T07:51:42Z S1 blur-1.5: attempt 1 started
+ABORTED: free system RAM 0.183 GiB fell below 0.400 GiB. Recorded in C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\aborted\cord_s1_blur-1.5_test_aborted_20261112T075152Z.json. No results written.
+2026-11-12T07:51:53Z S1 blur-1.5: attempt 1 exit 3 aborts ['cord_s1_blur-1.5_test_aborted_20261112T075152Z.json']
+2026-11-12T07:52:23Z S1 blur-1.5: attempt 2 started
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\degradation\cord_s1_blur-1.5_v1_1_1.json
+2026-11-12T07:56:06Z S1 blur-1.5: attempt 2 exit 0 aborts []
+2026-11-12T07:56:06Z S4h blur-1.5: attempt 1 started
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+ABORTED: free system RAM 0.389 GiB fell below 0.400 GiB. Recorded in C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\aborted\cord_s4h_blur-1.5_test_aborted_20261112T080356Z.json. No results written.
+2026-11-12T08:03:57Z S4h blur-1.5: attempt 1 exit 3 aborts ['cord_s4h_blur-1.5_test_aborted_20261112T080356Z.json']
+2026-11-12T08:04:27Z S4h blur-1.5: attempt 2 started
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\degradation\cord_s4h_blur-1.5_v1_1_1.json
+2026-11-12T08:08:48Z S4h blur-1.5: attempt 2 exit 0 aborts []
+2026-11-12T08:08:49Z S1 blur-3.0: attempt 1 started
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\degradation\cord_s1_blur-3.0_v1_1_1.json
+2026-11-12T08:12:11Z S1 blur-3.0: attempt 1 exit 0 aborts []
+2026-11-12T08:12:11Z S4h blur-3.0: attempt 1 started
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+ABORTED: free system RAM 0.365 GiB fell below 0.400 GiB. Recorded in C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\aborted\cord_s4h_blur-3.0_test_aborted_20261112T081517Z.json. No results written.
+2026-11-12T08:15:17Z S4h blur-3.0: attempt 1 exit 3 aborts ['cord_s4h_blur-3.0_test_aborted_20261112T081517Z.json']
+2026-11-12T08:15:47Z S4h blur-3.0: attempt 2 started
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\degradation\cord_s4h_blur-3.0_v1_1_1.json
+2026-11-12T08:20:23Z S4h blur-3.0: attempt 2 exit 0 aborts []
+2026-11-12T08:20:23Z S1 jpeg-30: attempt 1 started
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\degradation\cord_s1_jpeg-30_v1_1_1.json
+2026-11-12T08:24:05Z S1 jpeg-30: attempt 1 exit 0 aborts []
+2026-11-12T08:24:05Z S4h jpeg-30: attempt 1 started
+processed 10, failed=0
+ABORTED: free system RAM 0.369 GiB fell below 0.400 GiB. Recorded in C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\aborted\cord_s4h_jpeg-30_test_aborted_20261112T082554Z.json. No results written.
+2026-11-12T08:25:54Z S4h jpeg-30: attempt 1 exit 3 aborts ['cord_s4h_jpeg-30_test_aborted_20261112T082554Z.json']
+2026-11-12T08:26:25Z S4h jpeg-30: attempt 2 started
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+ABORTED: free system RAM 0.322 GiB fell below 0.400 GiB. Recorded in C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\aborted\cord_s4h_jpeg-30_test_aborted_20261112T083431Z.json. No results written.
+2026-11-12T08:34:32Z S4h jpeg-30: attempt 2 exit 3 aborts ['cord_s4h_jpeg-30_test_aborted_20261112T083431Z.json']
+2026-11-12T08:35:02Z S4h jpeg-30: attempt 3 started
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\degradation\cord_s4h_jpeg-30_v1_1_1.json
+2026-11-12T08:38:04Z S4h jpeg-30: attempt 3 exit 0 aborts []
+2026-11-12T08:38:04Z S1 jpeg-10: attempt 1 started
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\degradation\cord_s1_jpeg-10_v1_1_1.json
+2026-11-12T08:41:34Z S1 jpeg-10: attempt 1 exit 0 aborts []
+2026-11-12T08:41:34Z S4h jpeg-10: attempt 1 started
+processed 10, failed=0
+ABORTED: free system RAM 0.391 GiB fell below 0.400 GiB. Recorded in C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\aborted\cord_s4h_jpeg-10_test_aborted_20261112T084339Z.json. No results written.
+2026-11-12T08:43:40Z S4h jpeg-10: attempt 1 exit 3 aborts ['cord_s4h_jpeg-10_test_aborted_20261112T084339Z.json']
+2026-11-12T08:44:10Z S4h jpeg-10: attempt 2 started
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+ABORTED: free system RAM 0.377 GiB fell below 0.400 GiB. Recorded in C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\aborted\cord_s4h_jpeg-10_test_aborted_20261112T085335Z.json. No results written.
+2026-11-12T08:53:36Z S4h jpeg-10: attempt 2 exit 3 aborts ['cord_s4h_jpeg-10_test_aborted_20261112T085335Z.json']
+2026-11-12T08:54:06Z S4h jpeg-10: attempt 3 started
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\degradation\cord_s4h_jpeg-10_v1_1_1.json
+2026-11-12T08:56:02Z S4h jpeg-10: attempt 3 exit 0 aborts []
+2026-11-12T08:56:02Z keep-awake released: stopped process 16012
+2026-11-12T08:56:02Z SUMMARY
+2026-11-12T08:56:02Z   S1 records rerun: done, attempts 1
+2026-11-12T08:56:02Z   S2': done, attempts 1
+2026-11-12T08:56:02Z   S3': done, attempts 1
+2026-11-12T08:56:02Z   S4': done, attempts 2
+2026-11-12T08:56:02Z   S4h: done, attempts 1
+2026-11-12T08:56:02Z   S5-S1 all: done, attempts 1
+2026-11-12T08:56:02Z   S5-S1 grouped: done, attempts 1
+2026-11-12T08:56:02Z   S5-S4h all: done, attempts 1
+2026-11-12T08:56:02Z   S5-S4h grouped: done, attempts 1
+2026-11-12T08:56:02Z   S5 ablations: done, attempts 1
+2026-11-12T08:56:02Z   S1 blur-1.5: done, attempts 2
+2026-11-12T08:56:02Z   S4h blur-1.5: done, attempts 2
+2026-11-12T08:56:02Z   S1 blur-3.0: done, attempts 1
+2026-11-12T08:56:02Z   S4h blur-3.0: done, attempts 2
+2026-11-12T08:56:02Z   S1 jpeg-30: done, attempts 1
+2026-11-12T08:56:02Z   S4h jpeg-30: done, attempts 3
+2026-11-12T08:56:02Z   S1 jpeg-10: done, attempts 1
+2026-11-12T08:56:02Z   S4h jpeg-10: done, attempts 3
+2026-11-12T08:56:02Z   memory aborts: 8; metadata final-run-metadata-20261112T073516Z.json
+2026-11-12T08:56:02Z EXIT=0

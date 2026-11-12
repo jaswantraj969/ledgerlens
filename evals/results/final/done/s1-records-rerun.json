@@ -1,0 +1,7 @@
+{
+  "step": "S1 records rerun",
+  "output": "evals/results/repro/cord_s1_test_records_rerun_v1_1_1.json",
+  "output_sha256": "11c35c9765b2fe69e068117d24ba381826c3d6942c421974a36289d3cff5e621",
+  "completed_utc": "2026-11-12T07:35:39Z",
+  "recovered_without_marker": false
+}

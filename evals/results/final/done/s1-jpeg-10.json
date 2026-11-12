@@ -1,0 +1,7 @@
+{
+  "step": "S1 jpeg-10",
+  "output": "evals/results/degradation/cord_s1_jpeg-10_v1_1_1.json",
+  "output_sha256": "a4d6bf6d236e89696be28e5b8a674b0457331b2db3fed0dd512e1a08a7d15ac8",
+  "completed_utc": "2026-11-12T08:41:34Z",
+  "recovered_without_marker": false
+}

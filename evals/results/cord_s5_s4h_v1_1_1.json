@@ -1,0 +1,198 @@
+{
+  "system": "S5-S4h",
+  "base": "s4h",
+  "variant": "all",
+  "train_scope": "train_all_p2.2",
+  "train_units": {
+    "header": 2214,
+    "row": 3395
+  },
+  "validation_units": {
+    "header": 271,
+    "row": 354
+  },
+  "thresholds": {
+    "header": {
+      "0.98": 0.966,
+      "0.99": 0.969
+    },
+    "row": {
+      "0.98": 0.826,
+      "0.99": 0.826
+    }
+  },
+  "validation": {
+    "header": {
+      "units": 271,
+      "slots": 300,
+      "documents": 100,
+      "ece_10_bins": 0.05570651272083774,
+      "brier": 0.08284972454829032,
+      "roc_auc": 0.942470238095238,
+      "targets": {
+        "0.98": {
+          "threshold": 0.966,
+          "accepted": 59,
+          "automation_rate": 0.19666666666666666,
+          "automation_rate_ci95": [
+            0.14666666666666667,
+            0.24666666666666667
+          ],
+          "achieved_precision": 0.9830508474576272,
+          "achieved_precision_ci95": [
+            0.9423076923076923,
+            1.0
+          ],
+          "target_met": true
+        },
+        "0.99": {
+          "threshold": 0.969,
+          "accepted": 47,
+          "automation_rate": 0.15666666666666668,
+          "automation_rate_ci95": [
+            0.10666666666666667,
+            0.20666666666666667
+          ],
+          "achieved_precision": 1.0,
+          "achieved_precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "target_met": true
+        }
+      }
+    },
+    "row": {
+      "units": 354,
+      "slots": 354,
+      "documents": 100,
+      "ece_10_bins": 0.04850974109383818,
+      "brier": 0.0813479546413001,
+      "roc_auc": 0.9245149911816579,
+      "targets": {
+        "0.98": {
+          "threshold": 0.826,
+          "accepted": 1,
+          "automation_rate": 0.002824858757062147,
+          "automation_rate_ci95": [
+            0.0,
+            0.009036827066574452
+          ],
+          "achieved_precision": 1.0,
+          "achieved_precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "target_met": true
+        },
+        "0.99": {
+          "threshold": 0.826,
+          "accepted": 1,
+          "automation_rate": 0.002824858757062147,
+          "automation_rate_ci95": [
+            0.0,
+            0.009036827066574452
+          ],
+          "achieved_precision": 1.0,
+          "achieved_precision_ci95": [
+            1.0,
+            1.0
+          ],
+          "target_met": true
+        }
+      }
+    }
+  },
+  "environment": {
+    "git_commit": "475c048bc9e59d11e35a68f414f15e9f285bd85a",
+    "git_dirty": false,
+    "python": "3.12.13",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "cpu_count": 12,
+    "packages": {
+      "rapidocr": "3.10.0",
+      "onnxruntime": "1.31.1",
+      "numpy": "2.5.4",
+      "pypdfium2": "5.14.0",
+      "rapidfuzz": "3.14.6"
+    },
+    "ocr_execution": "CPU, onnxruntime defaults"
+  },
+  "test": {
+    "header": {
+      "units": 272,
+      "slots": 300,
+      "documents": 100,
+      "ece_10_bins": 0.03941748610484132,
+      "brier": 0.09923809843511298,
+      "roc_auc": 0.9207299686341603,
+      "targets": {
+        "0.98": {
+          "threshold": 0.966,
+          "accepted": 49,
+          "automation_rate": 0.16333333333333333,
+          "automation_rate_ci95": [
+            0.12,
+            0.21
+          ],
+          "achieved_precision": 0.9591836734693877,
+          "achieved_precision_ci95": [
+            0.8913043478260869,
+            1.0
+          ],
+          "target_met": false
+        },
+        "0.99": {
+          "threshold": 0.969,
+          "accepted": 42,
+          "automation_rate": 0.14,
+          "automation_rate_ci95": [
+            0.09666666666666666,
+            0.18333333333333332
+          ],
+          "achieved_precision": 0.9761904761904762,
+          "achieved_precision_ci95": [
+            0.9166666666666666,
+            1.0
+          ],
+          "target_met": false
+        }
+      }
+    },
+    "row": {
+      "units": 422,
+      "slots": 422,
+      "documents": 100,
+      "ece_10_bins": 0.05943914684760981,
+      "brier": 0.10385635143027946,
+      "roc_auc": 0.9011520335137022,
+      "targets": {
+        "0.98": {
+          "threshold": 0.826,
+          "accepted": 0,
+          "automation_rate": 0.0,
+          "automation_rate_ci95": [
+            0.0,
+            0.0
+          ],
+          "achieved_precision": null,
+          "achieved_precision_ci95": null,
+          "target_met": false
+        },
+        "0.99": {
+          "threshold": 0.826,
+          "accepted": 0,
+          "automation_rate": 0.0,
+          "automation_rate_ci95": [
+            0.0,
+            0.0
+          ],
+          "achieved_precision": null,
+          "achieved_precision_ci95": null,
+          "target_met": false
+        }
+      }
+    }
+  }
+}

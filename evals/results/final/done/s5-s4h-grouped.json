@@ -1,0 +1,7 @@
+{
+  "step": "S5-S4h grouped",
+  "output": "evals/results/cord_s5_s4h_grouped_v1_1_1.json",
+  "output_sha256": "a93b0fb6ba011889dafeefb4b733a8cf931ae3b6009a34478e062736dfe395b9",
+  "completed_utc": "2026-11-12T07:51:29Z",
+  "recovered_without_marker": false
+}

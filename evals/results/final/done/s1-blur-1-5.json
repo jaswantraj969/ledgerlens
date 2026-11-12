@@ -1,0 +1,7 @@
+{
+  "step": "S1 blur-1.5",
+  "output": "evals/results/degradation/cord_s1_blur-1.5_v1_1_1.json",
+  "output_sha256": "d1baebd1fb33b50ac19080d8fdf547ce17b93ce92d426f49bf02acfe3ddf0db8",
+  "completed_utc": "2026-11-12T07:56:06Z",
+  "recovered_without_marker": false
+}
