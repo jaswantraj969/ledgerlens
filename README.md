@@ -67,6 +67,10 @@ S1 was re-run in the final read (to save its per-field records for S5-S1). Its p
 
 Seven of the 100 test documents have identical OCR token text to a train or validation document (test 25, 28, 31, 33, 38, 44 and 75; images differ, labels identical in 5 of the 7). They are included in every figure here, as read ([limitations](docs/limitations.md)).
 
+<!-- dedup-sensitivity:start -->
+**Duplicate-exclusion check (post hoc, [addendum 01](docs/evaluation/addendum-01-duplicate-sensitivity.md)).** Leaving out the 7 test documents with a near-copy in train or validation (n = 93): no S1-against-S4h ordering changes on any field (on the 93, S1 against S4h: total 0.775 against 0.825; subtotal 0.819 against 0.729; tax 0.727 against 0.475; row-level 0.330 against 0.216). At the 0.98 target on the 93: S5-S1 header automation 0.194 at precision 0.963; S5-S4h header automation 0.168 at precision 0.957. The primary results above are unchanged. CORD also has 10 train-validation groups and 22 within-split groups with identical OCR token text. So validation choices were made partly on near-copies of train, and the document-bootstrap intervals, which treat documents as independent, are slightly optimistic. Source: [cord_test_dedup_sensitivity_v1_1_1.md](evals/results/final/cord_test_dedup_sensitivity_v1_1_1.md).
+<!-- dedup-sensitivity:end -->
+
 ### S5: which values can skip human review
 
 S5 fits a logistic model on CORD train predictions to score each extracted value, and accepts a value without review only when its score clears a threshold set on validation for a precision target. Header slots (total, subtotal and tax, 3 per document, filled or not) and predicted line-item rows are scored separately. On CORD test:

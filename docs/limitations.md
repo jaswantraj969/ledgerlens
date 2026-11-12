@@ -59,3 +59,7 @@ On CORD test, the thresholds chosen on validation gave header precision below ta
 ## CORD v2 has near-duplicate documents across its official splits
 
 Seven of the 100 test documents have identical OCR token text to a train or validation document: test 25, 28, 31, 33, 38, 44 and 75 (`docs/progress/logs/cord-cross-split-duplicates.txt`). The image bytes always differ. The gold labels are identical in 5 of the 7 pairs. Across all splits there are 17 such cross-split groups. The split checks compared document IDs only, so this was found after the final test read: 8 S2′ test replies were replayed from replies recorded for the train or validation twins. The test numbers are reported as read. They include these documents, so CORD test is not fully unseen data for the S5 calibrators (fitted on train) or the S1 rules (tuned on validation).
+
+<!-- dedup-sensitivity:start -->
+Duplicate-exclusion check (post hoc, `docs/evaluation/addendum-01-duplicate-sensitivity.md`): No S1-against-S4h ordering changes on any field (on the 93, S1 against S4h: total 0.775 against 0.825; subtotal 0.819 against 0.729; tax 0.727 against 0.475; row-level 0.330 against 0.216). There are also 10 train-validation and 22 within-split groups of near-copies, so validation choices rest partly on near-copies of train, and the bootstrap intervals are slightly optimistic. No clustered bootstrap was run.
+<!-- dedup-sensitivity:end -->
