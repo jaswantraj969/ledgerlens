@@ -4,8 +4,10 @@ Event 105 records each power-source change with `AcOnline`. Between two changes 
 Times while the machine slept are not compute time, so they never matter. A moment before the
 first event, or on a machine without the log, is "unknown", never assumed.
 
-The events are read once with PowerShell and saved, so audits are reproducible:
-docs/progress/logs/power-events.json.
+The events are read with PowerShell. Every read is saved to data/power/power-events.json
+(gitignored), so ordinary runs never modify a tracked file. The committed snapshot
+docs/progress/logs/power-events.json is written only by an explicit power audit
+(`evals.runners.audit_power`), so audits stay reproducible from the repository.
 """
 
 import bisect
@@ -18,15 +20,17 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-EVENTS_FILE = ROOT / "docs" / "progress" / "logs" / "power-events.json"
+EVENTS_FILE = ROOT / "docs" / "progress" / "logs" / "power-events.json"  # committed snapshot
+LIVE_FILE = ROOT / "data" / "power" / "power-events.json"  # gitignored, refreshed by runs
 _QUERY = r"""
 $events = Get-WinEvent -FilterHashtable @{LogName='System'; ProviderName='Microsoft-Windows-Kernel-Power'; Id=105} -ErrorAction SilentlyContinue | Sort-Object TimeCreated
 $events | ForEach-Object { $x = [xml]$_.ToXml(); $ac = ($x.Event.EventData.Data | Where-Object Name -eq 'AcOnline').'#text'; [pscustomobject]@{utc=$_.TimeCreated.ToUniversalTime().ToString('o'); ac_online=$ac} } | ConvertTo-Json
 """  # noqa: E501
 
 
-def read_events() -> list[dict[str, Any]]:
-    """Query the log now and save it. Returns [] where there is no Windows power log."""
+def read_events(snapshot: bool = False) -> list[dict[str, Any]]:
+    """Query the log now and save it to LIVE_FILE, and to the committed snapshot only when
+    `snapshot` is set (power audits). Returns [] where there is no Windows power log."""
     try:
         out = subprocess.run(  # noqa: S603 - fixed command, no user input
             ["powershell", "-NoProfile", "-Command", _QUERY],  # noqa: S607
@@ -37,8 +41,10 @@ def read_events() -> list[dict[str, Any]]:
     events = json.loads(out) if out.strip() else []
     events = events if isinstance(events, list) else [events]
     parsed = [{"utc": e["utc"], "ac": str(e["ac_online"]).lower() == "true"} for e in events]
-    EVENTS_FILE.parent.mkdir(parents=True, exist_ok=True)
-    EVENTS_FILE.write_text(json.dumps(parsed, indent=1) + "\n", encoding="utf-8", newline="\n")
+    targets = [LIVE_FILE, EVENTS_FILE] if snapshot else [LIVE_FILE]
+    for target in targets:
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(json.dumps(parsed, indent=1) + "\n", encoding="utf-8", newline="\n")
     return parsed
 
 
@@ -49,10 +55,14 @@ class PowerLog:
         self.states = [ac for _, ac in pairs]
 
     @classmethod
-    def load(cls, refresh: bool = False) -> "PowerLog":
-        if refresh or not EVENTS_FILE.exists():
-            return cls(read_events())
-        return cls(json.loads(EVENTS_FILE.read_text(encoding="utf-8")))
+    def load(cls, refresh: bool = False, snapshot: bool = False) -> "PowerLog":
+        """Fresh events when asked; otherwise the newest saved copy (local, then committed)."""
+        if refresh:
+            return cls(read_events(snapshot=snapshot))
+        for saved in (LIVE_FILE, EVENTS_FILE):
+            if saved.exists():
+                return cls(json.loads(saved.read_text(encoding="utf-8")))
+        return cls(read_events(snapshot=snapshot))
 
     def state_at(self, timestamp: float) -> str:
         index = bisect.bisect_right(self.times, timestamp) - 1

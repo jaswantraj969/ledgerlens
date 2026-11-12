@@ -99,7 +99,7 @@ def timed_results() -> list[Path]:
 
 
 def main() -> None:
-    log = PowerLog.load(refresh=True)
+    log = PowerLog.load(refresh=True, snapshot=True)  # the explicit audit updates the snapshot
     report = {}
     for path in timed_results():
         relative = path.relative_to(RESULTS).as_posix()

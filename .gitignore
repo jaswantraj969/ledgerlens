@@ -39,3 +39,5 @@ Thumbs.db
 
 # Portfolio screenshots show CORD receipts (CC BY 4.0); kept local, never committed (R10)
 docs/portfolio/screenshots/
+# Output of the offline smoke evaluation (bash scripts/tasks.sh eval-smoke), regenerated on demand
+evals/results/dev/synthetic_smoke.json
