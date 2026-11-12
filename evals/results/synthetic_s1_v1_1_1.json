@@ -1,0 +1,3992 @@
+{
+  "system": "S1",
+  "llm": null,
+  "memory": {
+    "peak_process_rss_gib": 0.553,
+    "peak_model_runner_rss_gib": 0.042,
+    "lowest_available_system_ram_gib": 3.95,
+    "total_system_ram_gib": 15.638,
+    "abort_below_gib": 0.4
+  },
+  "dataset": "synthetic",
+  "note": "Synthetic results are reported apart and are not real-dataset claims.",
+  "dev_layouts": [
+    "classic",
+    "modern",
+    "receipt",
+    "statement"
+  ],
+  "held_out_layouts": [
+    "ledger"
+  ],
+  "seed_base": 700000,
+  "routes": {
+    "native_pdf": {
+      "documents_per_layout": 40,
+      "layouts": {
+        "classic": {
+          "metrics_version": "1.1.1",
+          "normalization": {
+            "version": "1.0",
+            "sha256": "aa5cf4994ce5fd1b12b2aaf843fa3568f15bffe515b9cefd4dc1bb200760dee1"
+          },
+          "fields": {
+            "vendor_name": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 40,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "invoice_number": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 40,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "invoice_date": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 40,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "currency": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 40,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "subtotal": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 40,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "tax_amount": {
+              "n_documents": 40,
+              "n_present": 34,
+              "n_absent": 6,
+              "tp": 34,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": 0.0,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": [
+                0.0,
+                0.0
+              ]
+            },
+            "total_amount": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 40,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            }
+          },
+          "gold_values_excluded_unparsable": {
+            "vendor_name": 0,
+            "invoice_number": 0,
+            "invoice_date": 0,
+            "currency": 0,
+            "subtotal": 0,
+            "tax_amount": 0,
+            "total_amount": 0
+          },
+          "line_items_row_level": {
+            "n_documents": 40,
+            "n_documents_with_rows": 40,
+            "rows_correct": 163,
+            "rows_predicted": 163,
+            "rows_gold": 163,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "documents_all_rows_correct": 1.0,
+            "precision_ci95": [
+              1.0,
+              1.0
+            ],
+            "recall_ci95": [
+              1.0,
+              1.0
+            ],
+            "f1_ci95": [
+              1.0,
+              1.0
+            ],
+            "documents_all_rows_correct_ci95": [
+              1.0,
+              1.0
+            ]
+          },
+          "line_items_set_based": {
+            "label": "set-based, ignores row alignment",
+            "fields": {
+              "description": {
+                "n_documents": 40,
+                "n_labelled": 40,
+                "tp": 163,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "quantity": {
+                "n_documents": 40,
+                "n_labelled": 40,
+                "tp": 163,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "unit_price": {
+                "n_documents": 40,
+                "n_labelled": 40,
+                "tp": 163,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "amount": {
+                "n_documents": 40,
+                "n_labelled": 40,
+                "tp": 163,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              }
+            }
+          },
+          "failures": {
+            "failed_extractions": 0,
+            "pass_fallbacks": 0
+          },
+          "live_llm_seconds": []
+        },
+        "modern": {
+          "metrics_version": "1.1.1",
+          "normalization": {
+            "version": "1.0",
+            "sha256": "aa5cf4994ce5fd1b12b2aaf843fa3568f15bffe515b9cefd4dc1bb200760dee1"
+          },
+          "fields": {
+            "vendor_name": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 40,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "invoice_number": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 40,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "invoice_date": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 40,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "currency": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 40,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "subtotal": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 40,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "tax_amount": {
+              "n_documents": 40,
+              "n_present": 34,
+              "n_absent": 6,
+              "tp": 34,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": 0.0,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": [
+                0.0,
+                0.0
+              ]
+            },
+            "total_amount": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 40,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            }
+          },
+          "gold_values_excluded_unparsable": {
+            "vendor_name": 0,
+            "invoice_number": 0,
+            "invoice_date": 0,
+            "currency": 0,
+            "subtotal": 0,
+            "tax_amount": 0,
+            "total_amount": 0
+          },
+          "line_items_row_level": {
+            "n_documents": 40,
+            "n_documents_with_rows": 40,
+            "rows_correct": 163,
+            "rows_predicted": 163,
+            "rows_gold": 163,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "documents_all_rows_correct": 1.0,
+            "precision_ci95": [
+              1.0,
+              1.0
+            ],
+            "recall_ci95": [
+              1.0,
+              1.0
+            ],
+            "f1_ci95": [
+              1.0,
+              1.0
+            ],
+            "documents_all_rows_correct_ci95": [
+              1.0,
+              1.0
+            ]
+          },
+          "line_items_set_based": {
+            "label": "set-based, ignores row alignment",
+            "fields": {
+              "description": {
+                "n_documents": 40,
+                "n_labelled": 40,
+                "tp": 163,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "quantity": {
+                "n_documents": 40,
+                "n_labelled": 40,
+                "tp": 163,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "unit_price": {
+                "n_documents": 40,
+                "n_labelled": 40,
+                "tp": 163,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "amount": {
+                "n_documents": 40,
+                "n_labelled": 40,
+                "tp": 163,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              }
+            }
+          },
+          "failures": {
+            "failed_extractions": 0,
+            "pass_fallbacks": 0
+          },
+          "live_llm_seconds": []
+        },
+        "receipt": {
+          "metrics_version": "1.1.1",
+          "normalization": {
+            "version": "1.0",
+            "sha256": "aa5cf4994ce5fd1b12b2aaf843fa3568f15bffe515b9cefd4dc1bb200760dee1"
+          },
+          "fields": {
+            "vendor_name": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 40,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "invoice_number": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 40,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "invoice_date": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 40,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "currency": {
+              "n_documents": 40,
+              "n_present": 0,
+              "n_absent": 40,
+              "tp": 0,
+              "fp": 1,
+              "fn": 0,
+              "false_fills": 1,
+              "precision": 0.0,
+              "recall": null,
+              "f1": 0.0,
+              "exact_match": null,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": 0.025,
+              "precision_ci95": [
+                0.0,
+                0.0
+              ],
+              "recall_ci95": null,
+              "f1_ci95": [
+                0.0,
+                0.0
+              ],
+              "exact_match_ci95": null,
+              "false_fill_rate_ci95": [
+                0.0,
+                0.075
+              ]
+            },
+            "subtotal": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 40,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "tax_amount": {
+              "n_documents": 40,
+              "n_present": 34,
+              "n_absent": 6,
+              "tp": 34,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": 0.0,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": [
+                0.0,
+                0.0
+              ]
+            },
+            "total_amount": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 40,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            }
+          },
+          "gold_values_excluded_unparsable": {
+            "vendor_name": 0,
+            "invoice_number": 0,
+            "invoice_date": 0,
+            "currency": 0,
+            "subtotal": 0,
+            "tax_amount": 0,
+            "total_amount": 0
+          },
+          "line_items_row_level": {
+            "n_documents": 40,
+            "n_documents_with_rows": 40,
+            "rows_correct": 163,
+            "rows_predicted": 163,
+            "rows_gold": 163,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "documents_all_rows_correct": 1.0,
+            "precision_ci95": [
+              1.0,
+              1.0
+            ],
+            "recall_ci95": [
+              1.0,
+              1.0
+            ],
+            "f1_ci95": [
+              1.0,
+              1.0
+            ],
+            "documents_all_rows_correct_ci95": [
+              1.0,
+              1.0
+            ]
+          },
+          "line_items_set_based": {
+            "label": "set-based, ignores row alignment",
+            "fields": {
+              "description": {
+                "n_documents": 40,
+                "n_labelled": 40,
+                "tp": 163,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "quantity": {
+                "n_documents": 40,
+                "n_labelled": 40,
+                "tp": 163,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "unit_price": {
+                "n_documents": 40,
+                "n_labelled": 0,
+                "tp": 0,
+                "fp": 0,
+                "fn": 0,
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "exact_match": 1.0,
+                "precision_ci95": null,
+                "recall_ci95": null,
+                "f1_ci95": null,
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "amount": {
+                "n_documents": 40,
+                "n_labelled": 40,
+                "tp": 163,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              }
+            }
+          },
+          "failures": {
+            "failed_extractions": 0,
+            "pass_fallbacks": 0
+          },
+          "live_llm_seconds": []
+        },
+        "statement": {
+          "metrics_version": "1.1.1",
+          "normalization": {
+            "version": "1.0",
+            "sha256": "aa5cf4994ce5fd1b12b2aaf843fa3568f15bffe515b9cefd4dc1bb200760dee1"
+          },
+          "fields": {
+            "vendor_name": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 40,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "invoice_number": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 40,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "invoice_date": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 40,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "currency": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 39,
+              "fp": 1,
+              "fn": 1,
+              "false_fills": 0,
+              "precision": 0.975,
+              "recall": 0.975,
+              "f1": 0.975,
+              "exact_match": 0.975,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                0.925,
+                1.0
+              ],
+              "recall_ci95": [
+                0.925,
+                1.0
+              ],
+              "f1_ci95": [
+                0.925,
+                1.0
+              ],
+              "exact_match_ci95": [
+                0.925,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "subtotal": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 40,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "tax_amount": {
+              "n_documents": 40,
+              "n_present": 34,
+              "n_absent": 6,
+              "tp": 34,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": 0.0,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": [
+                0.0,
+                0.0
+              ]
+            },
+            "total_amount": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 40,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            }
+          },
+          "gold_values_excluded_unparsable": {
+            "vendor_name": 0,
+            "invoice_number": 0,
+            "invoice_date": 0,
+            "currency": 0,
+            "subtotal": 0,
+            "tax_amount": 0,
+            "total_amount": 0
+          },
+          "line_items_row_level": {
+            "n_documents": 40,
+            "n_documents_with_rows": 40,
+            "rows_correct": 163,
+            "rows_predicted": 163,
+            "rows_gold": 163,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "documents_all_rows_correct": 1.0,
+            "precision_ci95": [
+              1.0,
+              1.0
+            ],
+            "recall_ci95": [
+              1.0,
+              1.0
+            ],
+            "f1_ci95": [
+              1.0,
+              1.0
+            ],
+            "documents_all_rows_correct_ci95": [
+              1.0,
+              1.0
+            ]
+          },
+          "line_items_set_based": {
+            "label": "set-based, ignores row alignment",
+            "fields": {
+              "description": {
+                "n_documents": 40,
+                "n_labelled": 40,
+                "tp": 163,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "quantity": {
+                "n_documents": 40,
+                "n_labelled": 40,
+                "tp": 163,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "unit_price": {
+                "n_documents": 40,
+                "n_labelled": 40,
+                "tp": 163,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "amount": {
+                "n_documents": 40,
+                "n_labelled": 40,
+                "tp": 163,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              }
+            }
+          },
+          "failures": {
+            "failed_extractions": 0,
+            "pass_fallbacks": 0
+          },
+          "live_llm_seconds": []
+        },
+        "ledger": {
+          "metrics_version": "1.1.1",
+          "normalization": {
+            "version": "1.0",
+            "sha256": "aa5cf4994ce5fd1b12b2aaf843fa3568f15bffe515b9cefd4dc1bb200760dee1"
+          },
+          "fields": {
+            "vendor_name": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 0,
+              "fp": 40,
+              "fn": 40,
+              "false_fills": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "exact_match": 0.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                0.0,
+                0.0
+              ],
+              "recall_ci95": [
+                0.0,
+                0.0
+              ],
+              "f1_ci95": [
+                0.0,
+                0.0
+              ],
+              "exact_match_ci95": [
+                0.0,
+                0.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "invoice_number": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 40,
+              "false_fills": 0,
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0,
+              "exact_match": 0.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": null,
+              "recall_ci95": [
+                0.0,
+                0.0
+              ],
+              "f1_ci95": [
+                0.0,
+                0.0
+              ],
+              "exact_match_ci95": [
+                0.0,
+                0.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "invoice_date": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 40,
+              "false_fills": 0,
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0,
+              "exact_match": 0.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": null,
+              "recall_ci95": [
+                0.0,
+                0.0
+              ],
+              "f1_ci95": [
+                0.0,
+                0.0
+              ],
+              "exact_match_ci95": [
+                0.0,
+                0.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "currency": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 40,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "subtotal": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 40,
+              "false_fills": 0,
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0,
+              "exact_match": 0.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": null,
+              "recall_ci95": [
+                0.0,
+                0.0
+              ],
+              "f1_ci95": [
+                0.0,
+                0.0
+              ],
+              "exact_match_ci95": [
+                0.0,
+                0.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "tax_amount": {
+              "n_documents": 40,
+              "n_present": 34,
+              "n_absent": 6,
+              "tp": 0,
+              "fp": 0,
+              "fn": 34,
+              "false_fills": 0,
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0,
+              "exact_match": 0.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": 0.0,
+              "precision_ci95": null,
+              "recall_ci95": [
+                0.0,
+                0.0
+              ],
+              "f1_ci95": [
+                0.0,
+                0.0
+              ],
+              "exact_match_ci95": [
+                0.0,
+                0.0
+              ],
+              "false_fill_rate_ci95": [
+                0.0,
+                0.0
+              ]
+            },
+            "total_amount": {
+              "n_documents": 40,
+              "n_present": 40,
+              "n_absent": 0,
+              "tp": 0,
+              "fp": 1,
+              "fn": 40,
+              "false_fills": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "exact_match": 0.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                0.0,
+                0.0
+              ],
+              "recall_ci95": [
+                0.0,
+                0.0
+              ],
+              "f1_ci95": [
+                0.0,
+                0.0
+              ],
+              "exact_match_ci95": [
+                0.0,
+                0.0
+              ],
+              "false_fill_rate_ci95": null
+            }
+          },
+          "gold_values_excluded_unparsable": {
+            "vendor_name": 0,
+            "invoice_number": 0,
+            "invoice_date": 0,
+            "currency": 0,
+            "subtotal": 0,
+            "tax_amount": 0,
+            "total_amount": 0
+          },
+          "line_items_row_level": {
+            "n_documents": 40,
+            "n_documents_with_rows": 40,
+            "rows_correct": 163,
+            "rows_predicted": 163,
+            "rows_gold": 163,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "documents_all_rows_correct": 1.0,
+            "precision_ci95": [
+              1.0,
+              1.0
+            ],
+            "recall_ci95": [
+              1.0,
+              1.0
+            ],
+            "f1_ci95": [
+              1.0,
+              1.0
+            ],
+            "documents_all_rows_correct_ci95": [
+              1.0,
+              1.0
+            ]
+          },
+          "line_items_set_based": {
+            "label": "set-based, ignores row alignment",
+            "fields": {
+              "description": {
+                "n_documents": 40,
+                "n_labelled": 40,
+                "tp": 163,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "quantity": {
+                "n_documents": 40,
+                "n_labelled": 40,
+                "tp": 163,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "unit_price": {
+                "n_documents": 40,
+                "n_labelled": 40,
+                "tp": 163,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "amount": {
+                "n_documents": 40,
+                "n_labelled": 40,
+                "tp": 163,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              }
+            }
+          },
+          "failures": {
+            "failed_extractions": 0,
+            "pass_fallbacks": 0
+          },
+          "live_llm_seconds": []
+        }
+      },
+      "dev_vs_held_out": {
+        "vendor_name": {
+          "dev_f1": 1.0,
+          "held_out_f1": 0.0,
+          "gap": 1.0
+        },
+        "invoice_number": {
+          "dev_f1": 1.0,
+          "held_out_f1": 0.0,
+          "gap": 1.0
+        },
+        "invoice_date": {
+          "dev_f1": 1.0,
+          "held_out_f1": 0.0,
+          "gap": 1.0
+        },
+        "currency": {
+          "dev_f1": 0.9875518672199171,
+          "held_out_f1": 1.0,
+          "gap": -0.012448132780082943
+        },
+        "subtotal": {
+          "dev_f1": 1.0,
+          "held_out_f1": 0.0,
+          "gap": 1.0
+        },
+        "tax_amount": {
+          "dev_f1": 1.0,
+          "held_out_f1": 0.0,
+          "gap": 1.0
+        },
+        "total_amount": {
+          "dev_f1": 1.0,
+          "held_out_f1": 0.0,
+          "gap": 1.0
+        },
+        "line_items_row_level": {
+          "dev_f1": 1.0,
+          "held_out_f1": 1.0,
+          "gap": 0.0
+        }
+      }
+    },
+    "ocr": {
+      "documents_per_layout": 20,
+      "layouts": {
+        "classic": {
+          "metrics_version": "1.1.1",
+          "normalization": {
+            "version": "1.0",
+            "sha256": "aa5cf4994ce5fd1b12b2aaf843fa3568f15bffe515b9cefd4dc1bb200760dee1"
+          },
+          "fields": {
+            "vendor_name": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "invoice_number": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "invoice_date": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "currency": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "subtotal": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "tax_amount": {
+              "n_documents": 20,
+              "n_present": 17,
+              "n_absent": 3,
+              "tp": 17,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": 0.0,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": [
+                0.0,
+                0.0
+              ]
+            },
+            "total_amount": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            }
+          },
+          "gold_values_excluded_unparsable": {
+            "vendor_name": 0,
+            "invoice_number": 0,
+            "invoice_date": 0,
+            "currency": 0,
+            "subtotal": 0,
+            "tax_amount": 0,
+            "total_amount": 0
+          },
+          "line_items_row_level": {
+            "n_documents": 20,
+            "n_documents_with_rows": 20,
+            "rows_correct": 75,
+            "rows_predicted": 75,
+            "rows_gold": 75,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "documents_all_rows_correct": 1.0,
+            "precision_ci95": [
+              1.0,
+              1.0
+            ],
+            "recall_ci95": [
+              1.0,
+              1.0
+            ],
+            "f1_ci95": [
+              1.0,
+              1.0
+            ],
+            "documents_all_rows_correct_ci95": [
+              1.0,
+              1.0
+            ]
+          },
+          "line_items_set_based": {
+            "label": "set-based, ignores row alignment",
+            "fields": {
+              "description": {
+                "n_documents": 20,
+                "n_labelled": 20,
+                "tp": 75,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "quantity": {
+                "n_documents": 20,
+                "n_labelled": 20,
+                "tp": 75,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "unit_price": {
+                "n_documents": 20,
+                "n_labelled": 20,
+                "tp": 75,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "amount": {
+                "n_documents": 20,
+                "n_labelled": 20,
+                "tp": 75,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              }
+            }
+          },
+          "failures": {
+            "failed_extractions": 0,
+            "pass_fallbacks": 0
+          },
+          "live_llm_seconds": []
+        },
+        "modern": {
+          "metrics_version": "1.1.1",
+          "normalization": {
+            "version": "1.0",
+            "sha256": "aa5cf4994ce5fd1b12b2aaf843fa3568f15bffe515b9cefd4dc1bb200760dee1"
+          },
+          "fields": {
+            "vendor_name": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 19,
+              "fp": 1,
+              "fn": 1,
+              "false_fills": 0,
+              "precision": 0.95,
+              "recall": 0.95,
+              "f1": 0.95,
+              "exact_match": 0.95,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                0.85,
+                1.0
+              ],
+              "recall_ci95": [
+                0.85,
+                1.0
+              ],
+              "f1_ci95": [
+                0.85,
+                1.0
+              ],
+              "exact_match_ci95": [
+                0.85,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "invoice_number": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "invoice_date": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "currency": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "subtotal": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "tax_amount": {
+              "n_documents": 20,
+              "n_present": 17,
+              "n_absent": 3,
+              "tp": 17,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": 0.0,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": [
+                0.0,
+                0.0
+              ]
+            },
+            "total_amount": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            }
+          },
+          "gold_values_excluded_unparsable": {
+            "vendor_name": 0,
+            "invoice_number": 0,
+            "invoice_date": 0,
+            "currency": 0,
+            "subtotal": 0,
+            "tax_amount": 0,
+            "total_amount": 0
+          },
+          "line_items_row_level": {
+            "n_documents": 20,
+            "n_documents_with_rows": 20,
+            "rows_correct": 75,
+            "rows_predicted": 75,
+            "rows_gold": 75,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "documents_all_rows_correct": 1.0,
+            "precision_ci95": [
+              1.0,
+              1.0
+            ],
+            "recall_ci95": [
+              1.0,
+              1.0
+            ],
+            "f1_ci95": [
+              1.0,
+              1.0
+            ],
+            "documents_all_rows_correct_ci95": [
+              1.0,
+              1.0
+            ]
+          },
+          "line_items_set_based": {
+            "label": "set-based, ignores row alignment",
+            "fields": {
+              "description": {
+                "n_documents": 20,
+                "n_labelled": 20,
+                "tp": 75,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "quantity": {
+                "n_documents": 20,
+                "n_labelled": 20,
+                "tp": 75,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "unit_price": {
+                "n_documents": 20,
+                "n_labelled": 20,
+                "tp": 75,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "amount": {
+                "n_documents": 20,
+                "n_labelled": 20,
+                "tp": 75,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              }
+            }
+          },
+          "failures": {
+            "failed_extractions": 0,
+            "pass_fallbacks": 0
+          },
+          "live_llm_seconds": []
+        },
+        "receipt": {
+          "metrics_version": "1.1.1",
+          "normalization": {
+            "version": "1.0",
+            "sha256": "aa5cf4994ce5fd1b12b2aaf843fa3568f15bffe515b9cefd4dc1bb200760dee1"
+          },
+          "fields": {
+            "vendor_name": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "invoice_number": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "invoice_date": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "currency": {
+              "n_documents": 20,
+              "n_present": 0,
+              "n_absent": 20,
+              "tp": 0,
+              "fp": 1,
+              "fn": 0,
+              "false_fills": 1,
+              "precision": 0.0,
+              "recall": null,
+              "f1": 0.0,
+              "exact_match": null,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": 0.05,
+              "precision_ci95": [
+                0.0,
+                0.0
+              ],
+              "recall_ci95": null,
+              "f1_ci95": [
+                0.0,
+                0.0
+              ],
+              "exact_match_ci95": null,
+              "false_fill_rate_ci95": [
+                0.0,
+                0.15
+              ]
+            },
+            "subtotal": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "tax_amount": {
+              "n_documents": 20,
+              "n_present": 17,
+              "n_absent": 3,
+              "tp": 17,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": 0.0,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": [
+                0.0,
+                0.0
+              ]
+            },
+            "total_amount": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            }
+          },
+          "gold_values_excluded_unparsable": {
+            "vendor_name": 0,
+            "invoice_number": 0,
+            "invoice_date": 0,
+            "currency": 0,
+            "subtotal": 0,
+            "tax_amount": 0,
+            "total_amount": 0
+          },
+          "line_items_row_level": {
+            "n_documents": 20,
+            "n_documents_with_rows": 20,
+            "rows_correct": 73,
+            "rows_predicted": 73,
+            "rows_gold": 75,
+            "precision": 1.0,
+            "recall": 0.9733333333333334,
+            "f1": 0.9864864864864865,
+            "documents_all_rows_correct": 0.9,
+            "precision_ci95": [
+              1.0,
+              1.0
+            ],
+            "recall_ci95": [
+              0.9298183839881393,
+              1.0
+            ],
+            "f1_ci95": [
+              0.9636330457863305,
+              1.0
+            ],
+            "documents_all_rows_correct_ci95": [
+              0.75,
+              1.0
+            ]
+          },
+          "line_items_set_based": {
+            "label": "set-based, ignores row alignment",
+            "fields": {
+              "description": {
+                "n_documents": 20,
+                "n_labelled": 20,
+                "tp": 73,
+                "fp": 0,
+                "fn": 2,
+                "precision": 1.0,
+                "recall": 0.9733333333333334,
+                "f1": 0.9864864864864865,
+                "exact_match": 0.9,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  0.9298183839881393,
+                  1.0
+                ],
+                "f1_ci95": [
+                  0.9636330457863305,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  0.75,
+                  1.0
+                ]
+              },
+              "quantity": {
+                "n_documents": 20,
+                "n_labelled": 20,
+                "tp": 73,
+                "fp": 0,
+                "fn": 2,
+                "precision": 1.0,
+                "recall": 0.9733333333333334,
+                "f1": 0.9864864864864865,
+                "exact_match": 0.9,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  0.9298183839881393,
+                  1.0
+                ],
+                "f1_ci95": [
+                  0.9636330457863305,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  0.75,
+                  1.0
+                ]
+              },
+              "unit_price": {
+                "n_documents": 20,
+                "n_labelled": 0,
+                "tp": 0,
+                "fp": 0,
+                "fn": 0,
+                "precision": null,
+                "recall": null,
+                "f1": null,
+                "exact_match": 1.0,
+                "precision_ci95": null,
+                "recall_ci95": null,
+                "f1_ci95": null,
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "amount": {
+                "n_documents": 20,
+                "n_labelled": 20,
+                "tp": 73,
+                "fp": 0,
+                "fn": 2,
+                "precision": 1.0,
+                "recall": 0.9733333333333334,
+                "f1": 0.9864864864864865,
+                "exact_match": 0.9,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  0.9298183839881393,
+                  1.0
+                ],
+                "f1_ci95": [
+                  0.9636330457863305,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  0.75,
+                  1.0
+                ]
+              }
+            }
+          },
+          "failures": {
+            "failed_extractions": 0,
+            "pass_fallbacks": 0
+          },
+          "live_llm_seconds": []
+        },
+        "statement": {
+          "metrics_version": "1.1.1",
+          "normalization": {
+            "version": "1.0",
+            "sha256": "aa5cf4994ce5fd1b12b2aaf843fa3568f15bffe515b9cefd4dc1bb200760dee1"
+          },
+          "fields": {
+            "vendor_name": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "invoice_number": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "invoice_date": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "currency": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 19,
+              "fp": 1,
+              "fn": 1,
+              "false_fills": 0,
+              "precision": 0.95,
+              "recall": 0.95,
+              "f1": 0.95,
+              "exact_match": 0.95,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                0.85,
+                1.0
+              ],
+              "recall_ci95": [
+                0.85,
+                1.0
+              ],
+              "f1_ci95": [
+                0.85,
+                1.0
+              ],
+              "exact_match_ci95": [
+                0.85,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "subtotal": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "tax_amount": {
+              "n_documents": 20,
+              "n_present": 17,
+              "n_absent": 3,
+              "tp": 17,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": 0.0,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": [
+                0.0,
+                0.0
+              ]
+            },
+            "total_amount": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            }
+          },
+          "gold_values_excluded_unparsable": {
+            "vendor_name": 0,
+            "invoice_number": 0,
+            "invoice_date": 0,
+            "currency": 0,
+            "subtotal": 0,
+            "tax_amount": 0,
+            "total_amount": 0
+          },
+          "line_items_row_level": {
+            "n_documents": 20,
+            "n_documents_with_rows": 20,
+            "rows_correct": 75,
+            "rows_predicted": 75,
+            "rows_gold": 75,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "documents_all_rows_correct": 1.0,
+            "precision_ci95": [
+              1.0,
+              1.0
+            ],
+            "recall_ci95": [
+              1.0,
+              1.0
+            ],
+            "f1_ci95": [
+              1.0,
+              1.0
+            ],
+            "documents_all_rows_correct_ci95": [
+              1.0,
+              1.0
+            ]
+          },
+          "line_items_set_based": {
+            "label": "set-based, ignores row alignment",
+            "fields": {
+              "description": {
+                "n_documents": 20,
+                "n_labelled": 20,
+                "tp": 75,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "quantity": {
+                "n_documents": 20,
+                "n_labelled": 20,
+                "tp": 75,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "unit_price": {
+                "n_documents": 20,
+                "n_labelled": 20,
+                "tp": 75,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "amount": {
+                "n_documents": 20,
+                "n_labelled": 20,
+                "tp": 75,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              }
+            }
+          },
+          "failures": {
+            "failed_extractions": 0,
+            "pass_fallbacks": 0
+          },
+          "live_llm_seconds": []
+        },
+        "ledger": {
+          "metrics_version": "1.1.1",
+          "normalization": {
+            "version": "1.0",
+            "sha256": "aa5cf4994ce5fd1b12b2aaf843fa3568f15bffe515b9cefd4dc1bb200760dee1"
+          },
+          "fields": {
+            "vendor_name": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 0,
+              "fp": 20,
+              "fn": 20,
+              "false_fills": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "exact_match": 0.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                0.0,
+                0.0
+              ],
+              "recall_ci95": [
+                0.0,
+                0.0
+              ],
+              "f1_ci95": [
+                0.0,
+                0.0
+              ],
+              "exact_match_ci95": [
+                0.0,
+                0.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "invoice_number": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 20,
+              "false_fills": 0,
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0,
+              "exact_match": 0.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": null,
+              "recall_ci95": [
+                0.0,
+                0.0
+              ],
+              "f1_ci95": [
+                0.0,
+                0.0
+              ],
+              "exact_match_ci95": [
+                0.0,
+                0.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "invoice_date": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 20,
+              "false_fills": 0,
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0,
+              "exact_match": 0.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": null,
+              "recall_ci95": [
+                0.0,
+                0.0
+              ],
+              "f1_ci95": [
+                0.0,
+                0.0
+              ],
+              "exact_match_ci95": [
+                0.0,
+                0.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "currency": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 20,
+              "fp": 0,
+              "fn": 0,
+              "false_fills": 0,
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1": 1.0,
+              "exact_match": 1.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": [
+                1.0,
+                1.0
+              ],
+              "recall_ci95": [
+                1.0,
+                1.0
+              ],
+              "f1_ci95": [
+                1.0,
+                1.0
+              ],
+              "exact_match_ci95": [
+                1.0,
+                1.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "subtotal": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 20,
+              "false_fills": 0,
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0,
+              "exact_match": 0.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": null,
+              "recall_ci95": [
+                0.0,
+                0.0
+              ],
+              "f1_ci95": [
+                0.0,
+                0.0
+              ],
+              "exact_match_ci95": [
+                0.0,
+                0.0
+              ],
+              "false_fill_rate_ci95": null
+            },
+            "tax_amount": {
+              "n_documents": 20,
+              "n_present": 17,
+              "n_absent": 3,
+              "tp": 0,
+              "fp": 0,
+              "fn": 17,
+              "false_fills": 0,
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0,
+              "exact_match": 0.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": 0.0,
+              "precision_ci95": null,
+              "recall_ci95": [
+                0.0,
+                0.0
+              ],
+              "f1_ci95": [
+                0.0,
+                0.0
+              ],
+              "exact_match_ci95": [
+                0.0,
+                0.0
+              ],
+              "false_fill_rate_ci95": [
+                0.0,
+                0.0
+              ]
+            },
+            "total_amount": {
+              "n_documents": 20,
+              "n_present": 20,
+              "n_absent": 0,
+              "tp": 0,
+              "fp": 0,
+              "fn": 20,
+              "false_fills": 0,
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0,
+              "exact_match": 0.0,
+              "exact_match_redundant": "redundant: equals recall for single-valued fields (TP / n_present)",
+              "false_fill_rate": null,
+              "precision_ci95": null,
+              "recall_ci95": [
+                0.0,
+                0.0
+              ],
+              "f1_ci95": [
+                0.0,
+                0.0
+              ],
+              "exact_match_ci95": [
+                0.0,
+                0.0
+              ],
+              "false_fill_rate_ci95": null
+            }
+          },
+          "gold_values_excluded_unparsable": {
+            "vendor_name": 0,
+            "invoice_number": 0,
+            "invoice_date": 0,
+            "currency": 0,
+            "subtotal": 0,
+            "tax_amount": 0,
+            "total_amount": 0
+          },
+          "line_items_row_level": {
+            "n_documents": 20,
+            "n_documents_with_rows": 20,
+            "rows_correct": 74,
+            "rows_predicted": 75,
+            "rows_gold": 75,
+            "precision": 0.9866666666666667,
+            "recall": 0.9866666666666667,
+            "f1": 0.9866666666666667,
+            "documents_all_rows_correct": 0.95,
+            "precision_ci95": [
+              0.9565217391304348,
+              1.0
+            ],
+            "recall_ci95": [
+              0.9565217391304348,
+              1.0
+            ],
+            "f1_ci95": [
+              0.9565217391304348,
+              1.0
+            ],
+            "documents_all_rows_correct_ci95": [
+              0.85,
+              1.0
+            ]
+          },
+          "line_items_set_based": {
+            "label": "set-based, ignores row alignment",
+            "fields": {
+              "description": {
+                "n_documents": 20,
+                "n_labelled": 20,
+                "tp": 75,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "quantity": {
+                "n_documents": 20,
+                "n_labelled": 20,
+                "tp": 74,
+                "fp": 1,
+                "fn": 1,
+                "precision": 0.9866666666666667,
+                "recall": 0.9866666666666667,
+                "f1": 0.9866666666666667,
+                "exact_match": 0.95,
+                "precision_ci95": [
+                  0.9565217391304348,
+                  1.0
+                ],
+                "recall_ci95": [
+                  0.9565217391304348,
+                  1.0
+                ],
+                "f1_ci95": [
+                  0.9565217391304348,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  0.85,
+                  1.0
+                ]
+              },
+              "unit_price": {
+                "n_documents": 20,
+                "n_labelled": 20,
+                "tp": 75,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              },
+              "amount": {
+                "n_documents": 20,
+                "n_labelled": 20,
+                "tp": 75,
+                "fp": 0,
+                "fn": 0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "exact_match": 1.0,
+                "precision_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "recall_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "f1_ci95": [
+                  1.0,
+                  1.0
+                ],
+                "exact_match_ci95": [
+                  1.0,
+                  1.0
+                ]
+              }
+            }
+          },
+          "failures": {
+            "failed_extractions": 0,
+            "pass_fallbacks": 0
+          },
+          "live_llm_seconds": []
+        }
+      },
+      "dev_vs_held_out": {
+        "vendor_name": {
+          "dev_f1": 0.9875,
+          "held_out_f1": 0.0,
+          "gap": 0.9875
+        },
+        "invoice_number": {
+          "dev_f1": 1.0,
+          "held_out_f1": 0.0,
+          "gap": 1.0
+        },
+        "invoice_date": {
+          "dev_f1": 1.0,
+          "held_out_f1": 0.0,
+          "gap": 1.0
+        },
+        "currency": {
+          "dev_f1": 0.9752066115702479,
+          "held_out_f1": 1.0,
+          "gap": -0.024793388429752095
+        },
+        "subtotal": {
+          "dev_f1": 1.0,
+          "held_out_f1": 0.0,
+          "gap": 1.0
+        },
+        "tax_amount": {
+          "dev_f1": 1.0,
+          "held_out_f1": 0.0,
+          "gap": 1.0
+        },
+        "total_amount": {
+          "dev_f1": 1.0,
+          "held_out_f1": 0.0,
+          "gap": 1.0
+        },
+        "line_items_row_level": {
+          "dev_f1": 0.9966555183946488,
+          "held_out_f1": 0.9866666666666667,
+          "gap": 0.00998885172798214
+        }
+      }
+    }
+  },
+  "environment": {
+    "git_commit": "a446d31841b884002d04cf9add5778dc14060e8b",
+    "git_dirty": false,
+    "python": "3.12.13",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "cpu_count": 12,
+    "packages": {
+      "rapidocr": "3.10.0",
+      "onnxruntime": "1.31.1",
+      "numpy": "2.5.4",
+      "pypdfium2": "5.14.0",
+      "rapidfuzz": "3.14.6"
+    },
+    "ocr_execution": "CPU, onnxruntime defaults"
+  },
+  "power": {
+    "label": "battery-affected",
+    "timings_ac": 0,
+    "timings_battery": 2,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "run window (start and end of this run)"
+  }
+}

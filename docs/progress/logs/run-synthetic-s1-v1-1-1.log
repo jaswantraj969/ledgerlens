@@ -1,0 +1,13 @@
+START 2026-11-12T10:06:13Z commit a446d31
+classic: 40 documents, 0 failed
+modern: 40 documents, 0 failed
+receipt: 40 documents, 0 failed
+statement: 40 documents, 0 failed
+ledger: 40 documents, 0 failed
+classic: 20 documents, 0 failed
+modern: 20 documents, 0 failed
+receipt: 20 documents, 0 failed
+statement: 20 documents, 0 failed
+ledger: 20 documents, 0 failed
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\synthetic_s1_v1_1_1.json
+EXIT=0 END 2026-11-12T10:13:57Z
