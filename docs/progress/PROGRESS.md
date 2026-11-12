@@ -117,3 +117,11 @@
 - Security review (docs/security-review.md): fixed the webhook replay window, the public-address allow-list, the image pixel limit, the non-root web container, metrics hidden from the proxy, and the unused litellm extra (CVE); risks accepted: open registration, DNS rebinding window, per-email login limit.
 - Docker LLM smoke: the worker reaches host Ollama, but the run stopped at the 2 GiB free-RAM gate (0.43 GiB; Docker's VM held 4.7 GB).
 - Final suites at a clean HEAD: backend 486 passed, Vitest 36 passed, Playwright 1 passed on Compose, lint and type checks clean.
+
+## 2026-11-12, release preparation (no push, no remote)
+- Pre-push audit: one identity on all commits; no attribution strings in any commit message; gitleaks clean over the full history; no file over 5 MB; no dataset file ever committed. LICENSE missing: the owner's decision.
+- CORD download script added (pinned revision, checksums); README gains the CC BY 4.0 attribution.
+- README top section, quickstart (init_env.py, tasks.sh up), command status table; docs index; architecture diagram of the running services.
+- Evaluation page fixed: it now shows the final test table (its note said only S1 had read test).
+- Portfolio drafts in docs/portfolio/; screenshots taken with Playwright against Compose, kept out of git.
+- Fresh clone: attempt 1 failed on the Windows 260-character path limit (deep clone folder); README now asks for a short path; attempt 2 passed every step unaided at 293cc23 (backend 488, Vitest 37, e2e 1, lint, typecheck, eval-smoke, runtime security checks).

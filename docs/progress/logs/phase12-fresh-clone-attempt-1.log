@@ -1,0 +1,116 @@
+2026-11-12T16:40:25Z START phase 12 fresh-clone check; source HEAD 64a11f399595df0a143110d99038cfa3187576c3
+2026-11-12T16:40:25Z Environment, not README steps: the main working copy's stack is stopped first (same ports);
+2026-11-12T16:40:25Z COMPOSE_PROJECT_NAME=ledgerlens-fresh gives the clone its own containers and volumes;
+2026-11-12T16:40:25Z port 8080 is held by an unrelated httpd on this machine, so the README's --web-port 8081 option is used.
+ Container ledgerlens-web-1 Stopping 
+ Container ledgerlens-worker-1 Stopping 
+ Container ledgerlens-web-1 Stopped 
+ Container ledgerlens-web-1 Removing 
+ Container ledgerlens-web-1 Removed 
+ Container ledgerlens-worker-1 Stopped 
+ Container ledgerlens-worker-1 Removing 
+ Container ledgerlens-worker-1 Removed 
+ Container ledgerlens-api-1 Stopping 
+ Container ledgerlens-api-1 Stopped 
+ Container ledgerlens-api-1 Removing 
+ Container ledgerlens-api-1 Removed 
+ Container ledgerlens-redis-1 Stopping 
+ Container ledgerlens-postgres-1 Stopping 
+ Container ledgerlens-postgres-1 Stopped 
+ Container ledgerlens-postgres-1 Removing 
+ Container ledgerlens-postgres-1 Removed 
+ Container ledgerlens-redis-1 Stopped 
+ Container ledgerlens-redis-1 Removing 
+ Container ledgerlens-redis-1 Removed 
+ Network ledgerlens_default Removing 
+ Network ledgerlens_default Removed 
+2026-11-12T16:40:31Z main stack stopped (volumes kept)
+2026-11-12T16:40:32Z == STEP clone: git clone <working copy> /c/Users/jknm6/AppData/Local/Temp/claude/c778d8435e15a14b/9a954629-d813-4388-8578-142035aa385c/scratchpad/fresh-clone-20261112T164025Z
+2026-11-12T16:40:32Z    clone HEAD 64a11f399595df0a143110d99038cfa3187576c3; tracked files 757; untracked in clone: '0'
+2026-11-12T16:40:32Z == STEP init_env: python scripts/init_env.py --web-port 8081
+   | wrote .env with new random secrets
+2026-11-12T16:40:33Z    EXIT=0 (init_env)
+2026-11-12T16:40:33Z == STEP tasks.sh up: bash scripts/tasks.sh up
+   |  Container ledgerlens-fresh-redis-1 Waiting 
+   |  Container ledgerlens-fresh-api-1 Waiting 
+   |  Container ledgerlens-fresh-worker-1 Waiting 
+   |  Container ledgerlens-fresh-postgres-1 Healthy 
+   |  Container ledgerlens-fresh-redis-1 Healthy 
+   |  Container ledgerlens-fresh-api-1 Healthy 
+   |  Container ledgerlens-fresh-worker-1 Healthy 
+   |  Container ledgerlens-fresh-web-1 Healthy 
+2026-11-12T16:42:59Z    EXIT=0 (tasks.sh up)
+2026-11-12T16:42:59Z == STEP web reachable: curl -s -o /dev/null -w web / %{http_code}\n http://127.0.0.1:8081/
+   | web / 200
+2026-11-12T16:43:00Z    EXIT=0 (web reachable)
+2026-11-12T16:43:00Z == STEP uv sync: bash -c cd backend && uv sync --python 3.12 --extra eval --extra ocr && cd ..
+   |  + uvicorn==0.54.0
+   |  + virtualenv==21.15.5
+   |  + watchfiles==1.3.0
+   |  + websockets==17.4
+2026-11-12T16:49:15Z    EXIT=0 (uv sync)
+2026-11-12T16:49:15Z == STEP npm ci: npm --prefix frontend ci
+   | 25 packages are looking for funding
+   |   run `npm fund` for details
+   | 
+   | found 0 vulnerabilities
+2026-11-12T16:49:31Z    EXIT=0 (npm ci)
+2026-11-12T16:49:31Z == STEP tasks.sh test: bash scripts/tasks.sh test
+   | tests\unit\test_cord_runner_guards.py:114
+   |   C:\Users\jknm6\AppData\Local\Temp\claude\c778d8435e15a14b\9a954629-d813-4388-8578-142035aa385c\scratchpad\fresh-clone-20261112T164025Z\backend\tests\unit\test_cord_runner_guards.py:114: SyntaxWarning: invalid escape sequence '\W'
+   |     env={"PYTHONPATH": str(ROOT), "SYSTEMROOT": "C:\Windows", "PATH": ""},
+   | 
+   | -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+   | =========================== short test summary info ===========================
+   | ERROR tests/unit/test_eval_metrics.py
+   | ERROR tests/unit/test_s5.py
+   | !!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!
+   | 3 warnings, 2 errors in 88.42s (0:01:28)
+2026-11-12T16:51:13Z    EXIT=2 (tasks.sh test)
+2026-11-12T16:51:13Z == STEP tasks.sh lint: bash scripts/tasks.sh lint
+   | All checks passed!
+   | 179 files already formatted
+2026-11-12T16:51:14Z    EXIT=0 (tasks.sh lint)
+2026-11-12T16:51:14Z == STEP tasks.sh typecheck: bash scripts/tasks.sh typecheck
+   | Success: no issues found in 269 source files
+2026-11-12T16:51:41Z    EXIT=0 (tasks.sh typecheck)
+2026-11-12T16:51:42Z == STEP tasks.sh eval-smoke: bash scripts/tasks.sh eval-smoke
+   | classic: 3 documents, 0 failed
+   | modern: 3 documents, 0 failed
+   | receipt: 3 documents, 0 failed
+   | statement: 3 documents, 0 failed
+   | ledger: 3 documents, 0 failed
+   | wrote C:\Users\jknm6\AppData\Local\Temp\claude\c778d8435e15a14b\9a954629-d813-4388-8578-142035aa385c\scratchpad\fresh-clone-20261112T164025Z\evals\results\dev\synthetic_smoke.json
+2026-11-12T16:51:53Z    EXIT=0 (tasks.sh eval-smoke)
+2026-11-12T16:51:53Z == STEP e2e: env E2E_BASE_URL=http://127.0.0.1:8081 npm --prefix frontend run e2e
+   | 
+   |   -  1 e2e\screenshots.spec.ts:14:1 › portfolio screenshots
+   |   ok 2 e2e\flow.spec.ts:7:1 › upload, review and export one invoice (6.7s)
+   | 
+   |   1 skipped
+   |   1 passed (11.1s)
+2026-11-12T16:52:08Z    EXIT=0 (e2e)
+2026-11-12T16:52:08Z == STEP runtime security checks
+2026-11-12T16:52:09Z    user in api: uid=10001(app) gid=10001(app) groups=10001(app)
+2026-11-12T16:52:09Z    user in worker: uid=10001(app) gid=10001(app) groups=10001(app)
+2026-11-12T16:52:09Z    user in web: uid=10002(web) gid=10002(web) groups=10002(web)
+2026-11-12T16:52:10Z    postgres server: postgres 70;
+2026-11-12T16:52:10Z    redis server: redis-server 999;
+2026-11-12T16:52:10Z    web /api/metrics via proxy: 404 (expect 404)
+2026-11-12T16:52:11Z    web /api/health/ready via proxy: 200 (expect 200)
+2026-11-12T16:52:11Z    api /documents without credentials: 401 (expect 401)
+2026-11-12T16:52:11Z    api /metrics direct on 127.0.0.1: 200 (expect 200)
+2026-11-12T16:52:11Z == STEP tasks.sh down: bash scripts/tasks.sh down
+   |  Container ledgerlens-fresh-redis-1 Removed 
+   |  Container ledgerlens-fresh-postgres-1 Stopped 
+   |  Container ledgerlens-fresh-postgres-1 Removing 
+   |  Container ledgerlens-fresh-postgres-1 Removed 
+   |  Network ledgerlens-fresh_default Removing 
+   |  Network ledgerlens-fresh_default Removed 
+2026-11-12T16:52:18Z    EXIT=0 (tasks.sh down)
+2026-11-12T16:52:18Z clone tree after the run (generated files only expected):
+    M docs/progress/logs/power-events.json
+   ?? evals/results/dev/synthetic_smoke.json
+2026-11-12T16:52:37Z clean-up: clone volumes removed; main stack restarted (exit 0)
+2026-11-12T16:52:37Z FAILED_STEPS=1
+2026-11-12T16:52:37Z END

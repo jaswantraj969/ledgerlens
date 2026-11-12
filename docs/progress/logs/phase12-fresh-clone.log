@@ -1,0 +1,119 @@
+2026-11-12T16:56:04Z Attempt 2. Attempt 1 failed at tasks.sh test: the clone was at a 212-character folder depth and a scikit-learn file exceeded the Windows 260-character path limit (phase12-fresh-clone-attempt-1.log). README now asks for a short clone path on Windows.
+2026-11-12T16:56:04Z START phase 12 fresh-clone check; source HEAD 293cc23e922253c39390d453e57d43171c8102b8
+2026-11-12T16:56:04Z Environment, not README steps: the main working copy's stack is stopped first (same ports);
+2026-11-12T16:56:04Z COMPOSE_PROJECT_NAME=ledgerlens-fresh gives the clone its own containers and volumes;
+2026-11-12T16:56:04Z port 8080 is held by an unrelated httpd on this machine, so the README's --web-port 8081 option is used.
+ Container ledgerlens-web-1 Stopping 
+ Container ledgerlens-worker-1 Stopping 
+ Container ledgerlens-web-1 Stopped 
+ Container ledgerlens-web-1 Removing 
+ Container ledgerlens-web-1 Removed 
+ Container ledgerlens-worker-1 Stopped 
+ Container ledgerlens-worker-1 Removing 
+ Container ledgerlens-worker-1 Removed 
+ Container ledgerlens-api-1 Stopping 
+ Container ledgerlens-api-1 Stopped 
+ Container ledgerlens-api-1 Removing 
+ Container ledgerlens-api-1 Removed 
+ Container ledgerlens-redis-1 Stopping 
+ Container ledgerlens-postgres-1 Stopping 
+ Container ledgerlens-redis-1 Stopped 
+ Container ledgerlens-redis-1 Removing 
+ Container ledgerlens-postgres-1 Stopped 
+ Container ledgerlens-postgres-1 Removing 
+ Container ledgerlens-redis-1 Removed 
+ Container ledgerlens-postgres-1 Removed 
+ Network ledgerlens_default Removing 
+ Network ledgerlens_default Removed 
+2026-11-12T16:56:13Z main stack stopped (volumes kept)
+2026-11-12T16:56:13Z == STEP clone: git clone <working copy> /c/Users/jknm6/AppData/Local/Temp/llc-165604
+2026-11-12T16:56:16Z    clone HEAD 293cc23e922253c39390d453e57d43171c8102b8; tracked files 757; untracked in clone: '0'
+2026-11-12T16:56:16Z == STEP init_env: python scripts/init_env.py --web-port 8081
+   | wrote .env with new random secrets
+2026-11-12T16:56:17Z    EXIT=0 (init_env)
+2026-11-12T16:56:17Z == STEP tasks.sh up: bash scripts/tasks.sh up
+   |  Container ledgerlens-fresh-web-1 Waiting 
+   |  Container ledgerlens-fresh-postgres-1 Waiting 
+   |  Container ledgerlens-fresh-redis-1 Waiting 
+   |  Container ledgerlens-fresh-redis-1 Healthy 
+   |  Container ledgerlens-fresh-postgres-1 Healthy 
+   |  Container ledgerlens-fresh-worker-1 Healthy 
+   |  Container ledgerlens-fresh-web-1 Healthy 
+   |  Container ledgerlens-fresh-api-1 Healthy 
+2026-11-12T16:56:59Z    EXIT=0 (tasks.sh up)
+2026-11-12T16:56:59Z == STEP web reachable: curl -s -o /dev/null -w web / %{http_code}\n http://127.0.0.1:8081/
+   | web / 200
+2026-11-12T16:56:59Z    EXIT=0 (web reachable)
+2026-11-12T16:56:59Z == STEP uv sync: bash -c cd backend && uv sync --python 3.12 --extra eval --extra ocr && cd ..
+   |  + uvicorn==0.54.0
+   |  + virtualenv==21.15.5
+   |  + watchfiles==1.3.0
+   |  + websockets==17.4
+2026-11-12T16:57:24Z    EXIT=0 (uv sync)
+2026-11-12T16:57:24Z == STEP npm ci: npm --prefix frontend ci
+   | 25 packages are looking for funding
+   |   run `npm fund` for details
+   | 
+   | found 0 vulnerabilities
+2026-11-12T16:57:51Z    EXIT=0 (npm ci)
+2026-11-12T16:57:51Z == STEP tasks.sh test: bash scripts/tasks.sh test
+   | 
+   | 
+   |  RUN  v5.1.0 C:/Users/jknm6/AppData/Local/Temp/llc-165604/frontend
+   | 
+   | 
+   |  Test Files  3 passed (3)
+   |       Tests  37 passed (37)
+   |    Start at  22:05:24
+   |    Duration  24.96s (environment 64%, setup 13%, tests 11%, import 6%, transform 4%, worker 1%)
+   | 
+2026-11-12T17:05:49Z    EXIT=0 (tasks.sh test)
+2026-11-12T17:05:49Z == STEP tasks.sh lint: bash scripts/tasks.sh lint
+   | All checks passed!
+   | 179 files already formatted
+2026-11-12T17:05:52Z    EXIT=0 (tasks.sh lint)
+2026-11-12T17:05:53Z == STEP tasks.sh typecheck: bash scripts/tasks.sh typecheck
+   | Success: no issues found in 269 source files
+2026-11-12T17:07:03Z    EXIT=0 (tasks.sh typecheck)
+2026-11-12T17:07:03Z == STEP tasks.sh eval-smoke: bash scripts/tasks.sh eval-smoke
+   | classic: 3 documents, 0 failed
+   | modern: 3 documents, 0 failed
+   | receipt: 3 documents, 0 failed
+   | statement: 3 documents, 0 failed
+   | ledger: 3 documents, 0 failed
+   | wrote C:\Users\jknm6\AppData\Local\Temp\llc-165604\evals\results\dev\synthetic_smoke.json
+2026-11-12T17:07:33Z    EXIT=0 (tasks.sh eval-smoke)
+2026-11-12T17:07:33Z == STEP e2e: env E2E_BASE_URL=http://127.0.0.1:8081 npm --prefix frontend run e2e
+   | 
+   |   -  1 e2e\screenshots.spec.ts:14:1 › portfolio screenshots
+   |   ok 2 e2e\flow.spec.ts:7:1 › upload, review and export one invoice (8.2s)
+   | 
+   |   1 skipped
+   |   1 passed (14.7s)
+2026-11-12T17:07:57Z    EXIT=0 (e2e)
+2026-11-12T17:07:57Z == STEP runtime security checks
+2026-11-12T17:07:58Z    user in api: uid=10001(app) gid=10001(app) groups=10001(app)
+2026-11-12T17:07:59Z    user in worker: uid=10001(app) gid=10001(app) groups=10001(app)
+2026-11-12T17:07:59Z    user in web: uid=10002(web) gid=10002(web) groups=10002(web)
+2026-11-12T17:08:00Z    postgres server: postgres 70;
+2026-11-12T17:08:00Z    redis server: redis-server 999;
+2026-11-12T17:08:01Z    web /api/metrics via proxy: 404 (expect 404)
+2026-11-12T17:08:01Z    web /api/health/ready via proxy: 200 (expect 200)
+2026-11-12T17:08:01Z    api /documents without credentials: 401 (expect 401)
+2026-11-12T17:08:02Z    api /metrics direct on 127.0.0.1: 200 (expect 200)
+2026-11-12T17:08:02Z == STEP tasks.sh down: bash scripts/tasks.sh down
+   |  Container ledgerlens-fresh-redis-1 Removed 
+   |  Container ledgerlens-fresh-postgres-1 Stopped 
+   |  Container ledgerlens-fresh-postgres-1 Removing 
+   |  Container ledgerlens-fresh-postgres-1 Removed 
+   |  Network ledgerlens-fresh_default Removing 
+   |  Network ledgerlens-fresh_default Removed 
+2026-11-12T17:08:10Z    EXIT=0 (tasks.sh down)
+2026-11-12T17:08:10Z clone tree after the run (generated files only expected):
+    M docs/progress/logs/power-events.json
+   ?? evals/results/dev/synthetic_smoke.json
+2026-11-12T17:08:33Z clean-up: clone volumes removed; main stack restarted (exit 0)
+2026-11-12T17:08:33Z FAILED_STEPS=0
+2026-11-12T17:08:33Z END
+backend tests collected at 293cc23 (same tree as the clone): 488 tests collected in 35.86s
+note: the logged tail of 'tasks.sh test' shows the Vitest summary; the backend pytest run exited 0 before it (the target runs pytest, then Vitest only if pytest passed).

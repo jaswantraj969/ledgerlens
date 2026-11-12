@@ -60,9 +60,9 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 | 8 | Testing and hardening | IN PROGRESS | 2026-11-12 final run at a clean HEAD: backend 486 passed, Vitest 36, Playwright 1 on Compose, ruff, mypy (backend and evals) and oxlint clean, build passes (docs/progress/logs/phase8-final-*.log). Security review docs/security-review.md (5 fixed, 4 risks accepted). Docker LLM smoke blocked by free RAM |
 | 9 | Dockerfiles and full compose stack | VERIFIED | docs/progress/logs/run-docker-compose-up.log: all five services healthy. Web published on 8081 for this run because an unrelated httpd holds 8080 here (LEDGERLENS_WEB_PORT) |
 | 9 | Playwright flow against the Compose stack | VERIFIED | docs/progress/logs/run-e2e-docker.log (1 passed) |
-| 10 | Documentation | IN PROGRESS | README results section from the final test files; limitations updated. Some older limitations entries are stale (OCR now exists; S5 calibrators exist in evals but not in the product risk score) |
-| 11 | Portfolio and publication preparation | NOT STARTED | |
-| 12 | Final verification and report | NOT STARTED | |
+| 10 | Documentation | VERIFIED | README top section, quickstart with command status, data attribution; docs/README.md index; architecture diagram of the running services. Quickstart passed unaided in a fresh clone (docs/progress/logs/phase12-fresh-clone.log) |
+| 11 | Portfolio and publication preparation | IMPLEMENTED BUT UNVERIFIED | Drafts in docs/portfolio/ (summary, Upwork entry, case study), numbers checked by script against evals/results/final/; screenshots local only (CORD images, R10). Publishing is the owner's step |
+| 12 | Final verification and report | IN PROGRESS | Fresh clone at 293cc23: all steps pass (attempt 2; attempt 1 hit the Windows path limit, README fixed). Pre-push audit docs/progress/logs/prepush-audit.txt. Open: LICENSE not chosen; CI on GitHub needs a remote |
 
 ## Acceptance criteria
 
