@@ -1,0 +1,67 @@
+START 2026-11-12T20:33:48Z HEAD 6ff169d
+== integrity check against the done-markers
+PASS S1 records rerun predictions 8b3fccde4d46 vs recorded 8b3fccde4d46: match
+PASS done-markers: 18 for 18 steps; hash mismatches none
+PASS recovered markers: none
+PASS timed results not AC-only: none
+PASS aborts: 8 (metadata 8), memory only True, each aborted step then completed with its one fixed command True: {"S4'": 1, "S1 blur-1.5": 1, "S4h blur-1.5": 1, "S4h blur-3.0": 1, "S4h jpeg-30": 2, "S4h jpeg-10": 2}
+PASS code commit and dirty flag across results: [('475c048', False)]
+PASS LLM results off the fixed settings: none
+PASS S5 test thresholds differ from validation-chosen: none
+== sha256 of every file under evals/results/final/ before make reproduce
+45ef8e78b671b8fd71fb7b0215f007f12638410e6cc4ed11ee66af5848acc5e7 *./cord_degradation_test_v1_1_1.md
+d63dd82dd678dec9693c715c4818cea60d000977e639ff8ea8276f1a944d216f *./cord_degradation_test_v1_1_1.png
+50b3432c2d0607d10658058148d54fef231b0d381841d09acf2dcc035f8037f7 *./cord_s5_ablations_test_v1_1_1.md
+0783532a7aaaae4c82a774fa9f816d5ac1f676fb994e49df03028404a9c0a2b2 *./cord_s5_review_workload_v1_1_1.json
+076156af65ed9ca00bf3f21b9693fb48d0d50f6c451890403778f019031449f7 *./cord_s5_test_v1_1_1.json
+a60d15a818f649e1dc704a1ce9c67561e9a9c1dbfa4ef9a121fd9b03ee948b3a *./cord_s5_test_v1_1_1.md
+e547ad1636436df017bd20a4a66b4b078868d5282ea5e24966a2e54d92eaac09 *./cord_test_comparison_v1_1_1.json
+6fb09e71ef46c8327745960185b1b5cf2d945839ac0858d1dfe0b4efb2eb8fef *./cord_test_comparison_v1_1_1.md
+ede3735e48427f92067a653bf2385d3335314036241505489eb3bc5acd69403c *./cord_test_dedup_sensitivity_v1_1_1.json
+5692bcee19971f49e16297a4f3f1b4bef6bf5c46b55d5ff304155fc346208c1e *./cord_test_dedup_sensitivity_v1_1_1.md
+8170fd86ecc0b581a410fdef03dc9e8447ede3dc9256b8719be24520086f7a0f *./done/s1-blur-1-5.json
+6bf9d717523ae242bc70ca36164f1cca29ff8fdf596e131bbf379d22072aeae7 *./done/s1-blur-3-0.json
+d48fe0223dae47a63c5138e6fa69a951970bac916f1c4306a902c5558d336120 *./done/s1-jpeg-10.json
+f14c8f82e91b6ccc65aaceb86b5c390fa227d318ecc02803ea4f153798639722 *./done/s1-jpeg-30.json
+34fb89bab8f912a3a01546fbcdfb39dfbb640b14907bf85e52e19f8c8bb9edaf *./done/s1-records-rerun.json
+0692ca608ccde58e706f8a73a1211a2c5f791d6ee5f7f09c7e09179d8b7255d8 *./done/s2-.json
+9bbb8a8686b3344b405df5d29a86ff6a9a0a0e1ba33943bd9d8542f736ab65e4 *./done/s3-.json
+1f50aacd3733c343ecf450cd2a532ac275d034ff33f164f7da06d032398f234d *./done/s4-.json
+5774dcb04b4189a2425636d31f02cada195e9e1eea9939c912d6e896b35290b1 *./done/s4h-blur-1-5.json
+671d8bc349f2d9e36c6faf39d7aec4e4397f7b5089811480d6aacc938154fbf9 *./done/s4h-blur-3-0.json
+facfc2302735a1b900641d636408d270560e550bf189ed39b8707d636ed46d3c *./done/s4h-jpeg-10.json
+179637391b8a72710bd4655a962205a6d3bbb4fff4d2db0a301d377405ae82ae *./done/s4h-jpeg-30.json
+3ef948fffd2e40747219db069c94adee2f6eb5f1c25b73cb99fefe39089e57b2 *./done/s4h.json
+d15dce4d42c33fa2a741b88189d40fa64ec40789fde15fff7af19028f046fe15 *./done/s5-ablations.json
+c709896d3c43460ef843bc8b0c83d1c11b112175bc38a0a9c7a69f62293bb4b6 *./done/s5-s1-all.json
+108cdbab6b53aff77cd5260842eccd59938861d676e70202e38cef2b89d03f5e *./done/s5-s1-grouped.json
+6638b03836f247a9b007b56d1194992441145d96521ae26f5f30a9c5db125953 *./done/s5-s4h-all.json
+3e558eb23e33746ca77f67c51c50bc3b82ce369fe2309c06f064ba82d1d5099a *./done/s5-s4h-grouped.json
+f09c41da3cae324afd2a60baf2deac0f78ec581aa4d216bddd06f4d5ec8524ae *./final-run-metadata-20261112T073516Z.json
+95eb684cdcb7252c50ddcf362795e08748005d7ef283fd0e21b2e450cfb00061 *./replayed_timings_v1_1_1.json
+== bash scripts/tasks.sh reproduce
+reproduce EXIT=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\final\cord_test_comparison_v1_1_1.md systems: S1, S2', S3', S4', S4h
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\final\cord_s5_test_v1_1_1.md and its JSON
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\final
+== sha256 after
+every file under evals/results/final/ is byte-identical (30 files)
+== other tracked files changed by reproduce:
+ M evals/results/dev/cord_s1_validation_v1_1_1.json
+ M evals/results/dev/cord_s1_validation_v1_1_1.md
+ M evals/results/dev/cord_s2_validation_v1_1_1.json
+ M evals/results/dev/cord_s2_validation_v1_1_1.md
+ M evals/results/dev/cord_s3_validation_v1_1_1.json
+ M evals/results/dev/cord_s3_validation_v1_1_1.md
+ M evals/results/dev/cord_s4_validation_v1_1_1.json
+ M evals/results/dev/cord_s4_validation_v1_1_1.md
+ M evals/results/dev/cord_validation_comparison_v1_1_1.json
+ M evals/results/dev/cord_validation_comparison_v1_1_1.md
+?? docs/progress/logs/release-reproduce.log
+END 2026-11-12T20:34:19Z
+== replayed validation files: metrics against HEAD
+evals/results/dev/cord_s1_validation_v1_1_1.json: metrics and predictions hash identical: True; keys that differ: ['environment', 'latency_seconds', 'memory']
+evals/results/dev/cord_s2_validation_v1_1_1.json: metrics and predictions hash identical: True; keys that differ: ['environment', 'latency_seconds', 'memory']
+evals/results/dev/cord_s3_validation_v1_1_1.json: metrics and predictions hash identical: True; keys that differ: ['environment', 'latency_seconds', 'memory']
+evals/results/dev/cord_s4_validation_v1_1_1.json: metrics and predictions hash identical: True; keys that differ: ['environment', 'latency_seconds', 'memory']
+these files differ only in run metadata (timing, memory, commit); restored to the committed versions, no result file changed
