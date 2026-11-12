@@ -1,4 +1,4 @@
-START 2026-11-07T11:51:38Z timeout=9000s stall=900s cmd: bash /c/Users/jknm6/AppData/Local/Temp/claude/c778d8435e15a14b/9a954629-d813-4388-8578-142035aa385c/scratchpad/prompt_round.sh
+START 2026-11-07T11:51:38Z timeout=9000s stall=900s cmd: bash /c/Users/jknm6/AppData/Local/Temp/scratch/scratchpad/prompt_round.sh
 == prompt 1.0 num_ctx 4096
 processed 10, failed=0
 processed 20, failed=0

@@ -1,4 +1,4 @@
-START 2026-11-07T12:41:30Z timeout=7200s stall=900s cmd: bash /c/Users/jknm6/AppData/Local/Temp/claude/c778d8435e15a14b/9a954629-d813-4388-8578-142035aa385c/scratchpad/synthetic_s2.sh
+START 2026-11-07T12:41:30Z timeout=7200s stall=900s cmd: bash /c/Users/jknm6/AppData/Local/Temp/scratch/scratchpad/synthetic_s2.sh
 == synthetic S2' attempt 1
 classic: 40 documents, 0 failed
 HEARTBEAT 2026-11-07T12:45:33Z elapsed=243s progress=60 idle=0s

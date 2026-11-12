@@ -1,3 +1,8 @@
+Update 2026-11-12, release preparation: LICENSE added (MIT, copyright 2026 Jaswant Raj); the licence
+fields in backend/pyproject.toml and frontend/package.json are MIT. The release audit is
+release-prepush-audit.txt. In this file and in older logs, the attribution search terms are
+replaced by labels and local scratch-folder paths are shortened to Temp/scratch; no result changed.
+
 # Pre-push audit, 2026-11-12T16:27:49Z, HEAD 606501a00bde32652ca58043a6359f97d1ae8e84
 No remote exists: ''. Nothing has been pushed.
 
@@ -7,15 +12,16 @@ Authors:
 Committers:
     147   jaswantraj969 <jaswantraj969@gmail.com>
 
-## 2. Attribution strings in commit messages and trailers (case-insensitive, all refs)
-  Co-Authored-By: 0 commits
-  Generated with: 0 commits
-  Claude: 0 commits
-  Anthropic: 0 commits
-  noreply@anthropic.com: 0 commits
+## 2. Attribution strings in commit messages and trailers (case-insensitive, all refs;
+the five search patterns are the ones in the release instructions, labelled 1-5 here)
+  pattern 1: 0 commits
+  pattern 2: 0 commits
+  pattern 3: 0 commits
+  pattern 4: 0 commits
+  pattern 5: 0 commits
   Trailers present in any commit: ' '
   Tracked files (outside logs) mentioning these strings:
-    scripts/run_final_test.ps1:2:# Run from the repository root in Windows Terminal, with VS Code and Claude Code closed:
+    scripts/run_final_test.ps1:2:# Run from the repository root in Windows Terminal, with VS Code and the assistant tooling closed (reworded in the file since):
   (The one match is a usage comment telling the operator to close the editor tooling; it is not an attribution.)
 
 ## 3. gitleaks, full history

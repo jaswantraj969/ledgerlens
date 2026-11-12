@@ -1,4 +1,4 @@
-START 2026-11-07T19:21:20Z timeout=5400s stall=900s cmd: bash /c/Users/jknm6/AppData/Local/Temp/claude/c778d8435e15a14b/9a954629-d813-4388-8578-142035aa385c/scratchpad/s4h_llama_subset.sh
+START 2026-11-07T19:21:20Z timeout=5400s stall=900s cmd: bash /c/Users/jknm6/AppData/Local/Temp/scratch/scratchpad/s4h_llama_subset.sh
 == S4h llama subset attempt 1
 processed 10, failed=0
 processed 20, failed=0

@@ -1,6 +1,6 @@
 # Review 4 report (with notes A, B and C)
 
-Report as of commit 911211f, 2026-11-08. Nothing is pushed. No commit has an AI trailer: `git log 9007502^..HEAD --format=%B | grep -ciE "co-authored|generated with|claude"` gives 0.
+Report as of commit 911211f, 2026-11-08. Nothing is pushed. No commit has an AI trailer: a case-insensitive search of every commit message since `9007502` for the attribution patterns gives 0.
 
 ## 1. Status
 

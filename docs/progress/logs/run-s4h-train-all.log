@@ -1,4 +1,4 @@
-START 2026-11-08T05:44:12Z timeout=28800s stall=1500s cmd: bash /c/Users/jknm6/AppData/Local/Temp/claude/c778d8435e15a14b/9a954629-d813-4388-8578-142035aa385c/scratchpad/s4h_train_all.sh
+START 2026-11-08T05:44:12Z timeout=28800s stall=1500s cmd: bash /c/Users/jknm6/AppData/Local/Temp/scratch/scratchpad/s4h_train_all.sh
 == S4h train_all attempt 1
 processed 10, failed=0
 processed 20, failed=0

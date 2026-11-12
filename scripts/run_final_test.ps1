@@ -1,5 +1,5 @@
 # Final CORD test read, unattended (docs/evaluation/final-test-protocol.md).
-# Run from the repository root in Windows Terminal, with VS Code and Claude Code closed:
+# Run from the repository root in Windows Terminal, with editors and other memory-heavy applications closed:
 #   powershell -NoProfile -ExecutionPolicy Bypass -File scripts\run_final_test.ps1
 # Add -CheckOnly to run the pre-flight and flag checks without reading test.
 # Exit codes: 0 done, 10 pre-flight failed (test not read), 11 a step failed, 12 interrupted.

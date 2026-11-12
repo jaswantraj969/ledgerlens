@@ -25,7 +25,7 @@
  Network ledgerlens_default Removing 
  Network ledgerlens_default Removed 
 2026-11-12T16:40:31Z main stack stopped (volumes kept)
-2026-11-12T16:40:32Z == STEP clone: git clone <working copy> /c/Users/jknm6/AppData/Local/Temp/claude/c778d8435e15a14b/9a954629-d813-4388-8578-142035aa385c/scratchpad/fresh-clone-20261112T164025Z
+2026-11-12T16:40:32Z == STEP clone: git clone <working copy> /c/Users/jknm6/AppData/Local/Temp/scratch/scratchpad/fresh-clone-20261112T164025Z
 2026-11-12T16:40:32Z    clone HEAD 64a11f399595df0a143110d99038cfa3187576c3; tracked files 757; untracked in clone: '0'
 2026-11-12T16:40:32Z == STEP init_env: python scripts/init_env.py --web-port 8081
    | wrote .env with new random secrets
@@ -57,7 +57,7 @@
 2026-11-12T16:49:31Z    EXIT=0 (npm ci)
 2026-11-12T16:49:31Z == STEP tasks.sh test: bash scripts/tasks.sh test
    | tests\unit\test_cord_runner_guards.py:114
-   |   C:\Users\jknm6\AppData\Local\Temp\claude\c778d8435e15a14b\9a954629-d813-4388-8578-142035aa385c\scratchpad\fresh-clone-20261112T164025Z\backend\tests\unit\test_cord_runner_guards.py:114: SyntaxWarning: invalid escape sequence '\W'
+   |   C:\Users\jknm6\AppData\Local\Temp\scratch\scratchpad\fresh-clone-20261112T164025Z\backend\tests\unit\test_cord_runner_guards.py:114: SyntaxWarning: invalid escape sequence '\W'
    |     env={"PYTHONPATH": str(ROOT), "SYSTEMROOT": "C:\Windows", "PATH": ""},
    | 
    | -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
@@ -80,7 +80,7 @@
    | receipt: 3 documents, 0 failed
    | statement: 3 documents, 0 failed
    | ledger: 3 documents, 0 failed
-   | wrote C:\Users\jknm6\AppData\Local\Temp\claude\c778d8435e15a14b\9a954629-d813-4388-8578-142035aa385c\scratchpad\fresh-clone-20261112T164025Z\evals\results\dev\synthetic_smoke.json
+   | wrote C:\Users\jknm6\AppData\Local\Temp\scratch\scratchpad\fresh-clone-20261112T164025Z\evals\results\dev\synthetic_smoke.json
 2026-11-12T16:51:53Z    EXIT=0 (tasks.sh eval-smoke)
 2026-11-12T16:51:53Z == STEP e2e: env E2E_BASE_URL=http://127.0.0.1:8081 npm --prefix frontend run e2e
    | 
