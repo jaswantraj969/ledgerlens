@@ -49,14 +49,19 @@ def worker(mode: str) -> int:
     env = os.environ | {"LEDGERLENS_EXTRACTION_MODE": mode}
     env.setdefault("LEDGERLENS_WEB_PORT", "8081")
     command = [*COMPOSE, "up", "-d", "--no-deps", "--wait", "--wait-timeout", "120", "worker"]
-    return subprocess.run(command, cwd=ROOT, env=env, capture_output=True, check=False).returncode
+    done = subprocess.run(command, cwd=ROOT, env=env, capture_output=True, check=False)  # noqa: S603
+    return done.returncode
 
 
 def container_reaches_ollama() -> str | None:
-    probe = ("import os,urllib.request,json;u=os.environ['LEDGERLENS_OLLAMA_URL'];"
-             "print(json.load(urllib.request.urlopen(u+'/api/version',timeout=5))['version'])")  # fmt: skip
-    done = subprocess.run(["docker", "exec", "ledgerlens-worker-1", "python", "-c", probe],
-                          capture_output=True, text=True, check=False, timeout=30)  # fmt: skip
+    probe = (
+        "import os,urllib.request,json;u=os.environ['LEDGERLENS_OLLAMA_URL'];"
+        "print(json.load(urllib.request.urlopen(u+'/api/version',timeout=5))['version'])"
+    )
+    command = ["docker", "exec", "ledgerlens-worker-1", "python", "-c", probe]
+    done = subprocess.run(  # noqa: S603 (fixed command)
+        command, capture_output=True, text=True, check=False, timeout=30
+    )
     return done.stdout.strip() if done.returncode == 0 else None
 
 
@@ -91,13 +96,15 @@ def run(summary: dict[str, Any]) -> int:
     started = time.monotonic()
     with tempfile.TemporaryDirectory() as temporary, httpx.Client(base_url=API, timeout=60) as http:
         email = f"smoke-{uuid.uuid4().hex[:8]}@example.test"
-        token = http.post("/auth/register", json={"organization": "LLM smoke", "email": email,
-                                                   "password": uuid.uuid4().hex}).json()  # fmt: skip
+        account = {"organization": "LLM smoke", "email": email, "password": uuid.uuid4().hex}
+        token = http.post("/auth/register", json=account).json()
         headers = {"Authorization": f"Bearer {token['access_token']}"}
         documents = []
         for path in train_images(Path(temporary)):
             with path.open("rb") as handle:
-                reply = http.post("/documents", headers=headers, files={"file": (path.name, handle)})
+                reply = http.post(
+                    "/documents", headers=headers, files={"file": (path.name, handle)}
+                )
             reply.raise_for_status()
             documents.append(reply.json())
             log(f"uploaded {path.name}")

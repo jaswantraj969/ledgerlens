@@ -42,7 +42,8 @@ def download(name: str, target: Path) -> None:
     partial = target.with_suffix(target.suffix + ".part")
     offset = partial.stat().st_size if partial.exists() else 0
     url = URL.format(repo=REPOSITORY, revision=REVISION, name=name)
-    request = urllib.request.Request(url, headers={"Range": f"bytes={offset}-"} if offset else {})
+    headers = {"Range": f"bytes={offset}-"} if offset else {}
+    request = urllib.request.Request(url, headers=headers)  # noqa: S310 (fixed https URL)
     with urllib.request.urlopen(request, timeout=60) as response:  # noqa: S310 (fixed https URL)
         mode = "ab" if offset and response.status == 206 else "wb"
         with partial.open(mode) as handle:
