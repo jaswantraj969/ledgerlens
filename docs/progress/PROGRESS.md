@@ -134,4 +134,11 @@
 - CI workflow: actions pinned to commit SHAs, read-only permissions, no secrets; Linux simulation passes (it first exposed a crash where git is unavailable, fixed). Local CI mirror passes: 493 backend tests, 96% coverage, 37 frontend tests.
 - Release fresh clone: attempt 1 failed at e2e (a page-image locator also matched the evidence overlay; fixed with an exact name); attempt 2 passes every step with a clean tracked tree.
 - Release audit, integrity 8/8, make reproduce byte-identical. CHANGELOG and final report. Tag v1.0.0.
-- Not done: push and GitHub CI (no remote URL given), LLM mode inside Docker, A5 audit view, A6 batch export.
+- Not done at that point: push and GitHub CI (no remote URL given), LLM mode inside Docker, A5 audit view, A6 batch export (A5 and A6 done the next day, below).
+
+## 2026-11-13, v1.0.0 completed: audit trail and batch export (local; no remote)
+- A5: read-only audit trail route per document (organisation-scoped; old and new value joined from the review decisions, the audit rows keep hashes only) and a panel on the review page, newest first. The Playwright flow checks that a correction appears there.
+- A6: batch export route (JSON or CSV in the single-export format, at most 50 reviewed documents of the caller's organisation; refusals name the ids) and select-and-export on the documents page.
+- A13 recorded as verified in scope: the final tables regenerate byte-identically; replaying test runs needs the gitignored CORD caches.
+- The unpushed v1.0.0 tag was deleted. All checks were rerun at one commit with a clean tree; their logs are committed in the next commit, which carries the new tag.
+- Not done: push and GitHub CI (no remote URL given), LLM mode inside Docker.

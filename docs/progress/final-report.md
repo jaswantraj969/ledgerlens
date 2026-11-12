@@ -2,13 +2,13 @@
 
 Research prototype evaluated on public datasets. Not validated for production use.
 
-Date: 2026-11-12. Licence: MIT. The repository has no remote yet; nothing has been pushed or published.
+Date: 2026-11-13. Licence: MIT. The repository has no remote yet; nothing has been pushed or published.
 
 ## 1. What was built
 
-- **API** (FastAPI, PostgreSQL, Redis): upload with validation by content, deduplication per organisation, JWT and API-key authentication with roles, rate limits, review and export endpoints, signed webhooks, health and readiness probes.
+- **API** (FastAPI, PostgreSQL, Redis): upload with validation by content, deduplication per organisation, JWT and API-key authentication with roles, rate limits, review endpoints, a read-only audit trail per document, JSON and CSV export (one document, or up to 50 reviewed documents at once), signed webhooks, health and readiness probes.
 - **Worker** (RQ): parses each document (native PDF text, or CPU OCR with RapidOCR) and extracts with rules by default, or with a local LLM (`llama3.2:3b` through Ollama). It verifies every value against the page, scores its risk, and routes it to review or acceptance. Steps are idempotent, with retries and a dead-letter queue.
-- **Review UI** (React, served by Caddy): page image with evidence boxes, approve, reject or correct, a review queue, and an evaluation page that shows the final test results.
+- **Review UI** (React, served by Caddy): page image with evidence boxes, approve, reject or correct, the document's audit trail, a review queue, export of selected documents, and an evaluation page that shows the final test results.
 - **Deployment:** Docker Compose with five services, all running as non-root users; quickstart through `scripts/init_env.py` and `scripts/tasks.sh up`.
 - **Evaluation code** (`evals/`): CORD v2 and synthetic runners, metrics 1.1.1, S5 calibration and routing, ablations, degradation, power and integrity checks.
 
@@ -128,17 +128,15 @@ No S1-against-S4h ordering changes on any field. Source: `evals/results/final/co
 
 | Suite | Result | Log |
 |---|---|---|
-| Backend pytest (with PostgreSQL and Redis) | 493 passed; core coverage 96% | `docs/progress/logs/release-ci-local.log` |
-| Frontend Vitest | 37 passed | `release-ci-local.log` |
+| Backend pytest (with PostgreSQL and Redis) | 503 passed; core coverage 96% | `docs/progress/logs/release-ci-local.log` |
+| Frontend Vitest | 43 passed | `release-ci-local.log` |
 | Lint, type check (mypy over backend and evals, 107 files), oxlint, frontend build, pre-commit hooks, eval-smoke, gitleaks over the full history | all pass | `release-ci-local.log` |
-| Playwright upload, review and export against Docker Compose | 1 passed | `docs/progress/logs/release-fresh-clone.log` |
+| Playwright upload, review (correction checked in the audit trail) and export against Docker Compose | 1 passed | `docs/progress/logs/release-fresh-clone.log` |
 | Fresh clone following the README (attempt 2) | every step passes; tracked tree unchanged after the run | `release-fresh-clone.log` |
-| Linux simulation of the CI workflow | backend 493 passed, frontend 37 passed, gitleaks clean | `docs/progress/logs/release-ci-linux-simulation.log` |
+| Linux simulation of the CI workflow (at 6b0e402, before the audit trail and batch export) | backend 493 passed, frontend 37 passed, gitleaks clean | `docs/progress/logs/release-ci-linux-simulation.log` |
 
 ## 8. Not verified
 
 - **LLM mode inside Docker.** The worker container reaches Ollama on the host, but the smoke test stopped at its 2 GiB free-RAM gate (`docs/progress/logs/docker-llm-smoke.json`). `scripts/run_docker_llm_smoke.ps1` is ready for a run with other applications closed.
 - **CI on GitHub.** The workflow has not run on GitHub, because no remote exists. It was checked by the local mirror and by the Linux simulation.
-- **Audit trail in the review UI.** It is stored and tested in the API but not shown in the UI (A5).
-- **Batch export.** Not exposed as an API route (A6).
-- **Test-split replay.** `make reproduce` regenerates the final tables from the saved result files; it does not replay the test runs from the caches (A13).
+- **Test-split replay (A13, verified in scope).** `make reproduce` regenerates all 30 final files byte-identically from the saved result files. Replaying the test runs themselves needs the CORD caches, which are gitignored by design, so a fresh clone cannot replay them.
