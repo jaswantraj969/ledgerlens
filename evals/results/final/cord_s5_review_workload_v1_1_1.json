@@ -1,0 +1,129 @@
+{
+  "metrics_version": "1.1.1",
+  "split": "test",
+  "variant": "all",
+  "bootstrap": {
+    "resamples": 2000,
+    "seed": 20261106,
+    "unit": "document"
+  },
+  "method": "The S5 test files hold totals only, so per-document counts are recomputed from the saved predictions and records: the same calibrator is refitted on train (deterministic), and the thresholds recorded in the S5 test file are applied. The script stops unless the recomputed accepted totals equal the totals in the S5 test file exactly. No system, prompt, threshold or rule changes. Variant: all.",
+  "systems": {
+    "S5-S1": {
+      "source": "evals/results/cord_s5_s1_v1_1_1.json",
+      "documents": 100,
+      "targets": {
+        "0.98": {
+          "header_slots_routed_per_document": {
+            "mean": 2.42,
+            "ci95": [
+              2.23,
+              2.6
+            ]
+          },
+          "rows_routed_per_document": {
+            "mean": 2.5,
+            "ci95": [
+              1.99,
+              3.0
+            ]
+          },
+          "all_slots_routed_per_document": {
+            "mean": 4.92,
+            "ci95": [
+              4.37,
+              5.480249999999999
+            ]
+          },
+          "share_of_slots_routed": 0.8896925858951176,
+          "header_slots_per_document": 3.0,
+          "predicted_rows_per_document": 2.53
+        },
+        "0.99": {
+          "header_slots_routed_per_document": {
+            "mean": 2.42,
+            "ci95": [
+              2.23,
+              2.6
+            ]
+          },
+          "rows_routed_per_document": {
+            "mean": 2.5,
+            "ci95": [
+              1.99,
+              3.0
+            ]
+          },
+          "all_slots_routed_per_document": {
+            "mean": 4.92,
+            "ci95": [
+              4.37,
+              5.480249999999999
+            ]
+          },
+          "share_of_slots_routed": 0.8896925858951176,
+          "header_slots_per_document": 3.0,
+          "predicted_rows_per_document": 2.53
+        }
+      }
+    },
+    "S5-S4h": {
+      "source": "evals/results/cord_s5_s4h_v1_1_1.json",
+      "documents": 100,
+      "targets": {
+        "0.98": {
+          "header_slots_routed_per_document": {
+            "mean": 2.51,
+            "ci95": [
+              2.37,
+              2.64
+            ]
+          },
+          "rows_routed_per_document": {
+            "mean": 4.22,
+            "ci95": [
+              3.58,
+              5.04
+            ]
+          },
+          "all_slots_routed_per_document": {
+            "mean": 6.73,
+            "ci95": [
+              6.08,
+              7.570249999999999
+            ]
+          },
+          "share_of_slots_routed": 0.9321329639889196,
+          "header_slots_per_document": 3.0,
+          "predicted_rows_per_document": 4.22
+        },
+        "0.99": {
+          "header_slots_routed_per_document": {
+            "mean": 2.58,
+            "ci95": [
+              2.45,
+              2.71
+            ]
+          },
+          "rows_routed_per_document": {
+            "mean": 4.22,
+            "ci95": [
+              3.58,
+              5.04
+            ]
+          },
+          "all_slots_routed_per_document": {
+            "mean": 6.8,
+            "ci95": [
+              6.14,
+              7.640499999999997
+            ]
+          },
+          "share_of_slots_routed": 0.9418282548476454,
+          "header_slots_per_document": 3.0,
+          "predicted_rows_per_document": 4.22
+        }
+      }
+    }
+  }
+}
