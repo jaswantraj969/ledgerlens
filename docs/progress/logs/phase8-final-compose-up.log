@@ -1,0 +1,14 @@
+START 2026-11-12T16:07:16Z commit 5d75370 (clean tree); web on 8081 because an unrelated httpd holds 8080
+ Container ledgerlens-web-1 Healthy 
+ Container ledgerlens-redis-1 Healthy 
+ Container ledgerlens-postgres-1 Healthy 
+ Container ledgerlens-api-1 Healthy 
+ Container ledgerlens-worker-1 Healthy 
+EXIT=0
+ledgerlens-api-1 Up 6 seconds (healthy)
+ledgerlens-postgres-1 Up About an hour (healthy)
+ledgerlens-redis-1 Up About an hour (healthy)
+ledgerlens-web-1 Up 11 minutes (healthy)
+ledgerlens-worker-1 Up 6 seconds (healthy)
+api ready: {"status":"ready","checks":{"database":true,"redis":true,"storage":true,"worker":true}}
+END 2026-11-12T16:09:12Z

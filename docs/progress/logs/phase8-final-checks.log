@@ -1,0 +1,29 @@
+START 2026-11-12T16:06:48Z commit 5d75370 (clean tree)
+== ruff check and format (tasks.sh lint): bash scripts/tasks.sh lint
+All checks passed!
+178 files already formatted
+ruff check and format (tasks.sh lint) EXIT=0
+== mypy, backend and evals (tasks.sh typecheck): bash scripts/tasks.sh typecheck
+Success: no issues found in 526 source files
+mypy, backend and evals (tasks.sh typecheck) EXIT=0
+== oxlint: npx --prefix frontend oxlint frontend
+oxlint EXIT=0
+== frontend build (tsc -b && vite build): npm --prefix frontend run -s build
+dist/assets/index-DgD4boke.js   330.21 kB │ gzip: 99.96 kB
+
+[32m✓ built in 321ms[39m
+frontend build (tsc -b && vite build) EXIT=0
+== vitest: npm --prefix frontend run -s test
+ Test Files  3 passed (3)
+      Tests  36 passed (36)
+   Start at  21:07:00
+   Duration  8.18s (environment 71%, setup 14%, tests 9%, import 4%, transform 2%)
+
+vitest EXIT=0
+END 2026-11-12T16:07:09Z
+== oxlint (rerun from frontend/ for its summary line) 2026-11-12T16:09:34Z
+oxlint EXIT=0
+== oxlint --format default (file output) 2026-11-12T16:09:43Z
+Found 0 warnings and 0 errors.
+Finished in 38ms on 26 files with 116 rules using 12 threads.
+oxlint EXIT=0

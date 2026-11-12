@@ -110,3 +110,10 @@
 - S5: exact Clopper-Pearson intervals where fewer than 30 values were accepted; review workload per document with bootstrap intervals.
 - README corrected (synthetic under 1.1.1, S1 rerun hash, header precision wording, small samples, workload, degradation exceptions, risk score). ADR-0013 narrows A11 on synthetic data to S1 and S2'. Limitations updated (OCR parsing; risk score unfitted, S5 evaluation-only).
 - Phase 8 baseline: backend 458 passed, Vitest 36 passed, Playwright 1 passed on Compose, ruff and backend mypy clean, oxlint 1 warning.
+
+## 2026-11-12, addendum 01 and Phase 8 hardening
+- Addendum 01 (post hoc duplicate-exclusion check) committed in a1ec84e, then computed in 1faa328. On the 93 documents, no S1-against-S4h ordering changes on any field.
+- oxlint warning fixed; Alembic path_separator set; mypy now checks evals/ in the configured run (type-only fixes; make reproduce guard: all metrics and prediction hashes identical).
+- Security review (docs/security-review.md): fixed the webhook replay window, the public-address allow-list, the image pixel limit, the non-root web container, metrics hidden from the proxy, and the unused litellm extra (CVE); risks accepted: open registration, DNS rebinding window, per-email login limit.
+- Docker LLM smoke: the worker reaches host Ollama, but the run stopped at the 2 GiB free-RAM gate (0.43 GiB; Docker's VM held 4.7 GB).
+- Final suites at a clean HEAD: backend 486 passed, Vitest 36 passed, Playwright 1 passed on Compose, lint and type checks clean.
