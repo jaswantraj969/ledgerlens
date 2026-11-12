@@ -255,18 +255,37 @@ describe('Report', () => {
   it('shows committed results with intervals and flags files not produced yet', async () => {
     const { api } = client({
       'GET /evaluation/report': () => json({
+        test_comparison: unavailable('t'), s5_test: unavailable('f'),
         validation_comparison: { available: true, source: 'evals/results/dev/c.json', data: comparison },
-        prompt_round: unavailable('p'), s1_test: unavailable('s'), model_comparison: unavailable('m'),
-        s5_s1_validation: unavailable('a'), s5_s4h_validation: unavailable('b'), note: 'Only S1 has read test.',
+        prompt_round: unavailable('p'), s1_test: unavailable('s'),
+        s5_s1_validation: unavailable('a'), s5_s4h_validation: unavailable('b'), note: 'Validation only.',
       }),
     })
     withApi(api, <Report />)
-    const row = await screen.findByTestId('system-S1')
+    const row = await screen.findByTestId('validation-S1')
     expect(row).toHaveTextContent('0.830')
     expect(row).toHaveTextContent('[0.755, 0.899]')
     expect(row).toHaveTextContent('rules')
     expect(screen.getByTestId('source-s5_s1_validation')).toHaveTextContent('not produced yet')
-    expect(screen.getByText('Only S1 has read test.')).toBeInTheDocument()
+    expect(screen.getByText('Validation only.')).toBeInTheDocument()
+  })
+
+  it('shows the final test table before the validation table', async () => {
+    const test = { ...comparison, split: 'test', note: 'Final test read.' }
+    const { api } = client({
+      'GET /evaluation/report': () => json({
+        test_comparison: { available: true, source: 'evals/results/final/t.json', data: test },
+        s5_test: { available: true, source: 'evals/results/final/s5.json', data: {} },
+        validation_comparison: { available: true, source: 'evals/results/dev/c.json', data: comparison },
+        prompt_round: unavailable('p'), s1_test: unavailable('s'),
+        s5_s1_validation: unavailable('a'), s5_s4h_validation: unavailable('b'), note: 'Final read done.',
+      }),
+    })
+    withApi(api, <Report />)
+    const testRow = await screen.findByTestId('test-S1')
+    const validationRow = screen.getByTestId('validation-S1')
+    expect(testRow.compareDocumentPosition(validationRow) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+    expect(screen.getByTestId('source-s5_test')).not.toHaveTextContent('not produced yet')
   })
 })
 

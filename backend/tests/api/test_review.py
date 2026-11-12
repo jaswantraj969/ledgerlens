@@ -197,6 +197,14 @@ def test_the_report_serves_results_files_and_flags_missing_ones(
     assert comparison["source"] == "evals/results/dev/cord_validation_comparison_v1_1_1.json"
     assert {"S1", "S4h"} <= {s["system"] for s in comparison["data"]["systems"]}
     assert report["s1_test"]["data"]["split"] == "test"
+    test = report["test_comparison"]
+    assert test["available"] is True
+    assert test["source"] == "evals/results/final/cord_test_comparison_v1_1_1.json"
+    assert test["data"]["split"] == "test"
+    assert {"S1", "S2'", "S3'", "S4'", "S4h"} == {s["system"] for s in test["data"]["systems"]}
+    assert report["s5_test"]["available"] is True
+    assert "model_comparison" not in report
+    assert "final CORD test read is complete" in report["note"]
     client.app.state.settings = settings.model_copy(update={"results_dir": tmp_path})  # type: ignore[attr-defined]
     empty = client.get("/evaluation/report", headers=admin.headers).json()
     assert empty["validation_comparison"] == {

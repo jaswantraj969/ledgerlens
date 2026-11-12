@@ -100,10 +100,11 @@ export type QueueItem = z.infer<typeof queueItem>
 
 const block = z.object({ available: z.boolean(), source: z.string(), data: z.unknown().optional() })
 export const report = z.object({
+  test_comparison: block,
+  s5_test: block,
   validation_comparison: block,
   prompt_round: block,
   s1_test: block,
-  model_comparison: block,
   s5_s1_validation: block,
   s5_s4h_validation: block,
   note: z.string(),

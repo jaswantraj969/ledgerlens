@@ -10,10 +10,11 @@ const FIELDS: [string, string][] = [
 ]
 
 const BLOCK_TITLES: Record<string, string> = {
+  test_comparison: 'CORD test, final read, all systems',
+  s5_test: 'S5 on CORD test (automation and achieved precision)',
   validation_comparison: 'CORD validation, all systems',
   prompt_round: 'Prompt round (train subset)',
   s1_test: 'S1 on CORD test',
-  model_comparison: 'Model comparison (train subset)',
   s5_s1_validation: 'S5 on S1, validation',
   s5_s4h_validation: 'S5 on S4h, validation',
 }
@@ -30,6 +31,9 @@ export function Report() {
 
   if (error) return <p role="alert" className="text-red-700">{error}</p>
   if (!report) return <p>Loading…</p>
+  const test = report.test_comparison.available
+    ? comparisonSchema.safeParse(report.test_comparison.data)
+    : null
   const parsed = report.validation_comparison.available
     ? comparisonSchema.safeParse(report.validation_comparison.data)
     : null
@@ -38,6 +42,8 @@ export function Report() {
     <section className="space-y-6">
       <h2 className="text-xl font-semibold">Evaluation report</h2>
       <p className="text-sm">{report.note}</p>
+      {test?.success && <ComparisonTable comparison={test.data} />}
+      {test && !test.success && <p role="alert">The test comparison file has an unexpected format.</p>}
       {parsed?.success && <ComparisonTable comparison={parsed.data} />}
       {parsed && !parsed.success && (
         <p role="alert">The validation comparison file has an unexpected format.</p>
@@ -75,7 +81,7 @@ function ComparisonTable({ comparison }: { comparison: Comparison }) {
         </thead>
         <tbody>
           {comparison.systems.map((system) => (
-            <tr key={system.system} className="border-t" data-testid={`system-${system.system}`}>
+            <tr key={system.system} className="border-t" data-testid={`${comparison.split}-${system.system}`}>
               <td>{system.system}</td>
               <td>{system.model ? `${system.model} ${system.prompt ?? ''}` : 'rules'}</td>
               {FIELDS.map(([key]) => (
