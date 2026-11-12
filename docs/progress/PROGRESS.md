@@ -125,3 +125,13 @@
 - Evaluation page fixed: it now shows the final test table (its note said only S1 had read test).
 - Portfolio drafts in docs/portfolio/; screenshots taken with Playwright against Compose, kept out of git.
 - Fresh clone: attempt 1 failed on the Windows 260-character path limit (deep clone folder); README now asks for a short path; attempt 2 passed every step unaided at 293cc23 (backend 488, Vitest 37, e2e 1, lint, typecheck, eval-smoke, runtime security checks).
+
+## 2026-11-12/13, v1.0.0 release (local; no remote)
+- MIT licence (2026 Jaswant Raj); package metadata and version 1.0.0; README status "v1.0.0, research prototype".
+- Tracked files hold no attribution strings: script comment reworded, scratch paths and search terms redacted in old logs (no result changed).
+- Power events go to a gitignored path; `tasks.sh test` prints the pytest summary; mypy counts no data folders (107 files in working copy and clone).
+- Portfolio precision wording states the 0.98 target and the interval; README screenshots from synthetic invoices.
+- CI workflow: actions pinned to commit SHAs, read-only permissions, no secrets; Linux simulation passes (it first exposed a crash where git is unavailable, fixed). Local CI mirror passes: 493 backend tests, 96% coverage, 37 frontend tests.
+- Release fresh clone: attempt 1 failed at e2e (a page-image locator also matched the evidence overlay; fixed with an exact name); attempt 2 passes every step with a clean tracked tree.
+- Release audit, integrity 8/8, make reproduce byte-identical. CHANGELOG and final report. Tag v1.0.0.
+- Not done: push and GitHub CI (no remote URL given), LLM mode inside Docker, A5 audit view, A6 batch export.

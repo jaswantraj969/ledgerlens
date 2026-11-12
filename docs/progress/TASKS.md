@@ -57,39 +57,55 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 | 7 | SROIE | BLOCKED | Removed: official access unavailable; mirror terms unverified. Labels and vendor groups deleted; adapter kept with fictional fixtures |
 | 6 | Frontend: upload and batch, job status, review with boxes, approve/reject/correct, queue, export, evaluation page | VERIFIED | frontend/src (36 Vitest tests), npm run build |
 | 6 | Playwright upload, review, export flow | VERIFIED (local dev stack, not Docker) | docs/progress/logs/run-e2e-local.log |
-| 8 | Testing and hardening | IN PROGRESS | 2026-11-12 final run at a clean HEAD: backend 486 passed, Vitest 36, Playwright 1 on Compose, ruff, mypy (backend and evals) and oxlint clean, build passes (docs/progress/logs/phase8-final-*.log). Security review docs/security-review.md (5 fixed, 4 risks accepted). Docker LLM smoke blocked by free RAM |
+| 8 | Testing and hardening | VERIFIED | Security review (docs/security-review.md), Phase 8 suites (docs/progress/logs/phase8-final-*.log), release suites (docs/progress/logs/release-ci-local.log) |
 | 9 | Dockerfiles and full compose stack | VERIFIED | docs/progress/logs/run-docker-compose-up.log: all five services healthy. Web published on 8081 for this run because an unrelated httpd holds 8080 here (LEDGERLENS_WEB_PORT) |
 | 9 | Playwright flow against the Compose stack | VERIFIED | docs/progress/logs/run-e2e-docker.log (1 passed) |
 | 10 | Documentation | VERIFIED | README top section, quickstart with command status, data attribution; docs/README.md index; architecture diagram of the running services. Quickstart passed unaided in a fresh clone (docs/progress/logs/phase12-fresh-clone.log) |
 | 11 | Portfolio and publication preparation | IMPLEMENTED BUT UNVERIFIED | Drafts in docs/portfolio/ (summary, Upwork entry, case study), numbers checked by script against evals/results/final/; screenshots local only (CORD images, R10). Publishing is the owner's step |
-| 12 | Final verification and report | IN PROGRESS | Fresh clone at 293cc23: all steps pass (attempt 2; attempt 1 hit the Windows path limit, README fixed). Pre-push audit docs/progress/logs/prepush-audit.txt. Open: LICENSE not chosen; CI on GitHub needs a remote |
+| 12 | Final verification and report | VERIFIED | docs/progress/final-report.md; docs/progress/logs/release-fresh-clone.log, release-ci-local.log, release-prepush-audit.txt, release-reproduce.log |
+| R | Release A1: MIT LICENSE, licence metadata, README licence | VERIFIED | LICENSE, backend/pyproject.toml, frontend/package.json, docs/progress/logs/release-prepush-audit.txt |
+| R | Release A2: neutral script wording; 0 attribution matches in tracked files | VERIFIED | docs/progress/logs/release-prepush-audit.txt |
+| R | Release A3: power events written to a gitignored path | VERIFIED | evals/power.py, tests/unit/test_power.py; tracked tree unchanged in docs/progress/logs/release-fresh-clone.log |
+| R | Release A4: tasks.sh test prints the pytest summary | VERIFIED | docs/progress/logs/release-fresh-clone.log (BACKEND PYTEST SUMMARY line) |
+| R | Release A5: mypy source count independent of local caches | VERIFIED | backend/pyproject.toml exclude; 107 files in working copy and clone |
+| R | Release A6: portfolio precision wording, number check | VERIFIED | docs/progress/logs/portfolio-number-check.log |
+| R | Release A7: README status v1.0.0 | VERIFIED | README.md |
+| R | Release A8: README images from synthetic invoices; CORD captions | VERIFIED | docs/images/, docs/progress/logs/readme-images.log, docs/portfolio/screenshot-captions.md |
+| R | Release B9: CI workflow review | VERIFIED | .github/workflows/ci.yml; docs/progress/logs/release-ci-linux-simulation.log |
+| R | Release B10: local CI mirror at a clean HEAD | VERIFIED | docs/progress/logs/release-ci-local.log |
+| R | Release C11-C13: fresh clone, audit, integrity and reproduce | VERIFIED | docs/progress/logs/release-fresh-clone.log, release-prepush-audit.txt, release-reproduce.log |
+| R | Release D14-D16: CHANGELOG, final report, task status, v1.0.0 tag | VERIFIED | CHANGELOG.md, docs/progress/final-report.md, git tag v1.0.0 |
+| R | Release E17-E19: push to a private remote and GitHub CI | BLOCKED | No remote URL given (placeholder in the release instructions); nothing pushed |
 
 ## Acceptance criteria
 
 | Id | Status | Note |
 |---|---|---|
-| A1 | IN PROGRESS | Upload, batch, rejection, dedup, processing, frontend and the Docker stack work (e2e passes on Compose); hardening (Phase 8) not started |
-| A2 | VERIFIED | test_ocr_parser.py, test_pdfium_parser.py |
-| A3 | IN PROGRESS | Default and alternative schemas work offline; Ollama used with cord_receipt only |
-| A4 | VERIFIED | Fields, evidence, validations and review decisions persist; backend/tests/api/test_review.py |
-| A5 | NOT STARTED | |
-| A6 | VERIFIED | JSON and CSV export endpoints, signed webhooks; test_review.py, test_webhooks.py |
-| A7 | VERIFIED | backend/tests/api, docs/progress/logs/mutation-check.txt |
-| A8 | VERIFIED | Worker crash, retry, dead-letter, model-unavailable and webhook retry tests pass |
-| A9 | IMPLEMENTED BUT UNVERIFIED (local mirror; GitHub run pending human approval) | docs/progress/logs/ci-local.txt |
-| A10 | NOT STARTED | |
-| A11 | IN PROGRESS | CORD test done for S1-S4h and S5 (evals/results/final/), with review workload (evals/results/final/cord_s5_review_workload_v1_1_1.json). Synthetic narrowed to S1 and S2' by ADR-0013 |
-| A12 | IN PROGRESS | CORD layout groups for S1. No real vendor-grouped split was possible |
-| A13 | IN PROGRESS | Ablations and degradation done; final tables and figure regenerate via make reproduce from saved result files (docs/progress/logs/run-reproduce-final.log). make reproduce does not replay the test runs themselves from the caches |
-| A14 | IN PROGRESS | Split hashes and overlap tests exist, documented in docs/evaluation.md |
-| A15 | NOT STARTED | |
-| A16 | IN PROGRESS | No claims published yet |
-| A17 | IN PROGRESS | Scan clean, no trailers, nothing pushed; licence options not drafted |
+| A1 | VERIFIED | PDF, scanned PDF (test_ocr_parser.py::test_auto_parser_runs_ocr_on_scanned_pdf...), JPEG/PNG, single and batch upload; oversize, unsupported, disguised and too-many-pages rejected; duplicates idempotent (backend/tests/api/test_documents.py); 493 passed in docs/progress/logs/release-ci-local.log |
+| A2 | VERIFIED | backend/tests/unit/test_ocr_parser.py, test_pdfium_parser.py (bboxes, confidence, null when unavailable) |
+| A3 | VERIFIED | Default and alternative schema offline (tests/e2e/test_vertical_slice.py::test_alternative_schema_comes_from_config_alone); Ollama path used for every LLM result in evals/results/final/ (cord_receipt schema) |
+| A4 | VERIFIED | Evidence status, validations, signals, risk score and decision persist (tests/api/test_review.py); calibrated_prob stays null in the application because no calibrator is fitted there (docs/limitations.md) |
+| A5 | IN PROGRESS | Evidence highlighting, approve/reject/correct and the risk-ordered queue work (frontend tests, Playwright flow in release-fresh-clone.log); the audit trail is stored and tested (test_documents.py, test_review.py) but not visible in the UI or exposed by an API route |
+| A6 | IN PROGRESS | JSON and CSV export per document, OpenAPI at /docs and /openapi.json, HMAC-signed webhooks with retries (test_review.py, test_webhooks.py); batch export exists in the exporter but is not exposed as an API route |
+| A7 | VERIFIED | Roles, API keys, cross-organisation isolation, rate limits (test_auth.py, test_documents.py, test_route_auth.py); no secrets or document content in logs (test_health.py::test_logs_hold_no_secrets_or_document_content); docs/security-review.md |
+| A8 | VERIFIED | Worker crash, retry, dead-letter, invalid LLM output fallback (tests/api/test_worker.py, tests/unit/test_llm.py); readiness reflects each dependency (test_health.py) |
+| A9 | IMPLEMENTED BUT UNVERIFIED | ruff, mypy strict (backend and evals), backend and frontend tests pass locally (docs/progress/logs/release-ci-local.log, 96% core coverage) and in a Linux simulation of the workflow (docs/progress/logs/release-ci-linux-simulation.log); no GitHub run, because no remote exists |
+| A10 | VERIFIED | Fresh clone following the README: compose up to healthy, all suites, e2e, clean tracked tree (docs/progress/logs/release-fresh-clone.log; same machine, separate Compose project) |
+| A11 | VERIFIED (scope per ADR-0013) | CORD test: per-field P/R/F1 with CIs, ECE, Brier, ROC-AUC, automation and achieved precision at 0.98/0.99, review workload, cost 0 (local), p50/p95 latency on AC, n per field (evals/results/final/); synthetic: S1 and S2' only, by ADR-0013 |
+| A12 | VERIFIED (layout groups) | S5 grouped variant on unseen layout groups next to document-level results (evals/results/final/cord_s5_test_v1_1_1.md); S1 layout groups (evals/results/cord_s1_v1_1_layout_groups.md); no vendor split is possible on CORD (evals/datasets/LICENSES.md) |
+| A13 | IN PROGRESS | Ablations and degradation done (evals/results/final/); make reproduce regenerates every final table byte-identically from the saved result files (docs/progress/logs/release-reproduce.log), but does not replay the test runs from the caches |
+| A14 | VERIFIED | Split hashes stored, ID overlap test (test_cord_runner_guards.py::test_split_ids_do_not_overlap...), layout-group roles; content near-duplicates found post hoc are documented (cord-cross-split-duplicates.txt, addendum 01) |
+| A15 | VERIFIED | README (quickstart, results, limitations link, research-prototype statement), docs/README.md index, docs/limitations.md, docs/security-review.md, docs/progress/final-report.md |
+| A16 | VERIFIED | README and final-report numbers checked against result files; portfolio numbers checked by scripts/check_portfolio_numbers.py (docs/progress/logs/portfolio-number-check.log); README screenshots are synthetic (docs/progress/logs/readme-images.log) |
+| A17 | VERIFIED | One identity on every commit, 0 attribution matches in commits and tracked files, gitleaks clean over the full history, no data or weights ever committed, MIT LICENSE, nothing pushed (docs/progress/logs/release-prepush-audit.txt); CHANGELOG.md |
 
 ## Blockers
 
 | Blocker | Human action |
 |---|---|
 | SROIE results | None required. Blocked by decision; reopen only if official access appears |
-| CI on GitHub unverified | Approve creating a remote; nothing is pushed until then |
-| LLM below rules on CORD (S4h row F1 0.292 against 0.377) and qwen3:4b does not fit in RAM | None required now. A larger model needs a machine with more RAM |
+| CI on GitHub unverified (Release E) | Give a private remote URL; then push main and v1.0.0 and watch the run |
+| LLM mode inside Docker unverified | Run scripts/run_docker_llm_smoke.ps1 with other applications closed |
+| Upwork portfolio | Owner reviews docs/portfolio/ and publishes; nothing is published by the project |
+| LLM below rules on CORD (test: S4h row F1 0.253 against 0.365 for S1) and qwen3:4b does not fit in RAM | None required now. A larger model needs a machine with more RAM |
+| A5 audit trail not visible in the UI; A6 batch export not exposed | Future work (not part of v1.0.0) |
