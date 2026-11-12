@@ -1,0 +1,28 @@
+START 2026-11-12T15:10:56Z commit 9d15eaa (plus uncommitted type fixes in evals/runners/find_cord_duplicates.py, make_validation_comparison.py)
+== backend lint: bash scripts/tasks.sh lint
+All checks passed!
+172 files already formatted
+backend lint EXIT=0
+== backend typecheck (configured: mypy on backend): bash scripts/tasks.sh typecheck
+Success: no issues found in 56 source files
+backend typecheck (configured: mypy on backend) EXIT=0
+== evals mypy (not configured; informational): bash -c cd backend && uv run --no-sync mypy ../evals
+..\evals\runners\llm_smoke.py:72: error: Argument 1 to "iter_documents" has incompatible type "str"; expected "Literal['train', 'validation', 'test']"  [arg-type]
+Found 22 errors in 9 files (checked 48 source files)
+evals mypy (not configured; informational) EXIT=1
+== frontend lint (oxlint): npm --prefix frontend run -s lint
+src/components/Documents.tsx:26:10: warning react(set-state-in-effect): Calling setState synchronously within an effect can trigger cascading renders help: Effects should synchronize React with external systems. Calling setState synchronously inside an effect starts another render and is usually unnecessary. Derive the value during render, initialize state directly, or update it from the event that caused the change. Use an effect only when synchronizing with an external system.
+frontend lint (oxlint) EXIT=0
+== frontend build (tsc -b && vite build): npm --prefix frontend run -s build
+dist/assets/index-BYMwusPo.js   330.13 kB │ gzip: 99.95 kB
+
+[32m✓ built in 255ms[39m
+frontend build (tsc -b && vite build) EXIT=0
+== frontend vitest: npm --prefix frontend run -s test
+ Test Files  3 passed (3)
+      Tests  36 passed (36)
+   Start at  20:11:04
+   Duration  7.10s (environment 54%, tests 20%, setup 16%, import 8%, transform 2%)
+
+frontend vitest EXIT=0
+END 2026-11-12T15:11:12Z

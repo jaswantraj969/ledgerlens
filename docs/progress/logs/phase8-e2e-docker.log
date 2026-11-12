@@ -1,0 +1,8 @@
+START 2026-11-12T15:12:37Z commit 9d15eaa target=docker compose web on http://127.0.0.1:8081
+
+Running 1 test using 1 worker
+
+  ok 1 e2e\flow.spec.ts:7:1 › upload, review and export one invoice (7.0s)
+
+  1 passed (11.4s)
+EXIT=0 END 2026-11-12T15:13:01Z

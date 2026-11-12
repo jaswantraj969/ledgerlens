@@ -1,0 +1,79 @@
+START 2026-11-12T15:11:30Z commit 9d15eaa; web on 8081 because an unrelated httpd holds 8080
+ Image ledgerlens-backend:local Building 
+ Image ledgerlens-web:local Building 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ Image ledgerlens-backend:local Built 
+ Image ledgerlens-web:local Built 
+ Container ledgerlens-postgres-1 Running 
+ Container ledgerlens-redis-1 Running 
+ Container ledgerlens-api-1 Recreate 
+ Container ledgerlens-api-1 Recreated 
+ Container ledgerlens-worker-1 Recreate 
+ Container ledgerlens-worker-1 Recreated 
+ Container ledgerlens-redis-1 Waiting 
+ Container ledgerlens-postgres-1 Waiting 
+ Container ledgerlens-redis-1 Healthy 
+ Container ledgerlens-postgres-1 Healthy 
+ Container ledgerlens-api-1 Starting 
+ Container ledgerlens-api-1 Started 
+ Container ledgerlens-web-1 Starting 
+ Container ledgerlens-worker-1 Starting 
+ Container ledgerlens-worker-1 Started 
+ Container ledgerlens-web-1 Started 
+ Container ledgerlens-api-1 Waiting 
+ Container ledgerlens-worker-1 Waiting 
+ Container ledgerlens-web-1 Waiting 
+ Container ledgerlens-postgres-1 Waiting 
+ Container ledgerlens-redis-1 Waiting 
+ Container ledgerlens-redis-1 Healthy 
+ Container ledgerlens-postgres-1 Healthy 
+ Container ledgerlens-worker-1 Healthy 
+ Container ledgerlens-web-1 Healthy 
+ Container ledgerlens-api-1 Healthy 
+EXIT=0
+ledgerlens-api-1 Up 13 seconds (healthy)
+ledgerlens-postgres-1 Up 7 minutes (healthy)
+ledgerlens-redis-1 Up 7 minutes (healthy)
+ledgerlens-web-1 Up 12 seconds (healthy)
+ledgerlens-worker-1 Up 12 seconds (healthy)
+api ready: {"status":"ready","checks":{"database":true,"redis":true,"storage":true,"worker":true}}
+END 2026-11-12T15:12:31Z
