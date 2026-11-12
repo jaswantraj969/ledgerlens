@@ -1,6 +1,9 @@
 :8080 {
 	# The API, with the /api prefix removed, as in the Vite dev proxy.
 	handle_path /api/* {
+		# Operational endpoints stay off the public proxy; scrape the API service directly.
+		@internal path /metrics /metrics/*
+		respond @internal 404
 		reverse_proxy api:8000
 	}
 	handle {
