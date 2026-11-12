@@ -1,0 +1,400 @@
+{
+  "protocol": "docs/evaluation/final-test-protocol.md",
+  "mode": "check",
+  "started_utc": "2026-11-12T07:20:04Z",
+  "log": "docs/progress/logs/final-check-20261112T072004Z.log",
+  "preflight": {
+    "facts": {
+      "measured_utc": "2026-11-12T07:20:03Z",
+      "git_commit": "4273082a869de05e8a64871cf80ee3c641aeab76",
+      "git_dirty_files": [],
+      "protocol_commit_is_ancestor": true,
+      "boot_age_minutes": 35.7,
+      "ac_online": true,
+      "docker_daemon_running": false,
+      "docker_processes": [],
+      "free_ram_gib": 1.692,
+      "vscode_running": true,
+      "ollama_max_loaded_models": "1",
+      "ollama_version": "0.40.15",
+      "model_digest": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72"
+    },
+    "checks": [
+      {
+        "check": "clean commit",
+        "passed": true,
+        "detail": "0 changed or untracked files"
+      },
+      {
+        "check": "protocol commit is in history",
+        "passed": true,
+        "detail": "2550b14"
+      },
+      {
+        "check": "fresh reboot",
+        "passed": true,
+        "detail": "booted 35.7 min ago (limit 60)"
+      },
+      {
+        "check": "AC power",
+        "passed": true,
+        "detail": "ac_online=True"
+      },
+      {
+        "check": "Docker stopped",
+        "passed": true,
+        "detail": "daemon=False processes=[]"
+      },
+      {
+        "check": "free RAM",
+        "passed": false,
+        "detail": "1.692 GiB available (minimum 2.0)"
+      },
+      {
+        "check": "Ollama and model",
+        "passed": true,
+        "detail": "version=0.40.15 digest=a80c4f17acd5"
+      },
+      {
+        "check": "OLLAMA_MAX_LOADED_MODELS=1",
+        "passed": true,
+        "detail": "value=1"
+      },
+      {
+        "check": "keep-awake on",
+        "passed": true,
+        "detail": "scripts/keep_awake.ps1 running"
+      }
+    ]
+  },
+  "runner_flag_problems": [],
+  "keep_awake": "released",
+  "steps": [
+    {
+      "name": "S1 records rerun",
+      "module_args": [
+        "evals.runners.run_cord",
+        "--split",
+        "test",
+        "--final",
+        "--system",
+        "S1",
+        "--records-rerun",
+        "--save-records"
+      ],
+      "output": "evals/results/repro/cord_s1_test_records_rerun_v1_1_1.json",
+      "attempts": [],
+      "status": "pending"
+    },
+    {
+      "name": "S2'",
+      "module_args": [
+        "evals.runners.run_cord",
+        "--split",
+        "test",
+        "--final",
+        "--system",
+        "S2",
+        "--label",
+        "S2'",
+        "--prompt",
+        "2.2",
+        "--num-ctx",
+        "2304"
+      ],
+      "output": "evals/results/cord_s2p_v1_1_1.json",
+      "attempts": [],
+      "status": "pending"
+    },
+    {
+      "name": "S3'",
+      "module_args": [
+        "evals.runners.run_cord",
+        "--split",
+        "test",
+        "--final",
+        "--system",
+        "S3",
+        "--label",
+        "S3'",
+        "--prompt",
+        "2.2",
+        "--num-ctx",
+        "2304"
+      ],
+      "output": "evals/results/cord_s3p_v1_1_1.json",
+      "attempts": [],
+      "status": "pending"
+    },
+    {
+      "name": "S4'",
+      "module_args": [
+        "evals.runners.run_cord",
+        "--split",
+        "test",
+        "--final",
+        "--system",
+        "S4",
+        "--label",
+        "S4'",
+        "--prompt",
+        "2.2",
+        "--num-ctx",
+        "2304"
+      ],
+      "output": "evals/results/cord_s4p_v1_1_1.json",
+      "attempts": [],
+      "status": "pending"
+    },
+    {
+      "name": "S4h",
+      "module_args": [
+        "evals.runners.run_cord",
+        "--split",
+        "test",
+        "--final",
+        "--system",
+        "S4h",
+        "--label",
+        "S4h",
+        "--prompt",
+        "2.2",
+        "--num-ctx",
+        "2304",
+        "--save-records"
+      ],
+      "output": "evals/results/cord_s4h_v1_1_1.json",
+      "attempts": [],
+      "status": "pending"
+    },
+    {
+      "name": "S5-S1 all",
+      "module_args": [
+        "evals.runners.run_s5",
+        "--base",
+        "s1",
+        "--train-scope",
+        "train_all_p1.0",
+        "--variant",
+        "all",
+        "--final"
+      ],
+      "output": "evals/results/cord_s5_s1_v1_1_1.json",
+      "attempts": [],
+      "status": "pending"
+    },
+    {
+      "name": "S5-S1 grouped",
+      "module_args": [
+        "evals.runners.run_s5",
+        "--base",
+        "s1",
+        "--train-scope",
+        "train_all_p1.0",
+        "--variant",
+        "grouped",
+        "--final"
+      ],
+      "output": "evals/results/cord_s5_s1_grouped_v1_1_1.json",
+      "attempts": [],
+      "status": "pending"
+    },
+    {
+      "name": "S5-S4h all",
+      "module_args": [
+        "evals.runners.run_s5",
+        "--base",
+        "s4h",
+        "--train-scope",
+        "train_all_p2.2",
+        "--variant",
+        "all",
+        "--final"
+      ],
+      "output": "evals/results/cord_s5_s4h_v1_1_1.json",
+      "attempts": [],
+      "status": "pending"
+    },
+    {
+      "name": "S5-S4h grouped",
+      "module_args": [
+        "evals.runners.run_s5",
+        "--base",
+        "s4h",
+        "--train-scope",
+        "train_all_p2.2",
+        "--variant",
+        "grouped",
+        "--final"
+      ],
+      "output": "evals/results/cord_s5_s4h_grouped_v1_1_1.json",
+      "attempts": [],
+      "status": "pending"
+    },
+    {
+      "name": "S5 ablations",
+      "module_args": [
+        "evals.runners.run_s5_ablations",
+        "--final"
+      ],
+      "output": "evals/results/cord_s5_ablations_v1_1_1.json",
+      "attempts": [],
+      "status": "pending"
+    },
+    {
+      "name": "S1 blur-1.5",
+      "module_args": [
+        "evals.runners.run_cord",
+        "--split",
+        "test",
+        "--final",
+        "--system",
+        "S1",
+        "--perturb",
+        "blur-1.5"
+      ],
+      "output": "evals/results/degradation/cord_s1_blur-1.5_v1_1_1.json",
+      "attempts": [],
+      "status": "pending"
+    },
+    {
+      "name": "S4h blur-1.5",
+      "module_args": [
+        "evals.runners.run_cord",
+        "--split",
+        "test",
+        "--final",
+        "--system",
+        "S4h",
+        "--label",
+        "S4h",
+        "--prompt",
+        "2.2",
+        "--num-ctx",
+        "2304",
+        "--perturb",
+        "blur-1.5"
+      ],
+      "output": "evals/results/degradation/cord_s4h_blur-1.5_v1_1_1.json",
+      "attempts": [],
+      "status": "pending"
+    },
+    {
+      "name": "S1 blur-3.0",
+      "module_args": [
+        "evals.runners.run_cord",
+        "--split",
+        "test",
+        "--final",
+        "--system",
+        "S1",
+        "--perturb",
+        "blur-3.0"
+      ],
+      "output": "evals/results/degradation/cord_s1_blur-3.0_v1_1_1.json",
+      "attempts": [],
+      "status": "pending"
+    },
+    {
+      "name": "S4h blur-3.0",
+      "module_args": [
+        "evals.runners.run_cord",
+        "--split",
+        "test",
+        "--final",
+        "--system",
+        "S4h",
+        "--label",
+        "S4h",
+        "--prompt",
+        "2.2",
+        "--num-ctx",
+        "2304",
+        "--perturb",
+        "blur-3.0"
+      ],
+      "output": "evals/results/degradation/cord_s4h_blur-3.0_v1_1_1.json",
+      "attempts": [],
+      "status": "pending"
+    },
+    {
+      "name": "S1 jpeg-30",
+      "module_args": [
+        "evals.runners.run_cord",
+        "--split",
+        "test",
+        "--final",
+        "--system",
+        "S1",
+        "--perturb",
+        "jpeg-30"
+      ],
+      "output": "evals/results/degradation/cord_s1_jpeg-30_v1_1_1.json",
+      "attempts": [],
+      "status": "pending"
+    },
+    {
+      "name": "S4h jpeg-30",
+      "module_args": [
+        "evals.runners.run_cord",
+        "--split",
+        "test",
+        "--final",
+        "--system",
+        "S4h",
+        "--label",
+        "S4h",
+        "--prompt",
+        "2.2",
+        "--num-ctx",
+        "2304",
+        "--perturb",
+        "jpeg-30"
+      ],
+      "output": "evals/results/degradation/cord_s4h_jpeg-30_v1_1_1.json",
+      "attempts": [],
+      "status": "pending"
+    },
+    {
+      "name": "S1 jpeg-10",
+      "module_args": [
+        "evals.runners.run_cord",
+        "--split",
+        "test",
+        "--final",
+        "--system",
+        "S1",
+        "--perturb",
+        "jpeg-10"
+      ],
+      "output": "evals/results/degradation/cord_s1_jpeg-10_v1_1_1.json",
+      "attempts": [],
+      "status": "pending"
+    },
+    {
+      "name": "S4h jpeg-10",
+      "module_args": [
+        "evals.runners.run_cord",
+        "--split",
+        "test",
+        "--final",
+        "--system",
+        "S4h",
+        "--label",
+        "S4h",
+        "--prompt",
+        "2.2",
+        "--num-ctx",
+        "2304",
+        "--perturb",
+        "jpeg-10"
+      ],
+      "output": "evals/results/degradation/cord_s4h_jpeg-10_v1_1_1.json",
+      "attempts": [],
+      "status": "pending"
+    }
+  ],
+  "memory_aborts": 0,
+  "ended_utc": "2026-11-12T07:20:23Z",
+  "exit_code": 10
+}
