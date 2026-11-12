@@ -22,9 +22,23 @@ export function Documents({ pollMs = POLL_MS }: { pollMs?: number }) {
     }
   }, [api])
 
+  // Initial load. State is set only in the promise callbacks, and not after unmount.
   useEffect(() => {
-    void refresh()
-  }, [refresh])
+    let active = true
+    api.listDocuments().then(
+      (list) => {
+        if (!active) return
+        setDocuments(list)
+        setError(null)
+      },
+      (failure) => {
+        if (active) setError(errorMessage(failure))
+      },
+    )
+    return () => {
+      active = false
+    }
+  }, [api])
 
   // Poll job status for documents still being processed.
   useEffect(() => {
