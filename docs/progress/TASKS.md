@@ -78,7 +78,7 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 | A8 | VERIFIED | Worker crash, retry, dead-letter, model-unavailable and webhook retry tests pass |
 | A9 | IMPLEMENTED BUT UNVERIFIED (local mirror; GitHub run pending human approval) | docs/progress/logs/ci-local.txt |
 | A10 | NOT STARTED | |
-| A11 | IN PROGRESS | CORD test done for S1-S4h and S5 (evals/results/final/). Synthetic covers S1 and S2' only, not S3-S5; review workload not reported as its own metric |
+| A11 | IN PROGRESS | CORD test done for S1-S4h and S5 (evals/results/final/), with review workload (evals/results/final/cord_s5_review_workload_v1_1_1.json). Synthetic narrowed to S1 and S2' by ADR-0013 |
 | A12 | IN PROGRESS | CORD layout groups for S1. No real vendor-grouped split was possible |
 | A13 | IN PROGRESS | Ablations and degradation done; final tables and figure regenerate via make reproduce from saved result files (docs/progress/logs/run-reproduce-final.log). make reproduce does not replay the test runs themselves from the caches |
 | A14 | IN PROGRESS | Split hashes and overlap tests exist, documented in docs/evaluation.md |
