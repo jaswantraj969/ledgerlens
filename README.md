@@ -1,43 +1,91 @@
 # LedgerLens
 
-Evaluation-driven extraction of invoices and receipts: parse with provenance, extract to a schema, verify against the source, and estimate error risk.
+Evaluation-driven extraction of invoices and receipts: parse with provenance, extract to a schema, verify every value against the source document, and route uncertain values to a person.
 
-**Status: work in progress.** Research prototype evaluated on public datasets. Not validated for production use. No compliance certification. The API, worker, review UI and a local Docker Compose stack exist and pass their tests, including one end-to-end browser test (upload, review, export) against the Compose stack. The final CORD test read is complete; see Results below. See [docs/progress/TASKS.md](docs/progress/TASKS.md) and [docs/limitations.md](docs/limitations.md).
+**Status: work in progress.** Research prototype evaluated on public datasets. Not validated for production use. No compliance certification. Licence: not chosen yet. Progress: [docs/progress/TASKS.md](docs/progress/TASKS.md). Limitations: [docs/limitations.md](docs/limitations.md).
 
-## Commands
+## What it is
 
-Every command works two ways. `make` is optional, because each target only calls `scripts/tasks.sh`.
+- **Application:** you upload a PDF, JPEG or PNG, and a background worker extracts the total, subtotal, tax and line items. Each value keeps the page region it came from, is checked against the document text and arithmetic rules, and either goes to a review queue or is accepted. Reviewed results export as CSV or JSON, and signed webhooks report job events.
+- **Evaluation:** the same pipeline is measured on the public CORD v2 receipt dataset and on seeded synthetic invoices, under protocols committed before any test data was read. Results are below.
 
-| Task | With GNU make | Without make (Git Bash on Windows, or any Unix shell) |
+## Architecture
+
+- A React app served by Caddy talks to a FastAPI service. The service stores documents and jobs in PostgreSQL and queues work in Redis.
+- An RQ worker parses each document (native PDF text, or CPU OCR with RapidOCR) and extracts with rules by default, or with a local LLM (`llama3.2:3b` through Ollama on the host). It then verifies and scores every value.
+- Evaluation code in `evals/` runs the same pipeline offline against cached OCR and recorded LLM replies. Diagram and data model: [docs/architecture.md](docs/architecture.md). All docs: [docs/README.md](docs/README.md).
+
+## Quickstart (Docker Compose, rules mode)
+
+Needs Docker with Compose v2, Python 3.10 or later, and Git Bash on Windows (any shell elsewhere). Run from the repository root.
+
+```
+python scripts/init_env.py
+bash scripts/tasks.sh up
+```
+
+- `init_env.py` writes `.env` with new random secrets. If port 8080 is taken, use `python scripts/init_env.py --web-port 8081` and open that port instead.
+- `tasks.sh up` builds and starts PostgreSQL, Redis, the API, the worker and the web app, and waits until all five are healthy.
+- Then open http://127.0.0.1:8080, register (the first user of a new organisation is its admin), and upload a document.
+- `bash scripts/tasks.sh down` stops the stack and keeps its data.
+
+The worker extracts with rules only by default; no model is needed.
+
+### Tests and checks
+
+With the stack running (the backend tests use its PostgreSQL and Redis):
+
+```
+cd backend && uv sync --python 3.12 --extra eval --extra ocr && cd ..
+npm --prefix frontend ci
+bash scripts/tasks.sh test
+bash scripts/tasks.sh lint
+bash scripts/tasks.sh typecheck
+bash scripts/tasks.sh eval-smoke
+E2E_BASE_URL=http://127.0.0.1:8080 npm --prefix frontend run e2e
+```
+
+- `test` runs the backend tests and the frontend unit tests.
+- `typecheck` runs mypy over the backend and `evals/`.
+- `eval-smoke` is a small offline synthetic run: no model, no network, no dataset.
+- The last line is the Playwright upload, review and export test against the running stack. It uses the installed Google Chrome; use your web port if it is not 8080.
+
+### Optional: LLM mode with Ollama on the host (not run in Docker here)
+
+Install [Ollama](https://ollama.com), run `ollama pull llama3.2:3b`, set `LEDGERLENS_EXTRACTION_MODE=llm_or_rules` in `.env`, and run `bash scripts/tasks.sh up` again. The worker reaches the host's Ollama at `host.docker.internal:11434`.
+
+**Not verified:** this mode has not been run end to end inside Docker. A smoke test stopped at its free-RAM gate on a 16 GB machine ([limitations](docs/limitations.md)).
+
+### All commands
+
+`make <target>` calls `bash scripts/tasks.sh <target>`. The Status column says how far each command has been run.
+
+| Task | Command | Status |
 |---|---|---|
-| Start Postgres and Redis | `make dev` | `bash scripts/tasks.sh dev` |
-| Start the whole stack | `make up` | `bash scripts/tasks.sh up` |
-| Stop the stack | `make down` | `bash scripts/tasks.sh down` |
-| Run tests | `make test` | `bash scripts/tasks.sh test` |
-| Lint and format check | `make lint` | `bash scripts/tasks.sh lint` |
-| Type check | `make typecheck` | `bash scripts/tasks.sh typecheck` |
-| Local CI mirror | `make ci` | `bash scripts/tasks.sh ci` |
-| Offline smoke evaluation | `make eval-smoke` | `bash scripts/tasks.sh eval-smoke` |
-| Regenerate tables | `make tables` | `bash scripts/tasks.sh tables` |
-| Rebuild validation results from caches | `make reproduce` | `bash scripts/tasks.sh reproduce` |
+| Start PostgreSQL and Redis only | `bash scripts/tasks.sh dev` | run |
+| Build and start the whole stack | `bash scripts/tasks.sh up` | run |
+| Stop the stack | `bash scripts/tasks.sh down` | run |
+| Backend and frontend unit tests | `bash scripts/tasks.sh test` | run |
+| Lint and format check | `bash scripts/tasks.sh lint` | run |
+| Type check (backend and `evals/`) | `bash scripts/tasks.sh typecheck` | run |
+| Offline smoke evaluation | `bash scripts/tasks.sh eval-smoke` | run |
+| Local CI mirror | `bash scripts/tasks.sh ci` | last run 2026-11-07; not re-run since |
+| Regenerate tables | `bash scripts/tasks.sh tables` | run |
+| Rebuild validation results and the final tables from caches | `bash scripts/tasks.sh reproduce` | run |
+| Download CORD v2 (2.3 GB) | `python scripts/download_cord.py` | verify mode and a one-file download run; the full download was not repeated with this script |
+| Any of the above through GNU make | `make <target>` | not run: make is not installed on the development machine |
 
-`make up` builds and starts the whole stack: Postgres, Redis, API, worker and web. The web UI is at http://127.0.0.1:8080 by default. Set `LEDGERLENS_WEB_PORT` in `.env` if that port is taken. The worker uses rules only by default; set `LEDGERLENS_EXTRACTION_MODE=llm_or_rules` to use a local Ollama on the host.
+The Status column records what was run on the development machine and, for the quickstart, in a fresh clone ([docs/progress/logs/phase12-fresh-clone.log](docs/progress/logs/phase12-fresh-clone.log)).
 
-On Windows, GNU make is optional: `winget install GnuWin32.Make`, or use the right-hand column.
+## Data and licences
 
-## Setup
-
-```
-cd backend
-uv sync --python 3.12 --extra eval --extra ocr
-uv run pre-commit install
-```
-
-Run the install step once per clone, so commits run the hooks. Copy `.env.example` to `.env` before starting services.
+- **CORD v2:** receipts from Park et al., "CORD: A Consolidated Receipt Dataset for Post-OCR Parsing" (2019), published by NAVER Clova as [`naver-clova-ix/cord-v2`](https://huggingface.co/datasets/naver-clova-ix/cord-v2) under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). No CORD file is committed. `scripts/download_cord.py` fetches it at a pinned revision and checks every file against [evals/datasets/checksums/cord-v2.sha256](evals/datasets/checksums/cord-v2.sha256). Field mapping and counts: [evals/datasets/LICENSES.md](evals/datasets/LICENSES.md).
+- **Synthetic invoices:** generated by `evals/synthetic/generate.py` with fixed seeds. They are fictional, and their results are reported apart from real-data results.
+- **Dependencies:** Python and npm dependencies are under permissive or weak-copyleft licences (MIT, BSD, Apache-2.0, ISC, MPL-2.0, LGPL-3.0 for psycopg); none is GPL or AGPL ([docs/progress/logs/prepush-audit.txt](docs/progress/logs/prepush-audit.txt)).
 
 ## Evaluation
 
-The protocol, metric formulas and results are in [docs/evaluation.md](docs/evaluation.md). Every reported number comes from a file in `evals/results/`.
+The protocol, metric formulas and the development history are in [docs/evaluation.md](docs/evaluation.md) and [docs/evaluation/](docs/evaluation/). Every reported number comes from a file in `evals/results/`.
 
 ## Results
 

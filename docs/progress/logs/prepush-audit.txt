@@ -1,0 +1,81 @@
+# Pre-push audit, 2026-11-12T16:27:49Z, HEAD 606501a00bde32652ca58043a6359f97d1ae8e84
+No remote exists: ''. Nothing has been pushed.
+
+## 1. Identities (147 commits, all refs)
+Authors:
+    147   jaswantraj969 <jaswantraj969@gmail.com>
+Committers:
+    147   jaswantraj969 <jaswantraj969@gmail.com>
+
+## 2. Attribution strings in commit messages and trailers (case-insensitive, all refs)
+  Co-Authored-By: 0 commits
+  Generated with: 0 commits
+  Claude: 0 commits
+  Anthropic: 0 commits
+  noreply@anthropic.com: 0 commits
+  Trailers present in any commit: ' '
+  Tracked files (outside logs) mentioning these strings:
+    scripts/run_final_test.ps1:2:# Run from the repository root in Windows Terminal, with VS Code and Claude Code closed:
+  (The one match is a usage comment telling the operator to close the editor tooling; it is not an attribution.)
+
+## 3. gitleaks, full history
+9:27PM INF 147 commits scanned.
+9:27PM INF scan completed in 371ms
+9:27PM INF no leaks found
+
+## 4. Size and contents
+Tracked files over 5 MB: 0
+Largest tracked files:
+  348976 backend/uv.lock
+  118317 evals/results/synthetic_s2p_v1_1_1.json
+  110538 evals/results/synthetic_s1_v1_1_1.json
+  109128 frontend/package-lock.json
+  101044 evals/results/synthetic_s1_v1_1.json
+Tracked total: 3380645 bytes in 746 files; .git: 2.2M; pack: 1.49 MiB
+Images, parquet, model weights, .env or data/ ever added in any commit:
+  evals/results/final/cord_degradation_test_v1_1_1.png
+  (only the generated degradation figure; no dataset image)
+Caches tracked: evals/cache/synthetic/ 230 files (replies for synthetic invoices only, committed on purpose); evals/cache/cord-v2: 0 files
+.env files tracked: .env.example 
+
+## 5. CORD v2 (CC BY 4.0)
+Raw data is downloaded by scripts/download_cord.py (Hugging Face naver-clova-ix/cord-v2, revision 7f0115a4b758a71d6473b8d085751692da2fef98, SHA-256 checked against evals/datasets/checksums/cord-v2.sha256) into data/cord-v2/raw/, which is gitignored. Download check: docs/progress/logs/download-cord-check.log.
+README attribution: added in this release step (see README 'Data and licences').
+
+## 6. Licences
+LICENSE file: MISSING: no licence chosen. Decision for the owner.
+Python (pip-licenses over the backend environment, all extras installed locally; 106 packages):
+   38 MIT
+   18 BSD-3-Clause
+    9 MIT License
+    9 BSD License
+    8 Apache-2.0
+    4 Apache Software License
+    2 BSD-2-Clause
+    2 Mozilla Public License 2.0 (MPL 2.0)
+    2 Python Software Foundation License
+    2 LGPL-3.0-only
+    1 MIT-0
+    1 MPL-2.0
+    1 UNKNOWN
+    1 BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0
+    1 Apache-2.0 OR BSD-2-Clause
+    1 MIT-CMU
+    1 Apache-2.0 AND BSD-2-Clause
+    1 3-Clause BSD License
+    1 BSD-3-Clause, Apache-2.0, dependency licenses
+    1 MIT OR Apache-2.0
+    1 MPL-2.0 AND MIT
+    1 PSF-2.0
+  Copyleft or unknown:
+    certifi 2026.10.23: Mozilla Public License 2.0 (MPL 2.0)
+    hypothesis 6.170.14: MPL-2.0
+    ledgerlens 0.1.0: UNKNOWN
+    pathspec 1.1.1: Mozilla Public License 2.0 (MPL 2.0)
+    psycopg 3.3.8: LGPL-3.0-only
+    psycopg-binary 3.3.8: LGPL-3.0-only
+    tqdm 4.70.1: MPL-2.0 AND MIT
+  ledgerlens itself is UNKNOWN because no licence is chosen. psycopg is LGPL-3.0 (used unmodified as a library); certifi, hypothesis, pathspec and tqdm are MPL-2.0 (file-level copyleft). Neither restricts a permissive or proprietary licence for this project's own code.
+npm (license-checker 25.0.1, frontend, all dependencies): MIT 109, Apache-2.0 9, ISC 3, MIT-0 2, BSD-2-Clause 2, MPL-2.0 2 (lightningcss, build tool), BSD-3-Clause 2, BlueOak-1.0.0 1, CC0-1.0 1, 0BSD 1, UNLICENSED 1 (ledgerlens-frontend itself, private).
+npm production dependencies: MIT 4, UNLICENSED 1 (the project itself).
+No GPL or AGPL dependency in either tree.
