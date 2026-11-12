@@ -1,6 +1,33 @@
 # Architecture
 
-Diagrams describe the intended design. Implementation status is tracked in [progress/TASKS.md](progress/TASKS.md).
+The first diagram shows the system as it runs today, from `infra/docker-compose.yml`. The diagrams after it describe the design; implementation status is in [progress/TASKS.md](progress/TASKS.md). Not built: hosted LLM providers (only local Ollama exists).
+
+## Running services (Docker Compose)
+```mermaid
+flowchart LR
+  User[Browser] -->|"http://127.0.0.1:8080 (LEDGERLENS_WEB_PORT)"| Web
+  subgraph Compose["Docker Compose project: ledgerlens"]
+    Web["web: Caddy + React build<br/>uid 10002, :8080"]
+    API["api: FastAPI + Alembic<br/>uid 10001, 127.0.0.1:8000"]
+    Worker["worker: RQ<br/>uid 10001"]
+    PG[("postgres: PostgreSQL 16<br/>127.0.0.1:5433")]
+    Redis[("redis: Redis 7<br/>127.0.0.1:6380")]
+    Store[("volume: document storage")]
+    Cache[("volume: LLM reply cache")]
+  end
+  Web -->|"/api/* proxied, /api/metrics refused"| API
+  API --> PG
+  API -->|enqueue, rate limits| Redis
+  API --> Store
+  Worker -->|jobs| Redis
+  Worker --> PG
+  Worker --> Store
+  Worker --> Cache
+  Worker -.->|"llm or llm_or_rules mode only"| Ollama["Ollama on the host<br/>host.docker.internal:11434<br/>llama3.2:3b"]
+  Worker -.->|signed webhooks, https, public addresses only| Ext[Receiver]
+```
+
+All published ports are bound to 127.0.0.1. The worker extracts with rules by default; the LLM path is optional and was not run end to end inside Docker ([limitations](limitations.md)).
 
 ## System context
 ```mermaid
