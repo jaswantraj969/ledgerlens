@@ -19,7 +19,7 @@ usage() {
 
 case "${1:-}" in
   dev) "${compose[@]}" up -d --wait postgres redis ;;
-  up) "${compose[@]}" up -d --build ;;
+  up) "${compose[@]}" up -d --build --wait --wait-timeout 300 ;;
   down) "${compose[@]}" down ;;
   test)
     (cd backend && ../"$python" -m pytest -q) && npm --prefix frontend test
