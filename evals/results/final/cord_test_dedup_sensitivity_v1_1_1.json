@@ -1,0 +1,728 @@
+{
+  "addendum": "docs/evaluation/addendum-01-duplicate-sensitivity.md",
+  "post_hoc": true,
+  "excluded_documents": [
+    "cord-v2:test:25",
+    "cord-v2:test:28",
+    "cord-v2:test:31",
+    "cord-v2:test:33",
+    "cord-v2:test:38",
+    "cord-v2:test:44",
+    "cord-v2:test:75"
+  ],
+  "metrics_version": "1.1.1",
+  "bootstrap": {
+    "resamples": 2000,
+    "seed": 20261106,
+    "unit": "document"
+  },
+  "extraction": {
+    "S1": {
+      "predictions_sha256": "8b3fccde4d463e2d75c1f0ce007d2b34f256dfe60c5518a943b039cca9ab7e47",
+      "all_100": {
+        "total_amount": {
+          "f1": 0.7931034482758621,
+          "n_present": 95,
+          "f1_ci95": [
+            0.7118388809475189,
+            0.8655263157894735
+          ]
+        },
+        "subtotal": {
+          "f1": 0.8035714285714286,
+          "n_present": 65,
+          "f1_ci95": [
+            0.7128379664889566,
+            0.8760330578512396
+          ]
+        },
+        "tax_amount": {
+          "f1": 0.7631578947368421,
+          "n_present": 41,
+          "f1_ci95": [
+            0.6222072072072072,
+            0.8809523809523809
+          ]
+        },
+        "rows": {
+          "f1": 0.36507936507936506,
+          "rows_gold": 251,
+          "f1_ci95": [
+            0.2629521347122779,
+            0.4710722172675924
+          ]
+        }
+      },
+      "without_excluded": {
+        "total_amount": {
+          "f1": 0.775,
+          "n_present": 88,
+          "f1_ci95": [
+            0.6923076923076923,
+            0.8502994011976048
+          ]
+        },
+        "subtotal": {
+          "f1": 0.819047619047619,
+          "n_present": 60,
+          "f1_ci95": [
+            0.7316942040388146,
+            0.8910891089108911
+          ]
+        },
+        "tax_amount": {
+          "f1": 0.7272727272727273,
+          "n_present": 36,
+          "f1_ci95": [
+            0.576271186440678,
+            0.8572332730560573
+          ]
+        },
+        "rows": {
+          "f1": 0.33031674208144796,
+          "rows_gold": 224,
+          "f1_ci95": [
+            0.23148047064531782,
+            0.44448717948717925
+          ]
+        }
+      },
+      "excluded_only": {
+        "total_amount": {
+          "f1": 1.0,
+          "n_present": 7
+        },
+        "subtotal": {
+          "f1": 0.5714285714285714,
+          "n_present": 5
+        },
+        "tax_amount": {
+          "f1": 1.0,
+          "n_present": 5
+        },
+        "rows": {
+          "f1": 0.6129032258064516,
+          "rows_gold": 27
+        }
+      },
+      "documents": {
+        "without_excluded": 93,
+        "excluded_only": 7
+      }
+    },
+    "S2'": {
+      "predictions_sha256": "a51fed6699c736ecd75d703e7f764a80a9a2565641706c3d3d2785d83c01c6d4",
+      "all_100": {
+        "total_amount": {
+          "f1": 0.7650273224043715,
+          "n_present": 95,
+          "f1_ci95": [
+            0.6844251336898395,
+            0.8432432432432433
+          ]
+        },
+        "subtotal": {
+          "f1": 0.4782608695652174,
+          "n_present": 65,
+          "f1_ci95": [
+            0.34146341463414637,
+            0.6019417475728155
+          ]
+        },
+        "tax_amount": {
+          "f1": 0.5535714285714286,
+          "n_present": 41,
+          "f1_ci95": [
+            0.42990654205607476,
+            0.6666666666666666
+          ]
+        },
+        "rows": {
+          "f1": 0.19273743016759776,
+          "rows_gold": 251,
+          "f1_ci95": [
+            0.12102139842202024,
+            0.2720181818181817
+          ]
+        }
+      },
+      "without_excluded": {
+        "total_amount": {
+          "f1": 0.7529411764705882,
+          "n_present": 88,
+          "f1_ci95": [
+            0.6626506024096386,
+            0.8391093654356252
+          ]
+        },
+        "subtotal": {
+          "f1": 0.4883720930232558,
+          "n_present": 60,
+          "f1_ci95": [
+            0.35135135135135137,
+            0.6105572755417955
+          ]
+        },
+        "tax_amount": {
+          "f1": 0.5294117647058824,
+          "n_present": 36,
+          "f1_ci95": [
+            0.4,
+            0.6470588235294118
+          ]
+        },
+        "rows": {
+          "f1": 0.18322981366459629,
+          "rows_gold": 224,
+          "f1_ci95": [
+            0.10776093889016625,
+            0.26996849345896795
+          ]
+        }
+      },
+      "excluded_only": {
+        "total_amount": {
+          "f1": 0.9230769230769231,
+          "n_present": 7
+        },
+        "subtotal": {
+          "f1": 0.3333333333333333,
+          "n_present": 5
+        },
+        "tax_amount": {
+          "f1": 0.8,
+          "n_present": 5
+        },
+        "rows": {
+          "f1": 0.2777777777777778,
+          "rows_gold": 27
+        }
+      },
+      "documents": {
+        "without_excluded": 93,
+        "excluded_only": 7
+      }
+    },
+    "S3'": {
+      "predictions_sha256": "b2d8264faa1ac10902acfd926f51c8ea4a96f7d712aca83340a95e7fa1954e1e",
+      "all_100": {
+        "total_amount": {
+          "f1": 0.7734806629834254,
+          "n_present": 95,
+          "f1_ci95": [
+            0.6956261390262952,
+            0.8494965246836569
+          ]
+        },
+        "subtotal": {
+          "f1": 0.4835164835164835,
+          "n_present": 65,
+          "f1_ci95": [
+            0.345679012345679,
+            0.6055184876285793
+          ]
+        },
+        "tax_amount": {
+          "f1": 0.5636363636363636,
+          "n_present": 41,
+          "f1_ci95": [
+            0.4423076923076923,
+            0.6785796199213631
+          ]
+        },
+        "rows": {
+          "f1": 0.19154929577464788,
+          "rows_gold": 251,
+          "f1_ci95": [
+            0.11829363738077206,
+            0.2723889149783084
+          ]
+        }
+      },
+      "without_excluded": {
+        "total_amount": {
+          "f1": 0.7619047619047619,
+          "n_present": 88,
+          "f1_ci95": [
+            0.6708860759493671,
+            0.8488372093023255
+          ]
+        },
+        "subtotal": {
+          "f1": 0.49411764705882355,
+          "n_present": 60,
+          "f1_ci95": [
+            0.35714285714285715,
+            0.6173157693776249
+          ]
+        },
+        "tax_amount": {
+          "f1": 0.54,
+          "n_present": 36,
+          "f1_ci95": [
+            0.40860215053763443,
+            0.6595799517438033
+          ]
+        },
+        "rows": {
+          "f1": 0.18181818181818182,
+          "rows_gold": 224,
+          "f1_ci95": [
+            0.10541820059140569,
+            0.27113372800259505
+          ]
+        }
+      },
+      "excluded_only": {
+        "total_amount": {
+          "f1": 0.9230769230769231,
+          "n_present": 7
+        },
+        "subtotal": {
+          "f1": 0.3333333333333333,
+          "n_present": 5
+        },
+        "tax_amount": {
+          "f1": 0.8,
+          "n_present": 5
+        },
+        "rows": {
+          "f1": 0.2777777777777778,
+          "rows_gold": 27
+        }
+      },
+      "documents": {
+        "without_excluded": 93,
+        "excluded_only": 7
+      }
+    },
+    "S4'": {
+      "predictions_sha256": "cb2015f083d1ebaa6bd58f881aa9ca7e3237bb8c0b667ea4f8ae0c00368fdbf9",
+      "all_100": {
+        "total_amount": {
+          "f1": 0.8210526315789474,
+          "n_present": 95,
+          "f1_ci95": [
+            0.7473370602672484,
+            0.8923118279569893
+          ]
+        },
+        "subtotal": {
+          "f1": 0.7284768211920529,
+          "n_present": 65,
+          "f1_ci95": [
+            0.6330750105797714,
+            0.8129032258064516
+          ]
+        },
+        "tax_amount": {
+          "f1": 0.5076923076923077,
+          "n_present": 41,
+          "f1_ci95": [
+            0.39344262295081966,
+            0.609375
+          ]
+        },
+        "rows": {
+          "f1": 0.19887955182072828,
+          "rows_gold": 251,
+          "f1_ci95": [
+            0.12585327241910366,
+            0.2830742164665677
+          ]
+        }
+      },
+      "without_excluded": {
+        "total_amount": {
+          "f1": 0.8181818181818182,
+          "n_present": 88,
+          "f1_ci95": [
+            0.7386228354978355,
+            0.8888888888888888
+          ]
+        },
+        "subtotal": {
+          "f1": 0.7338129496402878,
+          "n_present": 60,
+          "f1_ci95": [
+            0.6333088235294118,
+            0.8219372389002233
+          ]
+        },
+        "tax_amount": {
+          "f1": 0.4745762711864407,
+          "n_present": 36,
+          "f1_ci95": [
+            0.35591240297798193,
+            0.5853658536585366
+          ]
+        },
+        "rows": {
+          "f1": 0.19003115264797507,
+          "rows_gold": 224,
+          "f1_ci95": [
+            0.11419544544544544,
+            0.27871908243623356
+          ]
+        }
+      },
+      "excluded_only": {
+        "total_amount": {
+          "f1": 0.8571428571428571,
+          "n_present": 7
+        },
+        "subtotal": {
+          "f1": 0.6666666666666666,
+          "n_present": 5
+        },
+        "tax_amount": {
+          "f1": 0.8333333333333334,
+          "n_present": 5
+        },
+        "rows": {
+          "f1": 0.2777777777777778,
+          "rows_gold": 27
+        }
+      },
+      "documents": {
+        "without_excluded": 93,
+        "excluded_only": 7
+      }
+    },
+    "S4h": {
+      "predictions_sha256": "21e017d417a6a9636452ffb0c8cc022345ad097efa5a52702a91849e9ee32e5e",
+      "all_100": {
+        "total_amount": {
+          "f1": 0.8272251308900523,
+          "n_present": 95,
+          "f1_ci95": [
+            0.7526881720430108,
+            0.8979591836734694
+          ]
+        },
+        "subtotal": {
+          "f1": 0.7236842105263158,
+          "n_present": 65,
+          "f1_ci95": [
+            0.6266666666666667,
+            0.8074534161490683
+          ]
+        },
+        "tax_amount": {
+          "f1": 0.5076923076923077,
+          "n_present": 41,
+          "f1_ci95": [
+            0.39344262295081966,
+            0.609375
+          ]
+        },
+        "rows": {
+          "f1": 0.2526002971768202,
+          "rows_gold": 251,
+          "f1_ci95": [
+            0.16792893969065986,
+            0.34285910248873214
+          ]
+        }
+      },
+      "without_excluded": {
+        "total_amount": {
+          "f1": 0.8248587570621468,
+          "n_present": 88,
+          "f1_ci95": [
+            0.7457627118644068,
+            0.8950276243093923
+          ]
+        },
+        "subtotal": {
+          "f1": 0.7285714285714285,
+          "n_present": 60,
+          "f1_ci95": [
+            0.6315587044534413,
+            0.8163265306122449
+          ]
+        },
+        "tax_amount": {
+          "f1": 0.4745762711864407,
+          "n_present": 36,
+          "f1_ci95": [
+            0.35591240297798193,
+            0.5853658536585366
+          ]
+        },
+        "rows": {
+          "f1": 0.2160392798690671,
+          "rows_gold": 224,
+          "f1_ci95": [
+            0.1311975155549754,
+            0.3093477477477477
+          ]
+        }
+      },
+      "excluded_only": {
+        "total_amount": {
+          "f1": 0.8571428571428571,
+          "n_present": 7
+        },
+        "subtotal": {
+          "f1": 0.6666666666666666,
+          "n_present": 5
+        },
+        "tax_amount": {
+          "f1": 0.8333333333333334,
+          "n_present": 5
+        },
+        "rows": {
+          "f1": 0.6129032258064516,
+          "rows_gold": 27
+        }
+      },
+      "documents": {
+        "without_excluded": 93,
+        "excluded_only": 7
+      }
+    }
+  },
+  "s5": {
+    "S5-S1": {
+      "documents": 93,
+      "header": {
+        "units": 147,
+        "slots": 279,
+        "documents": 93,
+        "ece_10_bins": 0.02164927342092192,
+        "brier": 0.1035794605417292,
+        "roc_auc": 0.7049956933677864,
+        "targets": {
+          "0.98": {
+            "threshold": 0.869,
+            "accepted": 54,
+            "automation_rate": 0.1935483870967742,
+            "automation_rate_ci95": [
+              0.13261648745519714,
+              0.2616487455197133
+            ],
+            "achieved_precision": 0.9629629629629629,
+            "achieved_precision_ci95": [
+              0.9,
+              1.0
+            ],
+            "target_met": false,
+            "correct_accepted": null,
+            "achieved_precision_exact_ci95_clopper_pearson": null
+          },
+          "0.99": {
+            "threshold": 0.878,
+            "accepted": 54,
+            "automation_rate": 0.1935483870967742,
+            "automation_rate_ci95": [
+              0.13261648745519714,
+              0.2616487455197133
+            ],
+            "achieved_precision": 0.9629629629629629,
+            "achieved_precision_ci95": [
+              0.9,
+              1.0
+            ],
+            "target_met": false,
+            "correct_accepted": null,
+            "achieved_precision_exact_ci95_clopper_pearson": null
+          }
+        }
+      },
+      "row": {
+        "units": 218,
+        "slots": 218,
+        "documents": 93,
+        "ece_10_bins": 0.13942570909419072,
+        "brier": 0.19555957592922563,
+        "roc_auc": 0.796787907416155,
+        "targets": {
+          "0.98": {
+            "threshold": 0.763,
+            "accepted": 3,
+            "automation_rate": 0.013761467889908258,
+            "automation_rate_ci95": [
+              0.0,
+              0.038252019766256175
+            ],
+            "achieved_precision": 1.0,
+            "achieved_precision_ci95": [
+              1.0,
+              1.0
+            ],
+            "target_met": true,
+            "correct_accepted": 3,
+            "achieved_precision_exact_ci95_clopper_pearson": [
+              0.2924017738212866,
+              1.0
+            ]
+          },
+          "0.99": {
+            "threshold": 0.763,
+            "accepted": 3,
+            "automation_rate": 0.013761467889908258,
+            "automation_rate_ci95": [
+              0.0,
+              0.038252019766256175
+            ],
+            "achieved_precision": 1.0,
+            "achieved_precision_ci95": [
+              1.0,
+              1.0
+            ],
+            "target_met": true,
+            "correct_accepted": 3,
+            "achieved_precision_exact_ci95_clopper_pearson": [
+              0.2924017738212866,
+              1.0
+            ]
+          }
+        }
+      }
+    },
+    "S5-S4h": {
+      "documents": 93,
+      "header": {
+        "units": 251,
+        "slots": 279,
+        "documents": 93,
+        "ece_10_bins": 0.038672166409869625,
+        "brier": 0.09901976591011097,
+        "roc_auc": 0.921152312599681,
+        "targets": {
+          "0.98": {
+            "threshold": 0.966,
+            "accepted": 47,
+            "automation_rate": 0.16845878136200718,
+            "automation_rate_ci95": [
+              0.12186379928315412,
+              0.21505376344086022
+            ],
+            "achieved_precision": 0.9574468085106383,
+            "achieved_precision_ci95": [
+              0.8857142857142857,
+              1.0
+            ],
+            "target_met": false,
+            "correct_accepted": null,
+            "achieved_precision_exact_ci95_clopper_pearson": null
+          },
+          "0.99": {
+            "threshold": 0.969,
+            "accepted": 40,
+            "automation_rate": 0.14336917562724014,
+            "automation_rate_ci95": [
+              0.1003584229390681,
+              0.18996415770609318
+            ],
+            "achieved_precision": 0.975,
+            "achieved_precision_ci95": [
+              0.9166223404255319,
+              1.0
+            ],
+            "target_met": false,
+            "correct_accepted": null,
+            "achieved_precision_exact_ci95_clopper_pearson": null
+          }
+        }
+      },
+      "row": {
+        "units": 387,
+        "slots": 387,
+        "documents": 93,
+        "ece_10_bins": 0.07145052906264658,
+        "brier": 0.10650567060464858,
+        "roc_auc": 0.8861748324365146,
+        "targets": {
+          "0.98": {
+            "threshold": 0.826,
+            "accepted": 0,
+            "automation_rate": 0.0,
+            "automation_rate_ci95": [
+              0.0,
+              0.0
+            ],
+            "achieved_precision": null,
+            "achieved_precision_ci95": null,
+            "target_met": false,
+            "correct_accepted": null,
+            "achieved_precision_exact_ci95_clopper_pearson": null
+          },
+          "0.99": {
+            "threshold": 0.826,
+            "accepted": 0,
+            "automation_rate": 0.0,
+            "automation_rate_ci95": [
+              0.0,
+              0.0
+            ],
+            "achieved_precision": null,
+            "achieved_precision_ci95": null,
+            "target_met": false,
+            "correct_accepted": null,
+            "achieved_precision_exact_ci95_clopper_pearson": null
+          }
+        }
+      }
+    }
+  },
+  "s1_vs_s4h": [
+    {
+      "field": "total_amount",
+      "all_100": {
+        "S1": 0.7931034482758621,
+        "S4h": 0.8272251308900523,
+        "higher": "S4h"
+      },
+      "without_excluded": {
+        "S1": 0.775,
+        "S4h": 0.8248587570621468,
+        "higher": "S4h"
+      },
+      "ordering_changes": false
+    },
+    {
+      "field": "subtotal",
+      "all_100": {
+        "S1": 0.8035714285714286,
+        "S4h": 0.7236842105263158,
+        "higher": "S1"
+      },
+      "without_excluded": {
+        "S1": 0.819047619047619,
+        "S4h": 0.7285714285714285,
+        "higher": "S1"
+      },
+      "ordering_changes": false
+    },
+    {
+      "field": "tax_amount",
+      "all_100": {
+        "S1": 0.7631578947368421,
+        "S4h": 0.5076923076923077,
+        "higher": "S1"
+      },
+      "without_excluded": {
+        "S1": 0.7272727272727273,
+        "S4h": 0.4745762711864407,
+        "higher": "S1"
+      },
+      "ordering_changes": false
+    },
+    {
+      "field": "rows",
+      "all_100": {
+        "S1": 0.36507936507936506,
+        "S4h": 0.2526002971768202,
+        "higher": "S1"
+      },
+      "without_excluded": {
+        "S1": 0.33031674208144796,
+        "S4h": 0.2160392798690671,
+        "higher": "S1"
+      },
+      "ordering_changes": false
+    }
+  ]
+}
