@@ -7,8 +7,7 @@ Generated from `cord_s1_validation_v1_1_1.json`. Do not edit by hand.
 - Schema: cord_receipt 1.1.0. Split sha256: `e809a1edf8320960479a1f79e7e2c086aaca4793dbf9c91fc354eaca2c656852`.
 - Predictions sha256: `d4b2385e1529fa38f4ec4c63ebc669a4a4bebed7247ef3b0eb35187bcd507b18`.
 - Intervals: 95% bootstrap, 2000 resamples of documents, seed 20261106.
-- Commit: `86cb81e4cf31b4c9f3e7679e06f7330c601fe9c5`, dirty: False.
-- Rescored from saved predictions of `evals/results/dev/cord_s1_validation_v1_1.json`, with no rerun. Rescored at commit `65c1c75515c8a19cbc9592be359f3119817f9492`, dirty: False.
+- Commit: `6edbc06b704e264567dcfd1ee1241c5aa5153209`, dirty: False.
 
 ## Single-valued fields
 
@@ -50,15 +49,16 @@ Secondary score, set-based, ignores row alignment.
 - Not found in the document: 0.
 - Withheld: 0.
 - Rule failures (arithmetic): 111.
+- Label proximity: 0 values next to a label for their field, 0 not.
 
 ## Latency and memory
 
 Timings are measured in this run.
 
-Power state of timings: ac (100 on AC, 0 on battery, 0 unknown; cache file modification time per recorded timing (audit replay)).
+Power state of timings: ac (100 on AC, 0 on battery, 0 unknown; cache file modification time per recorded timing).
 
 - OCR: p50 2.55 s, p95 4.71 s (n=100).
 - Total per document: p50 2.55 s, p95 4.71 s (n=100). No model is used.
-- Memory: peak process RSS 0.995 GiB, peak model runner RSS 0.024 GiB, lowest available system RAM 1.622 of 15.638 GiB.
+- Memory: peak process RSS 0.108 GiB, peak model runner RSS 1.674 GiB, lowest available system RAM 1.382 of 15.638 GiB.
 
 Gold values excluded as unparsable: none.

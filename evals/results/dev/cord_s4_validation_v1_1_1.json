@@ -257,9 +257,12 @@
     }
   },
   "system": "S4",
+  "system_definition": "S4",
   "dataset": "cord-v2",
   "split": "validation",
   "n_documents": 100,
+  "perturbation": null,
+  "records_rerun_of_predictions_sha256": null,
   "schema": "cord_receipt",
   "schema_version": "1.1.0",
   "split_sha256": "e809a1edf8320960479a1f79e7e2c086aaca4793dbf9c91fc354eaca2c656852",
@@ -282,7 +285,9 @@
     "values_output": 1040,
     "values_not_found_in_document": 0,
     "values_withheld": 37,
-    "rule_failures": 422
+    "rule_failures": 422,
+    "label_supported": 171,
+    "label_unsupported": 94
   },
   "latency_seconds": {
     "source": "recorded when the call was first made",
@@ -293,8 +298,8 @@
     },
     "extraction_excluding_llm": {
       "n": 100,
-      "p50": 0.004640750004909933,
-      "p95": 0.00744991500105243
+      "p50": 0.026437649999934365,
+      "p95": 0.042933199999242784
     },
     "warm_llm": {
       "n": 98,
@@ -303,8 +308,8 @@
     },
     "warm_total": {
       "n": 98,
-      "p50": 7.427266749995016,
-      "p95": 14.792401384986714
+      "p50": 7.447870349991336,
+      "p95": 14.811928649979972
     },
     "cold": {
       "documents": 2,
@@ -318,17 +323,26 @@
       ]
     }
   },
+  "power": {
+    "label": "ac",
+    "timings_ac": 301,
+    "timings_battery": 0,
+    "timings_unknown": 0,
+    "source": "Windows Kernel-Power event 105",
+    "method": "cache file modification time per recorded timing"
+  },
   "memory": {
-    "peak_process_rss_gib": 0.893,
-    "peak_model_runner_rss_gib": 0.024,
-    "lowest_available_system_ram_gib": 1.757,
-    "total_system_ram_gib": 15.638
+    "peak_process_rss_gib": 0.11,
+    "peak_model_runner_rss_gib": 0.044,
+    "lowest_available_system_ram_gib": 2.558,
+    "total_system_ram_gib": 15.638,
+    "abort_below_gib": 0.4
   },
   "workers": 1,
   "cost_per_document_usd": 0,
   "output_file": "evals/results/dev/cord_s4_validation_v1_1_1.json",
   "environment": {
-    "git_commit": "86cb81e4cf31b4c9f3e7679e06f7330c601fe9c5",
+    "git_commit": "6edbc06b704e264567dcfd1ee1241c5aa5153209",
     "git_dirty": false,
     "python": "3.12.13",
     "platform": "Windows-11-10.0.26300-SP0",
@@ -364,35 +378,5 @@
     "peak_model_runner_rss_gib": 2.664,
     "lowest_available_system_ram_gib": 0.253,
     "total_system_ram_gib": 15.638
-  },
-  "rescored_from": {
-    "results_file": "evals/results/dev/cord_s4_validation_v1_1.json",
-    "metrics_version": "1.1",
-    "values_compared": 155,
-    "values_different": 0,
-    "environment": {
-      "git_commit": "65c1c75515c8a19cbc9592be359f3119817f9492",
-      "git_dirty": false,
-      "python": "3.12.13",
-      "platform": "Windows-11-10.0.26300-SP0",
-      "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
-      "cpu_count": 12,
-      "packages": {
-        "rapidocr": "3.10.0",
-        "onnxruntime": "1.31.1",
-        "numpy": "2.5.4",
-        "pypdfium2": "5.14.0",
-        "rapidfuzz": "3.14.6"
-      },
-      "ocr_execution": "CPU, onnxruntime defaults"
-    }
-  },
-  "power": {
-    "label": "ac",
-    "timings_ac": 301,
-    "timings_battery": 0,
-    "timings_unknown": 0,
-    "source": "Windows Kernel-Power event 105",
-    "method": "cache file modification time per recorded timing (audit replay)"
   }
 }

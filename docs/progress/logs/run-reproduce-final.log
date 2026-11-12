@@ -1,0 +1,82 @@
+START 2026-11-12T09:00:48Z commit 6edbc06
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\cord_s1_validation_v1_1_1.json
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\cord_s2_validation_v1_1_1.json
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\cord_s3_validation_v1_1_1.json
+processed 10, failed=0
+processed 20, failed=0
+processed 30, failed=0
+processed 40, failed=0
+processed 50, failed=0
+processed 60, failed=0
+processed 70, failed=0
+processed 80, failed=0
+processed 90, failed=0
+processed 100, failed=0
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\cord_s4_validation_v1_1_1.json
+wrote evals\results\cord_s1_v1.md
+wrote evals\results\cord_s1_v1_1.md
+wrote evals\results\dev\cord_s1_validation_v1_1.md
+wrote evals\results\dev\cord_s2_validation_v1_1.md
+wrote evals\results\dev\cord_s3_validation_v1_1.md
+wrote evals\results\dev\cord_s4_validation_v1_1.md
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\runners\make_tables.py", line 251, in <module>
+    main()
+  File "C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\runners\make_tables.py", line 246, in main
+    output.write_text(render(result, source.name), encoding="utf-8", newline="\n")
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\runners\make_tables.py", line 238, in render
+    return render_v1(result, source)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\runners\make_tables.py", line 43, in render_v1
+    latency = result["latency_seconds"]
+              ~~~~~~^^^^^^^^^^^^^^^^^^^
+KeyError: 'latency_seconds'
+wrote evals\results\cord_s1_v1_1_1.md
+wrote evals\results\dev\cord_s1_validation_v1_1_1.md
+wrote evals\results\dev\cord_s2_validation_v1_1_1.md
+wrote evals\results\dev\cord_s2p_validation_v1_1_1.md
+wrote evals\results\dev\cord_s3_validation_v1_1_1.md
+wrote evals\results\dev\cord_s3p_validation_v1_1_1.md
+wrote evals\results\dev\cord_s4_validation_v1_1_1.md
+wrote evals\results\dev\cord_s4h_validation_v1_1_1.md
+wrote evals\results\dev\cord_s4p_validation_v1_1_1.md
+wrote evals\results\synthetic_s1_v1_1.md
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\cord_validation_comparison_v1_1_1.md systems: S1, S2, S3, S4, S2', S3', S4', S4h
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\cord_s5_validation_comparison_v1_1_1.md
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\final\cord_test_comparison_v1_1_1.md systems: S1, S2', S3', S4', S4h
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\final\cord_s5_test_v1_1_1.md
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\final
+EXIT=0 END 2026-11-12T09:01:30Z

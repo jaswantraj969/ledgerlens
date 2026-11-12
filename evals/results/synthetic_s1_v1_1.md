@@ -4,6 +4,8 @@ Generated from `synthetic_s1_v1_1.json`. Do not edit by hand. Synthetic results 
 
 Commit `7832fc29b2824a57909d1f22be3776c43e0e479e`, dirty: False.
 
+Power state of timings: not recorded.
+
 ## Route: native_pdf, 40 documents per layout
 
 ### Dev versus held-out, F1 pooled over documents

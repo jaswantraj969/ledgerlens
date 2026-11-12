@@ -1,0 +1,736 @@
+{
+  "metrics_version": "1.1.1",
+  "split": "test",
+  "note": "Final test read, once per configuration (docs/evaluation/final-test-protocol.md).",
+  "systems": [
+    {
+      "system": "S1",
+      "source": "evals/results/cord_s1_v1_1_1.json",
+      "model": null,
+      "prompt": null,
+      "n_documents": 100,
+      "fields": {
+        "total_amount": {
+          "n_present": 95,
+          "n_absent": 5,
+          "precision": 0.8734177215189873,
+          "precision_ci95": [
+            0.7972512285012284,
+            0.9404761904761905
+          ],
+          "recall": 0.7263157894736842,
+          "recall_ci95": [
+            0.6326530612244898,
+            0.8132179675994107
+          ],
+          "f1": 0.7931034482758621,
+          "f1_ci95": [
+            0.7118388809475189,
+            0.8655263157894735
+          ],
+          "false_fill_rate": 0.2,
+          "false_fill_rate_ci95": [
+            0.0,
+            0.6666666666666666
+          ]
+        },
+        "subtotal": {
+          "n_present": 65,
+          "n_absent": 35,
+          "precision": 0.9574468085106383,
+          "precision_ci95": [
+            0.8867817324185249,
+            1.0
+          ],
+          "recall": 0.6923076923076923,
+          "recall_ci95": [
+            0.5737704918032787,
+            0.7971739130434778
+          ],
+          "f1": 0.8035714285714286,
+          "f1_ci95": [
+            0.7128379664889566,
+            0.8760330578512396
+          ],
+          "false_fill_rate": 0.05714285714285714,
+          "false_fill_rate_ci95": [
+            0.0,
+            0.14814814814814814
+          ]
+        },
+        "tax_amount": {
+          "n_present": 41,
+          "n_absent": 59,
+          "precision": 0.8285714285714286,
+          "precision_ci95": [
+            0.6857142857142857,
+            0.9459459459459459
+          ],
+          "recall": 0.7073170731707317,
+          "recall_ci95": [
+            0.5625,
+            0.8409090909090909
+          ],
+          "f1": 0.7631578947368421,
+          "f1_ci95": [
+            0.6222072072072072,
+            0.8809523809523809
+          ],
+          "false_fill_rate": 0.0,
+          "false_fill_rate_ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "line_items_row_level": {
+        "n_documents": 100,
+        "n_documents_with_rows": 100,
+        "rows_correct": 92,
+        "rows_predicted": 253,
+        "rows_gold": 251,
+        "precision": 0.36363636363636365,
+        "recall": 0.3665338645418327,
+        "f1": 0.36507936507936506,
+        "documents_all_rows_correct": 0.22,
+        "precision_ci95": [
+          0.2610275062514208,
+          0.4712655455059355
+        ],
+        "recall_ci95": [
+          0.2610615026477592,
+          0.4767237217467631
+        ],
+        "f1_ci95": [
+          0.2629521347122779,
+          0.4710722172675924
+        ],
+        "documents_all_rows_correct_ci95": [
+          0.14,
+          0.3
+        ]
+      },
+      "failures": {
+        "crashes": 0,
+        "crash_detail": [],
+        "failed_extractions": 0,
+        "documents_with_a_fallback": 0,
+        "pass_fallbacks": 0,
+        "retries": 0,
+        "truncated_replies": 0
+      },
+      "values_withheld": 0,
+      "latency_seconds": {
+        "source": "measured in this run",
+        "warm_llm": null,
+        "warm_total": {
+          "n": 100,
+          "p50": 2.565458450000733,
+          "p95": 5.3871451099665135
+        },
+        "cold": {
+          "documents": 0,
+          "model_load_seconds": [],
+          "cold_llm_seconds_excluding_load": []
+        }
+      },
+      "power": {
+        "label": "ac",
+        "timings_ac": 100,
+        "timings_battery": 0,
+        "timings_unknown": 0,
+        "source": "Windows Kernel-Power event 105",
+        "method": "cache file modification time per recorded timing (audit replay)"
+      },
+      "lowest_available_system_ram_gib": 2.564
+    },
+    {
+      "system": "S2'",
+      "source": "evals/results/cord_s2p_v1_1_1.json",
+      "model": "llama3.2:3b",
+      "prompt": "a-2.2",
+      "n_documents": 100,
+      "fields": {
+        "total_amount": {
+          "n_present": 95,
+          "n_absent": 5,
+          "precision": 0.7954545454545454,
+          "precision_ci95": [
+            0.7111111111111111,
+            0.8764044943820225
+          ],
+          "recall": 0.7368421052631579,
+          "recall_ci95": [
+            0.6494845360824743,
+            0.8247422680412371
+          ],
+          "f1": 0.7650273224043715,
+          "f1_ci95": [
+            0.6844251336898395,
+            0.8432432432432433
+          ],
+          "false_fill_rate": 0.6,
+          "false_fill_rate_ci95": [
+            0.0,
+            1.0
+          ]
+        },
+        "subtotal": {
+          "n_present": 65,
+          "n_absent": 35,
+          "precision": 0.8148148148148148,
+          "precision_ci95": [
+            0.6521195652173913,
+            0.9565217391304348
+          ],
+          "recall": 0.3384615384615385,
+          "recall_ci95": [
+            0.22413793103448276,
+            0.4545788770053474
+          ],
+          "f1": 0.4782608695652174,
+          "f1_ci95": [
+            0.34146341463414637,
+            0.6019417475728155
+          ],
+          "false_fill_rate": 0.11428571428571428,
+          "false_fill_rate_ci95": [
+            0.024390243902439025,
+            0.23529411764705882
+          ]
+        },
+        "tax_amount": {
+          "n_present": 41,
+          "n_absent": 59,
+          "precision": 0.43661971830985913,
+          "precision_ci95": [
+            0.323943661971831,
+            0.5492957746478874
+          ],
+          "recall": 0.7560975609756098,
+          "recall_ci95": [
+            0.6175467914438503,
+            0.8823529411764706
+          ],
+          "f1": 0.5535714285714286,
+          "f1_ci95": [
+            0.42990654205607476,
+            0.6666666666666666
+          ],
+          "false_fill_rate": 0.5254237288135594,
+          "false_fill_rate_ci95": [
+            0.39344262295081966,
+            0.65625
+          ]
+        }
+      },
+      "line_items_row_level": {
+        "n_documents": 100,
+        "n_documents_with_rows": 100,
+        "rows_correct": 69,
+        "rows_predicted": 465,
+        "rows_gold": 251,
+        "precision": 0.14838709677419354,
+        "recall": 0.2749003984063745,
+        "f1": 0.19273743016759776,
+        "documents_all_rows_correct": 0.08,
+        "precision_ci95": [
+          0.09179452954421398,
+          0.21664681451867226
+        ],
+        "recall_ci95": [
+          0.17488561376645156,
+          0.38060589907604825
+        ],
+        "f1_ci95": [
+          0.12102139842202024,
+          0.2720181818181817
+        ],
+        "documents_all_rows_correct_ci95": [
+          0.03,
+          0.14
+        ]
+      },
+      "failures": {
+        "crashes": 0,
+        "crash_detail": [],
+        "failed_extractions": 0,
+        "documents_with_a_fallback": 0,
+        "pass_fallbacks": 0,
+        "retries": 1,
+        "truncated_replies": 1
+      },
+      "values_withheld": 0,
+      "latency_seconds": {
+        "source": "mixed: 93 calls measured in this run, 8 recorded earlier (an aborted run or an earlier system) and replayed",
+        "warm_llm": {
+          "n": 100,
+          "p50": 3.4279751499995577,
+          "p95": 7.446020645000159
+        },
+        "warm_total": {
+          "n": 100,
+          "p50": 6.46082039999105,
+          "p95": 12.714602934988374
+        },
+        "cold": {
+          "documents": 0,
+          "model_load_seconds": [],
+          "cold_llm_seconds_excluding_load": []
+        }
+      },
+      "power": {
+        "label": "ac",
+        "timings_ac": 201,
+        "timings_battery": 0,
+        "timings_unknown": 0,
+        "source": "Windows Kernel-Power event 105",
+        "method": "cache file modification time per recorded timing"
+      },
+      "lowest_available_system_ram_gib": 4.704
+    },
+    {
+      "system": "S3'",
+      "source": "evals/results/cord_s3p_v1_1_1.json",
+      "model": "llama3.2:3b",
+      "prompt": "a-2.2",
+      "n_documents": 100,
+      "fields": {
+        "total_amount": {
+          "n_present": 95,
+          "n_absent": 5,
+          "precision": 0.813953488372093,
+          "precision_ci95": [
+            0.7303370786516854,
+            0.8941484268125853
+          ],
+          "recall": 0.7368421052631579,
+          "recall_ci95": [
+            0.6494845360824743,
+            0.8247422680412371
+          ],
+          "f1": 0.7734806629834254,
+          "f1_ci95": [
+            0.6956261390262952,
+            0.8494965246836569
+          ],
+          "false_fill_rate": 0.6,
+          "false_fill_rate_ci95": [
+            0.0,
+            1.0
+          ]
+        },
+        "subtotal": {
+          "n_present": 65,
+          "n_absent": 35,
+          "precision": 0.8461538461538461,
+          "precision_ci95": [
+            0.6842105263157895,
+            0.9655172413793104
+          ],
+          "recall": 0.3384615384615385,
+          "recall_ci95": [
+            0.22413793103448276,
+            0.4545788770053474
+          ],
+          "f1": 0.4835164835164835,
+          "f1_ci95": [
+            0.345679012345679,
+            0.6055184876285793
+          ],
+          "false_fill_rate": 0.08571428571428572,
+          "false_fill_rate_ci95": [
+            0.0,
+            0.1935483870967742
+          ]
+        },
+        "tax_amount": {
+          "n_present": 41,
+          "n_absent": 59,
+          "precision": 0.4492753623188406,
+          "precision_ci95": [
+            0.3333333333333333,
+            0.5652173913043478
+          ],
+          "recall": 0.7560975609756098,
+          "recall_ci95": [
+            0.6175467914438503,
+            0.8823529411764706
+          ],
+          "f1": 0.5636363636363636,
+          "f1_ci95": [
+            0.4423076923076923,
+            0.6785796199213631
+          ],
+          "false_fill_rate": 0.4915254237288136,
+          "false_fill_rate_ci95": [
+            0.3616759679107081,
+            0.6181818181818182
+          ]
+        }
+      },
+      "line_items_row_level": {
+        "n_documents": 100,
+        "n_documents_with_rows": 100,
+        "rows_correct": 68,
+        "rows_predicted": 459,
+        "rows_gold": 251,
+        "precision": 0.14814814814814814,
+        "recall": 0.27091633466135456,
+        "f1": 0.19154929577464788,
+        "documents_all_rows_correct": 0.08,
+        "precision_ci95": [
+          0.09135185185185185,
+          0.21560085357287298
+        ],
+        "recall_ci95": [
+          0.17127745478036177,
+          0.3791670539033457
+        ],
+        "f1_ci95": [
+          0.11829363738077206,
+          0.2723889149783084
+        ],
+        "documents_all_rows_correct_ci95": [
+          0.03,
+          0.14
+        ]
+      },
+      "failures": {
+        "crashes": 0,
+        "crash_detail": [],
+        "failed_extractions": 0,
+        "documents_with_a_fallback": 0,
+        "pass_fallbacks": 0,
+        "retries": 1,
+        "truncated_replies": 1
+      },
+      "values_withheld": 61,
+      "latency_seconds": {
+        "source": "recorded when the call was first made",
+        "warm_llm": {
+          "n": 100,
+          "p50": 3.4279751499995577,
+          "p95": 7.446020645000159
+        },
+        "warm_total": {
+          "n": 100,
+          "p50": 6.486769499991041,
+          "p95": 12.728865054988347
+        },
+        "cold": {
+          "documents": 0,
+          "model_load_seconds": [],
+          "cold_llm_seconds_excluding_load": []
+        }
+      },
+      "power": {
+        "label": "ac",
+        "timings_ac": 201,
+        "timings_battery": 0,
+        "timings_unknown": 0,
+        "source": "Windows Kernel-Power event 105",
+        "method": "cache file modification time per recorded timing"
+      },
+      "lowest_available_system_ram_gib": 4.953
+    },
+    {
+      "system": "S4'",
+      "source": "evals/results/cord_s4p_v1_1_1.json",
+      "model": "llama3.2:3b",
+      "prompt": "a-2.2",
+      "n_documents": 100,
+      "fields": {
+        "total_amount": {
+          "n_present": 95,
+          "n_absent": 5,
+          "precision": 0.8210526315789474,
+          "precision_ci95": [
+            0.7395833333333334,
+            0.8969072164948454
+          ],
+          "recall": 0.8210526315789474,
+          "recall_ci95": [
+            0.7473684210526316,
+            0.8947642543859647
+          ],
+          "f1": 0.8210526315789474,
+          "f1_ci95": [
+            0.7473370602672484,
+            0.8923118279569893
+          ],
+          "false_fill_rate": 0.8,
+          "false_fill_rate_ci95": [
+            0.3333333333333333,
+            1.0
+          ]
+        },
+        "subtotal": {
+          "n_present": 65,
+          "n_absent": 35,
+          "precision": 0.6395348837209303,
+          "precision_ci95": [
+            0.5332716049382716,
+            0.740751633986928
+          ],
+          "recall": 0.8461538461538461,
+          "recall_ci95": [
+            0.7533390410958904,
+            0.9253731343283582
+          ],
+          "f1": 0.7284768211920529,
+          "f1_ci95": [
+            0.6330750105797714,
+            0.8129032258064516
+          ],
+          "false_fill_rate": 0.7142857142857143,
+          "false_fill_rate_ci95": [
+            0.5454545454545454,
+            0.8611111111111112
+          ]
+        },
+        "tax_amount": {
+          "n_present": 41,
+          "n_absent": 59,
+          "precision": 0.3707865168539326,
+          "precision_ci95": [
+            0.2717391304347826,
+            0.4706051386071669
+          ],
+          "recall": 0.8048780487804879,
+          "recall_ci95": [
+            0.6744059656218402,
+            0.9210655314757481
+          ],
+          "f1": 0.5076923076923077,
+          "f1_ci95": [
+            0.39344262295081966,
+            0.609375
+          ],
+          "false_fill_rate": 0.8305084745762712,
+          "false_fill_rate_ci95": [
+            0.7230769230769231,
+            0.9193548387096774
+          ]
+        }
+      },
+      "line_items_row_level": {
+        "n_documents": 100,
+        "n_documents_with_rows": 100,
+        "rows_correct": 71,
+        "rows_predicted": 463,
+        "rows_gold": 251,
+        "precision": 0.15334773218142547,
+        "recall": 0.28286852589641437,
+        "f1": 0.19887955182072828,
+        "documents_all_rows_correct": 0.09,
+        "precision_ci95": [
+          0.09523021128981393,
+          0.22199463033313846
+        ],
+        "recall_ci95": [
+          0.18257780581590963,
+          0.3916688144329897
+        ],
+        "f1_ci95": [
+          0.12585327241910366,
+          0.2830742164665677
+        ],
+        "documents_all_rows_correct_ci95": [
+          0.04,
+          0.15
+        ]
+      },
+      "failures": {
+        "crashes": 0,
+        "crash_detail": [],
+        "failed_extractions": 0,
+        "documents_with_a_fallback": 0,
+        "pass_fallbacks": 0,
+        "retries": 1,
+        "truncated_replies": 1
+      },
+      "values_withheld": 95,
+      "latency_seconds": {
+        "source": "mixed: 50 calls measured in this run, 151 recorded earlier (an aborted run or an earlier system) and replayed",
+        "warm_llm": {
+          "n": 99,
+          "p50": 7.423798499999905,
+          "p95": 16.393639000000075
+        },
+        "warm_total": {
+          "n": 99,
+          "p50": 10.561833499994702,
+          "p95": 20.90957731000049
+        },
+        "cold": {
+          "documents": 1,
+          "model_load_seconds": [
+            7.8123871
+          ],
+          "cold_llm_seconds_excluding_load": [
+            10.225899999999935
+          ]
+        }
+      },
+      "power": {
+        "label": "ac",
+        "timings_ac": 301,
+        "timings_battery": 0,
+        "timings_unknown": 0,
+        "source": "Windows Kernel-Power event 105",
+        "method": "cache file modification time per recorded timing"
+      },
+      "lowest_available_system_ram_gib": 0.475
+    },
+    {
+      "system": "S4h",
+      "source": "evals/results/cord_s4h_v1_1_1.json",
+      "model": "llama3.2:3b",
+      "prompt": "a-2.2",
+      "n_documents": 100,
+      "fields": {
+        "total_amount": {
+          "n_present": 95,
+          "n_absent": 5,
+          "precision": 0.8229166666666666,
+          "precision_ci95": [
+            0.7419354838709677,
+            0.8969072164948454
+          ],
+          "recall": 0.8315789473684211,
+          "recall_ci95": [
+            0.7578867623604466,
+            0.9052631578947369
+          ],
+          "f1": 0.8272251308900523,
+          "f1_ci95": [
+            0.7526881720430108,
+            0.8979591836734694
+          ],
+          "false_fill_rate": 0.8,
+          "false_fill_rate_ci95": [
+            0.3333333333333333,
+            1.0
+          ]
+        },
+        "subtotal": {
+          "n_present": 65,
+          "n_absent": 35,
+          "precision": 0.632183908045977,
+          "precision_ci95": [
+            0.524390243902439,
+            0.7325581395348837
+          ],
+          "recall": 0.8461538461538461,
+          "recall_ci95": [
+            0.7533390410958904,
+            0.9253731343283582
+          ],
+          "f1": 0.7236842105263158,
+          "f1_ci95": [
+            0.6266666666666667,
+            0.8074534161490683
+          ],
+          "false_fill_rate": 0.7428571428571429,
+          "false_fill_rate_ci95": [
+            0.5789473684210527,
+            0.8787878787878788
+          ]
+        },
+        "tax_amount": {
+          "n_present": 41,
+          "n_absent": 59,
+          "precision": 0.3707865168539326,
+          "precision_ci95": [
+            0.2717391304347826,
+            0.4706051386071669
+          ],
+          "recall": 0.8048780487804879,
+          "recall_ci95": [
+            0.6744059656218402,
+            0.9210655314757481
+          ],
+          "f1": 0.5076923076923077,
+          "f1_ci95": [
+            0.39344262295081966,
+            0.609375
+          ],
+          "false_fill_rate": 0.8305084745762712,
+          "false_fill_rate_ci95": [
+            0.7230769230769231,
+            0.9193548387096774
+          ]
+        }
+      },
+      "line_items_row_level": {
+        "n_documents": 100,
+        "n_documents_with_rows": 100,
+        "rows_correct": 85,
+        "rows_predicted": 422,
+        "rows_gold": 251,
+        "precision": 0.2014218009478673,
+        "recall": 0.3386454183266932,
+        "f1": 0.2526002971768202,
+        "documents_all_rows_correct": 0.17,
+        "precision_ci95": [
+          0.1306361664773314,
+          0.28375258891058625
+        ],
+        "recall_ci95": [
+          0.2338518962510898,
+          0.44490216461706317
+        ],
+        "f1_ci95": [
+          0.16792893969065986,
+          0.34285910248873214
+        ],
+        "documents_all_rows_correct_ci95": [
+          0.1,
+          0.24
+        ]
+      },
+      "failures": {
+        "crashes": 0,
+        "crash_detail": [],
+        "failed_extractions": 0,
+        "documents_with_a_fallback": 0,
+        "pass_fallbacks": 0,
+        "retries": 1,
+        "truncated_replies": 1
+      },
+      "values_withheld": 0,
+      "latency_seconds": {
+        "source": "recorded when the call was first made",
+        "warm_llm": {
+          "n": 99,
+          "p50": 7.423798499999905,
+          "p95": 16.393639000000075
+        },
+        "warm_total": {
+          "n": 99,
+          "p50": 10.554096499994795,
+          "p95": 20.849801080013645
+        },
+        "cold": {
+          "documents": 1,
+          "model_load_seconds": [
+            7.8123871
+          ],
+          "cold_llm_seconds_excluding_load": [
+            10.225899999999935
+          ]
+        }
+      },
+      "power": {
+        "label": "ac",
+        "timings_ac": 301,
+        "timings_battery": 0,
+        "timings_unknown": 0,
+        "source": "Windows Kernel-Power event 105",
+        "method": "cache file modification time per recorded timing"
+      },
+      "lowest_available_system_ram_gib": 0.405
+    }
+  ]
+}

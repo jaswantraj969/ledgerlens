@@ -125,8 +125,8 @@
         "warm_llm": null,
         "warm_total": {
           "n": 100,
-          "p50": 2.5509770500066224,
-          "p95": 4.706929900008253
+          "p50": 2.5514053000033527,
+          "p95": 4.708131830011689
         },
         "cold": {
           "documents": 0,
@@ -140,9 +140,9 @@
         "timings_battery": 0,
         "timings_unknown": 0,
         "source": "Windows Kernel-Power event 105",
-        "method": "cache file modification time per recorded timing (audit replay)"
+        "method": "cache file modification time per recorded timing"
       },
-      "lowest_available_system_ram_gib": 1.622
+      "lowest_available_system_ram_gib": 1.382
     },
     {
       "system": "S2",
@@ -270,8 +270,8 @@
         },
         "warm_total": {
           "n": 98,
-          "p50": 5.258191500016075,
-          "p95": 9.909243390033046
+          "p50": 5.27893895000768,
+          "p95": 9.920485995017092
         },
         "cold": {
           "documents": 2,
@@ -291,7 +291,7 @@
         "timings_battery": 0,
         "timings_unknown": 0,
         "source": "Windows Kernel-Power event 105",
-        "method": "cache file modification time per recorded timing (audit replay)"
+        "method": "cache file modification time per recorded timing"
       },
       "lowest_available_system_ram_gib": 0.265
     },
@@ -421,8 +421,8 @@
         },
         "warm_total": {
           "n": 98,
-          "p50": 5.257473450020008,
-          "p95": 9.908382310008713
+          "p50": 5.259452550014068,
+          "p95": 9.911614325017856
         },
         "cold": {
           "documents": 2,
@@ -442,9 +442,9 @@
         "timings_battery": 0,
         "timings_unknown": 0,
         "source": "Windows Kernel-Power event 105",
-        "method": "cache file modification time per recorded timing (audit replay)"
+        "method": "cache file modification time per recorded timing"
       },
-      "lowest_available_system_ram_gib": 1.647
+      "lowest_available_system_ram_gib": 2.616
     },
     {
       "system": "S4",
@@ -572,8 +572,8 @@
         },
         "warm_total": {
           "n": 98,
-          "p50": 7.427266749995016,
-          "p95": 14.792401384986714
+          "p50": 7.447870349991336,
+          "p95": 14.811928649979972
         },
         "cold": {
           "documents": 2,
@@ -593,7 +593,7 @@
         "timings_battery": 0,
         "timings_unknown": 0,
         "source": "Windows Kernel-Power event 105",
-        "method": "cache file modification time per recorded timing (audit replay)"
+        "method": "cache file modification time per recorded timing"
       },
       "lowest_available_system_ram_gib": 0.253
     },
