@@ -1,4 +1,105 @@
 
+=== lint
+$ bash scripts/tasks.sh lint
+All checks passed!
+179 files already formatted
+STEP_EXIT[lint]=0
+
+=== typecheck
+$ bash scripts/tasks.sh typecheck
+Success: no issues found in 107 source files
+STEP_EXIT[typecheck]=0
+
+=== pytest-coverage
+$ /c/Users/jknm6/Desktop/VS Projects/LedgerLens/backend/.venv/Scripts/python.exe -m pytest -q --cov=ledgerlens --cov-report=term
+........................................................................ [ 14%]
+........................................................................ [ 29%]
+........................................................................ [ 43%]
+........................................................................ [ 58%]
+........................................................................ [ 73%]
+........................................................................ [ 87%]
+.............................................................            [100%]
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\jknm6\Desktop\VS Projects\LedgerLens\backend\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=============================== tests coverage ================================
+______________ coverage: platform win32, python 3.12.13-final-0 _______________
+
+Name                                             Stmts   Miss  Cover
+--------------------------------------------------------------------
+src\ledgerlens\__init__.py                           1      0   100%
+src\ledgerlens\api\__init__.py                       0      0   100%
+src\ledgerlens\api\app.py                           48      0   100%
+src\ledgerlens\api\auth.py                         111      4    96%
+src\ledgerlens\api\deps.py                          65      0   100%
+src\ledgerlens\api\documents.py                    121      2    98%
+src\ledgerlens\api\health.py                        30      0   100%
+src\ledgerlens\api\report.py                        25      0   100%
+src\ledgerlens\api\review.py                       180      5    97%
+src\ledgerlens\api\webhooks.py                      76      0   100%
+src\ledgerlens\confidence\__init__.py                0      0   100%
+src\ledgerlens\confidence\features.py                7      0   100%
+src\ledgerlens\confidence\risk.py                   31      1    97%
+src\ledgerlens\core\__init__.py                      0      0   100%
+src\ledgerlens\core\config.py                       31      0   100%
+src\ledgerlens\core\errors.py                       25      0   100%
+src\ledgerlens\core\logs.py                         13      0   100%
+src\ledgerlens\core\security.py                     37      0   100%
+src\ledgerlens\db\__init__.py                        0      0   100%
+src\ledgerlens\db\models.py                        182      0   100%
+src\ledgerlens\db\repositories.py                   26      0   100%
+src\ledgerlens\export\__init__.py                    0      0   100%
+src\ledgerlens\export\exporters.py                  27      1    96%
+src\ledgerlens\extraction\__init__.py                0      0   100%
+src\ledgerlens\extraction\deterministic.py         159      3    98%
+src\ledgerlens\extraction\hybrid.py                 65      1    98%
+src\ledgerlens\extraction\layout.py                 46      1    98%
+src\ledgerlens\extraction\llm.py                   124      0   100%
+src\ledgerlens\extraction\merge.py                  54      0   100%
+src\ledgerlens\extraction\prompts.py                30      3    90%
+src\ledgerlens\fields.py                            31      0   100%
+src\ledgerlens\ingest\__init__.py                    0      0   100%
+src\ledgerlens\ingest\validate.py                   65      1    98%
+src\ledgerlens\llm\__init__.py                       0      0   100%
+src\ledgerlens\llm\base.py                          32      0   100%
+src\ledgerlens\llm\cache.py                         43      1    98%
+src\ledgerlens\llm\ollama.py                        38      2    95%
+src\ledgerlens\parsing\__init__.py                   0      0   100%
+src\ledgerlens\parsing\model.py                     22      0   100%
+src\ledgerlens\parsing\ocr.py                       79      5    94%
+src\ledgerlens\parsing\pdfium.py                    43      0   100%
+src\ledgerlens\pipeline.py                          43      1    98%
+src\ledgerlens\schema.py                            33      0   100%
+src\ledgerlens\storage\__init__.py                   0      0   100%
+src\ledgerlens\storage\local.py                     33      1    97%
+src\ledgerlens\verification\__init__.py              0      0   100%
+src\ledgerlens\verification\evidence.py             65      3    95%
+src\ledgerlens\verification\label_proximity.py      60      0   100%
+src\ledgerlens\verification\normalize.py            76      2    97%
+src\ledgerlens\verification\rules.py                30      0   100%
+src\ledgerlens\workers\__init__.py                   0      0   100%
+src\ledgerlens\workers\queue.py                     21      0   100%
+src\ledgerlens\workers\run.py                       19     19     0%
+src\ledgerlens\workers\tasks.py                    302     35    88%
+src\ledgerlens\workers\webhooks.py                 113      8    93%
+--------------------------------------------------------------------
+TOTAL                                             2662     99    96%
+493 passed, 1 warning in 185.90s (0:03:05)
+STEP_EXIT[pytest-coverage]=0
+
+=== eval-smoke
+$ bash scripts/tasks.sh eval-smoke
+classic: 3 documents, 0 failed
+modern: 3 documents, 0 failed
+receipt: 3 documents, 0 failed
+statement: 3 documents, 0 failed
+ledger: 3 documents, 0 failed
+wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\dev\synthetic_smoke.json
+STEP_EXIT[eval-smoke]=0
+
 === pre-commit-all-files
 $ /c/Users/jknm6/Desktop/VS Projects/LedgerLens/backend/.venv/Scripts/python.exe -m pre_commit run --all-files
 fix end of files.........................................................Passed
@@ -9,82 +110,10 @@ ruff format..............................................................Passed
 mypy.....................................................................Passed
 STEP_EXIT[pre-commit-all-files]=0
 
-=== pytest-coverage
-$ /c/Users/jknm6/Desktop/VS Projects/LedgerLens/backend/.venv/Scripts/python.exe -m pytest -q --cov=ledgerlens --cov-report=term
-........................................................................ [ 22%]
-........................................................................ [ 45%]
-........................................................................ [ 68%]
-........................................................................ [ 90%]
-.............................                                            [100%]
-============================== warnings summary ===============================
-.venv\Lib\site-packages\fastapi\testclient.py:1
-  C:\Users\jknm6\Desktop\VS Projects\LedgerLens\backend\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
-    from starlette.testclient import TestClient as TestClient  # noqa
-
-tests/api/test_auth.py::test_register_makes_the_first_user_an_admin
-tests/api/test_auth.py::test_register_makes_the_first_user_an_admin
-  C:\Users\jknm6\Desktop\VS Projects\LedgerLens\backend\.venv\Lib\site-packages\alembic\config.py:604: DeprecationWarning: No path_separator found in configuration; falling back to legacy splitting on spaces, commas, and colons for prepend_sys_path.  Consider adding path_separator=os to Alembic config.
-    util.warn_deprecated(
-
--- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-=============================== tests coverage ================================
-______________ coverage: platform win32, python 3.12.13-final-0 _______________
-
-Name                                         Stmts   Miss  Cover
-----------------------------------------------------------------
-src\ledgerlens\__init__.py                       1      0   100%
-src\ledgerlens\api\__init__.py                   0      0   100%
-src\ledgerlens\api\app.py                       45      0   100%
-src\ledgerlens\api\auth.py                     111      4    96%
-src\ledgerlens\api\deps.py                      65      0   100%
-src\ledgerlens\api\documents.py                122      2    98%
-src\ledgerlens\api\health.py                    30      0   100%
-src\ledgerlens\confidence\__init__.py            0      0   100%
-src\ledgerlens\confidence\features.py            7      0   100%
-src\ledgerlens\confidence\risk.py               31      1    97%
-src\ledgerlens\core\__init__.py                  0      0   100%
-src\ledgerlens\core\config.py                   17      0   100%
-src\ledgerlens\core\errors.py                   25      0   100%
-src\ledgerlens\core\logs.py                     13      0   100%
-src\ledgerlens\core\security.py                 37      0   100%
-src\ledgerlens\db\__init__.py                    0      0   100%
-src\ledgerlens\db\models.py                    172      0   100%
-src\ledgerlens\db\repositories.py               26      0   100%
-src\ledgerlens\export\__init__.py                0      0   100%
-src\ledgerlens\export\exporters.py              27      1    96%
-src\ledgerlens\extraction\__init__.py            0      0   100%
-src\ledgerlens\extraction\deterministic.py     159      3    98%
-src\ledgerlens\extraction\layout.py             46      1    98%
-src\ledgerlens\extraction\llm.py               100      0   100%
-src\ledgerlens\extraction\merge.py              54      0   100%
-src\ledgerlens\fields.py                        31      0   100%
-src\ledgerlens\ingest\__init__.py                0      0   100%
-src\ledgerlens\ingest\validate.py               61      1    98%
-src\ledgerlens\llm\__init__.py                   0      0   100%
-src\ledgerlens\llm\base.py                      28      0   100%
-src\ledgerlens\llm\cache.py                     39      0   100%
-src\ledgerlens\llm\ollama.py                    31      2    94%
-src\ledgerlens\parsing\__init__.py               0      0   100%
-src\ledgerlens\parsing\model.py                 22      0   100%
-src\ledgerlens\parsing\ocr.py                   79      5    94%
-src\ledgerlens\parsing\pdfium.py                43      0   100%
-src\ledgerlens\pipeline.py                      38      1    97%
-src\ledgerlens\schema.py                        33      0   100%
-src\ledgerlens\storage\__init__.py               0      0   100%
-src\ledgerlens\storage\local.py                 33      2    94%
-src\ledgerlens\verification\__init__.py          0      0   100%
-src\ledgerlens\verification\evidence.py         55      5    91%
-src\ledgerlens\verification\normalize.py        76      2    97%
-src\ledgerlens\verification\rules.py            30      0   100%
-----------------------------------------------------------------
-TOTAL                                         1687     30    98%
-317 passed, 3 warnings in 123.39s (0:02:03)
-STEP_EXIT[pytest-coverage]=0
-
 === npm-lint
 $ npm run lint
 
-> ledgerlens-frontend@0.1.0 lint
+> ledgerlens-frontend@1.0.0 lint
 > oxlint
 
 STEP_EXIT[npm-lint]=0
@@ -92,44 +121,44 @@ STEP_EXIT[npm-lint]=0
 === npm-test
 $ npm test
 
-> ledgerlens-frontend@0.1.0 test
+> ledgerlens-frontend@1.0.0 test
 > vitest run
 
 
  RUN  v5.1.0 C:/Users/jknm6/Desktop/VS Projects/LedgerLens/frontend
 
 
- Test Files  1 passed (1)
-      Tests  1 passed (1)
-   Start at  12:54:54
-   Duration  6.10s (environment 77%, setup 17%, tests 4%, transform 1%)
+ Test Files  3 passed (3)
+      Tests  37 passed (37)
+   Start at  01:09:53
+   Duration  8.14s (environment 66%, setup 17%, tests 11%, import 5%, transform 1%)
 
 STEP_EXIT[npm-test]=0
 
 === npm-build
 $ npm run build
 
-> ledgerlens-frontend@0.1.0 build
+> ledgerlens-frontend@1.0.0 build
 > tsc -b && vite build
 
 [36mvite v8.3.6 [32mbuilding client environment for production...[36m[39m
 transforming...
-✓ 16 modules transformed.
+✓ 126 modules transformed.
 rendering chunks...
 computing gzip size...
-dist/index.html                   0.46 kB │ gzip:  0.29 kB
-dist/assets/index-Dm_kgmD5.css    6.70 kB │ gzip:  2.02 kB
-dist/assets/index-CxFXa7To.js   219.75 kB │ gzip: 68.71 kB
+dist/index.html                   0.46 kB │ gzip:   0.29 kB
+dist/assets/index-B8Uot_FV.css   11.87 kB │ gzip:   3.22 kB
+dist/assets/index-DQMgaYWO.js   330.63 kB │ gzip: 100.09 kB
 
-[32m✓ built in 280ms[39m
+[32m✓ built in 260ms[39m
 STEP_EXIT[npm-build]=0
 
 === gitleaks-full-history
 $ /c/Users/jknm6/.cache/pre-commit/repomsx10mrf/golangenv-default/bin/gitleaks.exe detect --source . --no-banner --redact --log-opts=--all
-[90m12:55PM[0m [32mINF[0m 44 commits scanned.
-[90m12:55PM[0m [32mINF[0m scan completed in 498ms
-[90m12:55PM[0m [32mINF[0m no leaks found
+[90m1:10AM[0m [32mINF[0m 168 commits scanned.
+[90m1:10AM[0m [32mINF[0m scan completed in 477ms
+[90m1:10AM[0m [32mINF[0m no leaks found
 STEP_EXIT[gitleaks-full-history]=0
 
 CI_LOCAL_EXIT=0
-COMMIT=0303d976f684b474540d428e30b0a24a0140929a
+COMMIT=bcd84d3a86d0857c37c4df85499d2c82a6e2823c
