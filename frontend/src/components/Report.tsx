@@ -70,7 +70,12 @@ function ComparisonTable({ comparison }: { comparison: Comparison }) {
       <h3 className="font-semibold">
         CORD {comparison.split}, metrics {comparison.metrics_version}: F1 [95% CI]
       </h3>
-      <p className="text-sm text-slate-600">{comparison.note}</p>
+      <p className="text-sm text-slate-600">
+        {/* Validation files carry a note written before the final test read; describe them here. */}
+        {comparison.split === 'validation'
+          ? 'Development results on the validation split; the final test read is the table above.'
+          : comparison.note}
+      </p>
       <table className="mt-2 w-full text-left text-sm">
         <thead>
           <tr>
