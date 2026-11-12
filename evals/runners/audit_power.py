@@ -11,7 +11,6 @@ Only metadata is added (a `power` block). No number in any results file changes.
 """
 
 import contextlib
-import hashlib
 import json
 import re
 from pathlib import Path
@@ -19,8 +18,7 @@ from typing import Any
 
 from evals.datasets.cord import DEFAULT_RAW_DIR, iter_documents
 from evals.power import PowerLog
-from evals.runners.run_cord import CACHE_DIR, SCHEMA
-from evals.runners.run_cord_s1 import OCR_CACHE
+from evals.runners.run_cord import CACHE_DIR, SCHEMA, ocr_path
 from evals.systems import build_system
 from ledgerlens.extraction.llm import DEFAULT_PARAMS
 from ledgerlens.llm.base import LLMError
@@ -41,10 +39,6 @@ WINDOW_RUNS = {
 }
 
 
-def _ocr_path(document_id: str) -> Path:
-    return OCR_CACHE / f"{hashlib.sha256(document_id.encode()).hexdigest()}.json"
-
-
 def _scope(result: dict[str, Any]) -> tuple[str, set[str] | None]:
     split = str(result["split"])
     match = re.match(r"(\w+) \((\w+)\)", split)
@@ -57,6 +51,7 @@ def _scope(result: dict[str, Any]) -> tuple[str, set[str] | None]:
 def cord_paths(result: dict[str, Any]) -> list[Path]:
     """Cache files holding this result's timings: OCR per document, plus every LLM reply."""
     split, wanted = _scope(result)
+    perturbation = (result.get("perturbation") or {}).get("name")
     llm = result.get("llm")
     system = None
     provider = None
@@ -71,7 +66,7 @@ def cord_paths(result: dict[str, Any]) -> list[Path]:
     for document in iter_documents(split, DEFAULT_RAW_DIR, with_images=False):  # type: ignore[arg-type]
         if wanted is not None and document.document_id not in wanted:
             continue
-        ocr = _ocr_path(document.document_id)
+        ocr = ocr_path(document.document_id, perturbation)
         paths.append(ocr)
         if system is not None and ocr.exists():
             parsed = ParsedDocument.model_validate(json.loads(ocr.read_text("utf-8"))["parsed"])

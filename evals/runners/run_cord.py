@@ -5,6 +5,12 @@ to replace a result. If free RAM falls below 0.4 GiB the run stops, the abort is
 evals/results/aborted/, and no results or predictions are written. Per-document predictions
 are saved under data/ (gitignored), with their hash in the results file. A replay miss or
 provider failure counts as a failed extraction.
+
+Two test-only modes serve docs/evaluation/final-test-protocol.md. `--perturb NAME` reads the test
+images through one fixed perturbation (evals/perturb.py), with its own OCR cache entries, and
+writes to evals/results/degradation/. `--records-rerun` repeats a test configuration whose result
+already exists, only to save its per-field records; it must reproduce the recorded predictions
+hash exactly, and writes nothing else if it does not.
 """
 
 import argparse
@@ -21,6 +27,7 @@ import numpy as np
 from evals.datasets.cord import DEFAULT_RAW_DIR, HEADER_FIELDS, ROW_FIELDS, iter_documents
 from evals.memory_guard import MemoryLog, abort_run
 from evals.metrics import METRICS_VERSION
+from evals.perturb import PERTURBATIONS, ocr_key, perturb
 from evals.power import ac_online_now, timings_power
 from evals.runners.run_cord_s1 import OCR_CACHE, SPLIT_FILE, cached_parse, environment
 from evals.scoring import DocumentPrediction, score, to_prediction
@@ -86,6 +93,11 @@ def slug(label: str) -> str:
     return label.lower().replace("'", "p")
 
 
+def ocr_path(document_id: str, perturbation: str | None = None) -> Path:
+    key = ocr_key(document_id, perturbation)
+    return OCR_CACHE / f"{hashlib.sha256(key.encode()).hexdigest()}.json"
+
+
 def stop_if_low_memory(memory: MemoryLog, system: str, split: str, processed: int) -> None:
     """Abort before the next document, so a partial run never becomes a result."""
     if memory.abort_reason:
@@ -112,10 +124,22 @@ def main() -> None:
     parser.add_argument(
         "--save-records", action="store_true", help="also save per-field features (for S5)"
     )
+    parser.add_argument("--perturb", choices=sorted(PERTURBATIONS), help="test only: degradation")
+    parser.add_argument(
+        "--records-rerun",
+        action="store_true",
+        help="test only: repeat an existing configuration to save records; hash must match",
+    )
     arguments = parser.parse_args()
+    if (arguments.perturb or arguments.records_rerun) and arguments.split != "test":
+        sys.exit("--perturb and --records-rerun apply to the test split only")
+    if arguments.perturb and arguments.records_rerun:
+        sys.exit("--perturb and --records-rerun do not combine")
 
     label = arguments.label or arguments.system
     name = slug(label)
+    perturbation = arguments.perturb
+    reference_sha: str | None = None
     suffix = "v" + METRICS_VERSION.replace(".", "_")
     wanted: set[str] | None = None
     if arguments.split == "train":
@@ -131,6 +155,14 @@ def main() -> None:
         if not arguments.final:
             sys.exit("the test split needs --final: it is read once per configuration")
         output_path = RESULTS / f"cord_{name}_{suffix}.json"
+        if arguments.records_rerun:
+            if not output_path.exists():
+                sys.exit(f"--records-rerun needs the existing result {output_path}")
+            reference = json.loads(output_path.read_text(encoding="utf-8"))
+            reference_sha = reference["predictions_sha256"]
+            output_path = RESULTS / "repro" / f"cord_{name}_test_records_rerun_{suffix}.json"
+        elif perturbation:
+            output_path = RESULTS / "degradation" / f"cord_{name}_{perturbation}_{suffix}.json"
         if output_path.exists():
             sys.exit(f"{output_path} exists: a new configuration needs a new version")
         if ac_online_now() is not True:
@@ -159,23 +191,28 @@ def main() -> None:
 
     # OCR is cached for every CORD split; images are loaded only if some document lacks it.
     with_images = any(
-        not (OCR_CACHE / f"{hashlib.sha256(d.encode()).hexdigest()}.json").exists()
+        not ocr_path(d, perturbation).exists()
         for d in (
             wanted or json.loads(SPLIT_FILE.read_text(encoding="utf-8"))[arguments.split]["ids"]
         )
     )
+    run_label = label if perturbation is None else f"{label}_{perturbation}"
     for document in iter_documents(arguments.split, DEFAULT_RAW_DIR, with_images=with_images):
         if wanted is not None and document.document_id not in wanted:
             continue
-        stop_if_low_memory(memory, label, arguments.split, len(predictions))
+        stop_if_low_memory(memory, run_label, arguments.split, len(predictions))
         if arguments.split == "test" and ac_online_now() is not True:
-            abort_run(memory, ABORTED, f"cord_{name}_test_on_battery",
+            abort_run(memory, ABORTED, f"cord_{slug(run_label)}_test_on_battery",
                       {"reason_detail": "AC power lost during a test read",
                        "documents_processed": len(predictions)})  # fmt: skip
         gold_headers[document.document_id] = {f: document.gold[f] for f in HEADER_FIELDS}
         gold_rows[document.document_id] = document.gold_rows
         try:
-            entry = cached_parse(document.document_id, document.image or b"", ocr, OCR_CACHE)
+            image = document.image or b""
+            if perturbation and not ocr_path(document.document_id, perturbation).exists():
+                image = perturb(image, perturbation)
+            key = ocr_key(document.document_id, perturbation)
+            entry = cached_parse(key, image, ocr, OCR_CACHE)
             parsed = ParsedDocument.model_validate(entry["parsed"])
             started = time.perf_counter()
             output = system(parsed, schema)
@@ -249,7 +286,7 @@ def main() -> None:
                 flush=True,
             )
 
-    stop_if_low_memory(memory, label, arguments.split, len(predictions))
+    stop_if_low_memory(memory, run_label, arguments.split, len(predictions))
     if wanted is None:
         split_info = json.loads(SPLIT_FILE.read_text(encoding="utf-8"))[arguments.split]
     else:
@@ -260,7 +297,15 @@ def main() -> None:
     PREDICTIONS.mkdir(parents=True, exist_ok=True)
     dump = json.dumps([asdict(p) for p in predictions], sort_keys=True, indent=0)
     scope = arguments.split if wanted is None else f"{arguments.subset.stem}_p{arguments.prompt}"
+    if perturbation:
+        scope = f"{scope}_{perturbation}"
     prediction_path = PREDICTIONS / f"{name}_{scope}.json"
+    if reference_sha is not None:
+        actual = hashlib.sha256(dump.encode()).hexdigest()
+        if actual != reference_sha:
+            mismatch = PREDICTIONS / f"{name}_{scope}_records_rerun_mismatch.json"
+            mismatch.write_text(dump, encoding="utf-8", newline="\n")
+            sys.exit(f"records rerun predictions {actual} differ from recorded {reference_sha}")
     prediction_path.write_text(dump, encoding="utf-8", newline="\n")
     if arguments.save_records:
         records_path = RECORDS / f"{name}_{scope}.json"
@@ -286,6 +331,14 @@ def main() -> None:
         if wanted is None
         else f"{arguments.split} ({arguments.subset.stem})",
         "n_documents": len(predictions),
+        "perturbation": None
+        if perturbation is None
+        else {
+            "name": perturbation,
+            "kind": PERTURBATIONS[perturbation][0],
+            "severity": PERTURBATIONS[perturbation][1],
+        },
+        "records_rerun_of_predictions_sha256": reference_sha,
         "schema": SCHEMA,
         "schema_version": schema.version,
         "split_sha256": split_info["sha256"],
@@ -310,10 +363,7 @@ def main() -> None:
         },
         "latency_seconds": latency_report(rows, source=timing_source),
         "power": timings_power(
-            [
-                OCR_CACHE / f"{hashlib.sha256(p.document_id.encode()).hexdigest()}.json"
-                for p in predictions
-            ]
+            [ocr_path(p.document_id, perturbation) for p in predictions]
             + ([provider.cache.path_for(k) for k in provider.keys_used] if provider else [])
         ),
         "memory": memory.report(),

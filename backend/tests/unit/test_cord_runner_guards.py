@@ -103,3 +103,35 @@ def test_train_is_read_only_through_a_fixed_subset() -> None:
     )
     assert completed.returncode != 0
     assert "--subset" in completed.stderr
+
+
+def run_cord(*arguments: str) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        [sys.executable, "-m", "evals.runners.run_cord", *arguments],
+        capture_output=True,
+        text=True,
+        cwd=ROOT,
+        env={"PYTHONPATH": str(ROOT), "SYSTEMROOT": "C:\Windows", "PATH": ""},
+        check=False,
+    )
+
+
+@pytest.mark.parametrize("flag", [["--perturb", "jpeg-10"], ["--records-rerun"]])
+def test_degradation_and_records_rerun_apply_to_test_only(flag: list[str]) -> None:
+    completed = run_cord("--system", "S1", "--split", "validation", *flag)
+    assert completed.returncode != 0
+    assert "test split only" in completed.stderr
+
+
+def test_degradation_on_test_still_needs_final() -> None:
+    completed = run_cord("--system", "S1", "--split", "test", "--perturb", "blur-1.5")
+    assert completed.returncode != 0
+    assert "--final" in completed.stderr
+
+
+def test_perturbation_and_records_rerun_do_not_combine() -> None:
+    completed = run_cord(
+        "--system", "S1", "--split", "test", "--final", "--perturb", "jpeg-30", "--records-rerun"
+    )
+    assert completed.returncode != 0
+    assert "do not combine" in completed.stderr
