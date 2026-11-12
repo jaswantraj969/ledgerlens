@@ -1,0 +1,7 @@
+{
+  "started_utc": "2026-11-12T16:01:54Z",
+  "free_ram_gib_before": 0.427,
+  "outcome": "not run: free RAM 0.43 GiB below 2.0",
+  "worker_restored_to_rules": true,
+  "ended_utc": "2026-11-12T16:01:55Z"
+}

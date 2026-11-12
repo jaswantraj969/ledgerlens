@@ -50,7 +50,7 @@ The worker uses `AutoParser` (`backend/src/ledgerlens/parsing/ocr.py`). It reads
 
 ## LLM mode inside Docker: not tested
 
-The Compose stack was verified with the worker in its default rules mode: all five services were healthy, and the upload, review and export flow passed against it (`docs/progress/logs/run-docker-compose-up.log`, `run-e2e-docker.log`). The `llm` and `llm_or_rules` modes, which reach Ollama on the host from inside the container, were not tested in Docker.
+The Compose stack was verified with the worker in its default rules mode: all five services were healthy, and the upload, review and export flow passed against it (`docs/progress/logs/run-docker-compose-up.log`, `run-e2e-docker.log`). The `llm` and `llm_or_rules` modes, which reach Ollama on the host from inside the container, were not tested in Docker. Networking is not the obstacle: the worker container reached Ollama on the host (version 0.40.15 through `host.docker.internal`). A smoke test (`scripts/docker_llm_smoke.py`, 3 CORD train documents, hard timeout) stopped at its free-RAM gate on 2026-11-12: 0.43 GiB free against the 2 GiB required, with Docker Desktop's VM holding about 4.7 GB (`docs/progress/logs/docker-llm-smoke.json`). On this 16 GB machine, Docker, the model and an editor do not fit together.
 
 ## S5 header precision targets were not met on test
 
