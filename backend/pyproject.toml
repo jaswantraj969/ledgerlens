@@ -84,6 +84,9 @@ strict = true
 mypy_path = "src,.."
 # The evaluation code (../evals) is type-checked with the application, strictly.
 packages = ["ledgerlens", "evals"]
+# Data folders under evals/ hold no code; without this, every cache folder counts as a
+# namespace package, so the checked-source count depended on local (gitignored) caches.
+exclude = ["(^|/)evals/(cache|results|splits)/"]
 
 [[tool.mypy.overrides]]
 module = ["pypdfium2.*", "rapidocr.*", "sklearn.*", "pyarrow.*", "scipy.*", "rq.*"]
