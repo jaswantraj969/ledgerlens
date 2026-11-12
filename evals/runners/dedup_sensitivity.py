@@ -31,6 +31,7 @@ EXCLUDED = tuple(f"cord-v2:test:{n}" for n in (25, 28, 31, 33, 38, 44, 75))
 SYSTEMS = {"S1": "s1", "S2'": "s2p", "S3'": "s3p", "S4'": "s4p", "S4h": "s4h"}
 S5_BASES = {"S5-S1": ("s1", "train_all_p1.0"), "S5-S4h": ("s4h", "train_all_p2.2")}
 FIELDS = ("total_amount", "subtotal", "tax_amount")
+FIELD_NAMES = (tuple(HEADER_FIELDS), tuple(ROW_FIELDS))
 
 
 def _gold() -> tuple[dict[str, Any], dict[str, Any]]:
@@ -70,7 +71,7 @@ def extraction(gold: tuple[dict[str, Any], dict[str, Any]]) -> dict[str, Any]:
         recorded = json.loads((RESULTS / f"cord_{name}_v1_1_1.json").read_text(encoding="utf-8"))
         if digest != recorded["predictions_sha256"]:
             sys.exit(f"{label}: predictions file does not match the recorded hash")
-        full = score(predictions, headers, rows, HEADER_FIELDS, ROW_FIELDS)
+        full = score(predictions, headers, rows, tuple(HEADER_FIELDS), tuple(ROW_FIELDS))
         for key in FIELDS:  # the saved predictions must reproduce the recorded result
             if full["fields"][key]["f1"] != recorded["fields"][key]["f1"]:
                 sys.exit(f"{label}: full-set {key} F1 does not reproduce the recorded value")
@@ -79,8 +80,8 @@ def extraction(gold: tuple[dict[str, Any], dict[str, Any]]) -> dict[str, Any]:
         out[label] = {
             "predictions_sha256": digest,
             "all_100": _f1(full, with_ci=True),
-            "without_excluded": _f1(score(kept, headers, rows, HEADER_FIELDS, ROW_FIELDS), True),
-            "excluded_only": _f1(score(dropped, headers, rows, HEADER_FIELDS, ROW_FIELDS), False),
+            "without_excluded": _f1(score(kept, headers, rows, *FIELD_NAMES), True),
+            "excluded_only": _f1(score(dropped, headers, rows, *FIELD_NAMES), False),
             "documents": {"without_excluded": len(kept), "excluded_only": len(dropped)},
         }
     return out
@@ -102,7 +103,8 @@ def routing() -> dict[str, Any]:
         test = load(base, "test", "test")
         keep = {d for d in test[1] if d not in EXCLUDED}
         subset = restrict(test, keep)
-        out[label] = {"documents": len(subset[1])}
+        entry: dict[str, Any] = {"documents": len(subset[1])}
+        out[label] = entry
         for kind in ("header", "row"):
             calibrator = Calibrator.fit([u for u in train_units if u.kind == kind])
             thresholds = {float(t): v for t, v in recorded["thresholds"][kind].items()}
@@ -116,7 +118,7 @@ def routing() -> dict[str, Any]:
             sub_units = [u for u in subset[0] if u.kind == kind]
             sub_slots = subset[1] if kind == "header" else dict.fromkeys(subset[1], 0)
             report = routing_report(sub_units, calibrator.predict(sub_units), sub_slots, thresholds)
-            out[label][kind] = _with_exact(report)
+            entry[kind] = _with_exact(report)
     return out
 
 
@@ -130,7 +132,7 @@ def orderings(extract: dict[str, Any]) -> list[dict[str, Any]]:
     """S1 against S4h on each field, on all 100 and on the 93: which is higher."""
     out = []
     for key in (*FIELDS, "rows"):
-        row = {"field": key}
+        row: dict[str, Any] = {"field": key}
         for scope in ("all_100", "without_excluded"):
             s1, s4h = extract["S1"][scope][key]["f1"], extract["S4h"][scope][key]["f1"]
             row[scope] = {"S1": s1, "S4h": s4h,
@@ -216,7 +218,7 @@ def render(result: dict[str, Any]) -> str:
 
 
 def main() -> None:
-    result = {
+    result: dict[str, Any] = {
         "addendum": ADDENDUM,
         "post_hoc": True,
         "excluded_documents": list(EXCLUDED),

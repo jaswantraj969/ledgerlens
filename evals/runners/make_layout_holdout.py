@@ -10,6 +10,7 @@ import hashlib
 import json
 import random
 from pathlib import Path
+from typing import Any
 
 ROOT = Path(__file__).resolve().parents[2]
 GROUPS_FILE = ROOT / "evals" / "splits" / "cord_v2" / "layout_groups.json"
@@ -34,7 +35,7 @@ def main() -> None:
     for document_id, group in assignments.items():
         split = document_id.split(":")[1]
         members[(split, roles[group])].append(document_id)
-    payload = {
+    payload: dict[str, Any] = {
         "seed": SEED,
         "method": f"random.Random({SEED}).sample(sorted group ids, {EVALUATION_GROUP_COUNT})",
         "layout_groups_sha256": hashlib.sha256(GROUPS_FILE.read_bytes()).hexdigest(),

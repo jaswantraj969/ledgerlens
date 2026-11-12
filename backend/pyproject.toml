@@ -81,9 +81,16 @@ select = ["E", "F", "I", "UP", "B", "S", "C4", "SIM", "RUF"]
 [tool.mypy]
 python_version = "3.12"
 strict = true
-mypy_path = "src"
-packages = ["ledgerlens"]
+mypy_path = "src,.."
+# The evaluation code (../evals) is type-checked with the application, strictly.
+packages = ["ledgerlens", "evals"]
 
 [[tool.mypy.overrides]]
 module = ["pypdfium2.*", "rapidocr.*", "sklearn.*", "pyarrow.*", "scipy.*", "rq.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+# No type stubs are installed for these (types-psutil and reportlab stubs are not dependencies);
+# they are used only by the evaluation code for memory sampling and synthetic PDF generation.
+module = ["psutil", "psutil.*", "reportlab.*"]
 ignore_missing_imports = true

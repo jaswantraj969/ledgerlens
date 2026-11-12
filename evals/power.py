@@ -110,6 +110,6 @@ def ac_online_now() -> bool | None:
         ]
 
     status = SystemPowerStatus()
-    if not ctypes.windll.kernel32.GetSystemPowerStatus(ctypes.byref(status)):  # type: ignore[attr-defined]
+    if not ctypes.windll.kernel32.GetSystemPowerStatus(ctypes.byref(status)):  # type: ignore[attr-defined,unused-ignore]  # windll: Windows only
         return None
     return {0: False, 1: True}.get(status.ACLineStatus)

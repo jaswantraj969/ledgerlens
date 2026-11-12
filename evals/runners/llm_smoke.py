@@ -14,7 +14,7 @@ import subprocess
 import sys
 import time
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal, cast
 
 import numpy as np
 
@@ -69,7 +69,7 @@ def main() -> None:
     gpu_before = gpu_memory_used_mib()
     rows: list[dict[str, Any]] = []
 
-    for document in iter_documents(SPLIT, with_images=False):
+    for document in iter_documents(cast(Literal["validation"], SPLIT), with_images=False):
         if document.document_id not in wanted:
             continue
         name = hashlib.sha256(document.document_id.encode()).hexdigest()

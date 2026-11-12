@@ -30,4 +30,4 @@ repos:
         entry: uv run --no-sync --directory backend mypy
         language: system
         pass_filenames: false
-        files: ^backend/
+        files: ^(backend|evals)/

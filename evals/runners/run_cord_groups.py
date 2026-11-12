@@ -73,7 +73,7 @@ def main() -> None:
     predictions = [DocumentPrediction(**item) for item in raw]
     headers: dict[str, dict[str, str | None]] = {}
     rows: dict[str, list[dict[str, str | None]]] = {}
-    for document in iter_documents(arguments.split, with_images=False):  # type: ignore[arg-type]
+    for document in iter_documents(arguments.split, with_images=False):
         headers[document.document_id] = {f: document.gold[f] for f in HEADER_FIELDS}
         rows[document.document_id] = document.gold_rows
 

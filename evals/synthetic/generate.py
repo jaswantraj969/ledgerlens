@@ -12,6 +12,7 @@ from dataclasses import dataclass, field
 from datetime import date, timedelta
 from decimal import ROUND_HALF_UP, Decimal
 from io import BytesIO
+from typing import Any
 
 import pypdfium2 as pdfium
 from faker import Faker
@@ -178,7 +179,15 @@ def _formatter(style: Layout, currency: str):  # type: ignore[no-untyped-def]
     return money
 
 
-def _table(pdf, rows, y, money, top, columns=(50, 330, 430, 540), font="Helvetica"):  # type: ignore[no-untyped-def]
+def _table(
+    pdf: Any,
+    rows: Any,
+    y: float,
+    money: Any,
+    top: float,
+    columns: tuple[int, int, int, int] = (50, 330, 430, 540),
+    font: str = "Helvetica",
+) -> float:
     def header(at: float) -> float:
         pdf.drawString(columns[0], at, "Description")
         pdf.drawRightString(columns[1], at, "Qty")
@@ -200,7 +209,7 @@ def _table(pdf, rows, y, money, top, columns=(50, 330, 430, 540), font="Helvetic
     return y
 
 
-def _summary(pdf, summary, x, right, y, money):  # type: ignore[no-untyped-def]
+def _summary(pdf: Any, summary: Any, x: float, right: float, y: float, money: Any) -> float:
     for label, value in summary:
         pdf.drawString(x, y, label)
         pdf.drawRightString(right, y, money(value))

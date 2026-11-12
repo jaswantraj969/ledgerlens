@@ -140,8 +140,8 @@ def run(split: str, output: Path, ocr_cache: Path = OCR_CACHE) -> dict[str, Any]
             extract_time = time.perf_counter() - started
         except Exception as error:
             crashes.append(f"{document.document_id}: {type(error).__name__}")
-            records, entry, extract_time = [], None, None  # type: ignore[assignment]
-        if entry is not None:
+            records, entry, extract_time = [], None, None
+        if entry is not None and extract_time is not None:  # both are None after a crash
             seconds.append(entry["ocr_seconds"] + extract_time)
             extract_seconds.append(extract_time)
             if not any(page["tokens"] for page in entry["parsed"]["pages"]):

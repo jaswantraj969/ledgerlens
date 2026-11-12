@@ -2,7 +2,7 @@
 
 import re
 from collections import defaultdict
-from collections.abc import Callable, Hashable, Sequence
+from collections.abc import Callable, Collection, Hashable, Sequence
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -37,7 +37,7 @@ class DocumentPrediction:
 def to_prediction(
     document_id: str,
     records: list[FieldRecord],
-    header_fields: Sequence[str],
+    header_fields: Collection[str],
     *,
     fell_back: bool = False,
 ) -> DocumentPrediction:
@@ -72,7 +72,7 @@ def score(
     predictions: Sequence[DocumentPrediction],
     gold_headers: dict[str, dict[str, str | None]],
     gold_rows: dict[str, list[dict[str, str | None]]],
-    header_fields: Sequence[str],
+    header_fields: Collection[str],
     row_fields: Sequence[str],
     header_key: HeaderKey = money_key,
 ) -> dict[str, Any]:
