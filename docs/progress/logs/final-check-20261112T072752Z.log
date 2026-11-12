@@ -1,0 +1,54 @@
+2026-11-12T07:27:52Z START check, 18 protocol steps
+2026-11-12T07:27:55Z PREFLIGHT PASS clean commit: 0 changed or untracked files
+2026-11-12T07:27:55Z PREFLIGHT PASS protocol commit is in history: 2550b14
+2026-11-12T07:27:55Z PREFLIGHT PASS fresh reboot: booted 43.5 min ago (limit 60)
+2026-11-12T07:27:55Z PREFLIGHT PASS AC power: ac_online=True
+2026-11-12T07:27:55Z PREFLIGHT PASS Docker stopped: daemon=False processes=[]
+2026-11-12T07:27:55Z PREFLIGHT PASS free RAM: 2.677 GiB available (minimum 2.0)
+2026-11-12T07:27:55Z PREFLIGHT PASS Ollama and model: version=0.40.15 digest=a80c4f17acd5
+2026-11-12T07:27:55Z PREFLIGHT PASS OLLAMA_MAX_LOADED_MODELS=1: value=1
+2026-11-12T07:27:55Z PREFLIGHT PASS keep-awake on: scripts/keep_awake.ps1 running
+2026-11-12T07:27:57Z flags evals.runners.run_cord: exit 0, missing none
+2026-11-12T07:28:00Z flags evals.runners.run_s5: exit 0, missing none
+2026-11-12T07:28:03Z flags evals.runners.run_s5_ablations: exit 0, missing none
+2026-11-12T07:28:03Z STEP S1 records rerun: evals.runners.run_cord --split test --final --system S1 --records-rerun --save-records -> evals/results/repro/cord_s1_test_records_rerun_v1_1_1.json (to run)
+2026-11-12T07:28:03Z STEP S2': evals.runners.run_cord --split test --final --system S2 --label S2' --prompt 2.2 --num-ctx 2304 -> evals/results/cord_s2p_v1_1_1.json (to run)
+2026-11-12T07:28:03Z STEP S3': evals.runners.run_cord --split test --final --system S3 --label S3' --prompt 2.2 --num-ctx 2304 -> evals/results/cord_s3p_v1_1_1.json (to run)
+2026-11-12T07:28:03Z STEP S4': evals.runners.run_cord --split test --final --system S4 --label S4' --prompt 2.2 --num-ctx 2304 -> evals/results/cord_s4p_v1_1_1.json (to run)
+2026-11-12T07:28:03Z STEP S4h: evals.runners.run_cord --split test --final --system S4h --label S4h --prompt 2.2 --num-ctx 2304 --save-records -> evals/results/cord_s4h_v1_1_1.json (to run)
+2026-11-12T07:28:03Z STEP S5-S1 all: evals.runners.run_s5 --base s1 --train-scope train_all_p1.0 --variant all --final -> evals/results/cord_s5_s1_v1_1_1.json (to run)
+2026-11-12T07:28:03Z STEP S5-S1 grouped: evals.runners.run_s5 --base s1 --train-scope train_all_p1.0 --variant grouped --final -> evals/results/cord_s5_s1_grouped_v1_1_1.json (to run)
+2026-11-12T07:28:03Z STEP S5-S4h all: evals.runners.run_s5 --base s4h --train-scope train_all_p2.2 --variant all --final -> evals/results/cord_s5_s4h_v1_1_1.json (to run)
+2026-11-12T07:28:03Z STEP S5-S4h grouped: evals.runners.run_s5 --base s4h --train-scope train_all_p2.2 --variant grouped --final -> evals/results/cord_s5_s4h_grouped_v1_1_1.json (to run)
+2026-11-12T07:28:03Z STEP S5 ablations: evals.runners.run_s5_ablations --final -> evals/results/cord_s5_ablations_v1_1_1.json (to run)
+2026-11-12T07:28:03Z STEP S1 blur-1.5: evals.runners.run_cord --split test --final --system S1 --perturb blur-1.5 -> evals/results/degradation/cord_s1_blur-1.5_v1_1_1.json (to run)
+2026-11-12T07:28:03Z STEP S4h blur-1.5: evals.runners.run_cord --split test --final --system S4h --label S4h --prompt 2.2 --num-ctx 2304 --perturb blur-1.5 -> evals/results/degradation/cord_s4h_blur-1.5_v1_1_1.json (to run)
+2026-11-12T07:28:03Z STEP S1 blur-3.0: evals.runners.run_cord --split test --final --system S1 --perturb blur-3.0 -> evals/results/degradation/cord_s1_blur-3.0_v1_1_1.json (to run)
+2026-11-12T07:28:03Z STEP S4h blur-3.0: evals.runners.run_cord --split test --final --system S4h --label S4h --prompt 2.2 --num-ctx 2304 --perturb blur-3.0 -> evals/results/degradation/cord_s4h_blur-3.0_v1_1_1.json (to run)
+2026-11-12T07:28:03Z STEP S1 jpeg-30: evals.runners.run_cord --split test --final --system S1 --perturb jpeg-30 -> evals/results/degradation/cord_s1_jpeg-30_v1_1_1.json (to run)
+2026-11-12T07:28:03Z STEP S4h jpeg-30: evals.runners.run_cord --split test --final --system S4h --label S4h --prompt 2.2 --num-ctx 2304 --perturb jpeg-30 -> evals/results/degradation/cord_s4h_jpeg-30_v1_1_1.json (to run)
+2026-11-12T07:28:03Z STEP S1 jpeg-10: evals.runners.run_cord --split test --final --system S1 --perturb jpeg-10 -> evals/results/degradation/cord_s1_jpeg-10_v1_1_1.json (to run)
+2026-11-12T07:28:03Z STEP S4h jpeg-10: evals.runners.run_cord --split test --final --system S4h --label S4h --prompt 2.2 --num-ctx 2304 --perturb jpeg-10 -> evals/results/degradation/cord_s4h_jpeg-10_v1_1_1.json (to run)
+2026-11-12T07:28:03Z CHECK-ONLY: pre-flight passed; test was not read
+2026-11-12T07:28:03Z keep-awake released: stopped process 18576
+2026-11-12T07:28:03Z SUMMARY
+2026-11-12T07:28:03Z   S1 records rerun: pending, attempts 0
+2026-11-12T07:28:03Z   S2': pending, attempts 0
+2026-11-12T07:28:03Z   S3': pending, attempts 0
+2026-11-12T07:28:03Z   S4': pending, attempts 0
+2026-11-12T07:28:03Z   S4h: pending, attempts 0
+2026-11-12T07:28:03Z   S5-S1 all: pending, attempts 0
+2026-11-12T07:28:03Z   S5-S1 grouped: pending, attempts 0
+2026-11-12T07:28:03Z   S5-S4h all: pending, attempts 0
+2026-11-12T07:28:03Z   S5-S4h grouped: pending, attempts 0
+2026-11-12T07:28:03Z   S5 ablations: pending, attempts 0
+2026-11-12T07:28:03Z   S1 blur-1.5: pending, attempts 0
+2026-11-12T07:28:03Z   S4h blur-1.5: pending, attempts 0
+2026-11-12T07:28:03Z   S1 blur-3.0: pending, attempts 0
+2026-11-12T07:28:03Z   S4h blur-3.0: pending, attempts 0
+2026-11-12T07:28:03Z   S1 jpeg-30: pending, attempts 0
+2026-11-12T07:28:03Z   S4h jpeg-30: pending, attempts 0
+2026-11-12T07:28:03Z   S1 jpeg-10: pending, attempts 0
+2026-11-12T07:28:03Z   S4h jpeg-10: pending, attempts 0
+2026-11-12T07:28:03Z   memory aborts: 0; metadata final-check-metadata-20261112T072752Z.json
+2026-11-12T07:28:03Z EXIT=0
