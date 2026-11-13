@@ -1,11 +1,11 @@
-# Release pre-push audit, 2026-11-12T20:33:15Z, HEAD f6e62aed2f8333c9eb00470623ade622608bfcb9
+# Release pre-push audit, 2026-11-13T08:33:04Z, HEAD 06df1e7e0116c76734ac5fe4988d9bf6e43623b9
 Remotes: '' (none). Nothing has been pushed.
 
-## 1. Identities (172 commits, all refs)
+## 1. Identities (180 commits, all refs)
 Authors:
-    172   jaswantraj969 <jaswantraj969@gmail.com>
+    180   jaswantraj969 <jaswantraj969@gmail.com>
 Committers:
-    172   jaswantraj969 <jaswantraj969@gmail.com>
+    180   jaswantraj969 <jaswantraj969@gmail.com>
 
 ## 2. Attribution patterns (case-insensitive; patterns 1-5 are the five strings in the release instructions)
   pattern 1: 0 commit messages, 0 tracked files
@@ -17,9 +17,9 @@ Committers:
   total matches: 0
 
 ## 3. gitleaks, full history
-1:33AM INF 172 commits scanned.
-1:33AM INF scan completed in 425ms
-1:33AM INF no leaks found
+1:33PM INF 180 commits scanned.
+1:33PM INF scan completed in 958ms
+1:33PM INF no leaks found
 
 ## 4. Size and contents
 Tracked files over 5 MB: 0
@@ -29,7 +29,7 @@ Largest tracked files:
   118317 evals/results/synthetic_s2p_v1_1_1.json
   110538 evals/results/synthetic_s1_v1_1_1.json
   109152 frontend/package-lock.json
-Tracked total: 3713512 bytes in 772 files; .git: 3.3M
+Tracked total: 3767164 bytes in 777 files; .git: 3.6M
 Images ever added in any commit:
   docs/images/synthetic-documents.png
   docs/images/synthetic-queue.png

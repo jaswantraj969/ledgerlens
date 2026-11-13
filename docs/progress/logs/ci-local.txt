@@ -2,7 +2,7 @@
 === lint
 $ bash scripts/tasks.sh lint
 All checks passed!
-179 files already formatted
+180 files already formatted
 STEP_EXIT[lint]=0
 
 === typecheck
@@ -13,12 +13,12 @@ STEP_EXIT[typecheck]=0
 === pytest-coverage
 $ /c/Users/jknm6/Desktop/VS Projects/LedgerLens/backend/.venv/Scripts/python.exe -m pytest -q --cov=ledgerlens --cov-report=term
 ........................................................................ [ 14%]
-........................................................................ [ 29%]
-........................................................................ [ 43%]
-........................................................................ [ 58%]
-........................................................................ [ 73%]
-........................................................................ [ 87%]
-.............................................................            [100%]
+........................................................................ [ 28%]
+........................................................................ [ 42%]
+........................................................................ [ 57%]
+........................................................................ [ 71%]
+........................................................................ [ 85%]
+.......................................................................  [100%]
 ============================== warnings summary ===============================
 .venv\Lib\site-packages\fastapi\testclient.py:1
   C:\Users\jknm6\Desktop\VS Projects\LedgerLens\backend\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
@@ -38,7 +38,7 @@ src\ledgerlens\api\deps.py                          65      0   100%
 src\ledgerlens\api\documents.py                    121      2    98%
 src\ledgerlens\api\health.py                        30      0   100%
 src\ledgerlens\api\report.py                        25      0   100%
-src\ledgerlens\api\review.py                       180      5    97%
+src\ledgerlens\api\review.py                       244      5    98%
 src\ledgerlens\api\webhooks.py                      76      0   100%
 src\ledgerlens\confidence\__init__.py                0      0   100%
 src\ledgerlens\confidence\features.py                7      0   100%
@@ -86,8 +86,8 @@ src\ledgerlens\workers\run.py                       19     19     0%
 src\ledgerlens\workers\tasks.py                    302     35    88%
 src\ledgerlens\workers\webhooks.py                 113      8    93%
 --------------------------------------------------------------------
-TOTAL                                             2662     99    96%
-493 passed, 1 warning in 185.90s (0:03:05)
+TOTAL                                             2726     99    96%
+503 passed, 1 warning in 327.34s (0:05:27)
 STEP_EXIT[pytest-coverage]=0
 
 === eval-smoke
@@ -129,9 +129,9 @@ $ npm test
 
 
  Test Files  3 passed (3)
-      Tests  37 passed (37)
-   Start at  01:09:53
-   Duration  8.14s (environment 66%, setup 17%, tests 11%, import 5%, transform 1%)
+      Tests  43 passed (43)
+   Start at  13:22:20
+   Duration  11.87s (environment 64%, setup 18%, tests 11%, import 5%, transform 2%)
 
 STEP_EXIT[npm-test]=0
 
@@ -143,22 +143,22 @@ $ npm run build
 
 [36mvite v8.3.6 [32mbuilding client environment for production...[36m[39m
 transforming...
-✓ 126 modules transformed.
+✓ 127 modules transformed.
 rendering chunks...
 computing gzip size...
 dist/index.html                   0.46 kB │ gzip:   0.29 kB
-dist/assets/index-B8Uot_FV.css   11.87 kB │ gzip:   3.22 kB
-dist/assets/index-DQMgaYWO.js   330.63 kB │ gzip: 100.09 kB
+dist/assets/index-DT6fD0Zs.css   12.02 kB │ gzip:   3.24 kB
+dist/assets/index-Do_EkR2-.js   333.75 kB │ gzip: 100.71 kB
 
-[32m✓ built in 260ms[39m
+[32m✓ built in 438ms[39m
 STEP_EXIT[npm-build]=0
 
 === gitleaks-full-history
 $ /c/Users/jknm6/.cache/pre-commit/repomsx10mrf/golangenv-default/bin/gitleaks.exe detect --source . --no-banner --redact --log-opts=--all
-[90m1:10AM[0m [32mINF[0m 168 commits scanned.
-[90m1:10AM[0m [32mINF[0m scan completed in 477ms
-[90m1:10AM[0m [32mINF[0m no leaks found
+[90m1:22PM[0m [32mINF[0m 180 commits scanned.
+[90m1:22PM[0m [32mINF[0m scan completed in 682ms
+[90m1:22PM[0m [32mINF[0m no leaks found
 STEP_EXIT[gitleaks-full-history]=0
 
 CI_LOCAL_EXIT=0
-COMMIT=bcd84d3a86d0857c37c4df85499d2c82a6e2823c
+COMMIT=06df1e7e0116c76734ac5fe4988d9bf6e43623b9

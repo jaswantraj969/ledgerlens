@@ -1,10 +1,10 @@
-2026-11-12T20:25:54Z Attempt 2. Attempt 1 (release-fresh-clone-attempt-1.log) failed only at e2e: the page-image locator also matched the evidence overlay; fixed with an exact name match.
-2026-11-12T20:25:54Z START release fresh-clone check (same procedure as phase 12); source HEAD ba5a4c6c42873ff7f2d774dd07944fcd01047ba2
-2026-11-12T20:25:54Z Environment, not README steps: the main working copy's stack is stopped first (same ports);
-2026-11-12T20:25:54Z COMPOSE_PROJECT_NAME=ledgerlens-fresh gives the clone its own containers and volumes;
-2026-11-12T20:25:54Z port 8080 is held by an unrelated httpd on this machine, so the README's --web-port 8081 option is used.
- Container ledgerlens-web-1 Stopping 
+2026-11-13T08:22:52Z Final release run at the tagged code commit (after the audit trail and batch export). Earlier release runs: release-fresh-clone-attempt-1.log, and this file's git history.
+2026-11-13T08:22:52Z START release fresh-clone check (same procedure as phase 12); source HEAD 06df1e7e0116c76734ac5fe4988d9bf6e43623b9
+2026-11-13T08:22:52Z Environment, not README steps: the main working copy's stack is stopped first (same ports);
+2026-11-13T08:22:52Z COMPOSE_PROJECT_NAME=ledgerlens-fresh gives the clone its own containers and volumes;
+2026-11-13T08:22:52Z port 8080 is held by an unrelated httpd on this machine, so the README's --web-port 8081 option is used.
  Container ledgerlens-worker-1 Stopping 
+ Container ledgerlens-web-1 Stopping 
  Container ledgerlens-web-1 Stopped 
  Container ledgerlens-web-1 Removing 
  Container ledgerlens-web-1 Removed 
@@ -15,8 +15,8 @@
  Container ledgerlens-api-1 Stopped 
  Container ledgerlens-api-1 Removing 
  Container ledgerlens-api-1 Removed 
- Container ledgerlens-postgres-1 Stopping 
  Container ledgerlens-redis-1 Stopping 
+ Container ledgerlens-postgres-1 Stopping 
  Container ledgerlens-redis-1 Stopped 
  Container ledgerlens-redis-1 Removing 
  Container ledgerlens-redis-1 Removed 
@@ -25,95 +25,95 @@
  Container ledgerlens-postgres-1 Removed 
  Network ledgerlens_default Removing 
  Network ledgerlens_default Removed 
-2026-11-12T20:26:00Z main stack stopped (volumes kept)
-2026-11-12T20:26:00Z == STEP clone: git clone <working copy> /c/Users/jknm6/AppData/Local/Temp/llc-202554
-2026-11-12T20:26:01Z    clone HEAD ba5a4c6c42873ff7f2d774dd07944fcd01047ba2; tracked files 771; untracked in clone: '0'
-2026-11-12T20:26:01Z == STEP init_env: python scripts/init_env.py --web-port 8081
+2026-11-13T08:22:58Z main stack stopped (volumes kept)
+2026-11-13T08:22:58Z == STEP clone: git clone <working copy> /c/Users/jknm6/AppData/Local/Temp/llc-082252
+2026-11-13T08:23:00Z    clone HEAD 06df1e7e0116c76734ac5fe4988d9bf6e43623b9; tracked files 777; untracked in clone: '0'
+2026-11-13T08:23:00Z == STEP init_env: python scripts/init_env.py --web-port 8081
    | wrote .env with new random secrets
-2026-11-12T20:26:01Z    EXIT=0 (init_env)
-2026-11-12T20:26:01Z == STEP tasks.sh up: bash scripts/tasks.sh up
+2026-11-13T08:23:00Z    EXIT=0 (init_env)
+2026-11-13T08:23:00Z == STEP tasks.sh up: bash scripts/tasks.sh up
+   |  Container ledgerlens-fresh-worker-1 Waiting 
    |  Container ledgerlens-fresh-web-1 Waiting 
    |  Container ledgerlens-fresh-postgres-1 Waiting 
-   |  Container ledgerlens-fresh-redis-1 Waiting 
-   |  Container ledgerlens-fresh-postgres-1 Healthy 
    |  Container ledgerlens-fresh-redis-1 Healthy 
+   |  Container ledgerlens-fresh-postgres-1 Healthy 
    |  Container ledgerlens-fresh-api-1 Healthy 
    |  Container ledgerlens-fresh-worker-1 Healthy 
    |  Container ledgerlens-fresh-web-1 Healthy 
-2026-11-12T20:26:26Z    EXIT=0 (tasks.sh up)
-2026-11-12T20:26:26Z == STEP web reachable: curl -s -o /dev/null -w web / %{http_code}\n http://127.0.0.1:8081/
+2026-11-13T08:24:04Z    EXIT=0 (tasks.sh up)
+2026-11-13T08:24:04Z == STEP web reachable: curl -s -o /dev/null -w web / %{http_code}\n http://127.0.0.1:8081/
    | web / 200
-2026-11-12T20:26:26Z    EXIT=0 (web reachable)
-2026-11-12T20:26:26Z == STEP uv sync: bash -c cd backend && uv sync --python 3.12 --extra eval --extra ocr && cd ..
+2026-11-13T08:24:05Z    EXIT=0 (web reachable)
+2026-11-13T08:24:05Z == STEP uv sync: bash -c cd backend && uv sync --python 3.12 --extra eval --extra ocr && cd ..
    |  + uvicorn==0.54.0
    |  + virtualenv==21.15.5
    |  + watchfiles==1.3.0
    |  + websockets==17.4
-2026-11-12T20:26:32Z    EXIT=0 (uv sync)
-2026-11-12T20:26:32Z == STEP npm ci: npm --prefix frontend ci
+2026-11-13T08:24:14Z    EXIT=0 (uv sync)
+2026-11-13T08:24:14Z == STEP npm ci: npm --prefix frontend ci
    | 25 packages are looking for funding
    |   run `npm fund` for details
    | 
    | found 0 vulnerabilities
-2026-11-12T20:26:38Z    EXIT=0 (npm ci)
-2026-11-12T20:26:38Z == STEP tasks.sh test: bash scripts/tasks.sh test
+2026-11-13T08:24:23Z    EXIT=0 (npm ci)
+2026-11-13T08:24:23Z == STEP tasks.sh test: bash scripts/tasks.sh test
    | > ledgerlens-frontend@1.0.0 test
    | > vitest run
    | 
    | 
-   |  RUN  v5.1.0 C:/Users/jknm6/AppData/Local/Temp/llc-202554/frontend
+   |  RUN  v5.1.0 C:/Users/jknm6/AppData/Local/Temp/llc-082252/frontend
    | 
    | 
    |  Test Files  3 passed (3)
-   |       Tests  37 passed (37)
-   |    Start at  01:29:33
-   |    Duration  4.90s (environment 57%, tests 21%, setup 12%, import 5%, transform 5%)
+   |       Tests  43 passed (43)
+   |    Start at  13:31:05
+   |    Duration  10.41s (environment 62%, setup 14%, tests 14%, import 5%, transform 4%)
    | 
-2026-11-12T20:29:38Z    EXIT=0 (tasks.sh test)
-2026-11-12T20:29:38Z    BACKEND PYTEST SUMMARY: 493 passed, 1 warning in 169.62s (0:02:49) (exit 0)
-2026-11-12T20:29:38Z == STEP tasks.sh lint: bash scripts/tasks.sh lint
+2026-11-13T08:31:16Z    EXIT=0 (tasks.sh test)
+2026-11-13T08:31:16Z    BACKEND PYTEST SUMMARY: 503 passed, 1 warning in 388.43s (0:06:28) (exit 0)
+2026-11-13T08:31:16Z == STEP tasks.sh lint: bash scripts/tasks.sh lint
    | All checks passed!
-   | 179 files already formatted
-2026-11-12T20:29:39Z    EXIT=0 (tasks.sh lint)
-2026-11-12T20:29:39Z == STEP tasks.sh typecheck: bash scripts/tasks.sh typecheck
+   | 180 files already formatted
+2026-11-13T08:31:18Z    EXIT=0 (tasks.sh lint)
+2026-11-13T08:31:18Z == STEP tasks.sh typecheck: bash scripts/tasks.sh typecheck
    | Success: no issues found in 107 source files
-2026-11-12T20:29:51Z    EXIT=0 (tasks.sh typecheck)
-2026-11-12T20:29:51Z == STEP tasks.sh eval-smoke: bash scripts/tasks.sh eval-smoke
+2026-11-13T08:31:43Z    EXIT=0 (tasks.sh typecheck)
+2026-11-13T08:31:43Z == STEP tasks.sh eval-smoke: bash scripts/tasks.sh eval-smoke
    | classic: 3 documents, 0 failed
    | modern: 3 documents, 0 failed
    | receipt: 3 documents, 0 failed
    | statement: 3 documents, 0 failed
    | ledger: 3 documents, 0 failed
-   | wrote C:\Users\jknm6\AppData\Local\Temp\llc-202554\evals\results\dev\synthetic_smoke.json
-2026-11-12T20:29:57Z    EXIT=0 (tasks.sh eval-smoke)
-2026-11-12T20:29:57Z == STEP e2e: env E2E_BASE_URL=http://127.0.0.1:8081 npm --prefix frontend run e2e
+   | wrote C:\Users\jknm6\AppData\Local\Temp\llc-082252\evals\results\dev\synthetic_smoke.json
+2026-11-13T08:31:56Z    EXIT=0 (tasks.sh eval-smoke)
+2026-11-13T08:31:56Z == STEP e2e: env E2E_BASE_URL=http://127.0.0.1:8081 npm --prefix frontend run e2e
    | 
    |   -  1 e2e\screenshots.spec.ts:14:1 › portfolio screenshots
-   |   ok 2 e2e\flow.spec.ts:7:1 › upload, review and export one invoice (6.1s)
+   |   ok 2 e2e\flow.spec.ts:7:1 › upload, review and export one invoice (7.2s)
    | 
    |   1 skipped
-   |   1 passed (8.7s)
-2026-11-12T20:30:08Z    EXIT=0 (e2e)
-2026-11-12T20:30:08Z == STEP runtime security checks
-2026-11-12T20:30:08Z    user in api: uid=10001(app) gid=10001(app) groups=10001(app)
-2026-11-12T20:30:08Z    user in worker: uid=10001(app) gid=10001(app) groups=10001(app)
-2026-11-12T20:30:09Z    user in web: uid=10002(web) gid=10002(web) groups=10002(web)
-2026-11-12T20:30:09Z    postgres server: postgres 70;
-2026-11-12T20:30:09Z    redis server: redis-server 999;
-2026-11-12T20:30:09Z    web /api/metrics via proxy: 404 (expect 404)
-2026-11-12T20:30:10Z    web /api/health/ready via proxy: 200 (expect 200)
-2026-11-12T20:30:10Z    api /documents without credentials: 401 (expect 401)
-2026-11-12T20:30:10Z    api /metrics direct on 127.0.0.1: 200 (expect 200)
-2026-11-12T20:30:10Z == STEP tasks.sh down: bash scripts/tasks.sh down
+   |   1 passed (12.6s)
+2026-11-13T08:32:13Z    EXIT=0 (e2e)
+2026-11-13T08:32:13Z == STEP runtime security checks
+2026-11-13T08:32:14Z    user in api: uid=10001(app) gid=10001(app) groups=10001(app)
+2026-11-13T08:32:14Z    user in worker: uid=10001(app) gid=10001(app) groups=10001(app)
+2026-11-13T08:32:15Z    user in web: uid=10002(web) gid=10002(web) groups=10002(web)
+2026-11-13T08:32:16Z    postgres server: postgres 70;
+2026-11-13T08:32:16Z    redis server: redis-server 999;
+2026-11-13T08:32:16Z    web /api/metrics via proxy: 404 (expect 404)
+2026-11-13T08:32:16Z    web /api/health/ready via proxy: 200 (expect 200)
+2026-11-13T08:32:17Z    api /documents without credentials: 401 (expect 401)
+2026-11-13T08:32:17Z    api /metrics direct on 127.0.0.1: 200 (expect 200)
+2026-11-13T08:32:17Z == STEP tasks.sh down: bash scripts/tasks.sh down
    |  Container ledgerlens-fresh-redis-1 Removed 
    |  Container ledgerlens-fresh-postgres-1 Stopped 
    |  Container ledgerlens-fresh-postgres-1 Removing 
    |  Container ledgerlens-fresh-postgres-1 Removed 
    |  Network ledgerlens-fresh_default Removing 
    |  Network ledgerlens-fresh_default Removed 
-2026-11-12T20:30:19Z    EXIT=0 (tasks.sh down)
-2026-11-12T20:30:19Z tracked files modified after the run: none
-2026-11-12T20:30:19Z untracked files after the run: 0 (all should be gitignored outputs; listed below)
-2026-11-12T20:30:37Z clean-up: clone volumes removed; main stack restarted (exit 0)
-2026-11-12T20:30:37Z FAILED_STEPS=0
-2026-11-12T20:30:37Z END
+2026-11-13T08:32:25Z    EXIT=0 (tasks.sh down)
+2026-11-13T08:32:25Z tracked files modified after the run: none
+2026-11-13T08:32:25Z untracked files after the run: 0 (all should be gitignored outputs; listed below)
+2026-11-13T08:32:46Z clean-up: clone volumes removed; main stack restarted (exit 0)
+2026-11-13T08:32:46Z FAILED_STEPS=0
+2026-11-13T08:32:46Z END

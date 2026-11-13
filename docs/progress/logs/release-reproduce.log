@@ -1,5 +1,18 @@
-START 2026-11-12T20:33:48Z HEAD 6ff169d
+START 2026-11-13T08:34:34Z HEAD 06df1e7
 == integrity check against the done-markers
+  power S1 records rerun: ac (ac 100, battery 0, unknown 0)
+  power S2': ac (ac 201, battery 0, unknown 0)
+  power S3': ac (ac 201, battery 0, unknown 0)
+  power S4': ac (ac 301, battery 0, unknown 0)
+  power S4h: ac (ac 301, battery 0, unknown 0)
+  power S1 blur-1.5: ac (ac 100, battery 0, unknown 0)
+  power S4h blur-1.5: ac (ac 303, battery 0, unknown 0)
+  power S1 blur-3.0: ac (ac 100, battery 0, unknown 0)
+  power S4h blur-3.0: ac (ac 300, battery 0, unknown 0)
+  power S1 jpeg-30: ac (ac 100, battery 0, unknown 0)
+  power S4h jpeg-30: ac (ac 303, battery 0, unknown 0)
+  power S1 jpeg-10: ac (ac 100, battery 0, unknown 0)
+  power S4h jpeg-10: ac (ac 300, battery 0, unknown 0)
 PASS S1 records rerun predictions 8b3fccde4d46 vs recorded 8b3fccde4d46: match
 PASS done-markers: 18 for 18 steps; hash mismatches none
 PASS recovered markers: none
@@ -8,6 +21,7 @@ PASS aborts: 8 (metadata 8), memory only True, each aborted step then completed 
 PASS code commit and dirty flag across results: [('475c048', False)]
 PASS LLM results off the fixed settings: none
 PASS S5 test thresholds differ from validation-chosen: none
+integrity EXIT=0
 == sha256 of every file under evals/results/final/ before make reproduce
 45ef8e78b671b8fd71fb7b0215f007f12638410e6cc4ed11ee66af5848acc5e7 *./cord_degradation_test_v1_1_1.md
 d63dd82dd678dec9693c715c4818cea60d000977e639ff8ea8276f1a944d216f *./cord_degradation_test_v1_1_1.png
@@ -39,14 +53,14 @@ c709896d3c43460ef843bc8b0c83d1c11b112175bc38a0a9c7a69f62293bb4b6 *./done/s5-s1-a
 3e558eb23e33746ca77f67c51c50bc3b82ce369fe2309c06f064ba82d1d5099a *./done/s5-s4h-grouped.json
 f09c41da3cae324afd2a60baf2deac0f78ec581aa4d216bddd06f4d5ec8524ae *./final-run-metadata-20261112T073516Z.json
 95eb684cdcb7252c50ddcf362795e08748005d7ef283fd0e21b2e450cfb00061 *./replayed_timings_v1_1_1.json
-== bash scripts/tasks.sh reproduce
+== make reproduce (the Makefile target runs: bash scripts/tasks.sh reproduce; make is not installed here)
 reproduce EXIT=0
-wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\final\cord_test_comparison_v1_1_1.md systems: S1, S2', S3', S4', S4h
-wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\final\cord_s5_test_v1_1_1.md and its JSON
-wrote C:\Users\jknm6\Desktop\VS Projects\LedgerLens\evals\results\final
+wrote <repo>\evals\results\final\cord_test_comparison_v1_1_1.md systems: S1, S2', S3', S4', S4h
+wrote <repo>\evals\results\final\cord_s5_test_v1_1_1.md and its JSON
+wrote <repo>\evals\results\final
 == sha256 after
 every file under evals/results/final/ is byte-identical (30 files)
-== other tracked files changed by reproduce:
+== tracked files changed by reproduce (outside docs/progress/logs/):
  M evals/results/dev/cord_s1_validation_v1_1_1.json
  M evals/results/dev/cord_s1_validation_v1_1_1.md
  M evals/results/dev/cord_s2_validation_v1_1_1.json
@@ -57,11 +71,28 @@ every file under evals/results/final/ is byte-identical (30 files)
  M evals/results/dev/cord_s4_validation_v1_1_1.md
  M evals/results/dev/cord_validation_comparison_v1_1_1.json
  M evals/results/dev/cord_validation_comparison_v1_1_1.md
-?? docs/progress/logs/release-reproduce.log
-END 2026-11-12T20:34:19Z
 == replayed validation files: metrics against HEAD
 evals/results/dev/cord_s1_validation_v1_1_1.json: metrics and predictions hash identical: True; keys that differ: ['environment', 'latency_seconds', 'memory']
 evals/results/dev/cord_s2_validation_v1_1_1.json: metrics and predictions hash identical: True; keys that differ: ['environment', 'latency_seconds', 'memory']
 evals/results/dev/cord_s3_validation_v1_1_1.json: metrics and predictions hash identical: True; keys that differ: ['environment', 'latency_seconds', 'memory']
 evals/results/dev/cord_s4_validation_v1_1_1.json: metrics and predictions hash identical: True; keys that differ: ['environment', 'latency_seconds', 'memory']
-these files differ only in run metadata (timing, memory, commit); restored to the committed versions, no result file changed
+evals/results/dev/cord_validation_comparison_v1_1_1.json: metrics and predictions hash identical: False; keys that differ: ['systems']
+replayed validation files restored to the committed versions; tracked files outside docs/progress/logs/ now changed: 0
+END 2026-11-13T08:35:59Z
+== follow-up: what differs inside the validation comparison (the check above compares top-level keys only)
+reproduce run again at 2026-11-13T08:37:32Z, HEAD 06df1e7; its comparison file compared value by value against HEAD:
+reproduce EXIT=0
+evals/results/dev/cord_validation_comparison_v1_1_1.json: 10 differing values; differing keys (leaf names): ['lowest_available_system_ram_gib', 'p50', 'p95']
+    .systems[0].latency_seconds.warm_total.p50
+    .systems[0].latency_seconds.warm_total.p95
+    .systems[0].lowest_available_system_ram_gib
+    .systems[1].latency_seconds.warm_total.p50
+    .systems[1].latency_seconds.warm_total.p95
+    .systems[2].latency_seconds.warm_total.p50
+    .systems[2].latency_seconds.warm_total.p95
+    .systems[2].lowest_available_system_ram_gib
+    .systems[3].latency_seconds.warm_total.p50
+    .systems[3].latency_seconds.warm_total.p95
+evals/results/final/: still byte-identical (30 files)
+only latency and free-RAM readings differ; every metric is identical. Restored; tracked files outside docs/progress/logs/ changed: 0
+END 2026-11-13T08:38:38Z
