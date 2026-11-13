@@ -1,0 +1,17 @@
+# GitHub Actions CI for v1.0.0
+
+Repository: jaswantraj969/ledgerlens (visibility PRIVATE; checked with gh repo view before the first push: isEmpty true, isPrivate true)
+Pushed: main and tag v1.0.0 only, no force (tag object 5bbbb868aa03cac54b2c8c5d62c1100b0d687363 -> commit 02bd6175dfd656158251963a9878e673cfd6b69c)
+
+Workflow: ci (.github/workflows/ci.yml), event push, branch main
+Commit: 02bd6175dfd656158251963a9878e673cfd6b69c
+Run: https://github.com/jaswantraj969/ledgerlens/actions/runs/43398438112
+Started 2026-11-13T09:05:39Z, finished 2026-11-13T09:07:50Z
+Conclusion: success (first run; no fix commits were needed)
+
+Jobs:
+  backend   success  ruff lint and format; mypy "no issues found in 107 source files";
+                     pytest "503 passed" with PostgreSQL and Redis service containers, core coverage TOTAL 96%;
+                     offline eval-smoke
+  frontend  success  oxlint; Vitest "43 passed"; production build
+  secrets   success  gitleaks 8.18.4 (checksum verified) over the full history: "181 commits scanned", "no leaks found"

@@ -75,12 +75,12 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 | R | Release B10: local CI mirror at a clean HEAD | VERIFIED | docs/progress/logs/release-ci-local.log |
 | R | Release C11-C13: fresh clone, audit, integrity and reproduce | VERIFIED | docs/progress/logs/release-fresh-clone.log, release-prepush-audit.txt, release-reproduce.log |
 | R | Release D14-D16: CHANGELOG, final report, task status, v1.0.0 tag | VERIFIED | CHANGELOG.md, docs/progress/final-report.md; the first tag (never pushed) was deleted and v1.0.0 recreated after the A5 and A6 work (below) |
-| R | Release E17-E19: push to a private remote and GitHub CI | BLOCKED | No remote URL given (placeholder in the release instructions); nothing pushed |
+| R | Release E17-E19: push to a private remote and GitHub CI | VERIFIED | Done as round 2 step 6 (below) |
 | R2 | Step 1: A5 audit-trail view | VERIFIED | GET /documents/{id}/audit (read-only, organisation-scoped); review-page panel; backend/tests/api/test_audit_and_batch_export.py; frontend components.test.tsx; Playwright flow in docs/progress/logs/release-fresh-clone.log |
 | R2 | Step 2: A6 batch export | VERIFIED | POST /documents/export (cap 50, reviewed and owned only); documents-page action; same tests as step 1 |
 | R2 | Step 3: A13 recorded as verified in scope | VERIFIED | docs/progress/logs/release-reproduce.log |
 | R2 | Step 4: all checks at one commit, logs in the next commit, tag v1.0.0 on the log commit | VERIFIED | docs/progress/logs/release-ci-local.log, release-fresh-clone.log, release-prepush-audit.txt, release-reproduce.log (each names the commit it ran at) |
-| R2 | Step 6: push to a private remote and GitHub CI | BLOCKED | No remote URL given (placeholder); nothing pushed |
+| R2 | Step 6: push to a private remote and GitHub CI | VERIFIED | Private repository jaswantraj969/ledgerlens (PRIVATE and empty before the push); main and v1.0.0 pushed, no force; CI run https://github.com/jaswantraj969/ledgerlens/actions/runs/43398438112 success; docs/progress/logs/release-ci-github.txt |
 
 ## Acceptance criteria
 
@@ -94,7 +94,7 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 | A6 | VERIFIED | JSON and CSV export per document and in batch: POST /documents/export, same format as single export, at most 50 reviewed documents of the caller's organisation (backend/tests/api/test_audit_and_batch_export.py: success in both formats, mixed ownership refused, unreviewed refused, cap, 401); select-and-export on the documents page (components.test.tsx: request body, only reviewed selectable, refusal shown). OpenAPI at /docs and /openapi.json; HMAC-signed webhooks with retries (test_review.py, test_webhooks.py) |
 | A7 | VERIFIED | Roles, API keys, cross-organisation isolation, rate limits (test_auth.py, test_documents.py, test_route_auth.py); no secrets or document content in logs (test_health.py::test_logs_hold_no_secrets_or_document_content); docs/security-review.md |
 | A8 | VERIFIED | Worker crash, retry, dead-letter, invalid LLM output fallback (tests/api/test_worker.py, tests/unit/test_llm.py); readiness reflects each dependency (test_health.py) |
-| A9 | IMPLEMENTED BUT UNVERIFIED | ruff, mypy strict (backend and evals), backend and frontend tests pass locally (docs/progress/logs/release-ci-local.log, 96% core coverage) and in a Linux simulation of the workflow (docs/progress/logs/release-ci-linux-simulation.log); no GitHub run, because no remote exists |
+| A9 | VERIFIED | GitHub Actions run on the private repository at v1.0.0 (commit 02bd617): backend (ruff, mypy strict over backend and evals, 503 tests with PostgreSQL and Redis, 96% core coverage, eval-smoke), frontend (oxlint, 43 Vitest tests, build) and secrets (gitleaks, full history) all succeeded: https://github.com/jaswantraj969/ledgerlens/actions/runs/43398438112 (docs/progress/logs/release-ci-github.txt); also the local mirror (docs/progress/logs/release-ci-local.log) |
 | A10 | VERIFIED | Fresh clone following the README: compose up to healthy, all suites, e2e, clean tracked tree (docs/progress/logs/release-fresh-clone.log; same machine, separate Compose project) |
 | A11 | VERIFIED (scope per ADR-0013) | CORD test: per-field P/R/F1 with CIs, ECE, Brier, ROC-AUC, automation and achieved precision at 0.98/0.99, review workload, cost 0 (local), p50/p95 latency on AC, n per field (evals/results/final/); synthetic: S1 and S2' only, by ADR-0013 |
 | A12 | VERIFIED (layout groups) | S5 grouped variant on unseen layout groups next to document-level results (evals/results/final/cord_s5_test_v1_1_1.md); S1 layout groups (evals/results/cord_s1_v1_1_layout_groups.md); no vendor split is possible on CORD (evals/datasets/LICENSES.md) |
@@ -109,7 +109,6 @@ Labels: NOT STARTED, IN PROGRESS, BLOCKED, IMPLEMENTED BUT UNVERIFIED, VERIFIED.
 | Blocker | Human action |
 |---|---|
 | SROIE results | None required. Blocked by decision; reopen only if official access appears |
-| CI on GitHub unverified (Release E) | Give a private remote URL; then push main and v1.0.0 and watch the run |
 | LLM mode inside Docker unverified | Run scripts/run_docker_llm_smoke.ps1 with other applications closed |
 | Upwork portfolio | Owner reviews docs/portfolio/ and publishes; nothing is published by the project |
 | LLM below rules on CORD (test: S4h row F1 0.253 against 0.365 for S1) and qwen3:4b does not fit in RAM | None required now. A larger model needs a machine with more RAM |

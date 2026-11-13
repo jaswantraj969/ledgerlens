@@ -142,3 +142,7 @@
 - A13 recorded as verified in scope: the final tables regenerate byte-identically; replaying test runs needs the gitignored CORD caches.
 - The unpushed v1.0.0 tag was deleted. All checks were rerun at one commit with a clean tree; their logs are committed in the next commit, which carries the new tag.
 - Not done: push and GitHub CI (no remote URL given), LLM mode inside Docker.
+
+## 2026-11-13, pushed to the private repository
+- Created jaswantraj969/ledgerlens as private on the owner's instruction; gh repo view showed PRIVATE and empty before the push.
+- Pushed main and v1.0.0 only, without force. GitHub CI passed on the first run (backend, frontend, secrets): https://github.com/jaswantraj969/ledgerlens/actions/runs/43398438112. A9 verified (docs/progress/logs/release-ci-github.txt). No fixes were needed, so the tag was not touched and there is no v1.0.1 entry.

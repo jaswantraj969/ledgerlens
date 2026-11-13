@@ -2,7 +2,7 @@
 
 Research prototype evaluated on public datasets. Not validated for production use.
 
-Date: 2026-11-13. Licence: MIT. The repository has no remote yet; nothing has been pushed or published.
+Date: 2026-11-13. Licence: MIT. Pushed to a private GitHub repository after the release checks; nothing is public or published.
 
 ## 1. What was built
 
@@ -133,10 +133,10 @@ No S1-against-S4h ordering changes on any field. Source: `evals/results/final/co
 | Lint, type check (mypy over backend and evals, 107 files), oxlint, frontend build, pre-commit hooks, eval-smoke, gitleaks over the full history | all pass | `release-ci-local.log` |
 | Playwright upload, review (correction checked in the audit trail) and export against Docker Compose | 1 passed | `docs/progress/logs/release-fresh-clone.log` |
 | Fresh clone following the README (attempt 2) | every step passes; tracked tree unchanged after the run | `release-fresh-clone.log` |
+| GitHub Actions on the private repository, at v1.0.0 | backend, frontend and secrets jobs succeeded; 503 and 43 tests | `docs/progress/logs/release-ci-github.txt` |
 | Linux simulation of the CI workflow (at 6b0e402, before the audit trail and batch export) | backend 493 passed, frontend 37 passed, gitleaks clean | `docs/progress/logs/release-ci-linux-simulation.log` |
 
 ## 8. Not verified
 
 - **LLM mode inside Docker.** The worker container reaches Ollama on the host, but the smoke test stopped at its 2 GiB free-RAM gate (`docs/progress/logs/docker-llm-smoke.json`). `scripts/run_docker_llm_smoke.ps1` is ready for a run with other applications closed.
-- **CI on GitHub.** The workflow has not run on GitHub, because no remote exists. It was checked by the local mirror and by the Linux simulation.
 - **Test-split replay (A13, verified in scope).** `make reproduce` regenerates all 30 final files byte-identically from the saved result files. Replaying the test runs themselves needs the CORD caches, which are gitignored by design, so a fresh clone cannot replay them.
